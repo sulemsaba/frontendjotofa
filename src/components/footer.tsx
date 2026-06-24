@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import {
   ArrowUp,
   Instagram,
@@ -19,11 +20,11 @@ const footerLinks = {
     { label: "Contact", page: "contact" as PageId },
   ],
   Businesses: [
-    { label: "UTEC Solutions", page: "businesses" as PageId },
-    { label: "Courier & Logistics", page: "businesses" as PageId },
-    { label: "Cleaning & Maids", page: "businesses" as PageId },
-    { label: "Security", page: "businesses" as PageId },
-    { label: "Staffing & Labour", page: "businesses" as PageId },
+    { label: "UTEC Solutions", page: "utec" as PageId },
+    { label: "Courier & Logistics", page: "courier" as PageId },
+    { label: "Cleaning & Maids", page: "cleaning" as PageId },
+    { label: "Security", page: "security" as PageId },
+    { label: "Staffing & Labour", page: "staffing" as PageId },
   ],
   Careers: [
     { label: "Open Positions", page: "careers" as PageId },
@@ -32,7 +33,6 @@ const footerLinks = {
   ],
   Resources: [
     { label: "Investor Relations", page: "strategy" as PageId },
-    { label: "Partners", page: "strategy" as PageId },
     { label: "Privacy Policy", page: "home" as PageId },
     { label: "Terms of Service", page: "home" as PageId },
   ],
@@ -89,9 +89,11 @@ export function Footer() {
           {/* Brand column — spans 2 cols */}
           <div className="col-span-2">
             <div className="mb-4">
-              <img
+              <Image
                 src="/images/jotofa-logo.png"
                 alt="JOTOFA Group Logo"
+                width={222}
+                height={73}
                 className="h-9 w-auto object-contain dark:brightness-0 dark:invert transition-all duration-300"
               />
             </div>
@@ -121,7 +123,7 @@ export function Footer() {
                   <li key={link.label}>
                     <button
                       onClick={() => setActivePage(link.page)}
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-1 focus-visible:ring-offset-background"
                     >
                       {link.label}
                     </button>
@@ -167,7 +169,7 @@ export function Footer() {
             {/* Scroll to top */}
             <button
               onClick={scrollToTop}
-              className="w-8 h-8 rounded-full bg-secondary border border-border flex items-center justify-center hover:bg-jotofa-accent/10 hover:border-jotofa-accent/20 transition-all group"
+              className="w-8 h-8 rounded-full bg-secondary border border-border flex items-center justify-center hover:bg-jotofa-accent/10 hover:border-jotofa-accent/20 transition-all group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               aria-label="Back to top"
             >
               <ArrowUp className="w-3.5 h-3.5 text-muted-foreground group-hover:text-jotofa-gold transition-colors" />

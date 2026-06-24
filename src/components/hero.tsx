@@ -1,38 +1,43 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
   ChevronLeft,
   ChevronRight,
+  Play,
+  Pause,
 } from "lucide-react";
 import { usePage } from "@/lib/page-context";
 
 // ─── Data ──────────────────────────────────────────────
 
+// First entry of each column has descriptive alt text; subsequent duplicates
+// use empty alt="" so screen readers don't announce the same description 9×.
 const tickerImagesCol1 = [
   { src: "/images/jotofa-hero-1.jpeg", alt: "JOTOFA Group team delivering excellence across industries" },
-  { src: "/images/jotofa-hero-3.jpeg", alt: "JOTOFA Group team members in modern office" },
-  { src: "/images/jotofa-hero-2.jpeg", alt: "JOTOFA Group women professionals in office space" },
-  { src: "/images/jotofa-hero-1.jpeg", alt: "JOTOFA Group team celebrating success" },
-  { src: "/images/jotofa-hero-3.jpeg", alt: "JOTOFA Group colleagues together" },
-  { src: "/images/jotofa-hero-2.jpeg", alt: "JOTOFA Group professional team" },
-  { src: "/images/jotofa-hero-1.jpeg", alt: "JOTOFA Group staff in branded uniforms" },
-  { src: "/images/jotofa-hero-2.jpeg", alt: "JOTOFA Group office team" },
-  { src: "/images/jotofa-hero-3.jpeg", alt: "JOTOFA Group women leadership" },
+  { src: "/images/jotofa-hero-3.jpeg", alt: "" },
+  { src: "/images/jotofa-hero-2.jpeg", alt: "" },
+  { src: "/images/jotofa-hero-1.jpeg", alt: "" },
+  { src: "/images/jotofa-hero-3.jpeg", alt: "" },
+  { src: "/images/jotofa-hero-2.jpeg", alt: "" },
+  { src: "/images/jotofa-hero-1.jpeg", alt: "" },
+  { src: "/images/jotofa-hero-2.jpeg", alt: "" },
+  { src: "/images/jotofa-hero-3.jpeg", alt: "" },
 ];
 
 const tickerImagesCol2 = [
   { src: "/images/jotofa-hero-2.jpeg", alt: "JOTOFA Group women professionals collaborating" },
-  { src: "/images/jotofa-hero-1.jpeg", alt: "JOTOFA Group team with Delivering Excellence sign" },
-  { src: "/images/jotofa-hero-3.jpeg", alt: "JOTOFA Group team members posing together" },
-  { src: "/images/jotofa-hero-2.jpeg", alt: "JOTOFA Group office professionals" },
-  { src: "/images/jotofa-hero-1.jpeg", alt: "JOTOFA Group team gathering" },
-  { src: "/images/jotofa-hero-3.jpeg", alt: "JOTOFA Group staff in blue uniforms" },
-  { src: "/images/jotofa-hero-1.jpeg", alt: "JOTOFA Group workforce" },
-  { src: "/images/jotofa-hero-2.jpeg", alt: "JOTOFA Group corporate team" },
-  { src: "/images/jotofa-hero-3.jpeg", alt: "JOTOFA Group team spirit" },
+  { src: "/images/jotofa-hero-1.jpeg", alt: "" },
+  { src: "/images/jotofa-hero-3.jpeg", alt: "" },
+  { src: "/images/jotofa-hero-2.jpeg", alt: "" },
+  { src: "/images/jotofa-hero-1.jpeg", alt: "" },
+  { src: "/images/jotofa-hero-3.jpeg", alt: "" },
+  { src: "/images/jotofa-hero-1.jpeg", alt: "" },
+  { src: "/images/jotofa-hero-2.jpeg", alt: "" },
+  { src: "/images/jotofa-hero-3.jpeg", alt: "" },
 ];
 
 const newsSlides = [
@@ -88,10 +93,7 @@ export function Hero() {
   };
 
   return (
-    <section
-      className="relative w-full min-h-screen lg:h-screen lg:overflow-hidden"
-      style={{ backgroundColor: "#003951" }}
-    >
+    <section className="relative w-full min-h-screen lg:h-screen lg:overflow-hidden bg-jotofa-navy-mid">
       {/* Decorative top accent bar — visible cyan line across the top */}
       <div className="absolute top-0 left-0 right-0 z-[1] h-[3px] bg-gradient-to-r from-transparent via-jotofa-accent/70 to-transparent" />
 
@@ -100,10 +102,7 @@ export function Hero() {
         {/* ══════════════════════════════════════════════
             MOBILE: Animated Ticker (TOP)
             ══════════════════════════════════════════════ */}
-        <div
-          className="lg:hidden relative"
-          style={{ backgroundColor: "#003951" }}
-        >
+        <div className="lg:hidden relative bg-jotofa-navy-mid">
           {/* Extra top padding to clear the pill nav */}
           <div className="flex w-full" style={{ height: "55vh", gap: "8px", padding: "8px", paddingTop: "72px" }}>
             <div className="flex-1 h-full overflow-hidden relative">
@@ -117,7 +116,14 @@ export function Hero() {
               >
                 {[...tickerImagesCol1, ...tickerImagesCol1].map((img, i) => (
                   <div key={`mc1-${i}`} className="relative w-full flex-shrink-0 overflow-hidden rounded-lg" style={{ aspectRatio: "3/4" }}>
-                    <img src={img.src} alt={img.alt} className="w-full h-full object-cover block" />
+                    <Image
+                      src={img.src}
+                      alt={img.alt}
+                      fill
+                      sizes="(max-width: 640px) 50vw, 33vw"
+                      className="object-cover"
+                      priority={i < 2}
+                    />
                     <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2))" }} />
                   </div>
                 ))}
@@ -134,7 +140,14 @@ export function Hero() {
               >
                 {[...tickerImagesCol2, ...tickerImagesCol2].map((img, i) => (
                   <div key={`mc2-${i}`} className="relative w-full flex-shrink-0 overflow-hidden rounded-lg" style={{ aspectRatio: "3/4" }}>
-                    <img src={img.src} alt={img.alt} className="w-full h-full object-cover block" />
+                    <Image
+                      src={img.src}
+                      alt={img.alt}
+                      fill
+                      sizes="(max-width: 640px) 50vw, 33vw"
+                      className="object-cover"
+                      priority={i < 2}
+                    />
                     <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2))" }} />
                   </div>
                 ))}
@@ -142,20 +155,19 @@ export function Hero() {
             </div>
           </div>
 
-          <div className="absolute bottom-[80px] right-[16px] z-10">
+          {/* Pause button — repositioned to top-right of the ticker so it
+              doesn't overlap the news slider below on small screens. */}
+          <div className="absolute top-[80px] right-[16px] z-10">
             <button
               onClick={() => setTickerPaused(!tickerPaused)}
-              className="flex items-center justify-center transition-all duration-300"
-              style={{ background: "#fff", borderRadius: "50%", width: "36px", height: "36px", border: "none", cursor: "pointer", color: "#003951" }}
+              className="flex items-center justify-center transition-all duration-300 hover:scale-105 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-jotofa-navy-mid"
+              style={{ background: "#fff", borderRadius: "50%", width: "36px", height: "36px", border: "none", color: "#003951" }}
               aria-label={tickerPaused ? "Play animation" : "Pause animation"}
             >
               {tickerPaused ? (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 5V19L19 12L8 5Z" fill="currentColor" /></svg>
+                <Play className="w-4 h-4" fill="currentColor" />
               ) : (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M18 5C18 3.89543 17.1046 3 16 3C14.8954 3 14 3.89543 14 5V19C14 20.1046 14.8954 21 16 21C17.1046 21 18 20.1046 18 19V5Z" fill="currentColor" />
-                  <path d="M8.00001 3C6.89544 3 6 3.89543 6 5V19C6 20.1046 6.89544 21 8.00001 21C9.10458 21 10 20.1046 10 19V5C10 3.89543 9.10458 3 8.00001 3Z" fill="currentColor" />
-                </svg>
+                <Pause className="w-4 h-4" fill="currentColor" />
               )}
             </button>
           </div>
@@ -164,10 +176,7 @@ export function Hero() {
         {/* ══════════════════════════════════════════════
             LEFT COLUMN — Text + News Slider
             ══════════════════════════════════════════════ */}
-        <div
-          className="w-full lg:w-[45%] flex flex-col justify-between relative z-[2]"
-          style={{ backgroundColor: "#09263b" }}
-        >
+        <div className="w-full lg:w-[45%] flex flex-col justify-between relative z-[2] bg-jotofa-navy-card">
           <div className="flex flex-col justify-center flex-1 px-8 sm:px-10 lg:px-[60px] pt-24 pb-6 lg:pt-[140px] lg:pb-0">
             {/* Decorative accent line above title for visibility */}
             <motion.div
@@ -182,8 +191,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="mb-6"
-              style={{ fontSize: "clamp(2.8rem, 5vw, 5rem)", fontWeight: 900, lineHeight: 0.9, letterSpacing: "-0.02em" }}
+              className="mb-6 text-5xl md:text-7xl lg:text-8xl font-black leading-[0.9] tracking-tight"
             >
               <motion.span
                 className="block text-white drop-shadow-sm"
@@ -208,8 +216,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="mb-8"
-              style={{ fontSize: "1.1rem", lineHeight: 1.6, color: "rgba(255, 255, 255, 0.8)", maxWidth: "450px" }}
+              className="mb-8 text-lg leading-relaxed text-white/80 max-w-[450px]"
             >
               A diversified Tanzanian holding company driving excellence through
               ICT, logistics, professional services, security, and staffing —
@@ -223,10 +230,7 @@ export function Hero() {
             >
               <button
                 onClick={() => setActivePage("about")}
-                className="group inline-flex items-center gap-2 font-semibold transition-all duration-300"
-                style={{ padding: "14px 40px", borderRadius: "50px", fontSize: "0.95rem", backgroundColor: "transparent", border: "1.5px solid #fff", color: "#fff" }}
-                onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#fff"; e.currentTarget.style.color = "#003951"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "transparent"; e.currentTarget.style.color = "#fff"; }}
+                className="group inline-flex items-center gap-2 font-semibold transition-all duration-300 px-10 py-3.5 rounded-full text-[0.95rem] border-[1.5px] border-white text-white hover:bg-white hover:text-jotofa-navy-mid cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-jotofa-navy-card"
               >
                 Our Company
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
@@ -257,8 +261,14 @@ export function Hero() {
                   onClick={() => setActivePage("news")}
                 >
                   <div className="flex-shrink-0 w-[130px] sm:w-[160px] h-[85px] sm:h-[100px] rounded-lg overflow-hidden relative">
-                    <div className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" style={{ backgroundImage: `url('${newsSlides[currentSlide].image}')` }} />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0A2647]/70 to-transparent" />
+                    <Image
+                      src={newsSlides[currentSlide].image}
+                      alt=""
+                      fill
+                      sizes="(max-width: 640px) 130px, 160px"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-jotofa-navy/70 to-transparent" />
                   </div>
                   <div className="flex-1 pt-1">
                     <h3 className="text-white font-semibold text-sm sm:text-base leading-snug group-hover:text-jotofa-accent transition-colors">
@@ -272,13 +282,19 @@ export function Hero() {
             <div className="flex items-center justify-between mt-4">
               <div className="flex items-center gap-3">
                 <span className="text-white/30 text-sm font-medium tabular-nums">{currentSlide + 1}/{newsSlides.length}</span>
-                <span className="text-white/20 text-sm">JOTOFA Family of Businesses</span>
+                {/* "Family of Businesses" is now a real link, not just a label */}
+                <button
+                  onClick={() => setActivePage("businesses")}
+                  className="text-white/20 hover:text-white/60 text-sm transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent rounded-sm"
+                >
+                  Family of Businesses
+                </button>
               </div>
               <div className="flex items-center gap-2">
-                <button onClick={prevSlide} className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-white/40 hover:text-white hover:border-white/40 transition-all" aria-label="Previous slide">
+                <button onClick={prevSlide} className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-white/40 hover:text-white hover:border-white/40 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-jotofa-navy-card" aria-label="Previous slide">
                   <ChevronLeft className="w-4 h-4" />
                 </button>
-                <button onClick={nextSlide} className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-white/40 hover:text-white hover:border-white/40 transition-all" aria-label="Next slide">
+                <button onClick={nextSlide} className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-white/40 hover:text-white hover:border-white/40 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-jotofa-navy-card" aria-label="Next slide">
                   <ChevronRight className="w-4 h-4" />
                 </button>
               </div>
@@ -293,8 +309,7 @@ export function Hero() {
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="hidden lg:flex flex-1 relative h-full"
-          style={{ backgroundColor: "#003951" }}
+          className="hidden lg:flex flex-1 relative h-full bg-jotofa-navy-mid"
         >
           {/* Extra top padding to clear the pill nav */}
           <div className="flex w-full h-full" style={{ gap: "12px", padding: "12px", paddingTop: "80px" }}>
@@ -302,7 +317,14 @@ export function Hero() {
               <div className="flex flex-col" style={{ gap: "12px", animation: "scrollVertical 160s linear infinite", animationPlayState: tickerPaused ? "paused" : "running" }}>
                 {[...tickerImagesCol1, ...tickerImagesCol1].map((img, i) => (
                   <div key={`c1-${i}`} className="relative w-full flex-shrink-0 overflow-hidden rounded-lg group" style={{ aspectRatio: "3/4" }}>
-                    <img src={img.src} alt={img.alt} className="w-full h-full object-cover block transition-transform duration-300 group-hover:scale-[1.03]" />
+                    <Image
+                      src={img.src}
+                      alt={img.alt}
+                      fill
+                      sizes="22vw"
+                      className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                      priority={i < 2}
+                    />
                     <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2))" }} />
                   </div>
                 ))}
@@ -312,7 +334,14 @@ export function Hero() {
               <div className="flex flex-col" style={{ gap: "12px", animation: "scrollVertical 160s linear infinite reverse", animationPlayState: tickerPaused ? "paused" : "running" }}>
                 {[...tickerImagesCol2, ...tickerImagesCol2].map((img, i) => (
                   <div key={`c2-${i}`} className="relative w-full flex-shrink-0 overflow-hidden rounded-lg group" style={{ aspectRatio: "3/4" }}>
-                    <img src={img.src} alt={img.alt} className="w-full h-full object-cover block transition-transform duration-300 group-hover:scale-[1.03]" />
+                    <Image
+                      src={img.src}
+                      alt={img.alt}
+                      fill
+                      sizes="22vw"
+                      className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                      priority={i < 2}
+                    />
                     <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2))" }} />
                   </div>
                 ))}
@@ -323,17 +352,14 @@ export function Hero() {
           <div className="absolute bottom-[90px] right-[30px] z-10">
             <button
               onClick={() => setTickerPaused(!tickerPaused)}
-              className="flex items-center justify-center transition-all duration-300 hover:scale-105"
-              style={{ background: "#fff", borderRadius: "50%", width: "44px", height: "44px", border: "none", cursor: "pointer", color: "#003951" }}
+              className="flex items-center justify-center transition-all duration-300 hover:scale-105 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-jotofa-navy-mid"
+              style={{ background: "#fff", borderRadius: "50%", width: "44px", height: "44px", border: "none", color: "#003951" }}
               aria-label={tickerPaused ? "Play animation" : "Pause animation"}
             >
               {tickerPaused ? (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 5V19L19 12L8 5Z" fill="currentColor" /></svg>
+                <Play className="w-5 h-5" fill="currentColor" />
               ) : (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M18 5C18 3.89543 17.1046 3 16 3C14.8954 3 14 3.89543 14 5V19C14 20.1046 14.8954 21 16 21C17.1046 21 18 20.1046 18 19V5Z" fill="currentColor" />
-                  <path d="M8.00001 3C6.89544 3 6 3.89543 6 5V19C6 20.1046 6.89544 21 8.00001 21C9.10458 21 10 20.1046 10 19V5C10 3.89543 9.10458 3 8.00001 3Z" fill="currentColor" />
-                </svg>
+                <Pause className="w-5 h-5" fill="currentColor" />
               )}
             </button>
           </div>
