@@ -1,0 +1,111 @@
+# ─── Dependencies ───
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+/bun_modules  # (not standard, but harmless if it ever appears)
+
+# ─── Build output / caches ───
+# Next.js
+/.next/
+/out/
+next-env.d.ts
+
+# Production build
+/build
+
+# Bun
+bun.lockb  # (binary lockfile variant — keep bun.lock which is text)
+/.bun-cache/
+
+# TypeScript
+*.tsbuildinfo
+
+# Vercel
+.vercel
+
+# ─── Testing ───
+/coverage
+/.nyc_output
+
+# ─── Logs & runtime artifacts ───
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+dev.log
+server.log
+build.log
+*.pid
+*.seed
+*.pid.lock
+
+# ─── Environment & secrets ───
+.env
+.env*.local
+.env.development
+.env.production
+.env.preview
+.env.*.local
+*.local
+
+# ─── OS / editor junk ───
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.pem
+*.swp
+*.swo
+*~
+
+# Editor directories
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json.example
+.idea
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+
+# ─── AI-agent / chat-only artifacts ───
+# These are generated during chat sessions and must NEVER be pushed.
+/agent-ctx/
+/worklog.md
+/worklog/
+/download/
+/scripts/        # one-off generation scripts (kept locally for re-runs)
+screenshots/
+*.screenshot.png
+screenshot-*.png
+screenshot-*.jpeg
+
+# ─── Uploads / runtime user files ───
+/uploads/
+/upload/
+/backend/uploads/
+
+# ─── Database files ───
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+/db/
+/prisma/*.db
+/prisma/migrations/dev.db*
+
+# ─── Misc local-only ───
+TODO.local.md
+NOTES.local.md
+*.local.md

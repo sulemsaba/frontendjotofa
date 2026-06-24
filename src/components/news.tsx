@@ -1,0 +1,452 @@
+"use client";
+
+import {
+  ArrowUpRight,
+  Calendar,
+  Clock,
+  Newspaper,
+  TrendingUp,
+  Lightbulb,
+  Users,
+  Globe,
+  ChevronDown,
+  Filter,
+} from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ScrollReveal, StaggerContainer, StaggerItem } from "./scroll-reveal";
+import { usePage } from "@/lib/page-context";
+import { NewsDetail } from "./news-detail";
+import { useState, useCallback } from "react";
+
+const categories = [
+  { id: "all", label: "All" },
+  { id: "group", label: "Group Update" },
+  { id: "utec", label: "UTEC Solutions" },
+  { id: "csr", label: "CSR" },
+  { id: "innovation", label: "Innovation" },
+  { id: "logistics", label: "Logistics" },
+];
+
+const featuredArticle = {
+  category: "Group Update",
+  categoryKey: "group",
+  categoryColor: "text-jotofa-gold",
+  categoryBg: "bg-jotofa-accent/10",
+  categoryBorder: "border-jotofa-accent/20",
+  title: "JOTOFA GROUP Expands into East African Markets",
+  excerpt:
+    "Our regional growth strategy takes a major step forward with new operations in Kenya and Uganda, strengthening cross-border logistics and ICT services. This milestone marks a new chapter in our mission to power progress across East Africa.",
+  date: "March 2025",
+  readTime: "4 min read",
+  image: "/images/jotofa-hero-1.jpeg",
+};
+
+const newsItems = [
+  {
+    category: "UTEC Solutions",
+    categoryKey: "utec",
+    categoryColor: "text-utec-cyan",
+    categoryBg: "bg-utec-cyan/10",
+    categoryBorder: "border-utec-cyan/20",
+    title: "UTEC Deploys Smart City Infrastructure in Dar es Salaam",
+    excerpt:
+      "A landmark project bringing IoT-enabled traffic management, public Wi-Fi, and digital services to Tanzania's commercial capital.",
+    date: "February 2025",
+    readTime: "3 min read",
+    image: "/images/utec.png",
+  },
+  {
+    category: "CSR",
+    categoryKey: "csr",
+    categoryColor: "text-cleaning-green",
+    categoryBg: "bg-cleaning-green/10",
+    categoryBorder: "border-cleaning-green/20",
+    title: "2,000 Trees Planted: JOTOFA's Green Initiative Milestone",
+    excerpt:
+      "Our environmental stewardship program reaches a major milestone, with reforestation projects across three regions in Tanzania.",
+    date: "January 2025",
+    readTime: "2 min read",
+    image: "/images/jotofa-hero-3.jpeg",
+  },
+  {
+    category: "Innovation",
+    categoryKey: "innovation",
+    categoryColor: "text-staffing-purple",
+    categoryBg: "bg-staffing-purple/10",
+    categoryBorder: "border-staffing-purple/20",
+    title: "Digital Transformation Across All Subsidiaries",
+    excerpt:
+      "JOTOFA GROUP invests in end-to-end digital platforms, integrating operations from logistics tracking to HR management under one technology umbrella.",
+    date: "December 2024",
+    readTime: "5 min read",
+    image: "/images/jotofa-hero-2.jpeg",
+  },
+  {
+    category: "Logistics",
+    categoryKey: "logistics",
+    categoryColor: "text-courier-orange",
+    categoryBg: "bg-courier-orange/10",
+    categoryBorder: "border-courier-orange/20",
+    title: "JOTOFA Courier Launches Same-Day Delivery in Dar es Salaam",
+    excerpt:
+      "Our logistics subsidiary introduces express delivery services, reducing turnaround times for businesses and individuals across the metropolitan area.",
+    date: "November 2024",
+    readTime: "3 min read",
+    image: "/images/courier.png",
+  },
+  {
+    category: "Group Update",
+    categoryKey: "group",
+    categoryColor: "text-security-red",
+    categoryBg: "bg-security-red/10",
+    categoryBorder: "border-security-red/20",
+    title: "JOTOFA GROUP Achieves ISO 9001 Certification",
+    excerpt:
+      "Our commitment to quality management systems is recognized with international certification, reinforcing our promise of operational excellence.",
+    date: "October 2024",
+    readTime: "2 min read",
+    image: "/images/jotofa-hero-1.jpeg",
+  },
+  {
+    category: "UTEC Solutions",
+    categoryKey: "utec",
+    categoryColor: "text-utec-cyan",
+    categoryBg: "bg-utec-cyan/10",
+    categoryBorder: "border-utec-cyan/20",
+    title: "UTEC Partners with Tanzania Telecom Authority for 5G Rollout",
+    excerpt:
+      "A strategic partnership to accelerate next-generation connectivity infrastructure in major urban centers across Tanzania.",
+    date: "September 2024",
+    readTime: "4 min read",
+    image: "/images/utec.png",
+  },
+];
+
+const allArticles = [featuredArticle, ...newsItems];
+
+const statsHighlights = [
+  { icon: Newspaper, value: "50+", label: "Press Releases", accent: "text-jotofa-gold", bg: "bg-jotofa-accent/10" },
+  { icon: TrendingUp, value: "3", label: "Countries Covered", accent: "text-utec-cyan", bg: "bg-utec-cyan/10" },
+  { icon: Users, value: "5", label: "Subsidiary Updates", accent: "text-cleaning-green", bg: "bg-cleaning-green/10" },
+  { icon: Globe, value: "24/7", label: "Industry Coverage", accent: "text-courier-orange", bg: "bg-courier-orange/10" },
+];
+
+export function News() {
+  const { setActivePage } = usePage();
+  const [selectedArticle, setSelectedArticle] = useState<typeof featuredArticle | null>(null);
+
+  const handleArticleClick = useCallback((article: typeof allArticles[number]) => {
+    setSelectedArticle(article as typeof featuredArticle);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
+  const handleBack = useCallback(() => {
+    setSelectedArticle(null);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
+  const getRelatedArticles = useCallback(
+    (article: typeof featuredArticle) => {
+      return allArticles
+        .filter((a) => a.title !== article.title)
+        .slice(0, 3);
+    },
+    []
+  );
+
+  // Show article detail view if one is selected
+  if (selectedArticle) {
+    return (
+      <AnimatePresence mode="wait">
+        <NewsDetail
+          article={selectedArticle}
+          relatedArticles={getRelatedArticles(selectedArticle)}
+          onBack={handleBack}
+          onArticleClick={handleArticleClick}
+        />
+      </AnimatePresence>
+    );
+  }
+
+  return (
+    <div className="bg-background">
+      {/* ── Opening Hero ── */}
+      <section className="relative min-h-[85vh] flex flex-col items-center justify-center py-28 sm:py-36 overflow-hidden">
+        {/* Background layers */}
+        <div className="absolute inset-0 bg-background" />
+        <div className="absolute inset-0 bg-grid-pattern opacity-40" />
+        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-jotofa-accent/5 rounded-full blur-[140px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-utec-cyan/5 rounded-full blur-[120px]" />
+
+        {/* Decorative corner accents */}
+        <div className="absolute top-12 left-8 w-20 h-20 border-l-2 border-t-2 border-jotofa-accent/10 rounded-tl-lg hidden lg:block" />
+        <div className="absolute top-12 right-8 w-20 h-20 border-r-2 border-t-2 border-jotofa-accent/10 rounded-tr-lg hidden lg:block" />
+        <div className="absolute bottom-24 left-8 w-20 h-20 border-l-2 border-b-2 border-jotofa-accent/10 rounded-bl-lg hidden lg:block" />
+        <div className="absolute bottom-24 right-8 w-20 h-20 border-r-2 border-b-2 border-jotofa-accent/10 rounded-br-lg hidden lg:block" />
+
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center flex-1 flex flex-col items-center justify-center">
+          {/* Badge */}
+          <ScrollReveal>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-jotofa-accent/20 bg-jotofa-accent/5 mb-8">
+              <Newspaper className="w-4 h-4 text-jotofa-gold" />
+              <span className="text-jotofa-gold text-sm font-medium">Newsroom</span>
+            </div>
+          </ScrollReveal>
+
+          {/* Heading */}
+          <ScrollReveal delay={0.1}>
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-foreground mb-6">
+              News &{" "}
+              <span className="text-gold-gradient">Insights</span>
+            </h1>
+          </ScrollReveal>
+
+          {/* Description */}
+          <ScrollReveal delay={0.2}>
+            <p className="mx-auto max-w-3xl text-lg sm:text-xl text-muted-foreground leading-relaxed mb-10">
+              Stay informed about our group&apos;s latest developments,
+              innovations, and community impact across Tanzania and East Africa.
+            </p>
+          </ScrollReveal>
+
+          {/* Stats row */}
+          <ScrollReveal delay={0.3}>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 max-w-3xl mx-auto w-full">
+              {statsHighlights.map((item, i) => (
+                <motion.div
+                  key={item.label}
+                  initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{
+                    duration: 0.5,
+                    delay: 0.4 + i * 0.1,
+                    ease: [0.25, 0.4, 0.25, 1],
+                  }}
+                  className="flex flex-col items-center gap-2 p-5 sm:p-6 rounded-2xl bg-card border border-border hover:border-jotofa-accent/25 transition-all duration-300 hover:bg-secondary"
+                >
+                  <div className={`inline-flex items-center justify-center w-10 h-10 rounded-xl ${item.bg}`}>
+                    <item.icon className={`w-5 h-5 ${item.accent}`} />
+                  </div>
+                  <span className="text-2xl sm:text-3xl font-bold text-foreground">
+                    {item.value}
+                  </span>
+                  <span className="text-sm text-muted-foreground">{item.label}</span>
+                </motion.div>
+              ))}
+            </div>
+          </ScrollReveal>
+        </div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          className="relative z-10 flex flex-col items-center gap-2 mt-4 mb-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5, duration: 0.8 }}
+        >
+          <span className="text-xs text-muted-foreground tracking-widest uppercase">Latest Stories</span>
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <ChevronDown className="w-5 h-5 text-jotofa-gold/60" />
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* ── Featured Article ── */}
+      <section className="relative py-16 sm:py-20">
+        <div className="absolute inset-0 bg-background" />
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-jotofa-gold/15 to-transparent" />
+
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <ScrollReveal>
+            <div
+              className="group relative rounded-2xl border border-border overflow-hidden hover:border-jotofa-accent/25 transition-all duration-500 cursor-pointer"
+              onClick={() => handleArticleClick(featuredArticle)}
+            >
+              <div className="grid md:grid-cols-2">
+                {/* Image */}
+                <div className="relative min-h-[300px] md:min-h-[420px] overflow-hidden">
+                  <div
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                    style={{ backgroundImage: `url('${featuredArticle.image}')` }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r dark:from-jotofa-navy-deep/80 dark:to-jotofa-navy-deep/40 from-background/80 to-background/40 md:bg-gradient-to-r md:dark:from-transparent md:dark:to-transparent md:from-transparent md:to-transparent" />
+                  <div className="absolute inset-0 md:bg-gradient-to-l md:from-transparent md:to-jotofa-navy-deep/60 hidden md:block" />
+                  {/* Mobile overlay text indicator */}
+                  <div className="absolute bottom-4 left-4 md:hidden">
+                    <span className="text-xs text-white/60 font-medium">Featured</span>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="p-8 sm:p-10 flex flex-col justify-center">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="text-xs font-semibold uppercase tracking-widest text-jotofa-gold">
+                      Featured
+                    </span>
+                    <div
+                      className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full ${featuredArticle.categoryBg} ${featuredArticle.categoryBorder} border`}
+                    >
+                      <span className={`text-xs font-medium ${featuredArticle.categoryColor}`}>
+                        {featuredArticle.category}
+                      </span>
+                    </div>
+                  </div>
+
+                  <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4 group-hover:text-jotofa-gold transition-colors leading-snug">
+                    {featuredArticle.title}
+                  </h2>
+
+                  <p className="text-muted-foreground leading-relaxed mb-6">
+                    {featuredArticle.excerpt}
+                  </p>
+
+                  <div className="flex items-center justify-between mt-auto">
+                    <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                      <span className="flex items-center gap-1">
+                        <Calendar className="w-3 h-3" />
+                        {featuredArticle.date}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <Clock className="w-3 h-3" />
+                        {featuredArticle.readTime}
+                      </span>
+                    </div>
+                    <ArrowUpRight className="w-5 h-5 text-muted-foreground/30 group-hover:text-jotofa-gold transition-colors" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ── All News Grid ── */}
+      <section className="relative py-16 sm:py-20">
+        <div className="absolute inset-0 bg-background" />
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-jotofa-gold/15 to-transparent" />
+        <div className="absolute bottom-1/3 right-0 w-80 h-80 bg-jotofa-accent/5 rounded-full blur-[100px]" />
+
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          {/* Section header with filter */}
+          <ScrollReveal className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-12">
+            <div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
+                Latest <span className="text-gold-gradient">Stories</span>
+              </h2>
+              <p className="text-muted-foreground">
+                Updates from across our subsidiaries and group operations
+              </p>
+            </div>
+            <div className="flex items-center gap-2">
+              <Filter className="w-4 h-4 text-muted-foreground" />
+              <div className="flex items-center gap-1.5 flex-wrap">
+                {categories.map((cat, i) => (
+                  <button
+                    key={cat.id}
+                    className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
+                      i === 0
+                        ? "bg-jotofa-accent/10 border-jotofa-accent/20 text-jotofa-accent"
+                        : "border-border text-muted-foreground hover:border-jotofa-accent/20 hover:text-foreground"
+                    }`}
+                  >
+                    {cat.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </ScrollReveal>
+
+          {/* News grid — 3 columns */}
+          <StaggerContainer
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+            staggerDelay={0.1}
+          >
+            {newsItems.map((item) => (
+              <StaggerItem key={item.title}>
+                <article
+                  className="group h-full flex flex-col p-6 sm:p-7 rounded-2xl bg-card border border-border hover:border-jotofa-accent/25 transition-all duration-300 hover:bg-secondary cursor-pointer"
+                  onClick={() => handleArticleClick(item)}
+                >
+                  {/* Category badge */}
+                  <div
+                    className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full ${item.categoryBg} ${item.categoryBorder} border mb-4 self-start`}
+                  >
+                    <span className={`text-xs font-medium ${item.categoryColor}`}>
+                      {item.category}
+                    </span>
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-base sm:text-lg font-semibold text-foreground mb-3 group-hover:text-jotofa-gold transition-colors leading-snug">
+                    {item.title}
+                  </h3>
+
+                  {/* Excerpt */}
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-5 flex-1">
+                    {item.excerpt}
+                  </p>
+
+                  {/* Meta */}
+                  <div className="flex items-center justify-between mt-auto pt-4 border-t border-border/50">
+                    <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                      <span className="flex items-center gap-1">
+                        <Calendar className="w-3 h-3" />
+                        {item.date}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <Clock className="w-3 h-3" />
+                        {item.readTime}
+                      </span>
+                    </div>
+                    <ArrowUpRight className="w-4 h-4 text-muted-foreground/30 group-hover:text-jotofa-gold transition-colors" />
+                  </div>
+                </article>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </section>
+
+      {/* ── Newsletter CTA ── */}
+      <section className="relative py-20 sm:py-28">
+        <div className="absolute inset-0 bg-background" />
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-jotofa-gold/15 to-transparent" />
+
+        <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+          <ScrollReveal>
+            <div className="p-10 sm:p-14 rounded-2xl border border-jotofa-accent/15 bg-jotofa-accent/[0.03]">
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-jotofa-accent/10 mb-6">
+                <Lightbulb className="w-7 h-7 text-jotofa-gold" />
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
+                Stay <span className="text-gold-gradient">Informed</span>
+              </h2>
+              <p className="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto">
+                Get the latest updates from JOTOFA GROUP delivered to your inbox.
+                From strategic milestones to community impact — never miss a story.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <button
+                  onClick={() => setActivePage("contact")}
+                  className="px-8 py-3.5 bg-jotofa-accent hover:bg-jotofa-accent-dark text-white font-semibold rounded-full transition-all hover:shadow-lg hover:shadow-jotofa-accent/25"
+                >
+                  Subscribe to Updates
+                </button>
+                <button
+                  onClick={() => setActivePage("contact")}
+                  className="px-8 py-3.5 border dark:border-white/20 border-black/20 hover:border-jotofa-accent/40 text-foreground font-medium rounded-full transition-all dark:hover:bg-white/5 hover:bg-black/[0.04]"
+                >
+                  Contact Our Team
+                </button>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+    </div>
+  );
+}
