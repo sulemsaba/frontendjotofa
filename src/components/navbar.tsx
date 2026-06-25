@@ -149,11 +149,11 @@ export function Navbar() {
                     </span>
                   </button>
 
-                  {/* Our Businesses Mega Dropdown */}
+                  {/* Our Businesses Mega Dropdown — opens from button's left edge */}
                   {item.hasDropdown === "businesses" && openDropdown === "businesses" && (
                     <AnimatePresence>
                       <motion.div initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} transition={{ duration: 0.2, ease: "easeOut" }}
-                        className="absolute top-full left-1/2 -translate-x-1/2 pt-2"
+                        className="absolute top-full left-0 pt-2"
                         onMouseEnter={() => handleDropdownEnter("businesses")} onMouseLeave={handleDropdownLeave}>
                         <div className="w-[640px] bg-white dark:bg-jotofa-navy-card backdrop-blur-[20px] border border-jotofa-navy/8 dark:border-white/10 rounded-lg shadow-[0_12px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_24px_60px_rgba(0,0,0,0.5)] overflow-hidden">
                           <div className="grid grid-cols-[45%_55%] min-h-[260px]">
@@ -202,11 +202,11 @@ export function Navbar() {
                     </AnimatePresence>
                   )}
 
-                  {/* About Us Dropdown */}
+                  {/* About Us Dropdown — opens from button's left edge */}
                   {item.hasDropdown === "about" && openDropdown === "about" && (
                     <AnimatePresence>
                       <motion.div initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} transition={{ duration: 0.2, ease: "easeOut" }}
-                        className="absolute top-full left-1/2 -translate-x-1/2 pt-2"
+                        className="absolute top-full left-0 pt-2"
                         onMouseEnter={() => handleDropdownEnter("about")} onMouseLeave={handleDropdownLeave}>
                         <div className="w-[230px] bg-white dark:bg-jotofa-navy-card backdrop-blur-[20px] border border-jotofa-navy/8 dark:border-white/10 rounded-lg shadow-[0_12px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_24px_60px_rgba(0,0,0,0.5)] p-2">
                           {aboutItems.map((subItem) => (

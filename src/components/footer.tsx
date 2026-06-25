@@ -13,44 +13,35 @@ import {
 import { usePage, PageId } from "@/lib/page-context";
 
 /* ──────────────────────────────────────────────────────────────────────────
-   JOTOFA Group Footer — Expert UX 4-column architecture
-   (per NN/g + Baymard Institute principles)
+   JOTOFA Group Footer — simplified 4-column architecture
+   (per user spec, no background pattern, all 4 columns in one row on desktop)
 
-   Column 1: Brand Anchor
-     • JOTOFA logo
-     • Holding statement (trimmed — no full contact block here)
+   Top banner: logo + trimmed holding statement (full-width strip)
 
-   Column 2: Corporate + Careers (grouped to consolidate internal links)
-     • CORPORATE: About Us, Our Strategy, Investor Relations, CSR, News
-     • CAREERS: Open Positions, Why Join Us, Send Your CV
-       (on mobile, Careers is a horizontal pipe-separated row)
+   4 columns (one row on desktop, stacked on mobile):
+     • Col 1 — Quick Links:        About Us, Our Strategy, Investor Relations,
+                                    CSR Initiatives, News & Insights
+     • Col 2 — Our Businesses:     UTEC, Courier, Cleaning, Security, Staffing
+     • Col 3 — Careers:            Open Positions | Why Join Us | Send Your CV
+                                    (horizontal pipe-separated on mobile)
+     • Col 4 — Contact Us + Follow Us (merged):
+                                    Address, Phone, Email, Hours
+                                    + Social icons (LinkedIn, Twitter, Facebook)
+                                    + WhatsApp CTA
 
-   Column 3: Our Businesses
-     • UTEC Solutions (with small UTEC logo icon)
-     • Courier & Logistics, Cleaning & Maids, Security, Staffing & Labour
+   Bottom bar: © 2026 JOTOFA GROUP LIMITED · Privacy Policy · Terms of Service
 
-   Column 4: Contact Us + Follow Us
-     • Address, Phone, Email, Hours
-     • Social icons (LinkedIn, Twitter, Instagram)
-     • WhatsApp CTA pill
-
-   Bottom bar (legal "junk drawer"):
-     • Left: © 2026 JOTOFA GROUP LIMITED
-     • Right: Privacy Policy · Terms of Service
-     (No back-to-top here — that's a floating FAB elsewhere)
-
-   Background: subtle JOTOFA "G" monogram pattern at low opacity.
+   NO background pattern — clean, plain background only.
    ────────────────────────────────────────────────────────────────────────── */
 
 interface FooterLink {
   label: string;
   page: PageId;
-  /** Optional small icon rendered before the label (e.g. UTEC logo) */
   iconSrc?: string;
   iconAlt?: string;
 }
 
-const corporateLinks: FooterLink[] = [
+const quickLinks: FooterLink[] = [
   { label: "About Us", page: "about" },
   { label: "Our Strategy", page: "strategy" },
   { label: "Investor Relations", page: "strategy" },
@@ -98,7 +89,6 @@ const socialLinks = [
   },
 ];
 
-/* JOTOFA corporate contact (per Visual Identity Guidelines p.32) */
 const CORPORATE_PHONE = "0773 383 800";
 const CORPORATE_PHONE_TEL = "+255773383800";
 const CORPORATE_EMAIL = "info@jotofagroup.co.tz";
@@ -108,29 +98,8 @@ const CORPORATE_HOURS = "Mon – Fri, 8:00am – 6:00pm";
 const WHATSAPP_URL = "https://wa.me/255794974996";
 
 /* ──────────────────────────────────────────────────────────────────────────
-   FooterPattern — decorative JOTOFA "G" monogram background.
-   Uses the official /images/jotofa-g-pattern.png (579×337 seamlessly
-   tileable) as a CSS background-image with repeat. Opacity tuned to be
-   decorative-not-distractive: 6% in light mode, 4% in dark mode
-   (per Baymard "signal-to-noise" guidance).
-   ────────────────────────────────────────────────────────────────────────── */
-
-function FooterPattern() {
-  return (
-    <div
-      aria-hidden
-      className="pointer-events-none absolute inset-0 z-0 bg-repeat opacity-[0.06] dark:opacity-[0.04]"
-      style={{
-        backgroundImage: "url('/images/jotofa-g-pattern.png')",
-        backgroundSize: "220px auto",
-      }}
-    />
-  );
-}
-
-/* ──────────────────────────────────────────────────────────────────────────
    LinkColumn — heading + vertical list of footer links.
-   On desktop: vertical list. On mobile: 2-col grid (compact).
+   Always visible (never expandable). Left-aligned on all viewports.
    ────────────────────────────────────────────────────────────────────────── */
 
 function LinkColumn({
@@ -144,18 +113,15 @@ function LinkColumn({
 
   return (
     <div>
-      <h4 className="text-xs font-semibold text-foreground mb-3 uppercase tracking-wider text-center sm:text-left">
+      <h4 className="text-xs font-semibold text-foreground mb-3 uppercase tracking-wider text-left">
         {title}
       </h4>
-      <ul className="grid grid-cols-2 gap-x-3 gap-y-2 sm:grid-cols-1 sm:gap-y-2 sm:space-y-2">
+      <ul className="space-y-2">
         {links.map((link) => (
-          <li
-            key={link.label}
-            className="flex items-center justify-center sm:justify-start"
-          >
+          <li key={link.label} className="flex items-center justify-start">
             <button
               onClick={() => setActivePage(link.page)}
-              className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-1 focus-visible:ring-offset-background"
+              className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-1 focus-visible:ring-offset-background text-left"
             >
               {link.iconSrc && (
                 <Image
@@ -176,46 +142,38 @@ function LinkColumn({
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   CorporateAndCareersColumn — Column 2.
-   Contains two stacked sub-sections: CORPORATE links (vertical list) and
-   CAREERS links. On mobile, Careers switches to a horizontal pipe-separated
-   row to save vertical space (per user spec).
+   CareersColumn — Col 3.
+   Vertical list on desktop. Horizontal pipe-separated row on mobile
+   ("Open Positions | Why Join Us | Send Your CV") to save vertical space.
    ────────────────────────────────────────────────────────────────────────── */
 
-function CorporateAndCareersColumn() {
+function CareersColumn() {
   const { setActivePage } = usePage();
 
   return (
     <div>
-      {/* CORPORATE sub-section */}
-      <h4 className="text-xs font-semibold text-foreground mb-3 uppercase tracking-wider text-center sm:text-left">
-        Corporate
+      <h4 className="text-xs font-semibold text-foreground mb-3 uppercase tracking-wider text-left">
+        Careers
       </h4>
-      <ul className="grid grid-cols-2 gap-x-3 gap-y-2 sm:grid-cols-1 sm:gap-y-2 sm:space-y-2 mb-6">
-        {corporateLinks.map((link) => (
-          <li
-            key={link.label}
-            className="flex items-center justify-center sm:justify-start"
-          >
+      {/* Desktop: vertical list */}
+      <ul className="hidden sm:block space-y-2">
+        {careerLinks.map((link) => (
+          <li key={link.label} className="flex items-center justify-start">
             <button
               onClick={() => setActivePage(link.page)}
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-1 focus-visible:ring-offset-background"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-1 focus-visible:ring-offset-background text-left"
             >
               {link.label}
             </button>
           </li>
         ))}
       </ul>
-
-      {/* CAREERS sub-section — horizontal pipe row on mobile */}
-      <h4 className="text-xs font-semibold text-foreground mb-2 uppercase tracking-wider text-center sm:text-left">
-        Careers
-      </h4>
-      <ul className="flex flex-row flex-wrap justify-center sm:block sm:space-y-2 gap-x-2 gap-y-1">
+      {/* Mobile: horizontal pipe-separated row */}
+      <ul className="sm:hidden flex flex-row flex-wrap items-center justify-start gap-x-1.5 gap-y-1">
         {careerLinks.map((link, i) => (
           <li
             key={link.label}
-            className="flex items-center justify-center sm:justify-start"
+            className="flex items-center justify-center"
           >
             <button
               onClick={() => setActivePage(link.page)}
@@ -226,7 +184,7 @@ function CorporateAndCareersColumn() {
             {i < careerLinks.length - 1 && (
               <span
                 aria-hidden
-                className="mx-1 text-muted-foreground/40 select-none inline sm:hidden"
+                className="mx-1 text-muted-foreground/40 select-none"
               >
                 |
               </span>
@@ -244,45 +202,38 @@ function CorporateAndCareersColumn() {
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-border overflow-hidden">
-      {/* Base background */}
-      <div className="absolute inset-0 bg-background z-0" />
+    <footer className="relative border-t border-border bg-background">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* ─── Top banner: logo + holding statement (full-width strip) ─── */}
+        <div className="py-8 sm:py-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-border">
+          <Image
+            src="/images/jotofa-logo.png"
+            alt="JOTOFA Group Logo"
+            width={222}
+            height={73}
+            className="h-9 w-auto object-contain dark:brightness-0 dark:invert"
+          />
+          <p className="text-sm text-muted-foreground leading-relaxed sm:max-w-md sm:text-right">
+            A diversified Tanzanian holding company delivering excellence across
+            industries through ICT, logistics, professional services, security,
+            and staffing.
+          </p>
+        </div>
 
-      {/* Decorative G-pattern overlay */}
-      <FooterPattern />
+        {/* ─── 4-column link grid — all in one row on desktop ─── */}
+        <div className="py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
+          {/* Col 1: Quick Links */}
+          <LinkColumn title="Quick Links" links={quickLinks} />
 
-      {/* Content */}
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* ───────── Desktop / tablet 4-column grid ─────────
-            Brand (2 cols) | Corporate+Careers | Our Businesses | Contact+Follow */}
-        <div className="py-10 sm:py-14 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6 lg:gap-8">
-          {/* ─── Column 1: Brand Anchor ─── */}
-          <div className="col-span-2 md:col-span-1">
-            <div className="mb-4">
-              <Image
-                src="/images/jotofa-logo.png"
-                alt="JOTOFA Group Logo"
-                width={222}
-                height={73}
-                className="h-9 w-auto object-contain dark:brightness-0 dark:invert transition-all duration-300"
-              />
-            </div>
-            <p className="text-sm text-muted-foreground leading-relaxed max-w-[260px]">
-              A diversified Tanzanian holding company delivering excellence
-              across industries through ICT, logistics, professional services,
-              security, and staffing.
-            </p>
-          </div>
-
-          {/* ─── Column 2: Corporate + Careers ─── */}
-          <CorporateAndCareersColumn />
-
-          {/* ─── Column 3: Our Businesses ─── */}
+          {/* Col 2: Our Businesses */}
           <LinkColumn title="Our Businesses" links={businessLinks} />
 
-          {/* ─── Column 4: Contact Us + Follow Us ─── */}
+          {/* Col 3: Careers */}
+          <CareersColumn />
+
+          {/* Col 4: Contact Us + Follow Us (merged) */}
           <div>
-            <h4 className="text-xs font-semibold text-foreground mb-3 uppercase tracking-wider text-center sm:text-left">
+            <h4 className="text-xs font-semibold text-foreground mb-3 uppercase tracking-wider text-left">
               Contact Us
             </h4>
             <div className="space-y-2 text-xs text-muted-foreground mb-5">
@@ -314,11 +265,11 @@ export function Footer() {
               </div>
             </div>
 
-            {/* Follow Us sub-section */}
-            <h4 className="text-xs font-semibold text-foreground mb-3 uppercase tracking-wider text-center sm:text-left">
+            {/* Follow Us sub-section — merged into Contact column */}
+            <h4 className="text-xs font-semibold text-foreground mb-3 uppercase tracking-wider text-left">
               Follow Us
             </h4>
-            <div className="flex items-center gap-3 justify-center sm:justify-start mb-4">
+            <div className="flex items-center gap-3 justify-start mb-4">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
@@ -346,7 +297,7 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom bar — legal */}
+        {/* ─── Bottom bar — legal ─── */}
         <div className="py-5 border-t border-border">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="text-xs text-muted-foreground text-center sm:text-left">
