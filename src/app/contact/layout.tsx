@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Get in touch with JOTOFA GROUP — Ubungo Simu 2000, HT House 2nd Floor, Dar es Salaam. Phone: 0794 974 996. Email: procurement@jotofagroup.co.tz.",
+    "Get in touch with JOTOFA GROUP — HT House, 2nd Floor, Ubungo, Simu 2000 Road, Dar es Salaam. Phone: 0773 383 800. Email: info@jotofagroup.co.tz.",
   openGraph: {
     title: "JOTOFA GROUP — Contact Us",
     description:

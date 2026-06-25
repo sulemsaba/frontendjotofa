@@ -13,6 +13,7 @@ import { Strategy } from "@/components/strategy";
 import { CSR } from "@/components/csr";
 import { Footer } from "@/components/footer";
 import { WhatsAppButton } from "@/components/whatsapp-button";
+import { BackToTopButton } from "@/components/back-to-top-button";
 import { Testimonials } from "@/components/testimonials";
 import { homeTestimonials } from "@/lib/testimonials-data";
 import { UTECPage } from "@/components/pages/utec";
@@ -63,6 +64,7 @@ function PageContent() {
         </main>
         <Footer />
         <WhatsAppButton />
+      <BackToTopButton />
       </div>
     );
   }
@@ -88,6 +90,7 @@ function PageContent() {
       </main>
       <Footer />
       <WhatsAppButton />
+      <BackToTopButton />
     </div>
   );
 }

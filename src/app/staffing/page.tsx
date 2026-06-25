@@ -3,6 +3,7 @@ import { Navbar } from "@/components/navbar";
 import { StaffingPage } from "@/components/pages/staffing";
 import { Footer } from "@/components/footer";
 import { WhatsAppButton } from "@/components/whatsapp-button";
+import { BackToTopButton } from "@/components/back-to-top-button";
 
 export const metadata: Metadata = {
   title: "Staffing & Labour Solutions",
@@ -25,6 +26,7 @@ export default function StaffingPageRoute() {
       </main>
       <Footer />
       <WhatsAppButton />
+      <BackToTopButton />
     </div>
   );
 }

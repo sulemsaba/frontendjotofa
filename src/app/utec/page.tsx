@@ -3,6 +3,7 @@ import { Navbar } from "@/components/navbar";
 import { UTECPage } from "@/components/pages/utec";
 import { Footer } from "@/components/footer";
 import { WhatsAppButton } from "@/components/whatsapp-button";
+import { BackToTopButton } from "@/components/back-to-top-button";
 
 export const metadata: Metadata = {
   title: "UTEC Solutions — ICT Services",
@@ -25,6 +26,7 @@ export default function UTECPageRoute() {
       </main>
       <Footer />
       <WhatsAppButton />
+      <BackToTopButton />
     </div>
   );
 }

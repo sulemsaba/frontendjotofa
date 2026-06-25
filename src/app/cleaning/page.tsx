@@ -3,6 +3,7 @@ import { Navbar } from "@/components/navbar";
 import { CleaningPage } from "@/components/pages/cleaning";
 import { Footer } from "@/components/footer";
 import { WhatsAppButton } from "@/components/whatsapp-button";
+import { BackToTopButton } from "@/components/back-to-top-button";
 
 export const metadata: Metadata = {
   title: "Cleaning & Facility Management",
@@ -25,6 +26,7 @@ export default function CleaningPageRoute() {
       </main>
       <Footer />
       <WhatsAppButton />
+      <BackToTopButton />
     </div>
   );
 }

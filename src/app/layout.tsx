@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Open_Sans, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Per JOTOFA Visual Identity Guidelines p.16: Open Sans for web/digital.
+const openSans = Open_Sans({
+  variable: "--font-open-sans",
   subsets: ["latin"],
+  display: "swap",
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 const geistMono = Geist_Mono({
@@ -15,9 +18,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "JOTOFA GROUP — Powering Progress Across Tanzania",
+  metadataBase: new URL("https://jotofagroup.co.tz"),
+  title: "JOTOFA GROUP — Delivering Excellence Across Industries",
   description:
-    "JOTOFA GROUP is a diversified holding company driving innovation through ICT, logistics, cleaning, security, and staffing solutions across Tanzania and East Africa.",
+    "JOTOFA GROUP is a diversified Tanzanian holding company delivering excellence across industries through ICT, logistics, cleaning, security, and staffing solutions.",
   keywords: [
     "JOTOFA",
     "holding company",
@@ -34,9 +38,9 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
   },
   openGraph: {
-    title: "JOTOFA GROUP — Powering Progress Across Tanzania",
+    title: "JOTOFA GROUP — Delivering Excellence Across Industries",
     description:
-      "A diversified holding company driving innovation through ICT, logistics, cleaning, security, and staffing solutions.",
+      "A diversified Tanzanian holding company delivering excellence across industries through ICT, logistics, cleaning, security, and staffing solutions.",
     type: "website",
   },
 };
@@ -49,7 +53,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
+        className={`${openSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
       >
         <ThemeProvider
           attribute="class"

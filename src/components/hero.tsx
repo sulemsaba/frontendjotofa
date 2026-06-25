@@ -184,7 +184,7 @@ export function Hero() {
               animate={{ scaleX: 1 }}
               transition={{ duration: 0.8, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
               className="h-[3px] w-20 bg-jotofa-accent mb-6 rounded-full origin-left"
-              style={{ boxShadow: "0 0 12px rgba(0, 191, 255, 0.4)" }}
+              style={{ boxShadow: "0 0 12px rgba(0, 169, 183, 0.4)" }}
             />
 
             <motion.h1
@@ -203,7 +203,7 @@ export function Hero() {
               </motion.span>
               <motion.span
                 className="block text-gold-gradient"
-                style={{ textShadow: "0 0 30px rgba(0, 191, 255, 0.15)" }}
+                style={{ textShadow: "0 0 30px rgba(0, 169, 183, 0.15)" }}
                 initial={{ opacity: 0, transform: "translateY(20px)" }}
                 animate={{ opacity: 1, transform: "translateY(0)" }}
                 transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}

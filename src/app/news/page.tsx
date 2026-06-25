@@ -3,6 +3,7 @@ import { Navbar } from "@/components/navbar";
 import { News } from "@/components/news";
 import { Footer } from "@/components/footer";
 import { WhatsAppButton } from "@/components/whatsapp-button";
+import { BackToTopButton } from "@/components/back-to-top-button";
 import { getNews, type PublicNewsArticle } from "@/lib/api";
 
 export const metadata: Metadata = {
@@ -33,6 +34,7 @@ export default async function NewsPage() {
       </main>
       <Footer />
       <WhatsAppButton />
+      <BackToTopButton />
     </div>
   );
 }

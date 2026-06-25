@@ -6,7 +6,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-open-sans);
   --font-mono: var(--font-geist-mono);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -42,38 +42,63 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
-  /* ── JOTOFA Brand Tokens ── */
-  /* Accent (cyan) — highlights, CTAs, links, badges */
-  --color-jotofa-accent: #00BFFF;
-  --color-jotofa-accent-light: #4DD4FF;
-  --color-jotofa-accent-dark: #0099CC;
-  --color-jotofa-hover-accent: #33CCFF;
+  /* ════════════════════════════════════════════════════════════
+     JOTOFA BRAND TOKENS  —  per JOTOFA Visual Identity Guidelines
+     Main colours (guide p.23):
+       • JOTOFA Blue  #003B64  (RGB 0, 59, 100)
+       • Jet Black    #000000
+     Complementary colours (guide p.23):
+       • Teal         #00A9B7  (RGB 0, 169, 183)
+       • Lavender     #D9B3CE  (RGB 217, 179, 206)
+       • Lime Green   #8ED644  (RGB 142, 214, 68)
+       • Red          #E73323  (RGB 231, 51, 35)
+       • Burgundy     #8B1B5E  (RGB 139, 27, 94)
+       • Light Blue   #6ED2EC  (RGB 110, 210, 236)
+       • Gray         #CCD1D1  (RGB 204, 209, 209)
+       • Pink         #FF4D7D  (RGB 255, 77, 125)
+     ════════════════════════════════════════════════════════════ */
 
-  /* Primary (navy) — buttons, headings, strong text */
-  --color-jotofa-navy: #002040;
-  --color-jotofa-navy-deep: #00111F;
-  --color-jotofa-navy-mid: #001826;
-  --color-jotofa-navy-card: #0A2A40;
-  --color-jotofa-navy-sidebar: #000D18;
+  /* Primary — JOTOFA Blue (buttons, headings, strong elements) */
+  --color-jotofa-navy: #003B64;
+  --color-jotofa-navy-deep: #002A4A;
+  --color-jotofa-navy-mid: #00355A;
+  --color-jotofa-navy-card: #0A4A75;
+  --color-jotofa-navy-sidebar: #00253F;
+
+  /* Accent — Teal (highlights, CTAs, links, badges) */
+  --color-jotofa-accent: #00A9B7;
+  --color-jotofa-accent-light: #33BAC6;
+  --color-jotofa-accent-dark: #008799;
+  --color-jotofa-hover-accent: #00BCA8;
 
   /* Text hierarchy */
   --color-jotofa-text-secondary: #5E6A75;
   --color-jotofa-text-muted: #999DA0;
 
-  /* Subsidiary colors */
-  --color-utec-cyan: #00d4ff;
-  --color-courier-orange: #ff8c00;
-  --color-cleaning-green: #00d68f;
-  --color-security-red: #ff3d57;
-  --color-staffing-purple: #a855f7;
+  /* Subsidiary colours — official complementary palette */
+  --color-utec-cyan: #00A9B7;        /* Teal (same as accent) */
+  --color-courier-orange: #FF4D7D;   /* Pink (no orange in guide) */
+  --color-cleaning-green: #8ED644;   /* Lime Green */
+  --color-security-red: #E73323;     /* Red */
+  --color-staffing-purple: #8B1B5E;  /* Burgundy */
 
-  /* Legacy aliases — jotofa-gold now resolves to cyan for backward compat */
-  --color-jotofa-gold: #00BFFF;
-  --color-jotofa-gold-light: #4DD4FF;
-  --color-jotofa-gold-dark: #0099CC;
-  --color-dark-bg: #002040;
-  --color-dark-card: #0A2A40;
-  --color-dark-card-hover: #0E3350;
+  /* Full complementary palette — for future use */
+  --color-jotofa-teal: #00A9B7;
+  --color-jotofa-lavender: #D9B3CE;
+  --color-jotofa-lime: #8ED644;
+  --color-jotofa-red: #E73323;
+  --color-jotofa-burgundy: #8B1B5E;
+  --color-jotofa-light-blue: #6ED2EC;
+  --color-jotofa-gray: #CCD1D1;
+  --color-jotofa-pink: #FF4D7D;
+
+  /* Legacy aliases — keep working but resolve to new palette */
+  --color-jotofa-gold: #00A9B7;          /* was cyan, now teal */
+  --color-jotofa-gold-light: #33BAC6;
+  --color-jotofa-gold-dark: #008799;
+  --color-dark-bg: #003B64;
+  --color-dark-card: #0A4A75;
+  --color-dark-card-hover: #0E558A;
   --color-dark-border: rgba(255, 255, 255, 0.08);
 }
 
@@ -85,52 +110,52 @@
 
   /* Backgrounds */
   --background: #FFFFFF;
-  --foreground: #002040;
+  --foreground: #003B64;
   --card: #FFFFFF;
-  --card-foreground: #002040;
+  --card-foreground: #003B64;
   --popover: #FFFFFF;
-  --popover-foreground: #002040;
+  --popover-foreground: #003B64;
 
-  /* Primary = Navy (buttons, strong elements) */
-  --primary: #002040;
+  /* Primary = JOTOFA Blue (buttons, strong elements) */
+  --primary: #003B64;
   --primary-foreground: #FFFFFF;
 
   /* Secondary = subtle backgrounds */
-  --secondary: #F5F9FC;
-  --secondary-foreground: #002040;
+  --secondary: #F2F7FA;
+  --secondary-foreground: #003B64;
 
   /* Muted = quiet backgrounds */
-  --muted: #F5F9FC;
+  --muted: #F2F7FA;
   --muted-foreground: #5E6A75;
 
-  /* Accent = Cyan (highlights, CTAs, links) */
-  --accent: #00BFFF;
+  /* Accent = Teal (highlights, CTAs, links) */
+  --accent: #00A9B7;
   --accent-foreground: #FFFFFF;
 
   /* Destructive */
   --destructive: oklch(0.577 0.245 27.325);
 
   /* UI */
-  --border: rgba(0, 32, 64, 0.08);
-  --input: rgba(0, 32, 64, 0.12);
-  --ring: #00BFFF;
+  --border: rgba(0, 59, 100, 0.08);
+  --input: rgba(0, 59, 100, 0.12);
+  --ring: #00A9B7;
 
   /* Charts */
-  --chart-1: #00BFFF;
-  --chart-2: #ff8c00;
-  --chart-3: #00d68f;
-  --chart-4: #ff3d57;
-  --chart-5: #a855f7;
+  --chart-1: #00A9B7;
+  --chart-2: #FF4D7D;
+  --chart-3: #8ED644;
+  --chart-4: #E73323;
+  --chart-5: #8B1B5E;
 
   /* Sidebar */
-  --sidebar: #002040;
+  --sidebar: #003B64;
   --sidebar-foreground: #FFFFFF;
-  --sidebar-primary: #00BFFF;
-  --sidebar-primary-foreground: #002040;
-  --sidebar-accent: #003060;
+  --sidebar-primary: #00A9B7;
+  --sidebar-primary-foreground: #003B64;
+  --sidebar-accent: #0A4A75;
   --sidebar-accent-foreground: #FFFFFF;
   --sidebar-border: rgba(255, 255, 255, 0.08);
-  --sidebar-ring: #00BFFF;
+  --sidebar-ring: #00A9B7;
 }
 
 /* ═══════════════════════════════════════════
@@ -138,28 +163,28 @@
    ═══════════════════════════════════════════ */
 .dark {
   /* Backgrounds */
-  --background: #00111F;
+  --background: #00253F;
   --foreground: #FFFFFF;
-  --card: #0A2A40;
+  --card: #0A4A75;
   --card-foreground: #FFFFFF;
-  --popover: #0A2A40;
+  --popover: #0A4A75;
   --popover-foreground: #FFFFFF;
 
-  /* Primary = Navy (still navy in dark for buttons) */
-  --primary: #002040;
+  /* Primary = JOTOFA Blue (still navy in dark for buttons) */
+  --primary: #003B64;
   --primary-foreground: #FFFFFF;
 
   /* Secondary = slightly lighter than bg */
-  --secondary: #001826;
+  --secondary: #00355A;
   --secondary-foreground: #FFFFFF;
 
   /* Muted */
-  --muted: #001826;
+  --muted: #00355A;
   --muted-foreground: #C7D1DA;
 
-  /* Accent = Cyan */
-  --accent: #00BFFF;
-  --accent-foreground: #00111F;
+  /* Accent = Teal */
+  --accent: #00A9B7;
+  --accent-foreground: #00253F;
 
   /* Destructive */
   --destructive: oklch(0.704 0.191 22.216);
@@ -167,24 +192,24 @@
   /* UI */
   --border: rgba(255, 255, 255, 0.08);
   --input: rgba(255, 255, 255, 0.12);
-  --ring: #00BFFF;
+  --ring: #00A9B7;
 
   /* Charts */
-  --chart-1: #00BFFF;
-  --chart-2: #ff8c00;
-  --chart-3: #00d68f;
-  --chart-4: #ff3d57;
-  --chart-5: #a855f7;
+  --chart-1: #00A9B7;
+  --chart-2: #FF4D7D;
+  --chart-3: #8ED644;
+  --chart-4: #E73323;
+  --chart-5: #8B1B5E;
 
   /* Sidebar */
-  --sidebar: #000D18;
+  --sidebar: #00253F;
   --sidebar-foreground: #FFFFFF;
-  --sidebar-primary: #00BFFF;
-  --sidebar-primary-foreground: #00111F;
-  --sidebar-accent: #0A2A40;
+  --sidebar-primary: #00A9B7;
+  --sidebar-primary-foreground: #00253F;
+  --sidebar-accent: #0A4A75;
   --sidebar-accent-foreground: #FFFFFF;
   --sidebar-border: rgba(255, 255, 255, 0.08);
-  --sidebar-ring: #00BFFF;
+  --sidebar-ring: #00A9B7;
 }
 
 /* ═══════════════════════════════════════════
@@ -211,25 +236,25 @@
 
 /* Dark mode scrollbar (default) */
 ::-webkit-scrollbar-track {
-  background: #00111F;
+  background: #00253F;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #0A2A40;
+  background: #0A4A75;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #0E3350;
+  background: #0E558A;
 }
 
 /* ═══════════════════════════════════════════
    UTILITY CLASSES
    ═══════════════════════════════════════════ */
 
-/* Accent text gradient — cyan */
+/* Accent text gradient — teal */
 .text-gold-gradient {
-  background: linear-gradient(135deg, #4DD4FF, #00BFFF, #0099CC);
+  background: linear-gradient(135deg, #33BAC6, #00A9B7, #008799);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -238,14 +263,14 @@
 /* Subtle grid pattern — dark theme (navy) */
 .bg-grid-pattern {
   background-image:
-    linear-gradient(rgba(0, 191, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 191, 255, 0.04) 1px, transparent 1px);
+    linear-gradient(rgba(0, 169, 183, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 169, 183, 0.04) 1px, transparent 1px);
   background-size: 60px 60px;
 }
 
 /* Glass morphism — dark mode default */
 .glass {
-  background: rgba(10, 42, 64, 0.5);
+  background: rgba(10, 74, 117, 0.5);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -274,9 +299,9 @@
   opacity: 1;
 }
 
-/* Custom selection color — cyan */
+/* Custom selection color — teal */
 ::selection {
-  background: rgba(0, 191, 255, 0.3);
+  background: rgba(0, 169, 183, 0.3);
   color: #ffffff;
 }
 
@@ -315,11 +340,11 @@
    ═══════════════════════════════════════════ */
 :root:not(.dark) .glass {
   background: rgba(255, 255, 255, 0.7);
-  border-bottom: 1px solid rgba(0, 32, 64, 0.08);
+  border-bottom: 1px solid rgba(0, 59, 100, 0.08);
 }
 
 :root:not(.dark) .text-gold-gradient {
-  background: linear-gradient(135deg, #0099CC, #00BFFF, #4DD4FF);
+  background: linear-gradient(135deg, #008799, #00A9B7, #33BAC6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -327,12 +352,12 @@
 
 :root:not(.dark) .bg-grid-pattern {
   background-image:
-    linear-gradient(rgba(0, 32, 64, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 32, 64, 0.05) 1px, transparent 1px);
+    linear-gradient(rgba(0, 59, 100, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 59, 100, 0.05) 1px, transparent 1px);
 }
 
 :root:not(.dark) ::-webkit-scrollbar-track {
-  background: #F5F9FC;
+  background: #F2F7FA;
 }
 
 :root:not(.dark) ::-webkit-scrollbar-thumb {
@@ -344,8 +369,8 @@
 }
 
 :root:not(.dark) ::selection {
-  background: rgba(0, 191, 255, 0.2);
-  color: #002040;
+  background: rgba(0, 169, 183, 0.2);
+  color: #003B64;
 }
 
 /* ═══════════════════════════════════════════
@@ -358,15 +383,15 @@
   background: transparent;
 }
 .sidebar-scroll::-webkit-scrollbar-thumb {
-  background: rgba(0, 191, 255, 0.15);
+  background: rgba(0, 169, 183, 0.15);
   border-radius: 2px;
 }
 .sidebar-scroll::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 191, 255, 0.3);
+  background: rgba(0, 169, 183, 0.3);
 }
 :root:not(.dark) .sidebar-scroll::-webkit-scrollbar-thumb {
-  background: rgba(0, 32, 64, 0.1);
+  background: rgba(0, 59, 100, 0.1);
 }
 :root:not(.dark) .sidebar-scroll::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 32, 64, 0.2);
+  background: rgba(0, 59, 100, 0.2);
 }

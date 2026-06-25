@@ -21,19 +21,19 @@ const contactInfo = [
   {
     icon: MapPin,
     label: "Head Office",
-    value: "Ubungo Simu 2000, HT House 2nd Floor, Mawasiliano",
+    value: "HT House, 2nd Floor, Ubungo, Simu 2000 Road, P.O. Box 75075, Dar es Salaam",
   },
   {
     icon: Phone,
     label: "Phone",
-    value: "0794 974 996",
-    href: "tel:+255794974996",
+    value: "0773 383 800",
+    href: "tel:+255773383800",
   },
   {
     icon: Mail,
     label: "Email",
-    value: "procurement@jotofagroup.co.tz",
-    href: "mailto:procurement@jotofagroup.co.tz",
+    value: "info@jotofagroup.co.tz",
+    href: "mailto:info@jotofagroup.co.tz",
   },
   {
     icon: Clock,

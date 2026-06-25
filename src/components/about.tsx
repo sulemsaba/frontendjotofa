@@ -136,10 +136,10 @@ const keyNumbers = [
 
 const leadership = [
   {
-    initials: "JT",
-    name: "Joseph Tofa",
-    title: "Founder & Group CEO",
-    bio: "Visionary leader with 15+ years building diversified enterprises across East Africa",
+    initials: "JO",
+    name: "Joseph Odhiambo",
+    title: "Managing Director",
+    bio: "Leading JOTOFA GROUP with a commitment to delivering excellence across industries throughout Tanzania and East Africa",
     accent: "text-jotofa-gold",
     bg: "bg-jotofa-accent/10",
     border: "border-jotofa-accent/20",
@@ -291,11 +291,11 @@ export function About() {
               </blockquote>
               <div className="mt-4 flex items-center gap-3 pl-4">
                 <div className="w-10 h-10 rounded-full bg-jotofa-accent/15 flex items-center justify-center">
-                  <span className="text-sm font-bold text-jotofa-gold">JT</span>
+                  <span className="text-sm font-bold text-jotofa-gold">JO</span>
                 </div>
                 <div className="text-left">
-                  <div className="text-sm font-semibold text-foreground">Joseph Tofa</div>
-                  <div className="text-xs text-muted-foreground">Founder & Group CEO</div>
+                  <div className="text-sm font-semibold text-foreground">Joseph Odhiambo</div>
+                  <div className="text-xs text-muted-foreground">Managing Director</div>
                 </div>
               </div>
             </div>

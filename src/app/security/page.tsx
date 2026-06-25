@@ -3,6 +3,7 @@ import { Navbar } from "@/components/navbar";
 import { SecurityPage } from "@/components/pages/security";
 import { Footer } from "@/components/footer";
 import { WhatsAppButton } from "@/components/whatsapp-button";
+import { BackToTopButton } from "@/components/back-to-top-button";
 
 export const metadata: Metadata = {
   title: "Security Services",
@@ -25,6 +26,7 @@ export default function SecurityPageRoute() {
       </main>
       <Footer />
       <WhatsAppButton />
+      <BackToTopButton />
     </div>
   );
 }

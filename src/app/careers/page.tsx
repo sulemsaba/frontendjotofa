@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { WhatsAppButton } from "@/components/whatsapp-button";
+import { BackToTopButton } from "@/components/back-to-top-button";
 
 const Careers = dynamic(
   () => import("@/components/careers").then((m) => ({ default: m.Careers })),
@@ -41,6 +42,7 @@ export default function CareersPage() {
       </main>
       <Footer />
       <WhatsAppButton />
+      <BackToTopButton />
     </div>
   );
 }

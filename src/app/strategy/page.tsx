@@ -3,6 +3,7 @@ import { Navbar } from "@/components/navbar";
 import { Strategy } from "@/components/strategy";
 import { Footer } from "@/components/footer";
 import { WhatsAppButton } from "@/components/whatsapp-button";
+import { BackToTopButton } from "@/components/back-to-top-button";
 
 export const metadata: Metadata = {
   title: "Our Strategy",
@@ -25,6 +26,7 @@ export default function StrategyPage() {
       </main>
       <Footer />
       <WhatsAppButton />
+      <BackToTopButton />
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { Navbar } from "@/components/navbar";
 import { CSR } from "@/components/csr";
 import { Footer } from "@/components/footer";
 import { WhatsAppButton } from "@/components/whatsapp-button";
+import { BackToTopButton } from "@/components/back-to-top-button";
 
 export const metadata: Metadata = {
   title: "CSR Initiatives",
@@ -25,6 +26,7 @@ export default function CSRPage() {
       </main>
       <Footer />
       <WhatsAppButton />
+      <BackToTopButton />
     </div>
   );
 }

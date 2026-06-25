@@ -688,7 +688,7 @@ export function NewsDetail({ article, relatedArticles, onBack, onArticleClick }:
                 <ArrowRight className="w-4 h-4" />
               </button>
               <a
-                href="tel:+255794974996"
+                href="tel:+255773383800"
                 className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-white/30 text-white font-medium text-sm hover:bg-white/10 transition-all duration-200"
               >
                 <Phone className="w-4 h-4" />

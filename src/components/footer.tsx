@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import {
-  ArrowUp,
-  Instagram,
+  Facebook,
   Twitter,
   Linkedin,
   Mail,
@@ -14,9 +13,33 @@ import {
 import { usePage, PageId } from "@/lib/page-context";
 
 /* ──────────────────────────────────────────────────────────────────────────
-   Footer link groups.
-   All link columns are ALWAYS visible (no accordions, no <details>) per
-   Baymard/NNG guidance — desktop and mobile both see every link.
+   JOTOFA Group Footer — Expert UX 4-column architecture
+   (per NN/g + Baymard Institute principles)
+
+   Column 1: Brand Anchor
+     • JOTOFA logo
+     • Holding statement (trimmed — no full contact block here)
+
+   Column 2: Corporate + Careers (grouped to consolidate internal links)
+     • CORPORATE: About Us, Our Strategy, Investor Relations, CSR, News
+     • CAREERS: Open Positions, Why Join Us, Send Your CV
+       (on mobile, Careers is a horizontal pipe-separated row)
+
+   Column 3: Our Businesses
+     • UTEC Solutions (with small UTEC logo icon)
+     • Courier & Logistics, Cleaning & Maids, Security, Staffing & Labour
+
+   Column 4: Contact Us + Follow Us
+     • Address, Phone, Email, Hours
+     • Social icons (LinkedIn, Twitter, Instagram)
+     • WhatsApp CTA pill
+
+   Bottom bar (legal "junk drawer"):
+     • Left: © 2026 JOTOFA GROUP LIMITED
+     • Right: Privacy Policy · Terms of Service
+     (No back-to-top here — that's a floating FAB elsewhere)
+
+   Background: subtle JOTOFA "G" monogram pattern at low opacity.
    ────────────────────────────────────────────────────────────────────────── */
 
 interface FooterLink {
@@ -27,12 +50,18 @@ interface FooterLink {
   iconAlt?: string;
 }
 
-const quickLinks: FooterLink[] = [
+const corporateLinks: FooterLink[] = [
   { label: "About Us", page: "about" },
   { label: "Our Strategy", page: "strategy" },
+  { label: "Investor Relations", page: "strategy" },
   { label: "CSR Initiatives", page: "csr" },
   { label: "News & Insights", page: "news" },
-  { label: "Contact", page: "contact" },
+];
+
+const careerLinks: FooterLink[] = [
+  { label: "Open Positions", page: "careers" },
+  { label: "Why Join Us", page: "careers" },
+  { label: "Send Your CV", page: "contact" },
 ];
 
 const businessLinks: FooterLink[] = [
@@ -48,13 +77,6 @@ const businessLinks: FooterLink[] = [
   { label: "Staffing & Labour", page: "staffing" },
 ];
 
-const careerLinks: FooterLink[] = [
-  { label: "Open Positions", page: "careers" },
-  { label: "Why Join Us", page: "careers" },
-  { label: "Send Your CV", page: "contact" },
-];
-
-/* Social media — kept compact, used in the Contact column under "Follow Us" */
 const socialLinks = [
   {
     icon: Linkedin,
@@ -69,33 +91,35 @@ const socialLinks = [
     hoverBg: "hover:bg-[#1DA1F2]",
   },
   {
-    icon: Instagram,
-    label: "Instagram",
-    href: "https://instagram.com/jotofagroup",
-    hoverBg: "hover:bg-[#E4405F]",
+    icon: Facebook,
+    label: "Facebook",
+    href: "https://facebook.com/jotofagroup",
+    hoverBg: "hover:bg-[#1877F2]",
   },
 ];
 
-/* JOTOFA corporate contact (separate from the WhatsApp line used on the
-   floating button). The corporate line is the official one from the brand
-   guide; WhatsApp remains 0794 974 996 → wa.me/255794974996. */
+/* JOTOFA corporate contact (per Visual Identity Guidelines p.32) */
 const CORPORATE_PHONE = "0773 383 800";
 const CORPORATE_PHONE_TEL = "+255773383800";
-const CORPORATE_EMAIL = "procurement@jotofagroup.co.tz";
+const CORPORATE_EMAIL = "info@jotofagroup.co.tz";
+const CORPORATE_ADDRESS =
+  "HT House, 2nd Floor, Ubungo, Simu 2000 Road, P.O. Box 75075, Dar es Salaam";
+const CORPORATE_HOURS = "Mon – Fri, 8:00am – 6:00pm";
+const WHATSAPP_URL = "https://wa.me/255794974996";
 
 /* ──────────────────────────────────────────────────────────────────────────
-   FooterPattern — decorative JOTOFA "G" pattern background.
+   FooterPattern — decorative JOTOFA "G" monogram background.
    Uses the official /images/jotofa-g-pattern.png (579×337 seamlessly
-   tileable) as a CSS background-image with repeat. Opacity is tuned so the
-   G letterform is recognizable as decoration, not loud: 12% in light mode,
-   8% in dark mode (per brand-guide visual hierarchy).
+   tileable) as a CSS background-image with repeat. Opacity tuned to be
+   decorative-not-distractive: 6% in light mode, 4% in dark mode
+   (per Baymard "signal-to-noise" guidance).
    ────────────────────────────────────────────────────────────────────────── */
 
 function FooterPattern() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none absolute inset-0 z-0 bg-repeat opacity-[0.12] dark:opacity-[0.08]"
+      className="pointer-events-none absolute inset-0 z-0 bg-repeat opacity-[0.06] dark:opacity-[0.04]"
       style={{
         backgroundImage: "url('/images/jotofa-g-pattern.png')",
         backgroundSize: "220px auto",
@@ -105,55 +129,29 @@ function FooterPattern() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   LinkList — a single column of links with a heading.
-   `horizontalOnMobile` flips the layout on small screens: heading centered
-   on top, links in a single horizontal row separated by "|" — used for the
-   Careers column where there are only 3 short links.
+   LinkColumn — heading + vertical list of footer links.
+   On desktop: vertical list. On mobile: 2-col grid (compact).
    ────────────────────────────────────────────────────────────────────────── */
 
-interface LinkListProps {
-  title: string;
-  links: FooterLink[];
-  horizontalOnMobile?: boolean;
-  /** 2-col grid on mobile instead of vertical list — used for Quick Links
-      and Our Businesses which have 5 links each. */
-  twoColOnMobile?: boolean;
-}
-
-function LinkList({
+function LinkColumn({
   title,
   links,
-  horizontalOnMobile = false,
-  twoColOnMobile = false,
-}: LinkListProps) {
+}: {
+  title: string;
+  links: FooterLink[];
+}) {
   const { setActivePage } = usePage();
 
   return (
     <div>
-      {/* Heading */}
       <h4 className="text-xs font-semibold text-foreground mb-3 uppercase tracking-wider text-center sm:text-left">
         {title}
       </h4>
-
-      {/* Vertical list — desktop default */}
-      <ul
-        className={[
-          "space-y-2",
-          // On mobile: switch to horizontal row OR 2-col grid
-          horizontalOnMobile
-            ? "flex flex-row flex-wrap justify-center sm:block sm:space-y-2 gap-x-2 gap-y-1"
-            : twoColOnMobile
-            ? "grid grid-cols-2 gap-x-3 gap-y-2 sm:grid-cols-1 sm:gap-y-2 sm:space-y-2"
-            : "",
-        ].join(" ")}
-      >
-        {links.map((link, i) => (
+      <ul className="grid grid-cols-2 gap-x-3 gap-y-2 sm:grid-cols-1 sm:gap-y-2 sm:space-y-2">
+        {links.map((link) => (
           <li
             key={link.label}
-            className={[
-              "flex items-center justify-center sm:justify-start",
-              horizontalOnMobile ? "text-center sm:text-left" : "",
-            ].join(" ")}
+            className="flex items-center justify-center sm:justify-start"
           >
             <button
               onClick={() => setActivePage(link.page)}
@@ -170,9 +168,62 @@ function LinkList({
               )}
               <span>{link.label}</span>
             </button>
-            {/* Pipe separator between horizontal items — visible only on
-                mobile (where the row layout is), hidden on sm+ vertical list. */}
-            {horizontalOnMobile && i < links.length - 1 && (
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   CorporateAndCareersColumn — Column 2.
+   Contains two stacked sub-sections: CORPORATE links (vertical list) and
+   CAREERS links. On mobile, Careers switches to a horizontal pipe-separated
+   row to save vertical space (per user spec).
+   ────────────────────────────────────────────────────────────────────────── */
+
+function CorporateAndCareersColumn() {
+  const { setActivePage } = usePage();
+
+  return (
+    <div>
+      {/* CORPORATE sub-section */}
+      <h4 className="text-xs font-semibold text-foreground mb-3 uppercase tracking-wider text-center sm:text-left">
+        Corporate
+      </h4>
+      <ul className="grid grid-cols-2 gap-x-3 gap-y-2 sm:grid-cols-1 sm:gap-y-2 sm:space-y-2 mb-6">
+        {corporateLinks.map((link) => (
+          <li
+            key={link.label}
+            className="flex items-center justify-center sm:justify-start"
+          >
+            <button
+              onClick={() => setActivePage(link.page)}
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-1 focus-visible:ring-offset-background"
+            >
+              {link.label}
+            </button>
+          </li>
+        ))}
+      </ul>
+
+      {/* CAREERS sub-section — horizontal pipe row on mobile */}
+      <h4 className="text-xs font-semibold text-foreground mb-2 uppercase tracking-wider text-center sm:text-left">
+        Careers
+      </h4>
+      <ul className="flex flex-row flex-wrap justify-center sm:block sm:space-y-2 gap-x-2 gap-y-1">
+        {careerLinks.map((link, i) => (
+          <li
+            key={link.label}
+            className="flex items-center justify-center sm:justify-start"
+          >
+            <button
+              onClick={() => setActivePage(link.page)}
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-1 focus-visible:ring-offset-background"
+            >
+              {link.label}
+            </button>
+            {i < careerLinks.length - 1 && (
               <span
                 aria-hidden
                 className="mx-1 text-muted-foreground/40 select-none inline sm:hidden"
@@ -192,10 +243,6 @@ function LinkList({
    ────────────────────────────────────────────────────────────────────────── */
 
 export function Footer() {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   return (
     <footer className="relative border-t border-border overflow-hidden">
       {/* Base background */}
@@ -206,11 +253,11 @@ export function Footer() {
 
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* ───────── Desktop / tablet 5-column grid ─────────
-            Brand (2 cols) | Quick Links | Our Businesses | Careers | Contact+Follow */}
-        <div className="py-10 sm:py-14 grid grid-cols-2 md:grid-cols-6 gap-8 md:gap-6 lg:gap-8">
-          {/* Brand column — spans 2 cols on md+, full width first row on mobile */}
-          <div className="col-span-2 md:col-span-2">
+        {/* ───────── Desktop / tablet 4-column grid ─────────
+            Brand (2 cols) | Corporate+Careers | Our Businesses | Contact+Follow */}
+        <div className="py-10 sm:py-14 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6 lg:gap-8">
+          {/* ─── Column 1: Brand Anchor ─── */}
+          <div className="col-span-2 md:col-span-1">
             <div className="mb-4">
               <Image
                 src="/images/jotofa-logo.png"
@@ -221,19 +268,30 @@ export function Footer() {
               />
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-[260px]">
-              Powering progress across Tanzania through diversified excellence
-              in ICT, logistics, professional services, security, and staffing.
+              A diversified Tanzanian holding company delivering excellence
+              across industries through ICT, logistics, professional services,
+              security, and staffing.
             </p>
+          </div>
 
-            {/* Compact contact block under brand blurb — desktop only here,
-                full details in the Contact column on the right. */}
-            <div className="mt-5 space-y-2 text-xs text-muted-foreground">
+          {/* ─── Column 2: Corporate + Careers ─── */}
+          <CorporateAndCareersColumn />
+
+          {/* ─── Column 3: Our Businesses ─── */}
+          <LinkColumn title="Our Businesses" links={businessLinks} />
+
+          {/* ─── Column 4: Contact Us + Follow Us ─── */}
+          <div>
+            <h4 className="text-xs font-semibold text-foreground mb-3 uppercase tracking-wider text-center sm:text-left">
+              Contact Us
+            </h4>
+            <div className="space-y-2 text-xs text-muted-foreground mb-5">
               <div className="flex items-start gap-2">
-                <MapPin className="w-3.5 h-3.5 mt-0.5 text-jotofa-gold/70 flex-shrink-0" />
-                <span>Ubungo Simu 2000, HT House 2nd Floor, Dar es Salaam</span>
+                <MapPin className="w-3.5 h-3.5 mt-0.5 text-jotofa-accent/70 flex-shrink-0" />
+                <span>{CORPORATE_ADDRESS}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Phone className="w-3.5 h-3.5 text-jotofa-gold/70 flex-shrink-0" />
+                <Phone className="w-3.5 h-3.5 text-jotofa-accent/70 flex-shrink-0" />
                 <a
                   href={`tel:${CORPORATE_PHONE_TEL}`}
                   className="hover:text-foreground transition-colors"
@@ -242,7 +300,7 @@ export function Footer() {
                 </a>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="w-3.5 h-3.5 text-jotofa-gold/70 flex-shrink-0" />
+                <Mail className="w-3.5 h-3.5 text-jotofa-accent/70 flex-shrink-0" />
                 <a
                   href={`mailto:${CORPORATE_EMAIL}`}
                   className="hover:text-foreground transition-colors break-all"
@@ -251,44 +309,16 @@ export function Footer() {
                 </a>
               </div>
               <div className="flex items-start gap-2">
-                <Clock className="w-3.5 h-3.5 mt-0.5 text-jotofa-gold/70 flex-shrink-0" />
-                <span>Mon – Fri, 8:00am – 6:00pm</span>
+                <Clock className="w-3.5 h-3.5 mt-0.5 text-jotofa-accent/70 flex-shrink-0" />
+                <span>{CORPORATE_HOURS}</span>
               </div>
             </div>
-          </div>
 
-          {/* Quick Links — 2-col grid on mobile, vertical list on desktop */}
-          <LinkList
-            title="Quick Links"
-            links={quickLinks}
-            twoColOnMobile
-          />
-
-          {/* Our Businesses — 2-col grid on mobile, vertical list on desktop.
-              UTEC link carries the small UTEC logo icon. */}
-          <LinkList
-            title="Our Businesses"
-            links={businessLinks}
-            twoColOnMobile
-          />
-
-          {/* Careers — horizontal row on mobile (full-width col-span-2 so the
-              three short links fit on one line with pipe separators), vertical
-              list on desktop. */}
-          <div className="col-span-2 md:col-span-1">
-            <LinkList
-              title="Careers"
-              links={careerLinks}
-              horizontalOnMobile
-            />
-          </div>
-
-          {/* Contact + Follow Us column */}
-          <div>
-            <h4 className="text-xs font-semibold text-foreground mb-3 uppercase tracking-wider">
+            {/* Follow Us sub-section */}
+            <h4 className="text-xs font-semibold text-foreground mb-3 uppercase tracking-wider text-center sm:text-left">
               Follow Us
             </h4>
-            <div className="flex items-center gap-3 mb-5">
+            <div className="flex items-center gap-3 justify-center sm:justify-start mb-4">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
@@ -303,18 +333,12 @@ export function Footer() {
               ))}
             </div>
 
-            <p className="text-xs text-muted-foreground leading-relaxed">
-              Connect with JOTOFA Group on social media for the latest news,
-              insights, and career opportunities.
-            </p>
-
-            {/* WhatsApp CTA — quick chat shortcut, keeps WhatsApp discoverable
-                without putting it in the navbar. */}
+            {/* WhatsApp CTA */}
             <a
-              href="https://wa.me/255794974996"
+              href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#25D366]/10 text-[#25D366] text-xs font-medium hover:bg-[#25D366]/20 transition-colors"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-[#25D366]/10 text-[#25D366] text-xs font-medium hover:bg-[#25D366]/20 transition-colors"
             >
               <Phone className="w-3 h-3" />
               Chat on WhatsApp
@@ -322,11 +346,11 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom bar */}
+        {/* Bottom bar — legal */}
         <div className="py-5 border-t border-border">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="text-xs text-muted-foreground text-center sm:text-left">
-              © {new Date().getFullYear()} JOTOFA GROUP LIMITED · All rights reserved
+              © {new Date().getFullYear()} JOTOFA GROUP LIMITED
             </div>
             <div className="flex items-center gap-4 text-xs text-muted-foreground">
               <button className="hover:text-foreground transition-colors cursor-pointer">
@@ -337,15 +361,6 @@ export function Footer() {
                 Terms of Service
               </button>
             </div>
-
-            {/* Scroll to top */}
-            <button
-              onClick={scrollToTop}
-              className="w-8 h-8 rounded-full bg-secondary border border-border flex items-center justify-center hover:bg-jotofa-accent/10 hover:border-jotofa-accent/20 transition-all group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-              aria-label="Back to top"
-            >
-              <ArrowUp className="w-3.5 h-3.5 text-muted-foreground group-hover:text-jotofa-gold transition-colors" />
-            </button>
           </div>
         </div>
       </div>

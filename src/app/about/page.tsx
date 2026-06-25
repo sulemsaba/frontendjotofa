@@ -3,6 +3,7 @@ import { Navbar } from "@/components/navbar";
 import { About } from "@/components/about";
 import { Footer } from "@/components/footer";
 import { WhatsAppButton } from "@/components/whatsapp-button";
+import { BackToTopButton } from "@/components/back-to-top-button";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -25,6 +26,7 @@ export default function AboutPage() {
       </main>
       <Footer />
       <WhatsAppButton />
+      <BackToTopButton />
     </div>
   );
 }

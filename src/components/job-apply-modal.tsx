@@ -218,7 +218,7 @@ function FileUploadField({
 function JobSummarySidebar({ job }: { job: Job }) {
   return (
     <div className="space-y-4">
-      <div className="p-4 rounded-xl bg-secondary/50 dark:bg-[#002040]/30 border border-border">
+      <div className="p-4 rounded-xl bg-secondary/50 dark:bg-[#003B64]/30 border border-border">
         <h4 className="text-xs uppercase tracking-wider text-muted-foreground font-semibold mb-3">
           Position Summary
         </h4>
@@ -281,7 +281,7 @@ function JobSummarySidebar({ job }: { job: Job }) {
 function MobileJobSummary({ job }: { job: Job }) {
   return (
     <div className="space-y-3 mb-5">
-      <div className="flex items-center gap-3 p-3 rounded-xl bg-secondary/50 dark:bg-[#002040]/30 border border-border">
+      <div className="flex items-center gap-3 p-3 rounded-xl bg-secondary/50 dark:bg-[#003B64]/30 border border-border">
         <div className="flex-1 min-w-0">
           <h4 className="text-sm font-semibold text-foreground truncate">
             {job.title}
@@ -460,7 +460,7 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                   <div className="flex items-center justify-center gap-3">
                     <button
                       onClick={handleClose}
-                      className="px-6 py-2.5 text-sm font-semibold rounded-full bg-[#002040] text-white hover:bg-[#001826] transition-colors"
+                      className="px-6 py-2.5 text-sm font-semibold rounded-full bg-[#003B64] text-white hover:bg-[#00355A] transition-colors"
                     >
                       Browse More Jobs
                     </button>
@@ -492,7 +492,7 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                             onChange={(e) =>
                               setFormData({ ...formData, firstName: e.target.value })
                             }
-                            className={`w-full px-3 py-2 rounded-lg border text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#002040]/20 focus:border-[#002040]/40 transition-all ${
+                            className={`w-full px-3 py-2 rounded-lg border text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#003B64]/20 focus:border-[#003B64]/40 transition-all ${
                               errors.firstName ? "border-red-500" : "border-input"
                             }`}
                             placeholder="John"
@@ -514,7 +514,7 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                             onChange={(e) =>
                               setFormData({ ...formData, lastName: e.target.value })
                             }
-                            className={`w-full px-3 py-2 rounded-lg border text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#002040]/20 focus:border-[#002040]/40 transition-all ${
+                            className={`w-full px-3 py-2 rounded-lg border text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#003B64]/20 focus:border-[#003B64]/40 transition-all ${
                               errors.lastName ? "border-red-500" : "border-input"
                             }`}
                             placeholder="Doe"
@@ -539,7 +539,7 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                           onChange={(e) =>
                             setFormData({ ...formData, email: e.target.value })
                           }
-                          className={`w-full px-3 py-2 rounded-lg border text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#002040]/20 focus:border-[#002040]/40 transition-all ${
+                          className={`w-full px-3 py-2 rounded-lg border text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#003B64]/20 focus:border-[#003B64]/40 transition-all ${
                             errors.email ? "border-red-500" : "border-input"
                           }`}
                           placeholder="john.doe@email.com"
@@ -563,7 +563,7 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                           onChange={(e) =>
                             setFormData({ ...formData, phone: e.target.value })
                           }
-                          className={`w-full px-3 py-2 rounded-lg border text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#002040]/20 focus:border-[#002040]/40 transition-all ${
+                          className={`w-full px-3 py-2 rounded-lg border text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#003B64]/20 focus:border-[#003B64]/40 transition-all ${
                             errors.phone ? "border-red-500" : "border-input"
                           }`}
                           placeholder="+255 7XX XXX XXX"
@@ -587,7 +587,7 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                           onChange={(e) =>
                             setFormData({ ...formData, location: e.target.value })
                           }
-                          className="w-full px-3 py-2 rounded-lg border border-input text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#002040]/20 focus:border-[#002040]/40 transition-all"
+                          className="w-full px-3 py-2 rounded-lg border border-input text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#003B64]/20 focus:border-[#003B64]/40 transition-all"
                           placeholder="Dar es Salaam, Tanzania"
                         />
                       </div>
@@ -629,7 +629,7 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                               setFormData({ ...formData, coverLetterText: e.target.value })
                             }
                             rows={4}
-                            className="w-full px-3 py-2 rounded-lg border border-input text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#002040]/20 focus:border-[#002040]/40 transition-all resize-none"
+                            className="w-full px-3 py-2 rounded-lg border border-input text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#003B64]/20 focus:border-[#003B64]/40 transition-all resize-none"
                             placeholder="Type your cover letter here..."
                           />
                         </div>
@@ -712,7 +712,7 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                         <button
                           type="submit"
                           disabled={isSubmitting || isDeadlinePassed}
-                          className="flex-1 py-3 text-sm font-semibold rounded-full bg-[#002040] text-white hover:bg-[#001826] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                          className="flex-1 py-3 text-sm font-semibold rounded-full bg-[#003B64] text-white hover:bg-[#00355A] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                         >
                           {isSubmitting ? "Submitting..." : isDeadlinePassed ? "Deadline Passed" : "Submit Application"}
                         </button>
@@ -749,7 +749,7 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                             onChange={(e) =>
                               setFormData({ ...formData, firstName: e.target.value })
                             }
-                            className={`w-full px-3 py-2.5 rounded-lg border text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#002040]/20 transition-all ${
+                            className={`w-full px-3 py-2.5 rounded-lg border text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#003B64]/20 transition-all ${
                               errors.firstName ? "border-red-500" : "border-input"
                             }`}
                             placeholder="John"
@@ -768,7 +768,7 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                             onChange={(e) =>
                               setFormData({ ...formData, lastName: e.target.value })
                             }
-                            className={`w-full px-3 py-2.5 rounded-lg border text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#002040]/20 transition-all ${
+                            className={`w-full px-3 py-2.5 rounded-lg border text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#003B64]/20 transition-all ${
                               errors.lastName ? "border-red-500" : "border-input"
                             }`}
                             placeholder="Doe"
@@ -789,7 +789,7 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                           onChange={(e) =>
                             setFormData({ ...formData, email: e.target.value })
                           }
-                          className={`w-full px-3 py-2.5 rounded-lg border text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#002040]/20 transition-all ${
+                          className={`w-full px-3 py-2.5 rounded-lg border text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#003B64]/20 transition-all ${
                             errors.email ? "border-red-500" : "border-input"
                           }`}
                           placeholder="john@email.com"
@@ -809,7 +809,7 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                           onChange={(e) =>
                             setFormData({ ...formData, phone: e.target.value })
                           }
-                          className={`w-full px-3 py-2.5 rounded-lg border text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#002040]/20 transition-all ${
+                          className={`w-full px-3 py-2.5 rounded-lg border text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#003B64]/20 transition-all ${
                             errors.phone ? "border-red-500" : "border-input"
                           }`}
                           placeholder="+255 7XX XXX XXX"
@@ -856,7 +856,7 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                               setFormData({ ...formData, coverLetterText: e.target.value })
                             }
                             rows={3}
-                            className="w-full px-3 py-2.5 rounded-lg border border-input text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#002040]/20 transition-all resize-none"
+                            className="w-full px-3 py-2.5 rounded-lg border border-input text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#003B64]/20 transition-all resize-none"
                             placeholder="Type your cover letter here..."
                           />
                         </div>
@@ -935,7 +935,7 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                       <button
                         type="submit"
                         disabled={isSubmitting || isDeadlinePassed}
-                        className="w-full py-3 text-sm font-semibold rounded-full bg-[#002040] text-white hover:bg-[#001826] transition-colors disabled:opacity-60"
+                        className="w-full py-3 text-sm font-semibold rounded-full bg-[#003B64] text-white hover:bg-[#00355A] transition-colors disabled:opacity-60"
                       >
                         {isSubmitting ? "Submitting..." : isDeadlinePassed ? "Deadline Passed" : "Submit Application"}
                       </button>

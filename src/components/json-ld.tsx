@@ -14,19 +14,19 @@ export function JsonLd() {
     url: siteUrl,
     logo: `${siteUrl}/logo.svg`,
     description:
-      "A diversified Tanzanian holding company driving innovation through ICT, logistics, cleaning, security, and staffing solutions across East Africa.",
+      "A diversified Tanzanian holding company delivering excellence across industries through ICT, logistics, cleaning, security, and staffing solutions across East Africa.",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Ubungo Simu 2000, HT House 2nd Floor",
+      streetAddress: "HT House, 2nd Floor, Ubungo, Simu 2000 Road, P.O. Box 75075",
       addressLocality: "Dar es Salaam",
       addressCountry: "TZ",
     },
     contactPoint: [
       {
         "@type": "ContactPoint",
-        telephone: "+255-794-974-996",
+        telephone: "+255-773-383-800",
         contactType: "customer service",
-        email: "procurement@jotofagroup.co.tz",
+        email: "info@jotofagroup.co.tz",
         availableLanguage: ["English", "Swahili"],
       },
     ],
@@ -53,7 +53,7 @@ export function JsonLd() {
     name: "JOTOFA GROUP",
     url: siteUrl,
     description:
-      "Powering progress across Tanzania through diversified excellence in ICT, logistics, professional services, security, and staffing.",
+      "Delivering excellence across industries through ICT, logistics, professional services, security, and staffing across Tanzania.",
   };
 
   const breadcrumbSchema = {

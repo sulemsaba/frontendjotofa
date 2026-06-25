@@ -16,7 +16,6 @@ import {
   Building2,
   BarChart3,
   Heart,
-  Mail,
 } from "lucide-react";
 
 const businessItems = [
@@ -31,37 +30,32 @@ const aboutItems = [
   { id: "about", label: "Overview", description: "Who we are and what drives us", page: "about" as PageId, icon: Building2 },
   { id: "strategy", label: "Leadership & Strategy", description: "Our vision, mission and leadership", page: "strategy" as PageId, icon: BarChart3 },
   { id: "csr", label: "CSR & Sustainability", description: "Our social impact programs", page: "csr" as PageId, icon: Heart },
-];
-
-const resourceItems = [
-  { id: "strategy-investor", label: "Investor Relations", description: "Financial performance & reports", page: "strategy" as PageId, icon: BarChart3 },
-  { id: "contact", label: "Contact Us", description: "Get in touch with our team", page: "contact" as PageId, icon: Mail },
+  { id: "strategy", label: "Investor Relations", description: "Financial performance & reports", page: "strategy" as PageId, icon: BarChart3 },
 ];
 
 const PHONE_NUMBER = "0773 383 800";
 const PHONE_TEL = "+255773383800";
 
-interface NavItem { id: PageId; label: string; hasDropdown?: "businesses" | "about" | "resources"; }
+interface NavItem { id: PageId; label: string; hasDropdown?: "businesses" | "about"; }
 
 const navItems: NavItem[] = [
   { id: "home", label: "Home" },
   { id: "businesses", label: "Our Businesses", hasDropdown: "businesses" },
   { id: "about", label: "About Us", hasDropdown: "about" },
   { id: "news", label: "News & Insights" },
-  { id: "contact", label: "Resources", hasDropdown: "resources" },
   { id: "careers", label: "Careers" },
+  { id: "contact", label: "Contact Us" },
 ];
 
 const businessesPages: PageId[] = ["businesses", "utec", "courier", "cleaning", "security", "staffing"];
 const aboutPages: PageId[] = ["about", "strategy", "csr"];
-const resourcesPages: PageId[] = ["contact"];
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<"businesses" | "about" | "resources" | null>(null);
+  const [openDropdown, setOpenDropdown] = useState<"businesses" | "about" | null>(null);
   const [hoveredBizIndex, setHoveredBizIndex] = useState(0);
-  const [mobileExpanded, setMobileExpanded] = useState<"businesses" | "about" | "resources" | null>(null);
+  const [mobileExpanded, setMobileExpanded] = useState<"businesses" | "about" | null>(null);
   const dropdownHoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { setTheme, resolvedTheme } = useTheme();
   const { activePage, setActivePage } = usePage();
@@ -89,15 +83,15 @@ export function Navbar() {
 
   const handleNavClick = (pageId: PageId) => { setActivePage(pageId); setMobileOpen(false); setOpenDropdown(null); setMobileExpanded(null); };
   const toggleTheme = () => setTheme(resolvedTheme === "dark" ? "light" : "dark");
-  const isDropdownActive = (t: "businesses" | "about" | "resources") => { if (t === "businesses") return businessesPages.includes(activePage); if (t === "about") return aboutPages.includes(activePage); if (t === "resources") return resourcesPages.includes(activePage); return false; };
-  const handleDropdownEnter = (type: "businesses" | "about" | "resources") => { if (dropdownHoverTimeoutRef.current) clearTimeout(dropdownHoverTimeoutRef.current); setOpenDropdown(type); };
+  const isDropdownActive = (t: "businesses" | "about") => { if (t === "businesses") return businessesPages.includes(activePage); if (t === "about") return aboutPages.includes(activePage); return false; };
+  const handleDropdownEnter = (type: "businesses" | "about") => { if (dropdownHoverTimeoutRef.current) clearTimeout(dropdownHoverTimeoutRef.current); setOpenDropdown(type); };
   const handleDropdownLeave = () => { dropdownHoverTimeoutRef.current = setTimeout(() => setOpenDropdown(null), 150); };
 
   const currentBiz = businessItems[hoveredBizIndex];
 
   const pillBg = scrolled
-    ? "bg-white/85 dark:bg-[#001826]/90 shadow-md shadow-black/5 backdrop-blur-xl border border-jotofa-navy/8 dark:border-white/8"
-    : "bg-white/75 dark:bg-[#001826]/80 backdrop-blur-md border border-jotofa-navy/6 dark:border-white/6";
+    ? "bg-white/85 dark:bg-jotofa-navy-mid/90 shadow-md shadow-black/5 backdrop-blur-xl border border-jotofa-navy/8 dark:border-white/8"
+    : "bg-white/75 dark:bg-jotofa-navy-mid/80 backdrop-blur-md border border-jotofa-navy/6 dark:border-white/6";
 
   return (
     <>
@@ -122,8 +116,8 @@ export function Navbar() {
             </button>
           </div>
 
-          {/* PILL CONTAINER */}
-          <div className={`flex-1 flex items-center justify-between rounded-full transition-all duration-500 ${pillBg} px-5 sm:px-6 md:px-7 py-2.5 sm:py-3`}>
+          {/* NAV CONTAINER (traditional squared border, not pill) */}
+          <div className={`flex-1 flex items-center justify-between rounded-lg transition-all duration-500 ${pillBg} px-5 sm:px-6 md:px-7 py-2.5 sm:py-3`}>
 
           {/* NAV LINKS (desktop) */}
           <div ref={dropdownContainerRef} className="hidden lg:flex items-center justify-center">
@@ -143,7 +137,7 @@ export function Navbar() {
                     }}
                     aria-expanded={item.hasDropdown ? openDropdown === item.hasDropdown : undefined}
                     aria-haspopup={item.hasDropdown ? "true" : undefined}
-                    className={`relative px-4 py-2 text-[0.9rem] font-medium transition-all duration-200 whitespace-nowrap tracking-[0.01em] rounded-full cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
+                    className={`relative px-4 py-2 text-[0.9rem] font-medium transition-all duration-200 whitespace-nowrap tracking-[0.01em] rounded-md cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
                       activePage === item.id || (item.hasDropdown && isDropdownActive(item.hasDropdown))
                         ? "text-jotofa-navy dark:text-white font-semibold bg-jotofa-navy/[0.06] dark:bg-white/[0.08]"
                         : "text-jotofa-navy/65 dark:text-white/65 hover:text-jotofa-navy dark:hover:text-white hover:bg-jotofa-navy/[0.03] dark:hover:bg-white/[0.04]"
@@ -161,7 +155,7 @@ export function Navbar() {
                       <motion.div initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} transition={{ duration: 0.2, ease: "easeOut" }}
                         className="absolute top-full left-1/2 -translate-x-1/2 pt-2"
                         onMouseEnter={() => handleDropdownEnter("businesses")} onMouseLeave={handleDropdownLeave}>
-                        <div className="w-[640px] bg-white dark:bg-[#0a1e30] backdrop-blur-[20px] border border-jotofa-navy/8 dark:border-white/10 rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_24px_60px_rgba(0,0,0,0.5)] overflow-hidden">
+                        <div className="w-[640px] bg-white dark:bg-jotofa-navy-card backdrop-blur-[20px] border border-jotofa-navy/8 dark:border-white/10 rounded-lg shadow-[0_12px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_24px_60px_rgba(0,0,0,0.5)] overflow-hidden">
                           <div className="grid grid-cols-[45%_55%] min-h-[260px]">
                             <div className="border-r border-jotofa-navy/6 dark:border-white/6 p-2">
                               <div className="px-3 py-1.5 mb-1"><span className="text-[10px] font-semibold uppercase tracking-widest text-jotofa-navy/40 dark:text-white/30">Subsidiaries</span></div>
@@ -214,7 +208,7 @@ export function Navbar() {
                       <motion.div initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} transition={{ duration: 0.2, ease: "easeOut" }}
                         className="absolute top-full left-1/2 -translate-x-1/2 pt-2"
                         onMouseEnter={() => handleDropdownEnter("about")} onMouseLeave={handleDropdownLeave}>
-                        <div className="w-[230px] bg-white dark:bg-[#0a1e30] backdrop-blur-[20px] border border-jotofa-navy/8 dark:border-white/10 rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_24px_60px_rgba(0,0,0,0.5)] p-2">
+                        <div className="w-[230px] bg-white dark:bg-jotofa-navy-card backdrop-blur-[20px] border border-jotofa-navy/8 dark:border-white/10 rounded-lg shadow-[0_12px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_24px_60px_rgba(0,0,0,0.5)] p-2">
                           {aboutItems.map((subItem) => (
                             <button key={subItem.id} onClick={() => handleNavClick(subItem.page)}
                               className="flex items-center gap-3 w-full text-left px-3 py-2.5 rounded-xl hover:bg-jotofa-navy/[0.04] dark:hover:bg-white/[0.06] transition-colors duration-150 group/sub cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent">
@@ -230,27 +224,7 @@ export function Navbar() {
                     </AnimatePresence>
                   )}
 
-                  {/* Resources Dropdown */}
-                  {item.hasDropdown === "resources" && openDropdown === "resources" && (
-                    <AnimatePresence>
-                      <motion.div initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} transition={{ duration: 0.2, ease: "easeOut" }}
-                        className="absolute top-full left-1/2 -translate-x-1/2 pt-2"
-                        onMouseEnter={() => handleDropdownEnter("resources")} onMouseLeave={handleDropdownLeave}>
-                        <div className="w-[250px] bg-white dark:bg-[#0a1e30] backdrop-blur-[20px] border border-jotofa-navy/8 dark:border-white/10 rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_24px_60px_rgba(0,0,0,0.5)] p-2">
-                          {resourceItems.map((subItem) => (
-                            <button key={subItem.id} onClick={() => handleNavClick(subItem.page)}
-                              className="flex items-center gap-3 w-full text-left px-3 py-2.5 rounded-xl hover:bg-jotofa-navy/[0.04] dark:hover:bg-white/[0.06] transition-colors duration-150 group/sub cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent">
-                              <subItem.icon className="w-4 h-4 text-jotofa-navy/50 dark:text-white/40 group-hover/sub:text-jotofa-navy dark:group-hover/sub:text-white transition-opacity" />
-                              <div className="min-w-0">
-                                <div className="text-sm font-medium text-jotofa-navy/70 dark:text-white/70 group-hover/sub:text-jotofa-navy dark:group-hover/sub:text-white transition-colors whitespace-nowrap">{subItem.label}</div>
-                                <div className="text-[10px] text-jotofa-navy/30 dark:text-white/25 mt-0.5">{subItem.description}</div>
-                              </div>
-                            </button>
-                          ))}
-                        </div>
-                      </motion.div>
-                    </AnimatePresence>
-                  )}
+
                 </div>
               ))}
             </div>
@@ -258,11 +232,11 @@ export function Navbar() {
 
             {/* RIGHT: Action buttons (desktop) */}
             <div className="hidden lg:flex items-center gap-2 shrink-0">
-              <a href={`tel:${PHONE_TEL}`} className="group flex items-center gap-2 px-4 py-2 rounded-full border border-jotofa-navy/12 dark:border-white/12 text-jotofa-navy/70 dark:text-white/70 hover:border-jotofa-navy/25 dark:hover:border-white/25 hover:bg-jotofa-navy/[0.03] dark:hover:bg-white/[0.04] transition-all duration-200 text-[0.85rem] font-medium whitespace-nowrap cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background">
+              <a href={`tel:${PHONE_TEL}`} className="group flex items-center gap-2 px-4 py-2 rounded-md border border-jotofa-navy/12 dark:border-white/12 text-jotofa-navy/70 dark:text-white/70 hover:border-jotofa-navy/25 dark:hover:border-white/25 hover:bg-jotofa-navy/[0.03] dark:hover:bg-white/[0.04] transition-all duration-200 text-[0.85rem] font-medium whitespace-nowrap cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background">
                 <Phone className="w-4 h-4 text-jotofa-navy/60 dark:text-white/50 group-hover:text-jotofa-accent transition-colors" />
                 <span>{PHONE_NUMBER}</span>
               </a>
-              <button onClick={toggleTheme} className="p-2 rounded-full text-jotofa-navy/40 dark:text-white/40 hover:text-jotofa-navy dark:hover:text-white hover:bg-jotofa-navy/[0.04] dark:hover:bg-white/[0.06] transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label="Toggle theme">
+              <button onClick={toggleTheme} className="p-2 rounded-md text-jotofa-navy/40 dark:text-white/40 hover:text-jotofa-navy dark:hover:text-white hover:bg-jotofa-navy/[0.04] dark:hover:bg-white/[0.06] transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label="Toggle theme">
                 <Sun className="w-3.5 h-3.5 hidden dark:block" /><Moon className="w-3.5 h-3.5 block dark:hidden" />
               </button>
             </div>
@@ -270,11 +244,11 @@ export function Navbar() {
 
           {/* MOBILE: right-side controls */}
           <div className="flex lg:hidden items-center gap-2 shrink-0">
-            <a href={`tel:${PHONE_TEL}`} className="flex items-center gap-1.5 px-3 py-2 rounded-full border border-jotofa-navy/12 dark:border-white/12 text-jotofa-navy/60 dark:text-white/60 text-[13px] font-medium cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label={`Call ${PHONE_NUMBER}`}>
+            <a href={`tel:${PHONE_TEL}`} className="flex items-center gap-1.5 px-3 py-2 rounded-md border border-jotofa-navy/12 dark:border-white/12 text-jotofa-navy/60 dark:text-white/60 text-[13px] font-medium cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label={`Call ${PHONE_NUMBER}`}>
               <Phone className="w-3.5 h-3.5" />
               <span className="whitespace-nowrap">Call</span>
             </a>
-            <button onClick={toggleTheme} className="p-2 rounded-full text-jotofa-navy/40 dark:text-white/40 hover:text-jotofa-navy dark:hover:text-white transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label="Toggle theme">
+            <button onClick={toggleTheme} className="p-2 rounded-md text-jotofa-navy/40 dark:text-white/40 hover:text-jotofa-navy dark:hover:text-white transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label="Toggle theme">
               <Sun className="w-3.5 h-3.5 hidden dark:block" /><Moon className="w-3.5 h-3.5 block dark:hidden" />
             </button>
             <button onClick={() => setMobileOpen(!mobileOpen)} className="p-1.5 text-jotofa-navy dark:text-white hover:text-jotofa-navy/70 dark:hover:text-white/70 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-md" aria-label="Toggle menu" aria-expanded={mobileOpen}>
@@ -290,7 +264,7 @@ export function Navbar() {
           <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.25 }} className="fixed inset-0 z-40 lg:hidden">
             <div className="absolute inset-0 bg-black/20 dark:bg-black/50 backdrop-blur-sm" onClick={() => setMobileOpen(false)} />
             <motion.div initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }} transition={{ duration: 0.3, ease: "easeOut" }}
-              className="absolute right-0 top-0 bottom-0 w-[300px] bg-white dark:bg-[#0a1e30] backdrop-blur-xl border-l border-jotofa-navy/8 dark:border-white/8">
+              className="absolute right-0 top-0 bottom-0 w-[300px] bg-white dark:bg-jotofa-navy-card backdrop-blur-xl border-l border-jotofa-navy/8 dark:border-white/8">
               <div className="flex items-center justify-between p-4 border-b border-jotofa-navy/6 dark:border-white/6">
                 <Image
                   src="/images/jotofa-logo.png"
@@ -306,7 +280,7 @@ export function Navbar() {
                   <div key={item.id}>
                     <button onClick={() => { if (item.hasDropdown && mobileExpanded !== item.hasDropdown) setMobileExpanded(item.hasDropdown); else if (item.hasDropdown && mobileExpanded === item.hasDropdown) handleNavClick(item.id); else handleNavClick(item.id); }}
                       aria-expanded={item.hasDropdown ? mobileExpanded === item.hasDropdown : undefined}
-                      className={`flex items-center justify-between w-full text-left px-4 py-2.5 rounded-xl transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent ${activePage === item.id || (item.hasDropdown && isDropdownActive(item.hasDropdown)) ? "bg-[#002040]/8 dark:bg-white/8 text-jotofa-navy dark:text-white font-semibold" : "text-jotofa-navy/60 dark:text-white/60 hover:text-jotofa-navy dark:hover:text-white hover:bg-jotofa-navy/[0.03] dark:hover:bg-white/[0.04]"}`}>
+                      className={`flex items-center justify-between w-full text-left px-4 py-2.5 rounded-xl transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent ${activePage === item.id || (item.hasDropdown && isDropdownActive(item.hasDropdown)) ? "bg-[#003B64]/8 dark:bg-white/8 text-jotofa-navy dark:text-white font-semibold" : "text-jotofa-navy/60 dark:text-white/60 hover:text-jotofa-navy dark:hover:text-white hover:bg-jotofa-navy/[0.03] dark:hover:bg-white/[0.04]"}`}>
                       <span className="text-sm">{item.label}</span>
                       {item.hasDropdown && <ChevronDown className={`w-4 h-4 transition-transform ${mobileExpanded === item.hasDropdown ? "rotate-180" : ""}`} />}
                     </button>
@@ -331,15 +305,7 @@ export function Navbar() {
                         ))}
                       </div>
                     )}
-                    {item.hasDropdown === "resources" && mobileExpanded === "resources" && (
-                      <div className="pl-4 space-y-0.5 pb-1">
-                        {resourceItems.map(subItem => (
-                          <button key={subItem.id} onClick={() => handleNavClick(subItem.page)} className="flex items-center gap-3 w-full text-left px-4 py-2 text-jotofa-navy/50 dark:text-white/50 hover:text-jotofa-navy dark:hover:text-white hover:bg-jotofa-navy/[0.03] dark:hover:bg-white/[0.04] rounded-lg">
-                            <subItem.icon className="w-3.5 h-3.5 text-jotofa-navy/40 dark:text-white/30" /><span className="text-sm">{subItem.label}</span>
-                          </button>
-                        ))}
-                      </div>
-                    )}
+
                   </div>
                 ))}
                 <div className="pt-4 mt-2 border-t border-jotofa-navy/6 dark:border-white/6">

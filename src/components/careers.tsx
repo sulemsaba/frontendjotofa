@@ -85,7 +85,7 @@ const subsidiaryHeroData: Record<
   jotofa: {
     name: "JOTOFA Group",
     tagline:
-      "Powering progress across Tanzania through diversified excellence",
+      "Delivering excellence across industries through ICT, logistics, professional services, security, and staffing",
     logo: "/images/jotofa-logo.png",
     heroImage: "/images/jotofa-hero-1.jpeg",
     stats: [
@@ -812,7 +812,7 @@ export function Careers() {
               backgroundImage: `url('${heroData.heroImage}')`,
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#002040]/90 via-[#002040]/75 to-[#002040]/50" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#003B64]/90 via-[#003B64]/75 to-[#003B64]/50" />
 
           <div className="relative z-10 flex items-center h-full px-6 sm:px-8">
             <div className="flex items-center gap-4 sm:gap-5">
@@ -879,14 +879,14 @@ export function Careers() {
                     relative flex items-center gap-2 px-3 sm:px-4 py-3 text-[13px] sm:text-sm font-medium whitespace-nowrap transition-colors shrink-0
                     ${
                       isActive
-                        ? "text-[#002040] dark:text-white"
-                        : "text-[#002040]/40 dark:text-white/40 hover:text-[#002040] dark:hover:text-white/70"
+                        ? "text-[#003B64] dark:text-white"
+                        : "text-[#003B64]/40 dark:text-white/40 hover:text-[#003B64] dark:hover:text-white/70"
                     }
                   `}
                 >
                   <span>{sub.label}</span>
                   {isActive && (
-                    <span className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full bg-[#002040] dark:bg-white" />
+                    <span className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full bg-[#003B64] dark:bg-white" />
                   )}
                 </button>
               );
@@ -911,7 +911,7 @@ export function Careers() {
                 value={keyword}
                 onChange={(e) => handleKeywordChange(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                className="w-full pl-10 pr-4 py-2.5 rounded-full border border-input bg-background text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#002040]/20 focus:border-[#002040]/40 transition-all"
+                className="w-full pl-10 pr-4 py-2.5 rounded-full border border-input bg-background text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#003B64]/20 focus:border-[#003B64]/40 transition-all"
               />
             </div>
 
@@ -923,7 +923,7 @@ export function Careers() {
                   setShowCategoryDropdown(false);
                   setShowCompanyDropdown(false);
                 }}
-                className="w-full flex items-center justify-between gap-2 px-4 py-2.5 rounded-full border border-input bg-background text-sm text-foreground hover:border-[#002040]/30 transition-colors"
+                className="w-full flex items-center justify-between gap-2 px-4 py-2.5 rounded-full border border-input bg-background text-sm text-foreground hover:border-[#003B64]/30 transition-colors"
               >
                 <span className="truncate">
                   {selectedCategory === "All Categories"
@@ -941,9 +941,9 @@ export function Careers() {
                         e.stopPropagation();
                         handleCategorySelect(cat);
                       }}
-                      className={`w-full text-left px-4 py-2.5 text-sm hover:bg-secondary dark:hover:bg-[#002040] transition-colors ${
+                      className={`w-full text-left px-4 py-2.5 text-sm hover:bg-secondary dark:hover:bg-[#003B64] transition-colors ${
                         selectedCategory === cat
-                          ? "text-[#002040] dark:text-white font-medium"
+                          ? "text-[#003B64] dark:text-white font-medium"
                           : "text-foreground"
                       }`}
                     >
@@ -956,7 +956,7 @@ export function Careers() {
 
             <button
               onClick={handleSearch}
-              className="flex items-center justify-center gap-2 px-6 py-2.5 text-sm font-semibold rounded-full bg-[#002040] text-white hover:bg-[#001826] transition-colors shrink-0"
+              className="flex items-center justify-center gap-2 px-6 py-2.5 text-sm font-semibold rounded-full bg-[#003B64] text-white hover:bg-[#00355A] transition-colors shrink-0"
               aria-label="Search"
             >
               <Search className="w-4 h-4" />
@@ -985,7 +985,7 @@ export function Careers() {
                 setShowCompanyDropdown(false);
                 setShowSearchCategory(false);
               }}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-input bg-background text-sm text-foreground hover:border-[#002040]/30 transition-colors"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-input bg-background text-sm text-foreground hover:border-[#003B64]/30 transition-colors"
             >
               <Briefcase className="w-3.5 h-3.5 text-muted-foreground" />
               <span className="truncate max-w-[140px]">
@@ -1004,9 +1004,9 @@ export function Careers() {
                       e.stopPropagation();
                       handleCategorySelect(cat);
                     }}
-                    className={`w-full text-left px-4 py-2.5 text-sm hover:bg-secondary dark:hover:bg-[#002040] transition-colors ${
+                    className={`w-full text-left px-4 py-2.5 text-sm hover:bg-secondary dark:hover:bg-[#003B64] transition-colors ${
                       selectedCategory === cat
-                        ? "text-[#002040] dark:text-white font-medium"
+                        ? "text-[#003B64] dark:text-white font-medium"
                         : "text-foreground"
                     }`}
                   >
@@ -1026,7 +1026,7 @@ export function Careers() {
                 setShowCategoryDropdown(false);
                 setShowSearchCategory(false);
               }}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-input bg-background text-sm text-foreground hover:border-[#002040]/30 transition-colors"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-input bg-background text-sm text-foreground hover:border-[#003B64]/30 transition-colors"
             >
               <Globe className="w-3.5 h-3.5 text-muted-foreground" />
               <span className="truncate max-w-[140px]">
@@ -1045,9 +1045,9 @@ export function Careers() {
                       e.stopPropagation();
                       handleCompanySelect(comp);
                     }}
-                    className={`w-full text-left px-4 py-2.5 text-sm hover:bg-secondary dark:hover:bg-[#002040] transition-colors ${
+                    className={`w-full text-left px-4 py-2.5 text-sm hover:bg-secondary dark:hover:bg-[#003B64] transition-colors ${
                       selectedCompany === comp
-                        ? "text-[#002040] dark:text-white font-medium"
+                        ? "text-[#003B64] dark:text-white font-medium"
                         : "text-foreground"
                     }`}
                   >
@@ -1069,7 +1069,7 @@ export function Careers() {
                 setKeyword("");
                 setCurrentPage(1);
               }}
-              className="flex items-center gap-1 px-3 py-1.5 text-sm text-[#002040] dark:text-white hover:text-[#002040]/70 dark:hover:text-white/70 transition-colors"
+              className="flex items-center gap-1 px-3 py-1.5 text-sm text-[#003B64] dark:text-white hover:text-[#003B64]/70 dark:hover:text-white/70 transition-colors"
             >
               <X className="w-3.5 h-3.5" />
               Clear
@@ -1084,7 +1084,7 @@ export function Careers() {
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 mt-6 mb-20 sm:mb-12">
         {isLoading ? (
           <div className="bg-white dark:bg-[#0a1e30] rounded-2xl border border-border shadow-sm p-10 sm:p-16 text-center">
-            <div className="mx-auto mb-5 h-10 w-10 rounded-full border-4 border-[#002040]/20 border-t-[#002040] animate-spin" />
+            <div className="mx-auto mb-5 h-10 w-10 rounded-full border-4 border-[#003B64]/20 border-t-[#003B64] animate-spin" />
             <h3 className="text-xl font-bold text-foreground mb-2">
               Loading open positions
             </h3>
@@ -1135,7 +1135,7 @@ export function Careers() {
                   >
                     {/* ─── Collapsed Card Row ─── */}
                     <div
-                      className="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-0 px-5 sm:px-6 py-4 cursor-pointer hover:bg-muted/30 dark:hover:bg-[#002040]/20 transition-colors"
+                      className="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-0 px-5 sm:px-6 py-4 cursor-pointer hover:bg-muted/30 dark:hover:bg-[#003B64]/20 transition-colors"
                       onClick={() => {
                         if (isFullExpanded) {
                           setExpandedFullJob(null);
@@ -1153,7 +1153,7 @@ export function Careers() {
                         {/* Chevron toggle */}
                         <div className="pt-0.5 lg:pt-0 shrink-0">
                           {isExpanded ? (
-                            <ChevronDown className="w-4 h-4 text-[#002040] dark:text-white" />
+                            <ChevronDown className="w-4 h-4 text-[#003B64] dark:text-white" />
                           ) : (
                             <ChevronRight className="w-4 h-4 text-muted-foreground" />
                           )}
@@ -1162,11 +1162,11 @@ export function Careers() {
                         {/* Title + Req ID */}
                         <div className="min-w-0">
                           <div className="flex items-center gap-2 flex-wrap">
-                            <span className="text-[15px] font-semibold text-[#002040] dark:text-white leading-tight">
+                            <span className="text-[15px] font-semibold text-[#003B64] dark:text-white leading-tight">
                               {job.title}
                             </span>
                             {job.remote && (
-                              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 text-[11px] font-medium rounded-full bg-[#002040]/10 dark:bg-[#002040]/30 text-[#002040] dark:text-white border border-[#002040]/20 dark:border-[#002040]/50">
+                              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 text-[11px] font-medium rounded-full bg-[#003B64]/10 dark:bg-[#003B64]/30 text-[#003B64] dark:text-white border border-[#003B64]/20 dark:border-[#003B64]/50">
                                 <Home className="w-3 h-3" />
                                 Remote
                               </span>
@@ -1244,7 +1244,7 @@ export function Careers() {
                               e.stopPropagation();
                               setApplyJob(job);
                             }}
-                            className="px-4 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold rounded-full bg-[#002040] text-white hover:bg-[#001826] transition-colors"
+                            className="px-4 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold rounded-full bg-[#003B64] text-white hover:bg-[#00355A] transition-colors"
                           >
                             Apply Now
                           </button>
@@ -1310,7 +1310,7 @@ export function Careers() {
                                 e.stopPropagation();
                                 setApplyJob(job);
                               }}
-                              className="px-5 py-2 text-sm font-semibold rounded-full bg-[#002040] text-white hover:bg-[#001826] transition-colors"
+                              className="px-5 py-2 text-sm font-semibold rounded-full bg-[#003B64] text-white hover:bg-[#00355A] transition-colors"
                             >
                               Apply Now
                             </button>
@@ -1319,7 +1319,7 @@ export function Careers() {
                                 e.stopPropagation();
                                 setExpandedFullJob(job.id);
                               }}
-                              className="inline-flex items-center gap-1.5 text-sm font-medium text-[#002040] dark:text-white hover:underline"
+                              className="inline-flex items-center gap-1.5 text-sm font-medium text-[#003B64] dark:text-white hover:underline"
                             >
                               See More
                               <ChevronDown className="w-3.5 h-3.5" />
@@ -1357,8 +1357,8 @@ export function Careers() {
                             {/* Position Responsibilities */}
                             <div>
                               <h4 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
-                                <div className="w-6 h-6 rounded-md bg-[#002040]/10 dark:bg-white/10 flex items-center justify-center shrink-0">
-                                  <ListChecks className="w-3.5 h-3.5 text-[#002040] dark:text-white" />
+                                <div className="w-6 h-6 rounded-md bg-[#003B64]/10 dark:bg-white/10 flex items-center justify-center shrink-0">
+                                  <ListChecks className="w-3.5 h-3.5 text-[#003B64] dark:text-white" />
                                 </div>
                                 Position Responsibilities
                               </h4>
@@ -1368,7 +1368,7 @@ export function Careers() {
                                     key={i}
                                     className="flex items-start gap-2 text-sm text-muted-foreground"
                                   >
-                                    <span className="w-1.5 h-1.5 rounded-full bg-[#002040] dark:bg-white/60 mt-1.5 shrink-0" />
+                                    <span className="w-1.5 h-1.5 rounded-full bg-[#003B64] dark:bg-white/60 mt-1.5 shrink-0" />
                                     <span>{r}</span>
                                   </li>
                                 ))}
@@ -1378,8 +1378,8 @@ export function Careers() {
                             {/* Qualifications */}
                             <div>
                               <h4 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
-                                <div className="w-6 h-6 rounded-md bg-[#002040]/10 dark:bg-white/10 flex items-center justify-center shrink-0">
-                                  <GraduationCap className="w-3.5 h-3.5 text-[#002040] dark:text-white" />
+                                <div className="w-6 h-6 rounded-md bg-[#003B64]/10 dark:bg-white/10 flex items-center justify-center shrink-0">
+                                  <GraduationCap className="w-3.5 h-3.5 text-[#003B64] dark:text-white" />
                                 </div>
                                 Qualifications
                               </h4>
@@ -1389,7 +1389,7 @@ export function Careers() {
                                     key={i}
                                     className="flex items-start gap-2 text-sm text-muted-foreground"
                                   >
-                                    <span className="w-1.5 h-1.5 rounded-full bg-[#002040] dark:bg-white/60 mt-1.5 shrink-0" />
+                                    <span className="w-1.5 h-1.5 rounded-full bg-[#003B64] dark:bg-white/60 mt-1.5 shrink-0" />
                                     <span>{q}</span>
                                   </li>
                                 ))}
@@ -1399,8 +1399,8 @@ export function Careers() {
                             {/* Requirements */}
                             <div>
                               <h4 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
-                                <div className="w-6 h-6 rounded-md bg-[#002040]/10 dark:bg-white/10 flex items-center justify-center shrink-0">
-                                  <ShieldCheck className="w-3.5 h-3.5 text-[#002040] dark:text-white" />
+                                <div className="w-6 h-6 rounded-md bg-[#003B64]/10 dark:bg-white/10 flex items-center justify-center shrink-0">
+                                  <ShieldCheck className="w-3.5 h-3.5 text-[#003B64] dark:text-white" />
                                 </div>
                                 Requirements
                               </h4>
@@ -1410,7 +1410,7 @@ export function Careers() {
                                     key={i}
                                     className="flex items-start gap-2 text-sm text-muted-foreground"
                                   >
-                                    <span className="w-1.5 h-1.5 rounded-full bg-[#002040] dark:bg-white/60 mt-1.5 shrink-0" />
+                                    <span className="w-1.5 h-1.5 rounded-full bg-[#003B64] dark:bg-white/60 mt-1.5 shrink-0" />
                                     <span>{r}</span>
                                   </li>
                                 ))}
@@ -1420,8 +1420,8 @@ export function Careers() {
                             {/* Benefits */}
                             <div>
                               <h4 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
-                                <div className="w-6 h-6 rounded-md bg-[#002040]/10 dark:bg-white/10 flex items-center justify-center shrink-0">
-                                  <Heart className="w-3.5 h-3.5 text-[#002040] dark:text-white" />
+                                <div className="w-6 h-6 rounded-md bg-[#003B64]/10 dark:bg-white/10 flex items-center justify-center shrink-0">
+                                  <Heart className="w-3.5 h-3.5 text-[#003B64] dark:text-white" />
                                 </div>
                                 Benefits
                               </h4>
@@ -1471,7 +1471,7 @@ export function Careers() {
                                 e.stopPropagation();
                                 setApplyJob(job);
                               }}
-                              className="px-5 py-2.5 text-sm font-semibold rounded-full bg-[#002040] text-white hover:bg-[#001826] transition-colors"
+                              className="px-5 py-2.5 text-sm font-semibold rounded-full bg-[#003B64] text-white hover:bg-[#00355A] transition-colors"
                             >
                               Apply Now
                             </button>
@@ -1479,8 +1479,8 @@ export function Careers() {
                               onClick={(e) => toggleSaveJob(job.id, e)}
                               className={`px-5 py-2.5 text-sm font-medium rounded-full border transition-colors ${
                                 isSaved
-                                  ? "border-[#002040]/30 bg-[#002040]/5 text-[#002040] dark:text-white"
-                                  : "border-input text-foreground hover:border-[#002040]/30"
+                                  ? "border-[#003B64]/30 bg-[#003B64]/5 text-[#003B64] dark:text-white"
+                                  : "border-input text-foreground hover:border-[#003B64]/30"
                               }`}
                             >
                               {isSaved ? (
@@ -1512,7 +1512,7 @@ export function Careers() {
                                   );
                                 }
                               }}
-                              className="px-5 py-2.5 text-sm font-medium rounded-full border border-input text-foreground hover:border-[#002040]/30 transition-colors"
+                              className="px-5 py-2.5 text-sm font-medium rounded-full border border-input text-foreground hover:border-[#003B64]/30 transition-colors"
                             >
                               <span className="flex items-center gap-1.5">
                                 <Share2 className="w-3.5 h-3.5" />
@@ -1540,7 +1540,7 @@ export function Careers() {
                   onChange={(e) =>
                     handlePageSizeChange(Number(e.target.value))
                   }
-                  className="px-2 py-1 text-sm rounded border border-input bg-background text-foreground focus:outline-none focus:ring-1 focus:ring-[#002040]/20"
+                  className="px-2 py-1 text-sm rounded border border-input bg-background text-foreground focus:outline-none focus:ring-1 focus:ring-[#003B64]/20"
                 >
                   {PAGE_SIZE_OPTIONS.map((size) => (
                     <option key={size} value={size}>
@@ -1564,7 +1564,7 @@ export function Careers() {
                     setCurrentPage((p) => Math.max(1, p - 1))
                   }
                   disabled={currentPage === 1}
-                  className="p-2 rounded-lg hover:bg-secondary dark:hover:bg-[#002040]/50 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                  className="p-2 rounded-lg hover:bg-secondary dark:hover:bg-[#003B64]/50 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                   aria-label="Previous page"
                 >
                   <ChevronLeft className="w-4 h-4 text-foreground" />
@@ -1576,8 +1576,8 @@ export function Careers() {
                       onClick={() => setCurrentPage(page)}
                       className={`w-8 h-8 text-sm font-medium rounded-lg transition-colors ${
                         currentPage === page
-                          ? "bg-[#002040] text-white"
-                          : "text-foreground hover:bg-secondary dark:hover:bg-[#002040]/50"
+                          ? "bg-[#003B64] text-white"
+                          : "text-foreground hover:bg-secondary dark:hover:bg-[#003B64]/50"
                       }`}
                     >
                       {page}
@@ -1589,7 +1589,7 @@ export function Careers() {
                     setCurrentPage((p) => Math.min(totalPages, p + 1))
                   }
                   disabled={currentPage === totalPages}
-                  className="p-2 rounded-lg hover:bg-secondary dark:hover:bg-[#002040]/50 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                  className="p-2 rounded-lg hover:bg-secondary dark:hover:bg-[#003B64]/50 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                   aria-label="Next page"
                 >
                   <ChevronRight className="w-4 h-4 text-foreground" />
@@ -1602,7 +1602,7 @@ export function Careers() {
              EMPTY STATE
              ═══════════════════════════════════════ */
           <div className="bg-white dark:bg-[#0a1e30] rounded-2xl border border-border shadow-sm p-10 sm:p-16 text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-secondary dark:bg-[#002040] mb-5">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-secondary dark:bg-[#003B64] mb-5">
               <Briefcase className="w-8 h-8 text-muted-foreground" />
             </div>
             <h3 className="text-xl font-bold text-foreground mb-2">
@@ -1619,7 +1619,7 @@ export function Careers() {
                 setKeyword("");
                 handleTabChange("all");
               }}
-              className="px-6 py-2.5 text-sm font-semibold rounded-full bg-[#002040] text-white hover:bg-[#001826] transition-colors"
+              className="px-6 py-2.5 text-sm font-semibold rounded-full bg-[#003B64] text-white hover:bg-[#00355A] transition-colors"
             >
               View All Positions
             </button>
@@ -1630,7 +1630,7 @@ export function Careers() {
       {/* ═══════════════════════════════════════
           6. TALENT COMMUNITY SECTION
           ═══════════════════════════════════════ */}
-      <div id="talent-community" className="bg-[#002040]">
+      <div id="talent-community" className="bg-[#003B64]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
           <div className="grid md:grid-cols-2 gap-10 items-center">
             <div>
@@ -1645,7 +1645,7 @@ export function Careers() {
               </p>
               <button
                 onClick={() => setActivePage("contact")}
-                className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold rounded-full bg-white text-[#002040] hover:bg-white/90 transition-colors"
+                className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold rounded-full bg-white text-[#003B64] hover:bg-white/90 transition-colors"
               >
                 Join Now
                 <ArrowRight className="w-4 h-4" />
@@ -1658,7 +1658,7 @@ export function Careers() {
                 alt="JOTOFA GROUP team"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#002040]/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#003B64]/40 to-transparent" />
             </div>
           </div>
         </div>

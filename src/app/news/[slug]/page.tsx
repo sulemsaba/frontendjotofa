@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { WhatsAppButton } from "@/components/whatsapp-button";
+import { BackToTopButton } from "@/components/back-to-top-button";
 import { NewsDetailClient } from "./client";
 import { getNews, type PublicNewsArticle } from "@/lib/api";
 import { FALLBACK_ARTICLES, mapArticle, type RawArticle } from "@/lib/news-constants";
@@ -59,6 +60,7 @@ export default async function NewsDetailPage({ params }: Props) {
       </main>
       <Footer />
       <WhatsAppButton />
+      <BackToTopButton />
     </div>
   );
 }
