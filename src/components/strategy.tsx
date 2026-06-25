@@ -9,6 +9,8 @@ import {
   Globe,
 } from "lucide-react";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "./scroll-reveal";
+import { Testimonials } from "./testimonials";
+import { strategyTestimonials } from "@/lib/testimonials-data";
 
 const objectives = [
   {
@@ -82,6 +84,7 @@ const values = [
 
 export function Strategy() {
   return (
+    <>
     <section className="relative py-24 sm:py-32 min-h-screen">
       {/* Background */}
       <div className="absolute inset-0 bg-background" />
@@ -167,5 +170,17 @@ export function Strategy() {
         </ScrollReveal>
       </div>
     </section>
+
+    {/* Testimonials */}
+    <Testimonials
+      eyebrow="Investor & Partner Voices"
+      title={<>What Investors & <span className="text-gold-gradient">Partners Say</span></>}
+      subtitle="Why strategic partners and investors back JOTOFA Group's regional growth strategy."
+      accent="text-jotofa-gold"
+      accentBg="bg-jotofa-accent/10"
+      accentBorder="border-jotofa-accent/20"
+      testimonials={strategyTestimonials}
+    />
+    </>
   );
 }

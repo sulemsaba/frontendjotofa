@@ -10,6 +10,8 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "../scroll-reveal";
+import { Testimonials } from "../testimonials";
+import { staffingTestimonials } from "@/lib/testimonials-data";
 import { usePage } from "@/lib/page-context";
 
 const services = [
@@ -99,6 +101,17 @@ export function StaffingPage() {
           </StaggerContainer>
         </div>
       </section>
+
+      {/* Testimonials */}
+      <Testimonials
+        eyebrow="Staffing Client Stories"
+        title={<>What Our <span className="text-gold-gradient">HR Clients Say</span></>}
+        subtitle="Why Tanzanian employers rely on Staffing & Labour Supply for talent, payroll, and workforce management."
+        accent="text-staffing-purple"
+        accentBg="bg-staffing-purple/10"
+        accentBorder="border-staffing-purple/20"
+        testimonials={staffingTestimonials}
+      />
 
       <section className="relative py-20">
         <div className="absolute inset-0 bg-background" />

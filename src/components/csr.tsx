@@ -2,6 +2,8 @@
 
 import { GraduationCap, Heart, TreePine, ArrowUpRight } from "lucide-react";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "./scroll-reveal";
+import { Testimonials } from "./testimonials";
+import { csrTestimonials } from "@/lib/testimonials-data";
 
 const csrPillars = [
   {
@@ -59,6 +61,7 @@ const csrPillars = [
 
 export function CSR() {
   return (
+    <>
     <section className="relative py-24 sm:py-32 min-h-screen">
       {/* Background */}
       <div className="absolute inset-0 bg-background" />
@@ -170,5 +173,17 @@ export function CSR() {
         </ScrollReveal>
       </div>
     </section>
+
+    {/* Testimonials */}
+    <Testimonials
+      eyebrow="Community Voices"
+      title={<>What Our <span className="text-gold-gradient">Community Partners Say</span></>}
+      subtitle="Real impact, told by the schools, health partners, and communities we serve."
+      accent="text-cleaning-green"
+      accentBg="bg-cleaning-green/10"
+      accentBorder="border-cleaning-green/20"
+      testimonials={csrTestimonials}
+    />
+    </>
   );
 }

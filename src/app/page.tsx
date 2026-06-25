@@ -13,6 +13,8 @@ import { Strategy } from "@/components/strategy";
 import { CSR } from "@/components/csr";
 import { Footer } from "@/components/footer";
 import { WhatsAppButton } from "@/components/whatsapp-button";
+import { Testimonials } from "@/components/testimonials";
+import { homeTestimonials } from "@/lib/testimonials-data";
 import { UTECPage } from "@/components/pages/utec";
 import { CourierPage } from "@/components/pages/courier";
 import { CleaningPage } from "@/components/pages/cleaning";
@@ -47,6 +49,15 @@ function PageContent() {
         <main className="flex-1">
           <Hero />
           <Subsidiaries />
+          <Testimonials
+            eyebrow="Client Voices"
+            title={<>Trusted by <span className="text-gold-gradient">Businesses Across Tanzania</span></>}
+            subtitle="Organizations from Dar es Salaam to Kigali rely on JOTOFA Group for diversified, dependable, professional services."
+            accent="text-jotofa-gold"
+            accentBg="bg-jotofa-accent/10"
+            accentBorder="border-jotofa-accent/20"
+            testimonials={homeTestimonials}
+          />
           <NewsSection />
           <Contact />
         </main>

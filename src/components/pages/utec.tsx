@@ -10,6 +10,8 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "../scroll-reveal";
+import { Testimonials } from "../testimonials";
+import { utecTestimonials } from "@/lib/testimonials-data";
 import { usePage } from "@/lib/page-context";
 
 const services = [
@@ -104,6 +106,17 @@ export function UTECPage() {
           </StaggerContainer>
         </div>
       </section>
+
+      {/* Testimonials */}
+      <Testimonials
+        eyebrow="UTEC Client Stories"
+        title={<>What UTEC <span className="text-gold-gradient">Clients Say</span></>}
+        subtitle="Real outcomes from organizations that transformed their operations with UTEC Solutions."
+        accent="text-utec-cyan"
+        accentBg="bg-utec-cyan/10"
+        accentBorder="border-utec-cyan/20"
+        testimonials={utecTestimonials}
+      />
 
       {/* CTA */}
       <section className="relative py-20">

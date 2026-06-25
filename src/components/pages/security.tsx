@@ -10,6 +10,8 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "../scroll-reveal";
+import { Testimonials } from "../testimonials";
+import { securityTestimonials } from "@/lib/testimonials-data";
 import { usePage } from "@/lib/page-context";
 
 const services = [
@@ -99,6 +101,17 @@ export function SecurityPage() {
           </StaggerContainer>
         </div>
       </section>
+
+      {/* Testimonials */}
+      <Testimonials
+        eyebrow="Security Client Stories"
+        title={<>What Our <span className="text-gold-gradient">Security Clients Say</span></>}
+        subtitle="Why corporations, events, and high-security facilities trust JOTOFA Security to protect what matters."
+        accent="text-security-red"
+        accentBg="bg-security-red/10"
+        accentBorder="border-security-red/20"
+        testimonials={securityTestimonials}
+      />
 
       <section className="relative py-20">
         <div className="absolute inset-0 bg-background" />

@@ -10,6 +10,8 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "../scroll-reveal";
+import { Testimonials } from "../testimonials";
+import { cleaningTestimonials } from "@/lib/testimonials-data";
 import { usePage } from "@/lib/page-context";
 
 const services = [
@@ -99,6 +101,17 @@ export function CleaningPage() {
           </StaggerContainer>
         </div>
       </section>
+
+      {/* Testimonials */}
+      <Testimonials
+        eyebrow="Cleaning Client Stories"
+        title={<>What Our <span className="text-gold-gradient">Cleaning Clients Say</span></>}
+        subtitle="From office towers to lodges — why organizations across Tanzania choose JOTOFA Cleaning & Maids."
+        accent="text-cleaning-green"
+        accentBg="bg-cleaning-green/10"
+        accentBorder="border-cleaning-green/20"
+        testimonials={cleaningTestimonials}
+      />
 
       <section className="relative py-20">
         <div className="absolute inset-0 bg-background" />

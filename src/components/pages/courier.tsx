@@ -9,6 +9,8 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "../scroll-reveal";
+import { Testimonials } from "../testimonials";
+import { courierTestimonials } from "@/lib/testimonials-data";
 import { usePage } from "@/lib/page-context";
 
 const services = [
@@ -98,6 +100,17 @@ export function CourierPage() {
           </StaggerContainer>
         </div>
       </section>
+
+      {/* Testimonials */}
+      <Testimonials
+        eyebrow="Courier Client Stories"
+        title={<>What Our <span className="text-gold-gradient">Logistics Clients Say</span></>}
+        subtitle="Why businesses across Tanzania and East Africa trust JOTOFA Courier & Logistics with their deliveries."
+        accent="text-courier-orange"
+        accentBg="bg-courier-orange/10"
+        accentBorder="border-courier-orange/20"
+        testimonials={courierTestimonials}
+      />
 
       <section className="relative py-20">
         <div className="absolute inset-0 bg-background" />

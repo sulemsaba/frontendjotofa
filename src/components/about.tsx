@@ -31,6 +31,8 @@ import {
 } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "./scroll-reveal";
+import { Testimonials } from "./testimonials";
+import { aboutTestimonials } from "@/lib/testimonials-data";
 import { usePage } from "@/lib/page-context";
 
 const highlights = [
@@ -604,6 +606,17 @@ export function About() {
           </ScrollReveal>
         </div>
       </section>
+
+      {/* ── Testimonials ── */}
+      <Testimonials
+        eyebrow="Partners & Voices"
+        title={<>What Our <span className="text-gold-gradient">Partners Say</span></>}
+        subtitle="Long-term partners and stakeholders share why they trust JOTOFA Group."
+        accent="text-jotofa-gold"
+        accentBg="bg-jotofa-accent/10"
+        accentBorder="border-jotofa-accent/20"
+        testimonials={aboutTestimonials}
+      />
 
       {/* ── CTA ── */}
       <section className="relative py-20 sm:py-28">
