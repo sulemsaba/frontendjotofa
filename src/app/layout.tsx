@@ -3,6 +3,7 @@ import { Open_Sans, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
+import { PageProvider } from "@/lib/page-context";
 
 // Per JOTOFA Visual Identity Guidelines p.16: Open Sans for web/digital.
 const openSans = Open_Sans({
@@ -61,8 +62,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
-          <Toaster />
+          <PageProvider>
+            {children}
+            <Toaster />
+          </PageProvider>
         </ThemeProvider>
       </body>
     </html>

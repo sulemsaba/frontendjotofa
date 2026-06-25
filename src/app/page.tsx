@@ -96,9 +96,5 @@ function PageContent() {
 }
 
 export default function Home() {
-  return (
-    <PageProvider>
-      <PageContent />
-    </PageProvider>
-  );
+  return <PageContent />;
 }

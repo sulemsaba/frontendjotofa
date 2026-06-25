@@ -56,13 +56,12 @@ export function Navbar() {
   const [openDropdown, setOpenDropdown] = useState<"businesses" | "about" | null>(null);
   const [hoveredBizIndex, setHoveredBizIndex] = useState(0);
   const [mobileExpanded, setMobileExpanded] = useState<"businesses" | "about" | null>(null);
-  const dropdownHoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { setTheme, resolvedTheme } = useTheme();
   const { activePage, setActivePage } = usePage();
   const dropdownContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
+    const handleScroll = () => setScrolled(window.scrollY > 8);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -84,14 +83,18 @@ export function Navbar() {
   const handleNavClick = (pageId: PageId) => { setActivePage(pageId); setMobileOpen(false); setOpenDropdown(null); setMobileExpanded(null); };
   const toggleTheme = () => setTheme(resolvedTheme === "dark" ? "light" : "dark");
   const isDropdownActive = (t: "businesses" | "about") => { if (t === "businesses") return businessesPages.includes(activePage); if (t === "about") return aboutPages.includes(activePage); return false; };
-  const handleDropdownEnter = (type: "businesses" | "about") => { if (dropdownHoverTimeoutRef.current) clearTimeout(dropdownHoverTimeoutRef.current); setOpenDropdown(type); };
-  const handleDropdownLeave = () => { dropdownHoverTimeoutRef.current = setTimeout(() => setOpenDropdown(null), 150); };
+
+  // NN/g #13 — Click-activated (not hover-activated) dropdowns.
+  // Single click on the parent button toggles its submenu. Outside click / Esc closes.
+  const handleDropdownToggle = (type: "businesses" | "about") => {
+    setOpenDropdown((current) => (current === type ? null : type));
+  };
 
   const currentBiz = businessItems[hoveredBizIndex];
 
-  const pillBg = scrolled
-    ? "bg-white/85 dark:bg-jotofa-navy-mid/90 shadow-md shadow-black/5 backdrop-blur-xl border border-jotofa-navy/8 dark:border-white/8"
-    : "bg-white/75 dark:bg-jotofa-navy-mid/80 backdrop-blur-md border border-jotofa-navy/6 dark:border-white/6";
+  // NN/g #3 — Always solid/opaque navbar background for reliable contrast over any hero image.
+  // No transparency-dependent "scrolled vs not-scrolled" alpha — keep it consistently readable on all pages.
+  const navBg = "bg-white dark:bg-jotofa-navy-mid shadow-md shadow-black/5 backdrop-blur-xl border border-jotofa-navy/10 dark:border-white/10";
 
   return (
     <>
@@ -117,44 +120,47 @@ export function Navbar() {
           </div>
 
           {/* NAV CONTAINER (traditional squared border, not pill) */}
-          <div className={`flex-1 flex items-center justify-between rounded-lg transition-all duration-500 ${pillBg} px-5 sm:px-6 md:px-7 py-2.5 sm:py-3`}>
+          <div className={`flex-1 flex items-center justify-between rounded-lg transition-all duration-500 ${navBg} px-5 sm:px-6 md:px-7 py-3 sm:py-3.5`}>
 
           {/* NAV LINKS (desktop) */}
           <div ref={dropdownContainerRef} className="hidden lg:flex items-center justify-center">
-            <div className="flex items-center gap-0">
+            <div className="flex items-center gap-1">
               {navItems.map((item) => (
                 <div key={item.id} className="relative">
                   <button
-                    onClick={() => handleNavClick(item.id)}
-                    onMouseEnter={() => { if (item.hasDropdown) handleDropdownEnter(item.hasDropdown); }}
-                    onMouseLeave={handleDropdownLeave}
-                    onFocus={() => { if (item.hasDropdown) handleDropdownEnter(item.hasDropdown); }}
-                    onBlur={(e) => {
-                      // Only close if focus is leaving to something outside this dropdown group
-                      if (!e.currentTarget.parentElement?.contains(e.relatedTarget as Node)) {
-                        handleDropdownLeave();
+                    onClick={() => {
+                      if (item.hasDropdown) {
+                        handleDropdownToggle(item.hasDropdown);
+                      } else {
+                        handleNavClick(item.id);
                       }
                     }}
                     aria-expanded={item.hasDropdown ? openDropdown === item.hasDropdown : undefined}
                     aria-haspopup={item.hasDropdown ? "true" : undefined}
-                    className={`relative px-4 py-2 text-[0.9rem] font-medium transition-all duration-200 whitespace-nowrap tracking-[0.01em] rounded-md cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
+                    className={`relative px-4 py-2.5 text-[0.92rem] transition-all duration-200 whitespace-nowrap tracking-[0.01em] rounded-md cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
                       activePage === item.id || (item.hasDropdown && isDropdownActive(item.hasDropdown))
-                        ? "text-jotofa-navy dark:text-white font-semibold bg-jotofa-navy/[0.06] dark:bg-white/[0.08]"
-                        : "text-jotofa-navy/65 dark:text-white/65 hover:text-jotofa-navy dark:hover:text-white hover:bg-jotofa-navy/[0.03] dark:hover:bg-white/[0.04]"
+                        ? "text-jotofa-navy dark:text-white font-bold bg-jotofa-navy/[0.06] dark:bg-white/[0.10]"
+                        : "text-jotofa-navy/70 dark:text-white/70 font-medium hover:text-jotofa-navy dark:hover:text-white hover:bg-jotofa-navy/[0.04] dark:hover:bg-white/[0.05]"
                     }`}
                   >
                     <span className="relative flex items-center gap-1">
                       {item.label}
-                      {item.hasDropdown && (<ChevronDown className={`w-3 h-3 opacity-50 transition-transform duration-200 ${openDropdown === item.hasDropdown ? "rotate-180" : ""}`} />)}
+                      {item.hasDropdown && (<ChevronDown className={`w-3.5 h-3.5 opacity-60 transition-transform duration-200 ${openDropdown === item.hasDropdown ? "rotate-180" : ""}`} />)}
                     </span>
+                    {/* NN/g #5 — Clear active-location indicator: teal underline beneath the current page's nav item */}
+                    {(activePage === item.id || (item.hasDropdown && isDropdownActive(item.hasDropdown))) && (
+                      <span
+                        aria-hidden
+                        className="absolute left-3 right-3 -bottom-0.5 h-[2.5px] rounded-full bg-jotofa-accent"
+                      />
+                    )}
                   </button>
 
                   {/* Our Businesses Mega Dropdown — opens from button's left edge */}
                   {item.hasDropdown === "businesses" && openDropdown === "businesses" && (
                     <AnimatePresence>
                       <motion.div initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} transition={{ duration: 0.2, ease: "easeOut" }}
-                        className="absolute top-full left-0 pt-2"
-                        onMouseEnter={() => handleDropdownEnter("businesses")} onMouseLeave={handleDropdownLeave}>
+                        className="absolute top-full left-0 pt-2">
                         <div className="w-[640px] bg-white dark:bg-jotofa-navy-card backdrop-blur-[20px] border border-jotofa-navy/8 dark:border-white/10 rounded-lg shadow-[0_12px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_24px_60px_rgba(0,0,0,0.5)] overflow-hidden">
                           <div className="grid grid-cols-[45%_55%] min-h-[260px]">
                             <div className="border-r border-jotofa-navy/6 dark:border-white/6 p-2">
@@ -206,8 +212,7 @@ export function Navbar() {
                   {item.hasDropdown === "about" && openDropdown === "about" && (
                     <AnimatePresence>
                       <motion.div initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} transition={{ duration: 0.2, ease: "easeOut" }}
-                        className="absolute top-full left-0 pt-2"
-                        onMouseEnter={() => handleDropdownEnter("about")} onMouseLeave={handleDropdownLeave}>
+                        className="absolute top-full left-0 pt-2">
                         <div className="w-[230px] bg-white dark:bg-jotofa-navy-card backdrop-blur-[20px] border border-jotofa-navy/8 dark:border-white/10 rounded-lg shadow-[0_12px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_24px_60px_rgba(0,0,0,0.5)] p-2">
                           {aboutItems.map((subItem) => (
                             <button key={subItem.id} onClick={() => handleNavClick(subItem.page)}
