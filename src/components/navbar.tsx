@@ -38,8 +38,8 @@ const resourceItems = [
   { id: "contact", label: "Contact Us", description: "Get in touch with our team", page: "contact" as PageId, icon: Mail },
 ];
 
-const PHONE_NUMBER = "0794 974 996";
-const PHONE_TEL = "+255794974996";
+const PHONE_NUMBER = "0773 383 800";
+const PHONE_TEL = "+255773383800";
 
 interface NavItem { id: PageId; label: string; hasDropdown?: "businesses" | "about" | "resources"; }
 
