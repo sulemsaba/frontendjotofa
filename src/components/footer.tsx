@@ -204,34 +204,36 @@ export function Footer() {
   return (
     <footer className="relative border-t border-border bg-background">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* ─── Top banner: logo + holding statement (full-width strip) ─── */}
-        <div className="py-8 sm:py-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-border">
-          <Image
-            src="/images/jotofa-logo.png"
-            alt="JOTOFA Group Logo"
-            width={222}
-            height={73}
-            className="h-9 w-auto object-contain dark:brightness-0 dark:invert"
-          />
-          <p className="text-sm text-muted-foreground leading-relaxed sm:max-w-md sm:text-right">
-            A diversified Tanzanian holding company delivering excellence across
-            industries through ICT, logistics, professional services, security,
-            and staffing.
-          </p>
-        </div>
+        {/* ─── 5-column grid — all in one row on desktop ───
+            Col 1 Brand (logo + tagline) | Col 2 Quick Links |
+            Col 3 Our Businesses | Col 4 Careers | Col 5 Contact Us + Follow Us */}
+        <div className="py-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-6">
+          {/* Col 1: Brand Anchor — logo + tagline */}
+          <div className="col-span-2 md:col-span-1">
+            <Image
+              src="/images/jotofa-logo.png"
+              alt="JOTOFA Group Logo"
+              width={222}
+              height={73}
+              className="h-9 w-auto object-contain dark:brightness-0 dark:invert mb-4"
+            />
+            <p className="text-sm text-muted-foreground leading-relaxed max-w-[220px]">
+              A diversified Tanzanian holding company delivering excellence
+              across industries through ICT, logistics, professional services,
+              security, and staffing.
+            </p>
+          </div>
 
-        {/* ─── 4-column link grid — all in one row on desktop ─── */}
-        <div className="py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
-          {/* Col 1: Quick Links */}
+          {/* Col 2: Quick Links */}
           <LinkColumn title="Quick Links" links={quickLinks} />
 
-          {/* Col 2: Our Businesses */}
+          {/* Col 3: Our Businesses */}
           <LinkColumn title="Our Businesses" links={businessLinks} />
 
-          {/* Col 3: Careers */}
+          {/* Col 4: Careers */}
           <CareersColumn />
 
-          {/* Col 4: Contact Us + Follow Us (merged) */}
+          {/* Col 5: Contact Us + Follow Us (merged) */}
           <div>
             <h4 className="text-xs font-semibold text-foreground mb-3 uppercase tracking-wider text-left">
               Contact Us
