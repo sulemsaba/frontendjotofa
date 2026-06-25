@@ -104,9 +104,9 @@ export function Navbar() {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-jotofa-navy-mid border-b border-jotofa-navy/10 dark:border-white/10"
       >
-        {/* 3-COLUMN GRID — geometric symmetry so center links never budge from true viewport center.
-            Left = logo block, Center = nav links, Right = CTA + utilities. */}
-        <div className="mx-auto max-w-[1400px] h-16 sm:h-[68px] px-4 sm:px-6 grid grid-cols-3 items-stretch">
+        {/* 3-COLUMN GRID on desktop (lg+) — geometric symmetry so center links never budge.
+            On mobile/tablet (<lg), use 2-column grid: logo left, actions right (no empty middle). */}
+        <div className="mx-auto max-w-[1400px] h-16 sm:h-[68px] px-4 sm:px-6 grid grid-cols-2 lg:grid-cols-3 items-stretch">
 
           {/* ───────── LEFT: Logo Block ───────── */}
           <div className="flex justify-start items-center">
@@ -123,8 +123,8 @@ export function Navbar() {
           </div>
 
           {/* ───────── CENTER: Navigation Links ─────────
-              Hidden on mobile (hidden lg:flex), perfectly centered on desktop.
-              Each link fills navbar height so the active underline sits flush with the navbar bottom border. */}
+              Only rendered on lg+ (desktop). On mobile/tablet, the 2-col grid has no center column,
+              so this block is `hidden` and the grid effectively becomes left+right only. */}
           <div ref={dropdownContainerRef} className="hidden lg:flex justify-center items-stretch">
             <div className="flex items-stretch gap-1">
               {navItems.map((item) => (
@@ -239,23 +239,16 @@ export function Navbar() {
 
           {/* ───────── RIGHT: Call Now CTA + Theme toggle + Mobile menu ───────── */}
           <div className="flex justify-end items-center gap-2 sm:gap-3">
-            {/* Call Now — desktop micro-border CTA (visible md+ per spec) */}
+            {/* Call Now — micro-border CTA, visible on ALL viewports (mobile-first).
+                Compact on mobile (icon + "Call"), full on desktop (icon + "Call Now"). */}
             <a
               href={`tel:${PHONE_TEL}`}
-              className="hidden md:inline-flex items-center gap-2 text-xs font-bold tracking-wider uppercase border border-jotofa-navy dark:border-white text-jotofa-navy dark:text-white px-4 py-2.5 rounded-sm hover:bg-jotofa-navy hover:text-white dark:hover:bg-white dark:hover:text-jotofa-navy transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background whitespace-nowrap"
+              className="inline-flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs font-bold tracking-wider uppercase border border-jotofa-navy dark:border-white text-jotofa-navy dark:text-white px-3 sm:px-4 py-2 sm:py-2.5 rounded-sm hover:bg-jotofa-navy hover:text-white dark:hover:bg-white dark:hover:text-jotofa-navy transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background whitespace-nowrap"
               aria-label={`Call ${PHONE_NUMBER}`}
             >
               <Phone className="w-3.5 h-3.5" />
-              <span>Call Now</span>
-            </a>
-            {/* Call — mobile compact (always visible per mobile-first UX best practice) */}
-            <a
-              href={`tel:${PHONE_TEL}`}
-              className="md:hidden inline-flex items-center gap-1.5 text-xs font-bold tracking-wider uppercase border border-jotofa-navy dark:border-white text-jotofa-navy dark:text-white px-3 py-2 rounded-sm hover:bg-jotofa-navy hover:text-white dark:hover:bg-white dark:hover:text-jotofa-navy transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-              aria-label={`Call ${PHONE_NUMBER}`}
-            >
-              <Phone className="w-3.5 h-3.5" />
-              <span>Call</span>
+              <span className="hidden sm:inline">Call Now</span>
+              <span className="sm:hidden">Call</span>
             </a>
             {/* Theme toggle */}
             <button

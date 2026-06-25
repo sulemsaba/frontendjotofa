@@ -152,10 +152,11 @@ function CareersColumn() {
 
   return (
     <div>
-      <h4 className="text-xs font-semibold text-foreground mb-3 uppercase tracking-wider text-left">
+      {/* Heading: centered on mobile (full-width row), left-aligned on desktop */}
+      <h4 className="text-xs font-semibold text-foreground mb-3 uppercase tracking-wider text-center sm:text-left">
         Careers
       </h4>
-      {/* Desktop: vertical list */}
+      {/* Desktop: vertical list, left-aligned */}
       <ul className="hidden sm:block space-y-2">
         {careerLinks.map((link) => (
           <li key={link.label} className="flex items-center justify-start">
@@ -168,13 +169,10 @@ function CareersColumn() {
           </li>
         ))}
       </ul>
-      {/* Mobile: horizontal pipe-separated row */}
-      <ul className="sm:hidden flex flex-row flex-wrap items-center justify-start gap-x-1.5 gap-y-1">
+      {/* Mobile: horizontal pipe-separated row, centered (full-width column) */}
+      <ul className="sm:hidden flex flex-row flex-wrap items-center justify-center gap-x-1.5 gap-y-1">
         {careerLinks.map((link, i) => (
-          <li
-            key={link.label}
-            className="flex items-center justify-center"
-          >
+          <li key={link.label} className="flex items-center justify-center">
             <button
               onClick={() => setActivePage(link.page)}
               className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-1 focus-visible:ring-offset-background"
@@ -182,12 +180,7 @@ function CareersColumn() {
               {link.label}
             </button>
             {i < careerLinks.length - 1 && (
-              <span
-                aria-hidden
-                className="mx-1 text-muted-foreground/40 select-none"
-              >
-                |
-              </span>
+              <span aria-hidden className="mx-1 text-muted-foreground/40 select-none">|</span>
             )}
           </li>
         ))}
@@ -206,7 +199,15 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* ─── 5-column grid — all in one row on desktop ───
             Col 1 Brand (logo + tagline) | Col 2 Quick Links |
-            Col 3 Our Businesses | Col 4 Careers | Col 5 Contact Us + Follow Us */}
+            Col 3 Our Businesses | Col 4 Careers | Col 5 Contact Us + Follow Us
+
+            MOBILE LAYOUT (per user spec):
+            • Brand — full width
+            • Quick Links + Our Businesses — 2-col row (short lists)
+            • Careers — FULL WIDTH so the horizontal pipe-separated
+              links (Open Positions | Why Join Us | Send Your CV) display centered
+            • Contact Us + Follow Us — FULL WIDTH (too much content for half-width)
+         */}
         <div className="py-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-6">
           {/* Col 1: Brand Anchor — logo + tagline */}
           <div className="col-span-2 md:col-span-1">
@@ -230,11 +231,13 @@ export function Footer() {
           {/* Col 3: Our Businesses */}
           <LinkColumn title="Our Businesses" links={businessLinks} />
 
-          {/* Col 4: Careers */}
-          <CareersColumn />
+          {/* Col 4: Careers — full-width on mobile so horizontal pipe row centers nicely */}
+          <div className="col-span-2 md:col-span-1">
+            <CareersColumn />
+          </div>
 
-          {/* Col 5: Contact Us + Follow Us (merged) */}
-          <div>
+          {/* Col 5: Contact Us + Follow Us (merged) — full-width on mobile (too much content for half-width) */}
+          <div className="col-span-2 md:col-span-1">
             <h4 className="text-xs font-semibold text-foreground mb-3 uppercase tracking-wider text-left">
               Contact Us
             </h4>
