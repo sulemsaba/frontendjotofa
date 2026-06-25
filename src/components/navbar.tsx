@@ -237,19 +237,8 @@ export function Navbar() {
             </div>
           </div>
 
-          {/* ───────── RIGHT: Call Now CTA + Theme toggle + Mobile menu ───────── */}
+          {/* ───────── RIGHT: Theme toggle + Mobile menu ───────── */}
           <div className="flex justify-end items-center gap-2 sm:gap-3">
-            {/* Call Now — micro-border CTA, visible on ALL viewports (mobile-first).
-                Compact on mobile (icon + "Call"), full on desktop (icon + "Call Now"). */}
-            <a
-              href={`tel:${PHONE_TEL}`}
-              className="inline-flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs font-bold tracking-wider uppercase border border-jotofa-navy dark:border-white text-jotofa-navy dark:text-white px-3 sm:px-4 py-2 sm:py-2.5 rounded-sm hover:bg-jotofa-navy hover:text-white dark:hover:bg-white dark:hover:text-jotofa-navy transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background whitespace-nowrap"
-              aria-label={`Call ${PHONE_NUMBER}`}
-            >
-              <Phone className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Call Now</span>
-              <span className="sm:hidden">Call</span>
-            </a>
             {/* Theme toggle */}
             <button
               onClick={toggleTheme}
