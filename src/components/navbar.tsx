@@ -102,31 +102,33 @@ export function Navbar() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="fixed top-0 left-0 right-0 z-50 py-4 sm:py-5 px-3 sm:px-6"
+        className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-jotofa-navy-mid border-b border-jotofa-navy/10 dark:border-white/10"
       >
-        <div className="mx-auto max-w-[1400px] flex items-center gap-4 justify-between">
-          {/* LOGO - OUTSIDE PILL */}
-          <div className="flex items-center shrink-0">
-            <button onClick={() => handleNavClick("home")} className="flex items-center group">
+        {/* 3-COLUMN GRID — geometric symmetry so center links never budge from true viewport center.
+            Left = logo block, Center = nav links, Right = CTA + utilities. */}
+        <div className="mx-auto max-w-[1400px] h-16 sm:h-[68px] px-4 sm:px-6 grid grid-cols-3 items-stretch">
+
+          {/* ───────── LEFT: Logo Block ───────── */}
+          <div className="flex justify-start items-center">
+            <button onClick={() => handleNavClick("home")} className="flex items-center group" aria-label="JOTOFA Group home">
               <Image
                 src="/images/jotofa-logo.png"
                 alt="JOTOFA Group Logo"
                 width={222}
                 height={73}
                 priority
-                className="h-9 sm:h-10 md:h-11 w-auto object-contain dark:brightness-0 dark:invert transition-all duration-300 group-hover:opacity-80 cursor-pointer"
+                className="h-8 sm:h-9 w-auto object-contain dark:brightness-0 dark:invert transition-all duration-300 group-hover:opacity-80 cursor-pointer"
               />
             </button>
           </div>
 
-          {/* NAV CONTAINER (traditional squared border, not pill) */}
-          <div className={`flex-1 flex items-center justify-between rounded-lg transition-all duration-500 ${navBg} px-5 sm:px-6 md:px-7 py-3 sm:py-3.5`}>
-
-          {/* NAV LINKS (desktop) */}
-          <div ref={dropdownContainerRef} className="hidden lg:flex items-center justify-center">
-            <div className="flex items-center gap-1">
+          {/* ───────── CENTER: Navigation Links ─────────
+              Hidden on mobile (hidden lg:flex), perfectly centered on desktop.
+              Each link fills navbar height so the active underline sits flush with the navbar bottom border. */}
+          <div ref={dropdownContainerRef} className="hidden lg:flex justify-center items-stretch">
+            <div className="flex items-stretch gap-1">
               {navItems.map((item) => (
-                <div key={item.id} className="relative">
+                <div key={item.id} className="relative flex items-stretch">
                   <button
                     onClick={() => {
                       if (item.hasDropdown) {
@@ -137,21 +139,21 @@ export function Navbar() {
                     }}
                     aria-expanded={item.hasDropdown ? openDropdown === item.hasDropdown : undefined}
                     aria-haspopup={item.hasDropdown ? "true" : undefined}
-                    className={`relative px-4 py-2.5 text-[0.92rem] transition-all duration-200 whitespace-nowrap tracking-[0.01em] rounded-md cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
+                    className={`relative flex items-center px-4 text-sm tracking-wide transition-colors duration-200 whitespace-nowrap cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent ${
                       activePage === item.id || (item.hasDropdown && isDropdownActive(item.hasDropdown))
-                        ? "text-jotofa-navy dark:text-white font-bold bg-jotofa-navy/[0.06] dark:bg-white/[0.10]"
-                        : "text-jotofa-navy/70 dark:text-white/70 font-medium hover:text-jotofa-navy dark:hover:text-white hover:bg-jotofa-navy/[0.04] dark:hover:bg-white/[0.05]"
+                        ? "text-jotofa-navy dark:text-white font-semibold"
+                        : "text-jotofa-navy/70 dark:text-white/70 font-medium hover:text-jotofa-navy dark:hover:text-white"
                     }`}
                   >
                     <span className="relative flex items-center gap-1">
                       {item.label}
                       {item.hasDropdown && (<ChevronDown className={`w-3.5 h-3.5 opacity-60 transition-transform duration-200 ${openDropdown === item.hasDropdown ? "rotate-180" : ""}`} />)}
                     </span>
-                    {/* NN/g #5 — Clear active-location indicator: teal underline beneath the current page's nav item */}
+                    {/* NN/g #5 — Active indicator: razor-thin 2px teal line flush against the navbar bottom border */}
                     {(activePage === item.id || (item.hasDropdown && isDropdownActive(item.hasDropdown))) && (
                       <span
                         aria-hidden
-                        className="absolute left-3 right-3 -bottom-0.5 h-[2.5px] rounded-full bg-jotofa-accent"
+                        className="absolute left-3 right-3 bottom-0 h-[2px] bg-jotofa-accent"
                       />
                     )}
                   </button>
@@ -235,28 +237,42 @@ export function Navbar() {
             </div>
           </div>
 
-            {/* RIGHT: Action buttons (desktop) */}
-            <div className="hidden lg:flex items-center gap-2 shrink-0">
-              <a href={`tel:${PHONE_TEL}`} className="group flex items-center gap-2 px-4 py-2 rounded-md border border-jotofa-navy/12 dark:border-white/12 text-jotofa-navy/70 dark:text-white/70 hover:border-jotofa-navy/25 dark:hover:border-white/25 hover:bg-jotofa-navy/[0.03] dark:hover:bg-white/[0.04] transition-all duration-200 text-[0.85rem] font-medium whitespace-nowrap cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background">
-                <Phone className="w-4 h-4 text-jotofa-navy/60 dark:text-white/50 group-hover:text-jotofa-accent transition-colors" />
-                <span>{PHONE_NUMBER}</span>
-              </a>
-              <button onClick={toggleTheme} className="p-2 rounded-md text-jotofa-navy/40 dark:text-white/40 hover:text-jotofa-navy dark:hover:text-white hover:bg-jotofa-navy/[0.04] dark:hover:bg-white/[0.06] transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label="Toggle theme">
-                <Sun className="w-3.5 h-3.5 hidden dark:block" /><Moon className="w-3.5 h-3.5 block dark:hidden" />
-              </button>
-            </div>
-          </div>
-
-          {/* MOBILE: right-side controls */}
-          <div className="flex lg:hidden items-center gap-2 shrink-0">
-            <a href={`tel:${PHONE_TEL}`} className="flex items-center gap-1.5 px-3 py-2 rounded-md border border-jotofa-navy/12 dark:border-white/12 text-jotofa-navy/60 dark:text-white/60 text-[13px] font-medium cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label={`Call ${PHONE_NUMBER}`}>
+          {/* ───────── RIGHT: Call Now CTA + Theme toggle + Mobile menu ───────── */}
+          <div className="flex justify-end items-center gap-2 sm:gap-3">
+            {/* Call Now — desktop micro-border CTA (visible md+ per spec) */}
+            <a
+              href={`tel:${PHONE_TEL}`}
+              className="hidden md:inline-flex items-center gap-2 text-xs font-bold tracking-wider uppercase border border-jotofa-navy dark:border-white text-jotofa-navy dark:text-white px-4 py-2.5 rounded-sm hover:bg-jotofa-navy hover:text-white dark:hover:bg-white dark:hover:text-jotofa-navy transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background whitespace-nowrap"
+              aria-label={`Call ${PHONE_NUMBER}`}
+            >
               <Phone className="w-3.5 h-3.5" />
-              <span className="whitespace-nowrap">Call</span>
+              <span>Call Now</span>
             </a>
-            <button onClick={toggleTheme} className="p-2 rounded-md text-jotofa-navy/40 dark:text-white/40 hover:text-jotofa-navy dark:hover:text-white transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label="Toggle theme">
-              <Sun className="w-3.5 h-3.5 hidden dark:block" /><Moon className="w-3.5 h-3.5 block dark:hidden" />
+            {/* Call — mobile compact (always visible per mobile-first UX best practice) */}
+            <a
+              href={`tel:${PHONE_TEL}`}
+              className="md:hidden inline-flex items-center gap-1.5 text-xs font-bold tracking-wider uppercase border border-jotofa-navy dark:border-white text-jotofa-navy dark:text-white px-3 py-2 rounded-sm hover:bg-jotofa-navy hover:text-white dark:hover:bg-white dark:hover:text-jotofa-navy transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              aria-label={`Call ${PHONE_NUMBER}`}
+            >
+              <Phone className="w-3.5 h-3.5" />
+              <span>Call</span>
+            </a>
+            {/* Theme toggle */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-sm text-jotofa-navy/60 dark:text-white/60 hover:text-jotofa-navy dark:hover:text-white hover:bg-jotofa-navy/[0.05] dark:hover:bg-white/[0.08] transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              aria-label="Toggle theme"
+            >
+              <Sun className="w-4 h-4 hidden dark:block" />
+              <Moon className="w-4 h-4 block dark:hidden" />
             </button>
-            <button onClick={() => setMobileOpen(!mobileOpen)} className="p-1.5 text-jotofa-navy dark:text-white hover:text-jotofa-navy/70 dark:hover:text-white/70 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-md" aria-label="Toggle menu" aria-expanded={mobileOpen}>
+            {/* Mobile hamburger (reveals on <lg per spec — JOTOFA has 6 nav items, needs lg breakpoint) */}
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="lg:hidden p-2 text-jotofa-navy dark:text-white hover:text-jotofa-navy/70 dark:hover:text-white/70 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
+              aria-label="Toggle menu"
+              aria-expanded={mobileOpen}
+            >
               {mobileOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
