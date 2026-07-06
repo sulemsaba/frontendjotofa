@@ -9,7 +9,6 @@ import {
   ShieldCheck,
   Users,
   ArrowRight,
-  ArrowUpRight,
   ExternalLink,
 } from "lucide-react";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "./scroll-reveal";
@@ -17,18 +16,23 @@ import { usePage, PageId } from "@/lib/page-context";
 import { storeProductsPageUrl } from "@/lib/store-config";
 
 /* ──────────────────────────────────────────────────────────────────────────
-   "Five Arms, One Vision" — Option C: numbered magazine cards.
+   "Five Arms, One Vision"
 
-   Each subsidiary is a tall portrait card with:
-     • a full-bleed REAL photograph (object-cover, hover zoom)
-     • a big faded index number (01–05) in the division's accent colour
-     • an accent icon chip + tagline + name overlaid on the photo
-     • a content panel below: description, service tags, and an
-       "Explore →" CTA that navigates to the subsidiary page
-     • UTEC also shows a "Visit Online Store" external link
+   Five equal, roomy columns on desktop — each subsidiary gets its own
+   column (not a cramped 5-up row). BRAND COLOURS ONLY: JOTOFA navy +
+   teal. No per-subsidiary accent colours — every card uses the same
+   navy/teal palette so the section reads as ONE united group, not five
+   differently-coloured tiles.
 
-   Layout: 1-col (mobile) → 2-col (sm) → 3-col (lg) → 5-col (xl, the
-   literal "five arms in a row" statement on wide screens).
+   Card anatomy (vertical):
+     • Real photograph (object-cover, hover zoom)
+     • Navy number badge (01–05) overlapping the photo edge
+     • Icon + tagline + name
+     • Description
+     • Service list (teal bullets)
+     • "Explore →" CTA (+ "Visit Store" for UTEC)
+
+   Layout: 1-col mobile → 2-col sm → 3-col md → 5-col lg+.
    ────────────────────────────────────────────────────────────────────────── */
 
 interface Subsidiary {
@@ -38,11 +42,6 @@ interface Subsidiary {
   tagline: string;
   description: string;
   services: string[];
-  accentText: string;
-  accentBg: string;
-  accentBorder: string;
-  accentRing: string;
-  accentDot: string;
   icon: React.ComponentType<{ className?: string }>;
   image: string;
   storeUrl?: string;
@@ -64,11 +63,6 @@ const subsidiaries: Subsidiary[] = [
       "Software Development",
       "Telecom Services",
     ],
-    accentText: "text-utec-cyan",
-    accentBg: "bg-utec-cyan/10",
-    accentBorder: "border-utec-cyan/30",
-    accentRing: "group-hover:ring-utec-cyan/40",
-    accentDot: "bg-utec-cyan",
     icon: Monitor,
     image: "/images/subsidiaries/utec.jpg",
     storeUrl: storeProductsPageUrl(),
@@ -88,11 +82,6 @@ const subsidiaries: Subsidiary[] = [
       "Last-Mile Solutions",
       "Cross-Border Logistics",
     ],
-    accentText: "text-courier-orange",
-    accentBg: "bg-courier-orange/10",
-    accentBorder: "border-courier-orange/30",
-    accentRing: "group-hover:ring-courier-orange/40",
-    accentDot: "bg-courier-orange",
     icon: Truck,
     image: "/images/subsidiaries/courier.jpg",
   },
@@ -110,11 +99,6 @@ const subsidiaries: Subsidiary[] = [
       "Specialized Sanitization",
       "Staffed Housekeeping",
     ],
-    accentText: "text-cleaning-green",
-    accentBg: "bg-cleaning-green/10",
-    accentBorder: "border-cleaning-green/30",
-    accentRing: "group-hover:ring-cleaning-green/40",
-    accentDot: "bg-cleaning-green",
     icon: Sparkles,
     image: "/images/subsidiaries/cleaning.jpg",
   },
@@ -132,11 +116,6 @@ const subsidiaries: Subsidiary[] = [
       "Risk Assessment",
       "Security Consulting",
     ],
-    accentText: "text-security-red",
-    accentBg: "bg-security-red/10",
-    accentBorder: "border-security-red/30",
-    accentRing: "group-hover:ring-security-red/40",
-    accentDot: "bg-security-red",
     icon: ShieldCheck,
     image: "/images/subsidiaries/security.jpg",
   },
@@ -154,11 +133,6 @@ const subsidiaries: Subsidiary[] = [
       "Training & Development",
       "HR Consulting",
     ],
-    accentText: "text-staffing-purple",
-    accentBg: "bg-staffing-purple/10",
-    accentBorder: "border-staffing-purple/30",
-    accentRing: "group-hover:ring-staffing-purple/40",
-    accentDot: "bg-staffing-purple",
     icon: Users,
     image: "/images/subsidiaries/staffing.jpg",
   },
@@ -179,48 +153,36 @@ function SubsidiaryCard({ subsidiary }: { subsidiary: Subsidiary }) {
           setActivePage(subsidiary.id);
         }
       }}
-      className={`group relative flex flex-col rounded-2xl overflow-hidden bg-card border border-border ring-1 ring-transparent ${subsidiary.accentRing} transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.4)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
+      className="group relative flex flex-col rounded-2xl overflow-hidden bg-card border border-border transition-all duration-300 hover:-translate-y-1.5 hover:border-jotofa-accent/40 hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.4)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
     >
-      {/* ── Image (with overlays) ── */}
-      <div className="relative aspect-[4/5] overflow-hidden">
+      {/* ── Photograph ── */}
+      <div className="relative aspect-[4/3] overflow-hidden">
         <Image
           src={subsidiary.image}
           alt={subsidiary.name}
           fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 20vw"
+          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 20vw"
           className="object-cover transition-transform duration-700 group-hover:scale-110"
         />
-        {/* Readability gradient — dark in both themes (over a photo) */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/10" />
-        {/* Accent tint on hover */}
-        <div
-          aria-hidden
-          className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${subsidiary.accentBg} mix-blend-multiply`}
-        />
+        {/* Navy readability gradient at bottom of photo → blends into card */}
+        <div className="absolute inset-0 bg-gradient-to-t from-jotofa-navy via-jotofa-navy/30 to-transparent" />
 
-        {/* Big faded index number — top right */}
-        <span
-          className={`absolute top-3 right-4 text-6xl sm:text-7xl font-black leading-none ${subsidiary.accentText} opacity-70 select-none`}
-          style={{ WebkitTextStroke: "1px currentColor" }}
-          aria-hidden
-        >
-          {subsidiary.index}
-        </span>
-
-        {/* Icon chip — top left */}
-        <div className={`absolute top-4 left-4 w-10 h-10 rounded-xl flex items-center justify-center bg-white/15 backdrop-blur-md border border-white/25`}>
-          <Icon className={`w-5 h-5 text-white`} />
+        {/* Navy number badge — overlaps photo bottom edge */}
+        <div className="absolute top-4 left-4 flex items-center gap-2">
+          <span className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-jotofa-navy text-white text-sm font-bold border border-white/15">
+            {subsidiary.index}
+          </span>
+          <div className="w-9 h-9 rounded-lg bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center">
+            <Icon className="w-4.5 h-4.5 text-white" />
+          </div>
         </div>
 
-        {/* Tagline + Name — bottom of image */}
+        {/* Tagline + name — bottom of photo, white on navy gradient */}
         <div className="absolute bottom-0 left-0 right-0 p-5">
-          <div className={`inline-flex items-center gap-1.5 mb-2`}>
-            <span className={`w-1.5 h-1.5 rounded-full ${subsidiary.accentDot}`} />
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-white/80">
-              {subsidiary.tagline}
-            </span>
-          </div>
-          <h3 className="text-xl font-bold text-white leading-tight">
+          <span className="text-[11px] font-semibold uppercase tracking-wider text-jotofa-accent-light">
+            {subsidiary.tagline}
+          </span>
+          <h3 className="text-lg font-bold text-white leading-tight mt-1">
             {subsidiary.name}
           </h3>
         </div>
@@ -228,32 +190,25 @@ function SubsidiaryCard({ subsidiary }: { subsidiary: Subsidiary }) {
 
       {/* ── Content panel ── */}
       <div className="flex flex-col flex-1 p-5">
-        <p className="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-3">
+        <p className="text-sm text-muted-foreground leading-relaxed mb-4">
           {subsidiary.description}
         </p>
 
-        {/* Service tags */}
-        <div className="flex flex-wrap gap-1.5 mb-5">
-          {subsidiary.services.slice(0, 4).map((service) => (
-            <span
-              key={service}
-              className={`text-[11px] px-2 py-1 rounded-md ${subsidiary.accentBg} ${subsidiary.accentText} font-medium`}
-            >
-              {service}
-            </span>
+        {/* Service list — teal bullets, brand-only palette */}
+        <ul className="space-y-2 mb-6">
+          {subsidiary.services.map((service) => (
+            <li key={service} className="flex items-center gap-2.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-jotofa-accent flex-shrink-0" />
+              <span className="text-[13px] text-foreground/80 leading-tight">
+                {service}
+              </span>
+            </li>
           ))}
-          {subsidiary.services.length > 4 && (
-            <span className="text-[11px] px-2 py-1 rounded-md bg-secondary text-muted-foreground font-medium">
-              +{subsidiary.services.length - 4}
-            </span>
-          )}
-        </div>
+        </ul>
 
         {/* CTA row — pushed to bottom */}
         <div className="mt-auto flex items-center justify-between gap-2 pt-4 border-t border-border">
-          <span
-            className={`inline-flex items-center gap-1.5 text-sm font-semibold ${subsidiary.accentText} group-hover:gap-2.5 transition-all`}
-          >
+          <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-jotofa-accent group-hover:gap-2.5 transition-all">
             Explore
             <ArrowRight className="w-4 h-4" />
           </span>
@@ -264,7 +219,7 @@ function SubsidiaryCard({ subsidiary }: { subsidiary: Subsidiary }) {
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
-              className={`inline-flex items-center gap-1 text-xs font-medium ${subsidiary.accentText} hover:opacity-70 transition-opacity`}
+              className="inline-flex items-center gap-1 text-xs font-medium text-jotofa-accent hover:opacity-70 transition-opacity"
             >
               {subsidiary.storeLabel ?? "Store"}
               <ExternalLink className="w-3 h-3" />
@@ -300,9 +255,9 @@ export function Subsidiaries() {
           </p>
         </ScrollReveal>
 
-        {/* Numbered magazine cards */}
+        {/* 5 equal columns on desktop — each subsidiary gets its own column */}
         <StaggerContainer
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 lg:gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 lg:gap-6"
           staggerDelay={0.08}
         >
           {subsidiaries.map((s) => (
