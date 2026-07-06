@@ -109,3 +109,29 @@ screenshot-*.jpeg
 TODO.local.md
 NOTES.local.md
 *.local.md
+
+# ─────────────────────────────────────────────
+# SANDBOX / TEMPLATE INFRASTRUCTURE
+# These belong to the local dev-sandbox environment,
+# NOT to the JOTOFA project. Never commit them.
+# ─────────────────────────────────────────────
+
+# Z.ai sandbox scripts & gateway config
+/.zscripts/
+/.claude
+/.z-ai-config
+/Caddyfile
+
+# Template demo files (reference only, not part of JOTOFA)
+/examples/
+/mini-services/
+/skills/
+
+# Agent working artifacts
+/tool-results/
+/agent-ctx/
+/prompt
+
+# Temporary debug screenshots
+debug-*.png
+preview-*.png

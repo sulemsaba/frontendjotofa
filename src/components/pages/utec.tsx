@@ -8,11 +8,15 @@ import {
   Code,
   PhoneCall,
   ArrowRight,
+  ShoppingBag,
+  ExternalLink,
 } from "lucide-react";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "../scroll-reveal";
 import { Testimonials } from "../testimonials";
 import { utecTestimonials } from "@/lib/testimonials-data";
 import { usePage } from "@/lib/page-context";
+import { UtecFeaturedProducts } from "../utec-featured-products";
+import { storeProductsPageUrl } from "@/lib/store-config";
 
 const services = [
   { icon: Wifi, title: "Network Infrastructure", description: "Fiber optic, wireless, and structured cabling solutions for enterprises and governments." },
@@ -73,6 +77,27 @@ export function UTECPage() {
               ))}
             </div>
           </ScrollReveal>
+
+          <ScrollReveal delay={0.4}>
+            <div className="mt-10 flex flex-wrap items-center gap-3">
+              <a
+                href={storeProductsPageUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-7 py-3.5 bg-utec-cyan hover:bg-utec-cyan/90 text-white font-semibold rounded-full transition-all"
+              >
+                <ShoppingBag className="w-4 h-4" />
+                Shop Our Products
+                <ExternalLink className="w-4 h-4" />
+              </a>
+              <button
+                onClick={() => setActivePage("contact")}
+                className="inline-flex items-center gap-2 px-7 py-3.5 border border-utec-cyan/30 text-foreground hover:bg-utec-cyan/10 rounded-full font-semibold transition-all"
+              >
+                Talk to Sales <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -107,6 +132,9 @@ export function UTECPage() {
         </div>
       </section>
 
+      {/* Featured Products (live from the UTEC online store) */}
+      <UtecFeaturedProducts />
+
       {/* Testimonials */}
       <Testimonials
         eyebrow="UTEC Client Stories"
@@ -128,14 +156,25 @@ export function UTECPage() {
                 Ready to <span className="text-utec-cyan">Transform</span> Your Business?
               </h2>
               <p className="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto">
-                Let UTEC Solutions design and deploy the technology infrastructure your business needs to thrive.
+                Let UTEC Solutions design and deploy the technology infrastructure your business needs to thrive — or browse our online store for ready-to-ship equipment.
               </p>
-              <button
-                onClick={() => setActivePage("contact")}
-                className="inline-flex items-center gap-2 px-8 py-3.5 bg-utec-cyan hover:bg-utec-cyan/90 text-white font-semibold rounded-full transition-all"
-              >
-                Contact Us <ArrowRight className="w-4 h-4" />
-              </button>
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                <button
+                  onClick={() => setActivePage("contact")}
+                  className="inline-flex items-center gap-2 px-8 py-3.5 bg-utec-cyan hover:bg-utec-cyan/90 text-white font-semibold rounded-full transition-all"
+                >
+                  Contact Us <ArrowRight className="w-4 h-4" />
+                </button>
+                <a
+                  href={storeProductsPageUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-8 py-3.5 border border-utec-cyan/30 text-foreground hover:bg-utec-cyan/10 rounded-full font-semibold transition-all"
+                >
+                  <ShoppingBag className="w-4 h-4" />
+                  Visit Online Store <ExternalLink className="w-4 h-4" />
+                </a>
+              </div>
             </div>
           </ScrollReveal>
         </div>

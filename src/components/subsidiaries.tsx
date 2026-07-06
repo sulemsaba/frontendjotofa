@@ -10,9 +10,11 @@ import {
   Users,
   ChevronRight,
   ArrowUpRight,
+  ExternalLink,
 } from "lucide-react";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "./scroll-reveal";
 import { usePage } from "@/lib/page-context";
+import { storeProductsPageUrl } from "@/lib/store-config";
 
 interface Subsidiary {
   id: string;
@@ -26,6 +28,10 @@ interface Subsidiary {
   accentBorder: string;
   icon: React.ComponentType<{ className?: string }>;
   image: string;
+  /** Optional URL to a subsidiary's external online store / shop. */
+  storeUrl?: string;
+  /** Label for the store link button. */
+  storeLabel?: string;
 }
 
 const subsidiaries: Subsidiary[] = [
@@ -48,6 +54,8 @@ const subsidiaries: Subsidiary[] = [
     accentBorder: "border-utec-cyan/30",
     icon: Monitor,
     image: "/images/utec.png",
+    storeUrl: storeProductsPageUrl(),
+    storeLabel: "Visit Online Store",
   },
   {
     id: "courier",
@@ -251,13 +259,25 @@ function SubsidiaryDetail({ subsidiary }: { subsidiary: Subsidiary }) {
           </div>
         </div>
 
-        <div className="mt-8">
+        <div className="mt-8 flex flex-wrap items-center gap-3">
           <button
             onClick={() => setActivePage("contact")}
             className="px-6 py-2.5 bg-jotofa-accent/10 border border-jotofa-accent/25 text-jotofa-gold hover:bg-jotofa-accent/20 rounded-full text-sm font-medium transition-all"
           >
             Get in Touch
           </button>
+
+          {subsidiary.storeUrl && (
+            <a
+              href={subsidiary.storeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`inline-flex items-center gap-2 px-6 py-2.5 ${subsidiary.accentBg} border ${subsidiary.accentBorder} ${subsidiary.accentColor} hover:opacity-80 rounded-full text-sm font-medium transition-all`}
+            >
+              {subsidiary.storeLabel ?? "Visit Store"}
+              <ExternalLink className="w-4 h-4" />
+            </a>
+          )}
         </div>
       </div>
     </motion.div>
