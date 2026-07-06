@@ -21,12 +21,13 @@ import { CourierPage } from "@/components/pages/courier";
 import { CleaningPage } from "@/components/pages/cleaning";
 import { SecurityPage } from "@/components/pages/security";
 import { StaffingPage } from "@/components/pages/staffing";
+import { BusinessesPage } from "@/components/pages/businesses";
 import { motion, AnimatePresence } from "framer-motion";
 
 const pageComponents: Record<PageId, React.ComponentType> = {
   home: Hero,
   about: About,
-  businesses: Subsidiaries,
+  businesses: BusinessesPage,
   strategy: Strategy,
   csr: CSR,
   news: News,

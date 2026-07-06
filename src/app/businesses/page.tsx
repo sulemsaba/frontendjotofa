@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Navbar } from "@/components/navbar";
-import { Subsidiaries } from "@/components/subsidiaries";
+import { BusinessesPage } from "@/components/pages/businesses";
 import { Footer } from "@/components/footer";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { BackToTopButton } from "@/components/back-to-top-button";
@@ -17,12 +17,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BusinessesPage() {
+export default function BusinessesPageRoute() {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Navbar />
       <main className="flex-1 pt-16">
-        <Subsidiaries />
+        <BusinessesPage />
       </main>
       <Footer />
       <WhatsAppButton />
