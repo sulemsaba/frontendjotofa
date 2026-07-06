@@ -93,15 +93,15 @@ export function Hero() {
   };
 
   return (
-    <section className="relative w-full min-h-screen lg:h-screen lg:overflow-hidden bg-[#F4FAFC]">
-      {/* Light gradient base */}
-      <div aria-hidden className="absolute inset-0 bg-gradient-to-br from-white via-[#F4FAFC] to-[#E6F4F6]" />
-      {/* Faint navy grid (light-mode tuned) */}
-      <div aria-hidden className="absolute inset-0 opacity-[0.5]" style={{ backgroundImage: "linear-gradient(rgba(0,59,100,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(0,59,100,0.045) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
+    <section className="relative w-full min-h-screen lg:h-screen lg:overflow-hidden bg-[#F4FAFC] dark:bg-jotofa-navy-mid">
+      {/* Light gradient base — light mode only */}
+      <div aria-hidden className="absolute inset-0 bg-gradient-to-br from-white via-[#F4FAFC] to-[#E6F4F6] dark:hidden" />
+      {/* Faint grid — uses .bg-grid-pattern which has light/dark variants */}
+      <div aria-hidden className="absolute inset-0 bg-grid-pattern opacity-50 dark:opacity-30" />
       {/* Soft teal glow — top right */}
-      <div aria-hidden className="absolute top-0 right-0 w-[560px] h-[560px] bg-[#00A9B7]/12 rounded-full blur-[140px] pointer-events-none" />
-      {/* Soft navy glow — bottom left */}
-      <div aria-hidden className="absolute bottom-0 left-0 w-[420px] h-[420px] bg-[#003B64]/8 rounded-full blur-[120px] pointer-events-none" />
+      <div aria-hidden className="absolute top-0 right-0 w-[560px] h-[560px] bg-[#00A9B7]/12 dark:bg-utec-cyan/5 rounded-full blur-[140px] pointer-events-none" />
+      {/* Soft navy glow — bottom left (light mode only) */}
+      <div aria-hidden className="absolute bottom-0 left-0 w-[420px] h-[420px] bg-[#003B64]/8 rounded-full blur-[120px] pointer-events-none dark:hidden" />
       {/* Decorative top accent bar — visible teal line across the top */}
       <div className="absolute top-0 left-0 right-0 z-[1] h-[3px] bg-gradient-to-r from-transparent via-[#00A9B7]/70 to-transparent" />
 
@@ -110,7 +110,7 @@ export function Hero() {
         {/* ══════════════════════════════════════════════
             MOBILE: Animated Ticker (TOP)
             ══════════════════════════════════════════════ */}
-        <div className="lg:hidden relative">
+        <div className="lg:hidden relative dark:bg-jotofa-navy-mid">
           {/* Extra top padding to clear the pill nav */}
           <div className="flex w-full" style={{ height: "55vh", gap: "8px", padding: "8px", paddingTop: "72px" }}>
             <div className="flex-1 h-full overflow-hidden relative">
@@ -168,7 +168,7 @@ export function Hero() {
           <div className="absolute top-[80px] right-[16px] z-10">
             <button
               onClick={() => setTickerPaused(!tickerPaused)}
-              className="flex items-center justify-center transition-all duration-300 hover:scale-105 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-jotofa-navy-mid"
+              className="flex items-center justify-center transition-all duration-300 hover:scale-105 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#F4FAFC] dark:focus-visible:ring-offset-jotofa-navy-mid"
               style={{ background: "#fff", borderRadius: "50%", width: "36px", height: "36px", border: "none", color: "#003951" }}
               aria-label={tickerPaused ? "Play animation" : "Pause animation"}
             >
@@ -184,7 +184,7 @@ export function Hero() {
         {/* ══════════════════════════════════════════════
             LEFT COLUMN — Text + News Slider
             ══════════════════════════════════════════════ */}
-        <div className="w-full lg:w-[45%] flex flex-col justify-between relative z-[2]">
+        <div className="w-full lg:w-[45%] flex flex-col justify-between relative z-[2] dark:bg-jotofa-navy-card">
           <div className="flex flex-col justify-center flex-1 px-8 sm:px-10 lg:px-[60px] pt-24 pb-6 lg:pt-[140px] lg:pb-0">
             {/* Decorative accent line above title for visibility */}
             <motion.div
@@ -202,7 +202,7 @@ export function Hero() {
               className="mb-6 text-5xl md:text-7xl lg:text-8xl font-black leading-[0.9] tracking-tight"
             >
               <motion.span
-                className="block text-jotofa-navy drop-shadow-sm"
+                className="block text-jotofa-navy dark:text-white drop-shadow-sm"
                 initial={{ opacity: 0, transform: "translateY(20px)" }}
                 animate={{ opacity: 1, transform: "translateY(0)" }}
                 transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
@@ -224,7 +224,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="mb-8 text-lg leading-relaxed text-[#5E6A75] max-w-[450px]"
+              className="mb-8 text-lg leading-relaxed text-[#5E6A75] dark:text-white/80 max-w-[450px]"
             >
               A diversified Tanzanian holding company driving excellence through
               ICT, logistics, professional services, security, and staffing —
@@ -238,7 +238,7 @@ export function Hero() {
             >
               <button
                 onClick={() => setActivePage("about")}
-                className="group inline-flex items-center gap-2 font-semibold transition-all duration-300 px-10 py-3.5 rounded-full text-[0.95rem] bg-jotofa-navy text-white hover:bg-jotofa-navy-deep cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00A9B7] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F4FAFC] shadow-[0_8px_24px_-8px_rgba(0,59,100,0.35)]"
+                className="group inline-flex items-center gap-2 font-semibold transition-all duration-300 px-10 py-3.5 rounded-full text-[0.95rem] bg-jotofa-navy text-white hover:bg-jotofa-navy-deep cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00A9B7] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F4FAFC] dark:border-[1.5px] dark:border-white dark:bg-transparent dark:text-white dark:hover:bg-white dark:hover:text-jotofa-navy-mid dark:shadow-none dark:focus-visible:ring-offset-jotofa-navy-card shadow-[0_8px_24px_-8px_rgba(0,59,100,0.35)]"
               >
                 Our Company
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
@@ -276,10 +276,10 @@ export function Hero() {
                       sizes="(max-width: 640px) 130px, 160px"
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-jotofa-navy/70 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 dark:from-jotofa-navy/70 to-transparent" />
                   </div>
                   <div className="flex-1 pt-1">
-                    <h3 className="text-jotofa-navy font-semibold text-sm sm:text-base leading-snug group-hover:text-[#00A9B7] transition-colors">
+                    <h3 className="text-jotofa-navy dark:text-white font-semibold text-sm sm:text-base leading-snug group-hover:text-[#00A9B7] dark:group-hover:text-jotofa-accent transition-colors">
                       {newsSlides[currentSlide].title}
                     </h3>
                   </div>
@@ -289,20 +289,20 @@ export function Hero() {
 
             <div className="flex items-center justify-between mt-4">
               <div className="flex items-center gap-3">
-                <span className="text-jotofa-navy/40 text-sm font-medium tabular-nums">{currentSlide + 1}/{newsSlides.length}</span>
+                <span className="text-jotofa-navy/40 dark:text-white/30 text-sm font-medium tabular-nums">{currentSlide + 1}/{newsSlides.length}</span>
                 {/* "Family of Businesses" is now a real link, not just a label */}
                 <button
                   onClick={() => setActivePage("businesses")}
-                  className="text-jotofa-navy/30 hover:text-jotofa-navy/60 text-sm transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00A9B7] rounded-sm"
+                  className="text-jotofa-navy/30 hover:text-jotofa-navy/60 dark:text-white/20 dark:hover:text-white/60 text-sm transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00A9B7] rounded-sm"
                 >
                   Family of Businesses
                 </button>
               </div>
               <div className="flex items-center gap-2">
-                <button onClick={prevSlide} className="w-9 h-9 rounded-full border border-jotofa-navy/15 flex items-center justify-center text-jotofa-navy/40 hover:text-jotofa-navy hover:border-jotofa-navy/40 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00A9B7] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F4FAFC]" aria-label="Previous slide">
+                <button onClick={prevSlide} className="w-9 h-9 rounded-full border border-jotofa-navy/15 dark:border-white/15 flex items-center justify-center text-jotofa-navy/40 dark:text-white/40 hover:text-jotofa-navy dark:hover:text-white hover:border-jotofa-navy/40 dark:hover:border-white/40 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00A9B7] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F4FAFC] dark:focus-visible:ring-offset-jotofa-navy-card" aria-label="Previous slide">
                   <ChevronLeft className="w-4 h-4" />
                 </button>
-                <button onClick={nextSlide} className="w-9 h-9 rounded-full border border-jotofa-navy/15 flex items-center justify-center text-jotofa-navy/40 hover:text-jotofa-navy hover:border-jotofa-navy/40 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00A9B7] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F4FAFC]" aria-label="Next slide">
+                <button onClick={nextSlide} className="w-9 h-9 rounded-full border border-jotofa-navy/15 dark:border-white/15 flex items-center justify-center text-jotofa-navy/40 dark:text-white/40 hover:text-jotofa-navy dark:hover:text-white hover:border-jotofa-navy/40 dark:hover:border-white/40 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00A9B7] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F4FAFC] dark:focus-visible:ring-offset-jotofa-navy-card" aria-label="Next slide">
                   <ChevronRight className="w-4 h-4" />
                 </button>
               </div>
@@ -317,7 +317,7 @@ export function Hero() {
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="hidden lg:flex flex-1 relative h-full"
+          className="hidden lg:flex flex-1 relative h-full dark:bg-jotofa-navy-mid"
         >
           {/* Extra top padding to clear the pill nav */}
           <div className="flex w-full h-full" style={{ gap: "12px", padding: "12px", paddingTop: "80px" }}>
@@ -360,7 +360,7 @@ export function Hero() {
           <div className="absolute bottom-[90px] right-[30px] z-10">
             <button
               onClick={() => setTickerPaused(!tickerPaused)}
-              className="flex items-center justify-center transition-all duration-300 hover:scale-105 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-jotofa-navy-mid"
+              className="flex items-center justify-center transition-all duration-300 hover:scale-105 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#F4FAFC] dark:focus-visible:ring-offset-jotofa-navy-mid"
               style={{ background: "#fff", borderRadius: "50%", width: "44px", height: "44px", border: "none", color: "#003951" }}
               aria-label={tickerPaused ? "Play animation" : "Pause animation"}
             >
