@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   Wifi,
@@ -19,6 +20,8 @@ interface Service {
   icon: LucideIcon;
   title: string;
   description: string;
+  /** Local image path (under /public). */
+  image: string;
   /** Tailwind col-span classes for the bento layout (lg breakpoint). */
   span: string;
   /** Whether this is the large featured cell. */
@@ -34,6 +37,7 @@ const services: Service[] = [
     title: "Network Infrastructure",
     description:
       "Fiber optic, wireless, and structured cabling solutions for enterprises and governments — designed, deployed, and maintained end-to-end.",
+    image: "/images/utec-services/network.jpg",
     span: "lg:col-span-2 lg:row-span-2",
     featured: true,
     highlights: [
@@ -48,6 +52,7 @@ const services: Service[] = [
     title: "Cloud Solutions",
     description:
       "Scalable cloud hosting, migration, and management tailored for the East African market.",
+    image: "/images/utec-services/cloud.jpg",
     span: "lg:col-span-2",
   },
   {
@@ -56,6 +61,7 @@ const services: Service[] = [
     title: "Cybersecurity",
     description:
       "Threat protection, vulnerability assessment, and compliance.",
+    image: "/images/utec-services/cyber.jpg",
     span: "lg:col-span-1",
   },
   {
@@ -64,6 +70,7 @@ const services: Service[] = [
     title: "Software Development",
     description:
       "Custom apps, mobile solutions, and digital platforms built for local needs.",
+    image: "/images/utec-services/software.jpg",
     span: "lg:col-span-1",
   },
   {
@@ -72,6 +79,7 @@ const services: Service[] = [
     title: "Telecom Services",
     description:
       "VoIP, unified communications, and PBX connecting businesses across the region.",
+    image: "/images/utec-services/telecom.jpg",
     span: "lg:col-span-2",
   },
   {
@@ -80,6 +88,7 @@ const services: Service[] = [
     title: "IT Consulting",
     description:
       "Strategic technology advisory helping organizations navigate digital transformation.",
+    image: "/images/utec-services/consulting.jpg",
     span: "lg:col-span-2",
   },
 ];
@@ -88,77 +97,7 @@ function ServiceCell({ service, index }: { service: Service; index: number }) {
   const { setActivePage } = usePage();
   const Icon = service.icon;
   const num = String(index + 1).padStart(2, "0");
-
-  if (service.featured) {
-    return (
-      <StaggerItem key={service.id} className={service.span}>
-        <motion.button
-          type="button"
-          onClick={() => setActivePage("contact")}
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.08 * index, duration: 0.5, ease: "easeOut" }}
-          className="group relative w-full h-full text-left overflow-hidden rounded-3xl border border-utec-cyan/25 bg-utec-cyan/[0.04] p-7 sm:p-8 transition-all duration-300 hover:border-utec-cyan/45 hover:shadow-[0_24px_60px_-20px_rgba(0,169,183,0.35)]"
-        >
-          {/* Decorative grid + glow (the "visual" of the featured cell) */}
-          <div
-            aria-hidden
-            className="absolute inset-0 bg-grid-pattern opacity-[0.35] pointer-events-none"
-          />
-          <div
-            aria-hidden
-            className="absolute -top-16 -right-12 w-64 h-64 bg-utec-cyan/20 rounded-full blur-[90px] pointer-events-none transition-opacity duration-500 group-hover:opacity-80"
-          />
-
-          <div className="relative z-10 flex flex-col h-full">
-            <div className="flex items-center justify-between mb-6">
-              <span className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-utec-cyan/15 ring-1 ring-utec-cyan/30">
-                <Icon className="w-7 h-7 text-utec-cyan" />
-              </span>
-              <span className="text-xs font-mono font-semibold text-utec-cyan/70 tracking-widest">
-                {num}
-              </span>
-            </div>
-
-            <div className="inline-flex items-center gap-1.5 self-start px-2.5 py-1 rounded-full bg-utec-cyan/10 border border-utec-cyan/20 mb-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-utec-cyan animate-pulse" />
-              <span className="text-[11px] font-semibold text-utec-cyan uppercase tracking-wide">
-                Core Capability
-              </span>
-            </div>
-
-            <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">
-              {service.title}
-            </h3>
-            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6 max-w-md">
-              {service.description}
-            </p>
-
-            {service.highlights && (
-              <ul className="space-y-2 mb-6">
-                {service.highlights.map((h) => (
-                  <li
-                    key={h}
-                    className="flex items-center gap-2.5 text-sm text-foreground/80"
-                  >
-                    <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-utec-cyan/15">
-                      <span className="w-1.5 h-1.5 rounded-full bg-utec-cyan" />
-                    </span>
-                    {h}
-                  </li>
-                ))}
-              </ul>
-            )}
-
-            <span className="mt-auto inline-flex items-center gap-1.5 text-sm font-semibold text-utec-cyan">
-              Talk to our team
-              <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </span>
-          </div>
-        </motion.button>
-      </StaggerItem>
-    );
-  }
+  const featured = !!service.featured;
 
   return (
     <StaggerItem key={service.id} className={service.span}>
@@ -168,35 +107,102 @@ function ServiceCell({ service, index }: { service: Service; index: number }) {
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.08 * index, duration: 0.5, ease: "easeOut" }}
-        className="group relative w-full h-full text-left overflow-hidden rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:border-utec-cyan/35 hover:bg-secondary/40 hover:-translate-y-0.5"
+        className={`group relative w-full h-full text-left overflow-hidden rounded-3xl border transition-all duration-300 ${
+          featured
+            ? "min-h-[340px] sm:min-h-[420px] lg:min-h-[520px] border-utec-cyan/30 hover:border-utec-cyan/60 hover:shadow-[0_28px_70px_-22px_rgba(0,169,183,0.45)]"
+            : "min-h-[260px] sm:min-h-[300px] border-border/60 hover:border-utec-cyan/45 hover:-translate-y-0.5 hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.5)]"
+        }`}
       >
-        {/* Hover glow */}
-        <div
-          aria-hidden
-          className="absolute -top-10 -right-10 w-32 h-32 bg-utec-cyan/0 rounded-full blur-[60px] pointer-events-none transition-all duration-500 group-hover:bg-utec-cyan/20"
+        {/* ── Background image (fills the card, zooms on hover) ── */}
+        <Image
+          src={service.image}
+          alt={service.title}
+          fill
+          sizes={featured ? "(max-width: 1024px) 100vw, 50vw" : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"}
+          className="object-cover transition-transform duration-[800ms] ease-out group-hover:scale-110"
+          priority={featured}
         />
 
-        <div className="relative z-10 flex flex-col h-full">
-          <div className="flex items-center justify-between mb-5">
-            <span className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-utec-cyan/10 transition-colors duration-300 group-hover:bg-utec-cyan/20">
-              <Icon className="w-5 h-5 text-utec-cyan" />
+        {/* ── Dark gradient overlay (bottom-up) for text readability ── */}
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-black/15"
+        />
+        {/* Subtle teal tint that strengthens on hover — ties to UTEC brand */}
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-utec-cyan/0 group-hover:bg-utec-cyan/15 transition-colors duration-500"
+        />
+
+        {/* ── Content ── */}
+        <div className="relative z-10 flex flex-col h-full p-6 sm:p-7">
+          {/* Top row: icon chip + number */}
+          <div className="flex items-center justify-between">
+            <span
+              className={`inline-flex items-center justify-center rounded-2xl bg-white/15 backdrop-blur-md ring-1 ring-white/25 ${
+                featured ? "w-14 h-14" : "w-11 h-11"
+              }`}
+            >
+              <Icon className={featured ? "w-7 h-7" : "w-5 h-5"} style={{ color: "#67e8f9" }} />
             </span>
-            <span className="text-[11px] font-mono font-semibold text-muted-foreground/60 tracking-widest">
+            <span className="text-[11px] font-mono font-semibold text-white/60 tracking-widest">
               {num}
             </span>
           </div>
 
-          <h3 className="text-base sm:text-lg font-semibold text-foreground mb-1.5">
-            {service.title}
-          </h3>
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            {service.description}
-          </p>
+          {/* Bottom-anchored content */}
+          <div className="mt-auto">
+            {featured && (
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-utec-cyan/25 border border-utec-cyan/40 backdrop-blur-sm mb-3">
+                <span className="w-1.5 h-1.5 rounded-full bg-utec-cyan animate-pulse" />
+                <span className="text-[11px] font-semibold text-cyan-100 uppercase tracking-wide">
+                  Core Capability
+                </span>
+              </div>
+            )}
 
-          <span className="mt-auto pt-4 inline-flex items-center gap-1 text-xs font-semibold text-utec-cyan opacity-0 -translate-x-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
-            Learn more
-            <ArrowUpRight className="w-3.5 h-3.5" />
-          </span>
+            <h3
+              className={`font-bold text-white leading-tight mb-2 ${
+                featured ? "text-2xl sm:text-3xl" : "text-lg sm:text-xl"
+              }`}
+            >
+              {service.title}
+            </h3>
+            <p
+              className={`text-white/80 leading-relaxed mb-4 ${
+                featured ? "text-sm sm:text-base max-w-md" : "text-[13px] sm:text-sm"
+              }`}
+            >
+              {service.description}
+            </p>
+
+            {featured && service.highlights && (
+              <ul className="space-y-1.5 mb-5">
+                {service.highlights.map((h) => (
+                  <li
+                    key={h}
+                    className="flex items-center gap-2.5 text-sm text-white/90"
+                  >
+                    <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-utec-cyan/30 ring-1 ring-utec-cyan/40">
+                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-200" />
+                    </span>
+                    {h}
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            <span
+              className={`inline-flex items-center gap-1.5 font-semibold text-cyan-200 transition-all duration-300 ${
+                featured
+                  ? "text-sm"
+                  : "text-xs opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0"
+              }`}
+            >
+              {featured ? "Talk to our team" : "Learn more"}
+              <ArrowUpRight className={featured ? "w-4 h-4" : "w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"} />
+            </span>
+          </div>
         </div>
       </motion.button>
     </StaggerItem>
@@ -232,9 +238,9 @@ export function UtecServices() {
           </p>
         </ScrollReveal>
 
-        {/* Bento grid */}
+        {/* Image-led bento grid */}
         <StaggerContainer
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:auto-rows-[minmax(180px,auto)]"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5"
           staggerDelay={0.08}
         >
           {services.map((s, i) => (
