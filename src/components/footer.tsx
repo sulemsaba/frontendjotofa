@@ -9,6 +9,7 @@ import {
   Phone,
   MapPin,
   Clock,
+  ArrowRight,
 } from "lucide-react";
 import { usePage, PageId } from "@/lib/page-context";
 
@@ -190,6 +191,42 @@ function CareersColumn() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
+   CtaBand — "Let's Build Together" call-to-action strip.
+   Sits at the top of the footer (replaces the old full Contact section
+   that used to live on the homepage). Compact: heading + one-line
+   subtitle + a single "Get in Touch" button that routes to the contact
+   page. Theme-aware.
+   ────────────────────────────────────────────────────────────────────────── */
+
+function CtaBand() {
+  const { setActivePage } = usePage();
+
+  return (
+    <div className="py-10 sm:py-12 border-b border-border">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+        <div className="max-w-xl">
+          <h3 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight">
+            Let&apos;s{" "}
+            <span className="text-gold-gradient">Build Together</span>
+          </h3>
+          <p className="mt-2 text-sm sm:text-base text-muted-foreground">
+            Whether you&apos;re looking for a partnership, a service inquiry,
+            or just want to learn more — we&apos;re here to help.
+          </p>
+        </div>
+        <button
+          onClick={() => setActivePage("contact")}
+          className="group inline-flex items-center gap-2 flex-shrink-0 px-7 py-3.5 rounded-full bg-jotofa-accent text-white font-semibold text-sm transition-all hover:bg-jotofa-accent-dark shadow-[0_8px_24px_-8px_rgba(0,169,183,0.5)] hover:shadow-[0_12px_32px_-8px_rgba(0,169,183,0.6)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        >
+          Get in Touch
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
    Footer
    ────────────────────────────────────────────────────────────────────────── */
 
@@ -197,6 +234,9 @@ export function Footer() {
   return (
     <footer className="relative border-t border-border bg-background">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* ─── CTA band — replaces the old homepage Contact section ─── */}
+        <CtaBand />
+
         {/* ─── 5-column grid — all in one row on desktop ───
             Col 1 Brand (logo + tagline) | Col 2 Quick Links |
             Col 3 Our Businesses | Col 4 Careers | Col 5 Contact Us + Follow Us

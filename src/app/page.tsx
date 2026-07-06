@@ -60,7 +60,6 @@ function PageContent() {
             testimonials={homeTestimonials}
           />
           <NewsSection />
-          <Contact />
         </main>
         <Footer />
         <WhatsAppButton />

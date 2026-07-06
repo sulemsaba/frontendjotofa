@@ -1,47 +1,62 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+import { motion } from "framer-motion";
 import {
   Monitor,
   Truck,
   Sparkles,
   ShieldCheck,
   Users,
-  ChevronRight,
+  ArrowRight,
   ArrowUpRight,
   ExternalLink,
 } from "lucide-react";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "./scroll-reveal";
-import { usePage } from "@/lib/page-context";
+import { usePage, PageId } from "@/lib/page-context";
 import { storeProductsPageUrl } from "@/lib/store-config";
 
+/* ──────────────────────────────────────────────────────────────────────────
+   "Five Arms, One Vision" — Option C: numbered magazine cards.
+
+   Each subsidiary is a tall portrait card with:
+     • a full-bleed REAL photograph (object-cover, hover zoom)
+     • a big faded index number (01–05) in the division's accent colour
+     • an accent icon chip + tagline + name overlaid on the photo
+     • a content panel below: description, service tags, and an
+       "Explore →" CTA that navigates to the subsidiary page
+     • UTEC also shows a "Visit Online Store" external link
+
+   Layout: 1-col (mobile) → 2-col (sm) → 3-col (lg) → 5-col (xl, the
+   literal "five arms in a row" statement on wide screens).
+   ────────────────────────────────────────────────────────────────────────── */
+
 interface Subsidiary {
-  id: string;
+  id: PageId;
+  index: string;
   name: string;
-  shortName: string;
   tagline: string;
   description: string;
   services: string[];
-  accentColor: string;
+  accentText: string;
   accentBg: string;
   accentBorder: string;
+  accentRing: string;
+  accentDot: string;
   icon: React.ComponentType<{ className?: string }>;
   image: string;
-  /** Optional URL to a subsidiary's external online store / shop. */
   storeUrl?: string;
-  /** Label for the store link button. */
   storeLabel?: string;
 }
 
 const subsidiaries: Subsidiary[] = [
   {
     id: "utec",
+    index: "01",
     name: "UTEC Solutions",
-    shortName: "UTEC",
     tagline: "ICT & Telecommunications",
     description:
-      "Delivering cutting-edge ICT infrastructure, telecommunications solutions, and digital transformation services that connect businesses and communities across Tanzania.",
+      "Cutting-edge ICT infrastructure, telecommunications, and digital transformation services connecting businesses and communities across Tanzania.",
     services: [
       "Network Infrastructure",
       "Cloud Solutions",
@@ -49,21 +64,23 @@ const subsidiaries: Subsidiary[] = [
       "Software Development",
       "Telecom Services",
     ],
-    accentColor: "text-utec-cyan",
+    accentText: "text-utec-cyan",
     accentBg: "bg-utec-cyan/10",
     accentBorder: "border-utec-cyan/30",
+    accentRing: "group-hover:ring-utec-cyan/40",
+    accentDot: "bg-utec-cyan",
     icon: Monitor,
-    image: "/images/utec.png",
+    image: "/images/subsidiaries/utec.jpg",
     storeUrl: storeProductsPageUrl(),
     storeLabel: "Visit Online Store",
   },
   {
     id: "courier",
-    name: "JOTOFA Courier & Logistics",
-    shortName: "Courier",
+    index: "02",
+    name: "Courier & Logistics",
     tagline: "Reliable Delivery Network",
     description:
-      "A trusted logistics and courier network ensuring timely, secure delivery of goods and documents across Tanzania and East Africa — powered by technology and driven by reliability.",
+      "A trusted logistics and courier network ensuring timely, secure delivery of goods and documents across Tanzania and East Africa.",
     services: [
       "Express Delivery",
       "Freight & Cargo",
@@ -71,19 +88,21 @@ const subsidiaries: Subsidiary[] = [
       "Last-Mile Solutions",
       "Cross-Border Logistics",
     ],
-    accentColor: "text-courier-orange",
+    accentText: "text-courier-orange",
     accentBg: "bg-courier-orange/10",
     accentBorder: "border-courier-orange/30",
+    accentRing: "group-hover:ring-courier-orange/40",
+    accentDot: "bg-courier-orange",
     icon: Truck,
-    image: "/images/courier.png",
+    image: "/images/subsidiaries/courier.jpg",
   },
   {
     id: "cleaning",
-    name: "JOTOFA Cleaning & Maids",
-    shortName: "Cleaning",
-    tagline: "Professional Cleaning Services",
+    index: "03",
+    name: "Cleaning & Maids",
+    tagline: "Professional Cleaning",
     description:
-      "Premium cleaning and housekeeping services for commercial, residential, and industrial spaces — ensuring hygiene, health, and pristine environments every time.",
+      "Premium cleaning and housekeeping for commercial, residential, and industrial spaces — ensuring hygiene and pristine environments every time.",
     services: [
       "Commercial Cleaning",
       "Residential Services",
@@ -91,19 +110,21 @@ const subsidiaries: Subsidiary[] = [
       "Specialized Sanitization",
       "Staffed Housekeeping",
     ],
-    accentColor: "text-cleaning-green",
+    accentText: "text-cleaning-green",
     accentBg: "bg-cleaning-green/10",
     accentBorder: "border-cleaning-green/30",
+    accentRing: "group-hover:ring-cleaning-green/40",
+    accentDot: "bg-cleaning-green",
     icon: Sparkles,
-    image: "/images/cleaning.png",
+    image: "/images/subsidiaries/cleaning.jpg",
   },
   {
     id: "security",
+    index: "04",
     name: "JOTOFA Security",
-    shortName: "Security",
-    tagline: "Comprehensive Security Solutions",
+    tagline: "Comprehensive Security",
     description:
-      "Providing robust security services from manned guarding to electronic surveillance — protecting people, assets, and operations with integrity and vigilance.",
+      "Robust security services from manned guarding to electronic surveillance — protecting people, assets, and operations with integrity and vigilance.",
     services: [
       "Manned Guarding",
       "Electronic Surveillance",
@@ -111,19 +132,21 @@ const subsidiaries: Subsidiary[] = [
       "Risk Assessment",
       "Security Consulting",
     ],
-    accentColor: "text-security-red",
+    accentText: "text-security-red",
     accentBg: "bg-security-red/10",
     accentBorder: "border-security-red/30",
+    accentRing: "group-hover:ring-security-red/40",
+    accentDot: "bg-security-red",
     icon: ShieldCheck,
-    image: "/images/security.png",
+    image: "/images/subsidiaries/security.jpg",
   },
   {
     id: "staffing",
-    name: "Staffing & Labour Supply",
-    shortName: "Staffing",
-    tagline: "Workforce Solutions Partner",
+    index: "05",
+    name: "Staffing & Labour",
+    tagline: "Workforce Solutions",
     description:
-      "Connecting talent with opportunity — providing skilled and semi-skilled labour supply, recruitment, and workforce management solutions for industries across Tanzania.",
+      "Connecting talent with opportunity — skilled and semi-skilled labour supply, recruitment, and workforce management for industries across Tanzania.",
     services: [
       "Recruitment Services",
       "Labour Outsourcing",
@@ -131,151 +154,120 @@ const subsidiaries: Subsidiary[] = [
       "Training & Development",
       "HR Consulting",
     ],
-    accentColor: "text-staffing-purple",
+    accentText: "text-staffing-purple",
     accentBg: "bg-staffing-purple/10",
     accentBorder: "border-staffing-purple/30",
+    accentRing: "group-hover:ring-staffing-purple/40",
+    accentDot: "bg-staffing-purple",
     icon: Users,
-    image: "/images/staffing.png",
+    image: "/images/subsidiaries/staffing.jpg",
   },
 ];
 
-function SubsidiaryCard({
-  subsidiary,
-  isSelected,
-  onClick,
-}: {
-  subsidiary: Subsidiary;
-  isSelected: boolean;
-  onClick: () => void;
-}) {
-  const Icon = subsidiary.icon;
-
-  return (
-    <motion.button
-      onClick={onClick}
-      className={`relative w-full text-left p-5 sm:p-6 rounded-2xl border transition-all duration-300 ${
-        isSelected
-          ? `${subsidiary.accentBg} ${subsidiary.accentBorder} shadow-lg`
-          : "bg-card border-border hover:bg-secondary hover:border-jotofa-accent/20"
-      }`}
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
-    >
-      <div className="flex items-start gap-4">
-        <div
-          className={`flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center ${
-            isSelected ? subsidiary.accentBg : "bg-secondary"
-          }`}
-        >
-          <Icon className={`w-6 h-6 ${subsidiary.accentColor}`} />
-        </div>
-        <div className="flex-1 min-w-0">
-          <h3
-            className={`font-semibold text-sm sm:text-base mb-1 ${
-              isSelected ? "text-foreground" : "text-muted-foreground"
-            }`}
-          >
-            {subsidiary.shortName}
-          </h3>
-          <p className="text-xs text-muted-foreground/70 truncate">
-            {subsidiary.tagline}
-          </p>
-        </div>
-        <ChevronRight
-          className={`w-4 h-4 flex-shrink-0 mt-1 transition-transform ${
-            isSelected
-              ? `rotate-90 ${subsidiary.accentColor}`
-              : "text-muted-foreground/40"
-          }`}
-        />
-      </div>
-    </motion.button>
-  );
-}
-
-function SubsidiaryDetail({ subsidiary }: { subsidiary: Subsidiary }) {
-  const Icon = subsidiary.icon;
+function SubsidiaryCard({ subsidiary }: { subsidiary: Subsidiary }) {
   const { setActivePage } = usePage();
+  const Icon = subsidiary.icon;
 
   return (
     <motion.div
-      key={subsidiary.id}
-      initial={{ opacity: 0, x: 20 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -20 }}
-      transition={{ duration: 0.4, ease: [0.25, 0.4, 0.25, 1] }}
-      className="grid lg:grid-cols-2 gap-8 lg:gap-12"
+      role="button"
+      tabIndex={0}
+      onClick={() => setActivePage(subsidiary.id)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          setActivePage(subsidiary.id);
+        }
+      }}
+      className={`group relative flex flex-col rounded-2xl overflow-hidden bg-card border border-border ring-1 ring-transparent ${subsidiary.accentRing} transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.4)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
     >
-      {/* Image side */}
-      <div className="relative rounded-2xl overflow-hidden aspect-[4/3] lg:aspect-auto lg:min-h-[400px]">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url('${subsidiary.image}')` }}
+      {/* ── Image (with overlays) ── */}
+      <div className="relative aspect-[4/5] overflow-hidden">
+        <Image
+          src={subsidiary.image}
+          alt={subsidiary.name}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 20vw"
+          className="object-cover transition-transform duration-700 group-hover:scale-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
-          <div
-            className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full ${subsidiary.accentBg} ${subsidiary.accentBorder} border mb-3`}
-          >
-            <Icon className={`w-4 h-4 ${subsidiary.accentColor}`} />
-            <span className={`text-xs font-medium ${subsidiary.accentColor}`}>
+        {/* Readability gradient — dark in both themes (over a photo) */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/10" />
+        {/* Accent tint on hover */}
+        <div
+          aria-hidden
+          className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${subsidiary.accentBg} mix-blend-multiply`}
+        />
+
+        {/* Big faded index number — top right */}
+        <span
+          className={`absolute top-3 right-4 text-6xl sm:text-7xl font-black leading-none ${subsidiary.accentText} opacity-70 select-none`}
+          style={{ WebkitTextStroke: "1px currentColor" }}
+          aria-hidden
+        >
+          {subsidiary.index}
+        </span>
+
+        {/* Icon chip — top left */}
+        <div className={`absolute top-4 left-4 w-10 h-10 rounded-xl flex items-center justify-center bg-white/15 backdrop-blur-md border border-white/25`}>
+          <Icon className={`w-5 h-5 text-white`} />
+        </div>
+
+        {/* Tagline + Name — bottom of image */}
+        <div className="absolute bottom-0 left-0 right-0 p-5">
+          <div className={`inline-flex items-center gap-1.5 mb-2`}>
+            <span className={`w-1.5 h-1.5 rounded-full ${subsidiary.accentDot}`} />
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-white/80">
               {subsidiary.tagline}
             </span>
           </div>
-          <h3 className="text-2xl sm:text-3xl font-bold text-foreground">
+          <h3 className="text-xl font-bold text-white leading-tight">
             {subsidiary.name}
           </h3>
         </div>
       </div>
 
-      {/* Info side */}
-      <div className="flex flex-col justify-center">
-        <p className="text-muted-foreground leading-relaxed mb-8 text-base">
+      {/* ── Content panel ── */}
+      <div className="flex flex-col flex-1 p-5">
+        <p className="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-3">
           {subsidiary.description}
         </p>
 
-        <div>
-          <h4 className="text-sm font-semibold text-foreground/80 uppercase tracking-wider mb-4">
-            Core Services
-          </h4>
-          <div className="space-y-3">
-            {subsidiary.services.map((service, i) => (
-              <motion.div
-                key={service}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.1 * i, duration: 0.3 }}
-                className="flex items-center gap-3 group"
-              >
-                <div
-                  className={`w-1.5 h-1.5 rounded-full ${subsidiary.accentColor.replace("text-", "bg-")}`}
-                />
-                <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
-                  {service}
-                </span>
-                <ArrowUpRight className="w-3 h-3 text-muted-foreground/30 group-hover:text-foreground/50 ml-auto transition-colors" />
-              </motion.div>
-            ))}
-          </div>
+        {/* Service tags */}
+        <div className="flex flex-wrap gap-1.5 mb-5">
+          {subsidiary.services.slice(0, 4).map((service) => (
+            <span
+              key={service}
+              className={`text-[11px] px-2 py-1 rounded-md ${subsidiary.accentBg} ${subsidiary.accentText} font-medium`}
+            >
+              {service}
+            </span>
+          ))}
+          {subsidiary.services.length > 4 && (
+            <span className="text-[11px] px-2 py-1 rounded-md bg-secondary text-muted-foreground font-medium">
+              +{subsidiary.services.length - 4}
+            </span>
+          )}
         </div>
 
-        <div className="mt-8 flex flex-wrap items-center gap-3">
-          <button
-            onClick={() => setActivePage("contact")}
-            className="px-6 py-2.5 bg-jotofa-accent/10 border border-jotofa-accent/25 text-jotofa-gold hover:bg-jotofa-accent/20 rounded-full text-sm font-medium transition-all"
+        {/* CTA row — pushed to bottom */}
+        <div className="mt-auto flex items-center justify-between gap-2 pt-4 border-t border-border">
+          <span
+            className={`inline-flex items-center gap-1.5 text-sm font-semibold ${subsidiary.accentText} group-hover:gap-2.5 transition-all`}
           >
-            Get in Touch
-          </button>
+            Explore
+            <ArrowRight className="w-4 h-4" />
+          </span>
 
           {subsidiary.storeUrl && (
             <a
               href={subsidiary.storeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={`inline-flex items-center gap-2 px-6 py-2.5 ${subsidiary.accentBg} border ${subsidiary.accentBorder} ${subsidiary.accentColor} hover:opacity-80 rounded-full text-sm font-medium transition-all`}
+              onClick={(e) => e.stopPropagation()}
+              className={`inline-flex items-center gap-1 text-xs font-medium ${subsidiary.accentText} hover:opacity-70 transition-opacity`}
             >
-              {subsidiary.storeLabel ?? "Visit Store"}
-              <ExternalLink className="w-4 h-4" />
+              {subsidiary.storeLabel ?? "Store"}
+              <ExternalLink className="w-3 h-3" />
             </a>
           )}
         </div>
@@ -285,17 +277,14 @@ function SubsidiaryDetail({ subsidiary }: { subsidiary: Subsidiary }) {
 }
 
 export function Subsidiaries() {
-  const [selectedId, setSelectedId] = useState("utec");
-  const selected = subsidiaries.find((s) => s.id === selectedId)!;
-
   return (
-    <section className="relative py-24 sm:py-32 min-h-screen">
+    <section className="relative py-24 sm:py-32">
       {/* Section background */}
       <div className="absolute inset-0 bg-background" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <ScrollReveal className="text-center mb-16">
+        <ScrollReveal className="text-center mb-14 sm:mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-jotofa-accent/20 bg-jotofa-accent/5 mb-6">
             <span className="text-jotofa-gold text-sm font-medium">
               Our Portfolio
@@ -311,60 +300,17 @@ export function Subsidiaries() {
           </p>
         </ScrollReveal>
 
-        {/* Layout: sidebar cards + detail panel */}
-        <div className="grid lg:grid-cols-[320px_1fr] gap-6 lg:gap-8">
-          {/* Subsidiary selector sidebar */}
-          <StaggerContainer
-            className="space-y-3"
-            staggerDelay={0.08}
-          >
-            {subsidiaries.map((s) => (
-              <StaggerItem key={s.id}>
-                <SubsidiaryCard
-                  subsidiary={s}
-                  isSelected={selectedId === s.id}
-                  onClick={() => setSelectedId(s.id)}
-                />
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-
-          {/* Detail panel */}
-          <div className="min-h-[400px] p-6 sm:p-8 rounded-2xl bg-card border border-border">
-            <AnimatePresence mode="wait">
-              <SubsidiaryDetail subsidiary={selected} />
-            </AnimatePresence>
-          </div>
-        </div>
-
-        {/* Mobile: horizontal scroll cards for small screens */}
-        <div className="lg:hidden mt-8">
-          <div className="flex gap-3 overflow-x-auto pb-4 -mx-4 px-4 snap-x snap-mandatory">
-            {subsidiaries.map((s) => {
-              const Icon = s.icon;
-              return (
-                <button
-                  key={s.id}
-                  onClick={() => setSelectedId(s.id)}
-                  className={`flex-shrink-0 snap-start flex items-center gap-2 px-4 py-2.5 rounded-full border transition-all ${
-                    selectedId === s.id
-                      ? `${s.accentBg} ${s.accentBorder}`
-                      : "bg-card border-border"
-                  }`}
-                >
-                  <Icon className={`w-4 h-4 ${s.accentColor}`} />
-                  <span
-                    className={`text-sm font-medium whitespace-nowrap ${
-                      selectedId === s.id ? "text-foreground" : "text-muted-foreground"
-                    }`}
-                  >
-                    {s.shortName}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
+        {/* Numbered magazine cards */}
+        <StaggerContainer
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 lg:gap-6"
+          staggerDelay={0.08}
+        >
+          {subsidiaries.map((s) => (
+            <StaggerItem key={s.id}>
+              <SubsidiaryCard subsidiary={s} />
+            </StaggerItem>
+          ))}
+        </StaggerContainer>
       </div>
     </section>
   );
