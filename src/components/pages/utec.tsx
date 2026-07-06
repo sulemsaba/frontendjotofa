@@ -2,30 +2,18 @@
 
 import {
   Monitor,
-  Wifi,
-  Shield,
-  Cloud,
-  Code,
-  PhoneCall,
   ArrowRight,
   ShoppingBag,
   ExternalLink,
 } from "lucide-react";
-import { ScrollReveal, StaggerContainer, StaggerItem } from "../scroll-reveal";
+import { ScrollReveal } from "../scroll-reveal";
 import { Testimonials } from "../testimonials";
 import { utecTestimonials } from "@/lib/testimonials-data";
 import { usePage } from "@/lib/page-context";
-import { UtecFeaturedProducts } from "../utec-featured-products";
+import { UtecProductSpotlight } from "../utec-product-spotlight";
+import { UtecProductRepeater } from "../utec-product-repeater";
+import { UtecServices } from "../utec-services";
 import { storeProductsPageUrl } from "@/lib/store-config";
-
-const services = [
-  { icon: Wifi, title: "Network Infrastructure", description: "Fiber optic, wireless, and structured cabling solutions for enterprises and governments." },
-  { icon: Cloud, title: "Cloud Solutions", description: "Scalable cloud hosting, migration, and management services tailored for the East African market." },
-  { icon: Shield, title: "Cybersecurity", description: "Comprehensive threat protection, vulnerability assessment, and compliance solutions." },
-  { icon: Code, title: "Software Development", description: "Custom applications, mobile solutions, and digital platforms built for local needs." },
-  { icon: PhoneCall, title: "Telecom Services", description: "VoIP, unified communications, and PBX solutions connecting businesses across the region." },
-  { icon: Monitor, title: "IT Consulting", description: "Strategic technology advisory helping organizations navigate digital transformation." },
-];
 
 const stats = [
   { value: "150+", label: "Projects Delivered" },
@@ -101,39 +89,14 @@ export function UTECPage() {
         </div>
       </section>
 
-      {/* Services */}
-      <section className="relative py-20 sm:py-28">
-        <div className="absolute inset-0 bg-background" />
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-utec-cyan/15 to-transparent" />
+      {/* Services (modern bento layout) */}
+      <UtecServices />
 
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <ScrollReveal className="text-center mb-14">
-            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">
-              Our <span className="text-utec-cyan">Services</span>
-            </h2>
-            <p className="text-muted-foreground max-w-xl mx-auto">
-              Comprehensive ICT and telecom solutions designed for the modern enterprise.
-            </p>
-          </ScrollReveal>
+      {/* Featured Products (curated spotlight, real radios pierce above the box) */}
+      <UtecProductSpotlight />
 
-          <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" staggerDelay={0.1}>
-            {services.map((service) => (
-              <StaggerItem key={service.title}>
-                <div className="group h-full p-6 rounded-2xl bg-card border border-border hover:border-utec-cyan/25 transition-all duration-300 hover:bg-secondary">
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-utec-cyan/10 mb-5">
-                    <service.icon className="w-6 h-6 text-utec-cyan" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-foreground mb-2">{service.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{service.description}</p>
-                </div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-        </div>
-      </section>
-
-      {/* Featured Products (live from the UTEC online store) */}
-      <UtecFeaturedProducts />
+      {/* Full catalog — 3 rows (Repeaters / Mobile / Portables), live from the store */}
+      <UtecProductRepeater />
 
       {/* Testimonials */}
       <Testimonials

@@ -84,10 +84,17 @@ export function Navbar() {
   const toggleTheme = () => setTheme(resolvedTheme === "dark" ? "light" : "dark");
   const isDropdownActive = (t: "businesses" | "about") => { if (t === "businesses") return businessesPages.includes(activePage); if (t === "about") return aboutPages.includes(activePage); return false; };
 
-  // NN/g #13 — Click-activated (not hover-activated) dropdowns.
-  // Single click on the parent button toggles its submenu. Outside click / Esc closes.
-  const handleDropdownToggle = (type: "businesses" | "about") => {
-    setOpenDropdown((current) => (current === type ? null : type));
+  // Hover-activated dropdowns (desktop). A short close delay bridges the gap
+  // between the parent button and the floating dropdown so the menu doesn't
+  // flicker when the cursor travels between them. Outside click / Esc also close.
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const openMenu = (type: "businesses" | "about") => {
+    if (closeTimer.current) { clearTimeout(closeTimer.current); closeTimer.current = null; }
+    setOpenDropdown(type);
+  };
+  const scheduleCloseMenu = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    closeTimer.current = setTimeout(() => setOpenDropdown(null), 160);
   };
 
   const currentBiz = businessItems[hoveredBizIndex];
@@ -128,41 +135,50 @@ export function Navbar() {
           <div ref={dropdownContainerRef} className="hidden lg:flex justify-center items-stretch">
             <div className="flex items-stretch gap-1">
               {navItems.map((item) => (
-                <div key={item.id} className="relative flex items-stretch">
+                <div
+                  key={item.id}
+                  className="relative flex items-stretch"
+                  onMouseEnter={item.hasDropdown ? () => openMenu(item.hasDropdown) : undefined}
+                  onMouseLeave={item.hasDropdown ? scheduleCloseMenu : undefined}
+                >
                   <button
-                    onClick={() => {
-                      if (item.hasDropdown) {
-                        handleDropdownToggle(item.hasDropdown);
-                      } else {
-                        handleNavClick(item.id);
-                      }
-                    }}
+                    onClick={() => handleNavClick(item.id)}
                     aria-expanded={item.hasDropdown ? openDropdown === item.hasDropdown : undefined}
                     aria-haspopup={item.hasDropdown ? "true" : undefined}
-                    className={`relative flex items-center px-4 text-sm tracking-wide transition-colors duration-200 whitespace-nowrap cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent ${
+                    className={`group/nav relative flex items-center px-4 rounded-lg text-sm tracking-wide transition-all duration-200 whitespace-nowrap cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent ${
                       activePage === item.id || (item.hasDropdown && isDropdownActive(item.hasDropdown))
-                        ? "text-jotofa-navy dark:text-white font-semibold"
-                        : "text-jotofa-navy/70 dark:text-white/70 font-medium hover:text-jotofa-navy dark:hover:text-white"
+                        ? "text-jotofa-navy dark:text-white font-semibold bg-jotofa-navy/[0.04] dark:bg-white/[0.05]"
+                        : "text-jotofa-navy/70 dark:text-white/70 font-medium hover:text-jotofa-navy dark:hover:text-white hover:bg-jotofa-navy/[0.05] dark:hover:bg-white/[0.06]"
                     }`}
                   >
                     <span className="relative flex items-center gap-1">
                       {item.label}
-                      {item.hasDropdown && (<ChevronDown className={`w-3.5 h-3.5 opacity-60 transition-transform duration-200 ${openDropdown === item.hasDropdown ? "rotate-180" : ""}`} />)}
+                      {item.hasDropdown && (<ChevronDown className={`w-3.5 h-3.5 opacity-60 transition-transform duration-200 ${openDropdown === item.hasDropdown ? "rotate-180" : "group-hover/nav:opacity-100"}`} />)}
                     </span>
-                    {/* NN/g #5 — Active indicator: razor-thin 2px teal line flush against the navbar bottom border */}
-                    {(activePage === item.id || (item.hasDropdown && isDropdownActive(item.hasDropdown))) && (
-                      <span
-                        aria-hidden
-                        className="absolute left-3 right-3 bottom-0 h-[2px] bg-jotofa-accent"
-                      />
-                    )}
+                    {/* NN/g #5 — Active indicator: razor-thin 2px teal line flush against the navbar bottom border.
+                        Non-active items show a muted teal underline that scales in on hover for affordance. */}
+                    {(() => {
+                      const isActive = activePage === item.id || (item.hasDropdown && isDropdownActive(item.hasDropdown));
+                      return (
+                        <span
+                          aria-hidden
+                          className={`absolute left-3 right-3 bottom-0 h-[2px] bg-jotofa-accent origin-center transition-transform duration-200 ${
+                            isActive
+                              ? "scale-x-100"
+                              : "scale-x-0 group-hover/nav:scale-x-100 group-hover/nav:opacity-50"
+                          }`}
+                        />
+                      );
+                    })()}
                   </button>
 
                   {/* Our Businesses Mega Dropdown — opens from button's left edge */}
                   {item.hasDropdown === "businesses" && openDropdown === "businesses" && (
                     <AnimatePresence>
                       <motion.div initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} transition={{ duration: 0.2, ease: "easeOut" }}
-                        className="absolute top-full left-0 pt-2">
+                        className="absolute top-full left-0 pt-2"
+                        onMouseEnter={() => openMenu("businesses")}
+                        onMouseLeave={scheduleCloseMenu}>
                         <div className="w-[640px] bg-white dark:bg-jotofa-navy-card backdrop-blur-[20px] border border-jotofa-navy/8 dark:border-white/10 rounded-lg shadow-[0_12px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_24px_60px_rgba(0,0,0,0.5)] overflow-hidden">
                           <div className="grid grid-cols-[45%_55%] min-h-[260px]">
                             <div className="border-r border-jotofa-navy/6 dark:border-white/6 p-2">
@@ -214,7 +230,9 @@ export function Navbar() {
                   {item.hasDropdown === "about" && openDropdown === "about" && (
                     <AnimatePresence>
                       <motion.div initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} transition={{ duration: 0.2, ease: "easeOut" }}
-                        className="absolute top-full left-0 pt-2">
+                        className="absolute top-full left-0 pt-2"
+                        onMouseEnter={() => openMenu("about")}
+                        onMouseLeave={scheduleCloseMenu}>
                         <div className="w-[230px] bg-white dark:bg-jotofa-navy-card backdrop-blur-[20px] border border-jotofa-navy/8 dark:border-white/10 rounded-lg shadow-[0_12px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_24px_60px_rgba(0,0,0,0.5)] p-2">
                           {aboutItems.map((subItem) => (
                             <button key={subItem.id} onClick={() => handleNavClick(subItem.page)}
@@ -283,7 +301,7 @@ export function Navbar() {
                   <div key={item.id}>
                     <button onClick={() => { if (item.hasDropdown && mobileExpanded !== item.hasDropdown) setMobileExpanded(item.hasDropdown); else if (item.hasDropdown && mobileExpanded === item.hasDropdown) handleNavClick(item.id); else handleNavClick(item.id); }}
                       aria-expanded={item.hasDropdown ? mobileExpanded === item.hasDropdown : undefined}
-                      className={`flex items-center justify-between w-full text-left px-4 py-2.5 rounded-xl transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent ${activePage === item.id || (item.hasDropdown && isDropdownActive(item.hasDropdown)) ? "bg-[#003B64]/8 dark:bg-white/8 text-jotofa-navy dark:text-white font-semibold" : "text-jotofa-navy/60 dark:text-white/60 hover:text-jotofa-navy dark:hover:text-white hover:bg-jotofa-navy/[0.03] dark:hover:bg-white/[0.04]"}`}>
+                      className={`flex items-center justify-between w-full text-left px-4 py-2.5 rounded-xl transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent ${activePage === item.id || (item.hasDropdown && isDropdownActive(item.hasDropdown)) ? "bg-[#003B64]/8 dark:bg-white/8 text-jotofa-navy dark:text-white font-semibold" : "text-jotofa-navy/60 dark:text-white/60 hover:text-jotofa-navy dark:hover:text-white hover:bg-jotofa-navy/[0.05] dark:hover:bg-white/[0.06]"}`}>
                       <span className="text-sm">{item.label}</span>
                       {item.hasDropdown && <ChevronDown className={`w-4 h-4 transition-transform ${mobileExpanded === item.hasDropdown ? "rotate-180" : ""}`} />}
                     </button>

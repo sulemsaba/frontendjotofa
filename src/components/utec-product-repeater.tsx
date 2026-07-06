@@ -1,0 +1,317 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import {
+  ExternalLink,
+  ArrowRight,
+  AlertCircle,
+  Radio,
+  RadioTower,
+  Truck,
+  type LucideIcon,
+} from "lucide-react";
+import { ScrollReveal, StaggerContainer, StaggerItem } from "./scroll-reveal";
+import { storeProductsPageUrl } from "@/lib/store-config";
+
+interface CatalogProduct {
+  id: string;
+  name: string;
+  code?: string;
+  image: string | null;
+  originPrice: number | null;
+  discountPrice: number | null;
+  currency: string;
+  hasDiscount: boolean;
+  url: string;
+}
+
+interface CatalogRow {
+  key: string;
+  label: string;
+  blurb: string;
+  products: CatalogProduct[];
+}
+
+const rowMeta: Record<
+  string,
+  { icon: LucideIcon; accent: string; soft: string }
+> = {
+  repeaters: {
+    icon: RadioTower,
+    accent: "text-utec-cyan",
+    soft: "bg-utec-cyan/10",
+  },
+  mobile: {
+    icon: Truck,
+    accent: "text-amber-600 dark:text-amber-400",
+    soft: "bg-amber-500/10",
+  },
+  portables: {
+    icon: Radio,
+    accent: "text-emerald-600 dark:text-emerald-400",
+    soft: "bg-emerald-500/10",
+  },
+};
+
+function formatPrice(value: number | null, currency: string): string | null {
+  if (value == null) return null;
+  try {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency,
+      maximumFractionDigits: 2,
+    }).format(value);
+  } catch {
+    return `${currency} ${value}`;
+  }
+}
+
+function CatalogCard({
+  product,
+  index,
+}: {
+  product: CatalogProduct;
+  index: number;
+}) {
+  const origin = formatPrice(product.originPrice, product.currency);
+  const discount = formatPrice(product.discountPrice, product.currency);
+  const [imgFailed, setImgFailed] = useState(false);
+
+  return (
+    <StaggerItem key={product.id}>
+      <motion.a
+        href={product.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.05 * index, duration: 0.4 }}
+        whileHover={{ y: -4 }}
+        className="group flex flex-col h-full rounded-2xl border border-border bg-card overflow-hidden hover:border-utec-cyan/40 hover:shadow-lg transition-all duration-300"
+      >
+        {/* Image */}
+        <div className="relative aspect-square bg-gradient-to-b from-secondary/40 to-secondary/10 overflow-hidden">
+          {product.image && !imgFailed ? (
+            <img
+              src={product.image}
+              alt={product.name}
+              loading="lazy"
+              className="absolute inset-0 w-full h-full object-contain p-5 transition-transform duration-500 group-hover:scale-105"
+              onError={() => setImgFailed(true)}
+            />
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <Radio className="w-12 h-12 text-muted-foreground/25" />
+            </div>
+          )}
+
+          {/* Discount badge */}
+          {product.hasDiscount && product.originPrice && product.discountPrice && (
+            <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-utec-cyan text-white shadow">
+              -{Math.round((1 - product.discountPrice / product.originPrice) * 100)}%
+            </span>
+          )}
+
+          {/* External link affordance */}
+          <span className="absolute top-3 right-3 w-8 h-8 rounded-full bg-background/80 backdrop-blur flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <ExternalLink className="w-4 h-4 text-utec-cyan" />
+          </span>
+        </div>
+
+        {/* Body */}
+        <div className="flex flex-col flex-1 p-4">
+          <h3
+            className="text-sm font-semibold text-foreground leading-snug line-clamp-2 mb-2 min-h-[2.5rem]"
+            title={product.name}
+          >
+            {product.name}
+          </h3>
+
+          <div className="mt-auto flex items-baseline gap-2 flex-wrap">
+            {product.hasDiscount ? (
+              <>
+                <span className="text-base font-bold text-utec-cyan">{discount}</span>
+                <span className="text-xs text-muted-foreground line-through">{origin}</span>
+              </>
+            ) : (
+              <span className="text-base font-bold text-foreground">{origin ?? "—"}</span>
+            )}
+          </div>
+        </div>
+      </motion.a>
+    </StaggerItem>
+  );
+}
+
+function RowSkeleton() {
+  return (
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+      {Array.from({ length: 4 }).map((_, i) => (
+        <div
+          key={i}
+          className="flex flex-col h-full rounded-2xl border border-border bg-card overflow-hidden"
+        >
+          <div className="aspect-square bg-secondary/40 animate-pulse" />
+          <div className="p-4 space-y-2">
+            <div className="h-4 bg-secondary rounded animate-pulse w-5/6" />
+            <div className="h-4 bg-secondary rounded animate-pulse w-3/4" />
+            <div className="h-5 bg-secondary/70 rounded animate-pulse w-1/3 mt-3" />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export function UtecProductRepeater() {
+  const [rows, setRows] = useState<CatalogRow[]>([]);
+  const [status, setStatus] = useState<"loading" | "success" | "error">(
+    "loading"
+  );
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch("/api/utec-store/catalog", { cache: "no-store" });
+        const data = await res.json();
+        if (cancelled) return;
+        if (!res.ok || !data.rows?.length) {
+          setStatus("error");
+          return;
+        }
+        // Only keep rows that actually have products.
+        setRows(data.rows.filter((r: CatalogRow) => r.products.length > 0));
+        setStatus("success");
+      } catch {
+        if (!cancelled) setStatus("error");
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  return (
+    <section className="relative py-20 sm:py-24">
+      <div className="absolute inset-0 bg-background" />
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-utec-cyan/15 to-transparent" />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <ScrollReveal className="text-center mb-14">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-utec-cyan/20 bg-utec-cyan/5 mb-5">
+            <Radio className="w-4 h-4 text-utec-cyan" />
+            <span className="text-utec-cyan text-sm font-medium">Full Catalog</span>
+          </div>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-foreground mb-3">
+            Explore the <span className="text-utec-cyan">Catalog</span>
+          </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Real products, live prices, straight from the UTEC Solutions store.
+            Browse by category — each item links to its store page for full specs
+            and purchase.
+          </p>
+        </ScrollReveal>
+
+        {/* Rows */}
+        {status === "loading" && (
+          <div className="space-y-12">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <div key={i}>
+                <div className="h-6 w-40 bg-secondary rounded animate-pulse mb-4" />
+                <RowSkeleton />
+              </div>
+            ))}
+          </div>
+        )}
+
+        {status === "success" && (
+          <div className="space-y-14 sm:space-y-16">
+            {rows.map((row) => {
+              const meta = rowMeta[row.key] ?? rowMeta.portables;
+              const Icon = meta.icon;
+              return (
+                <div key={row.key}>
+                  {/* Row header */}
+                  <ScrollReveal className="flex items-end justify-between gap-4 mb-6">
+                    <div className="flex items-start gap-3">
+                      <span
+                        className={`inline-flex items-center justify-center w-11 h-11 rounded-xl ${meta.soft} shrink-0`}
+                      >
+                        <Icon className={`w-5 h-5 ${meta.accent}`} />
+                      </span>
+                      <div>
+                        <h3 className="text-lg sm:text-xl font-bold text-foreground leading-tight">
+                          {row.label}
+                        </h3>
+                        <p className="text-sm text-muted-foreground mt-0.5 max-w-xl">
+                          {row.blurb}
+                        </p>
+                      </div>
+                    </div>
+                    <a
+                      href={storeProductsPageUrl()}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hidden sm:inline-flex items-center gap-1.5 text-sm font-medium text-utec-cyan hover:text-utec-cyan/80 transition-colors whitespace-nowrap"
+                    >
+                      View all <ArrowRight className="w-3.5 h-3.5" />
+                    </a>
+                  </ScrollReveal>
+
+                  <StaggerContainer
+                    className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"
+                    staggerDelay={0.06}
+                  >
+                    {row.products.map((p, i) => (
+                      <CatalogCard key={p.id} product={p} index={i} />
+                    ))}
+                  </StaggerContainer>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        {status === "error" && (
+          <div className="max-w-xl mx-auto p-8 rounded-2xl border border-border bg-card text-center">
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-utec-cyan/10 mb-4">
+              <AlertCircle className="w-6 h-6 text-utec-cyan" />
+            </div>
+            <h3 className="text-lg font-semibold text-foreground mb-2">
+              Catalog preview unavailable
+            </h3>
+            <p className="text-sm text-muted-foreground mb-5">
+              We couldn&apos;t load the live catalog right now. You can still
+              browse the full UTEC Solutions store directly.
+            </p>
+            <a
+              href={storeProductsPageUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-2.5 bg-utec-cyan/10 border border-utec-cyan/25 text-utec-cyan hover:bg-utec-cyan/20 rounded-full text-sm font-medium transition-all"
+            >
+              Visit Store <ExternalLink className="w-4 h-4" />
+            </a>
+          </div>
+        )}
+
+        {/* Browse-all CTA */}
+        {status !== "error" && (
+          <div className="mt-14 text-center">
+            <a
+              href={storeProductsPageUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-7 py-3 bg-utec-cyan hover:bg-utec-cyan/90 text-white font-semibold rounded-full transition-all hover:shadow-lg hover:shadow-utec-cyan/25"
+            >
+              Browse All Products <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
