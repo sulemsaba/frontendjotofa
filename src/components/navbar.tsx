@@ -14,8 +14,6 @@ import {
   Sun,
   Moon,
   Building2,
-  BarChart3,
-  Heart,
 } from "lucide-react";
 
 const businessItems = [
@@ -26,13 +24,6 @@ const businessItems = [
   { id: "staffing", label: "Staffing & Labour", description: "Workforce Solutions Partner", page: "staffing" as PageId, image: "/images/staffing.png", logo: "/images/staffing-logo.png" },
 ];
 
-const aboutItems = [
-  { id: "about", label: "Overview", description: "Who we are and what drives us", page: "about" as PageId, icon: Building2 },
-  { id: "strategy", label: "Leadership & Strategy", description: "Our vision, mission and leadership", page: "strategy" as PageId, icon: BarChart3 },
-  { id: "csr", label: "CSR & Sustainability", description: "Our social impact programs", page: "csr" as PageId, icon: Heart },
-  { id: "investor", label: "Investor Relations", description: "Financial performance & reports", page: "strategy" as PageId, icon: BarChart3 },
-];
-
 const PHONE_NUMBER = "0773 383 800";
 const PHONE_TEL = "+255773383800";
 
@@ -41,14 +32,13 @@ interface NavItem { id: PageId; label: string; hasDropdown?: "businesses" | "abo
 const navItems: NavItem[] = [
   { id: "home", label: "Home" },
   { id: "businesses", label: "Our Businesses", hasDropdown: "businesses" },
-  { id: "about", label: "About Us", hasDropdown: "about" },
+  { id: "about", label: "About Us" },
   { id: "news", label: "News & Insights" },
   { id: "careers", label: "Careers" },
   { id: "contact", label: "Contact Us" },
 ];
 
 const businessesPages: PageId[] = ["businesses", "utec", "courier", "cleaning", "security", "staffing"];
-const aboutPages: PageId[] = ["about", "strategy", "csr"];
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -82,7 +72,7 @@ export function Navbar() {
 
   const handleNavClick = (pageId: PageId) => { setActivePage(pageId); setMobileOpen(false); setOpenDropdown(null); setMobileExpanded(null); };
   const toggleTheme = () => setTheme(resolvedTheme === "dark" ? "light" : "dark");
-  const isDropdownActive = (t: "businesses" | "about") => { if (t === "businesses") return businessesPages.includes(activePage); if (t === "about") return aboutPages.includes(activePage); return false; };
+  const isDropdownActive = (t: "businesses") => businessesPages.includes(activePage);
 
   // Hover-activated dropdowns (desktop). A short close delay bridges the gap
   // between the parent button and the floating dropdown so the menu doesn't
@@ -113,7 +103,7 @@ export function Navbar() {
       >
         {/* 3-COLUMN GRID on desktop (lg+) — geometric symmetry so center links never budge.
             On mobile/tablet (<lg), use 2-column grid: logo left, actions right (no empty middle). */}
-        <div className="mx-auto max-w-[1400px] h-16 sm:h-[68px] px-4 sm:px-6 grid grid-cols-2 lg:grid-cols-3 items-stretch">
+        <div className="mx-auto max-w-[1400px] h-14 sm:h-16 px-4 sm:px-6 grid grid-cols-2 lg:grid-cols-3 items-stretch">
 
           {/* ───────── LEFT: Logo Block ───────── */}
           <div className="flex justify-start items-center">
@@ -232,30 +222,6 @@ export function Navbar() {
                     </AnimatePresence>
                   )}
 
-                  {/* About Us Dropdown — opens from button's left edge */}
-                  {item.hasDropdown === "about" && openDropdown === "about" && (
-                    <AnimatePresence>
-                      <motion.div initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} transition={{ duration: 0.2, ease: "easeOut" }}
-                        className="absolute top-full left-0 pt-2"
-                        onMouseEnter={() => openMenu("about")}
-                        onMouseLeave={scheduleCloseMenu}>
-                        <div className="w-[230px] bg-white dark:bg-jotofa-navy-card backdrop-blur-[20px] border border-jotofa-navy/8 dark:border-white/10 rounded-lg shadow-[0_12px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_24px_60px_rgba(0,0,0,0.5)] p-2">
-                          {aboutItems.map((subItem) => (
-                            <button key={subItem.id} onClick={() => handleNavClick(subItem.page)}
-                              className="flex items-center gap-3 w-full text-left px-3 py-2.5 rounded-xl hover:bg-jotofa-navy/[0.04] dark:hover:bg-white/[0.06] transition-colors duration-150 group/sub cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent">
-                              <subItem.icon className="w-4 h-4 text-jotofa-navy/50 dark:text-white/40 group-hover/sub:text-jotofa-navy dark:group-hover/sub:text-white transition-opacity" />
-                              <div className="min-w-0">
-                                <div className="text-sm font-medium text-jotofa-navy/70 dark:text-white/70 group-hover/sub:text-jotofa-navy dark:group-hover/sub:text-white transition-colors whitespace-nowrap">{subItem.label}</div>
-                                <div className="text-[10px] text-jotofa-navy/30 dark:text-white/25 mt-0.5">{subItem.description}</div>
-                              </div>
-                            </button>
-                          ))}
-                        </div>
-                      </motion.div>
-                    </AnimatePresence>
-                  )}
-
-
                 </div>
               ))}
             </div>
@@ -322,15 +288,6 @@ export function Navbar() {
                               <Image src={biz.logo} alt={`${biz.label} logo`} width={20} height={20} className="w-5 h-5 object-contain" />
                             </div>
                             <span className="text-sm">{biz.label}</span>
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                    {item.hasDropdown === "about" && mobileExpanded === "about" && (
-                      <div className="pl-4 space-y-0.5 pb-1">
-                        {aboutItems.map(subItem => (
-                          <button key={subItem.id} onClick={() => handleNavClick(subItem.page)} className="flex items-center gap-3 w-full text-left px-4 py-2 text-jotofa-navy/50 dark:text-white/50 hover:text-jotofa-navy dark:hover:text-white hover:bg-jotofa-navy/[0.03] dark:hover:bg-white/[0.04] rounded-lg">
-                            <subItem.icon className="w-3.5 h-3.5 text-jotofa-navy/40 dark:text-white/30" /><span className="text-sm">{subItem.label}</span>
                           </button>
                         ))}
                       </div>

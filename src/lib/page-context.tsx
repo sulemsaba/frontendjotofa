@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, useCallback, useEffect, ReactNode } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export type PageId =
   | "home"
@@ -64,6 +64,7 @@ function pathnameToPageId(pathname: string | null): PageId {
 
 export function PageProvider({ children }: { children: ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
   const [activePage, setActivePageState] = useState<PageId>(() => pathnameToPageId(pathname));
 
   // Sync activePage with URL on mount and whenever the pathname changes.
@@ -73,10 +74,14 @@ export function PageProvider({ children }: { children: ReactNode }) {
     setActivePageState(pathnameToPageId(pathname));
   }, [pathname]);
 
+  // Real URL-based navigation: pushing the route lets the browser back/forward,
+  // refresh, and deep-linking all work correctly. The pathname effect above
+  // syncs `activePage` once the route change lands.
   const setActivePage = useCallback((page: PageId) => {
-    setActivePageState(page);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, []);
+    const url = page === "home" ? "/" : `/${page}`;
+    router.push(url);
+    window.scrollTo({ top: 0 });
+  }, [router]);
 
   return (
     <PageContext.Provider value={{ activePage, setActivePage }}>
