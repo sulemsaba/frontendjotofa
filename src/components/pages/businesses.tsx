@@ -79,6 +79,7 @@ const businesses: Business[] = [
     description:
       "A trusted logistics and courier network ensuring timely, secure delivery of goods and documents. We operate across Tanzania and East Africa with end-to-end tracking and last-mile coverage.",
     icon: Truck,
+    logoSrc: "/images/courier-logo.png",
     logoMark: "JC",
   },
   {
@@ -88,6 +89,7 @@ const businesses: Business[] = [
     description:
       "Premium cleaning and housekeeping for commercial, residential, and industrial spaces. We deliver hygiene and pristine environments through trained, supervised crews.",
     icon: Sparkles,
+    logoSrc: "/images/cleaning-logo.png",
     logoMark: "JM",
   },
   {
@@ -97,6 +99,7 @@ const businesses: Business[] = [
     description:
       "Robust security services from manned guarding to electronic surveillance. We protect people, assets, and operations with integrity and round-the-clock vigilance.",
     icon: ShieldCheck,
+    logoSrc: "/images/security-logo.png",
     logoMark: "JS",
   },
   {
@@ -106,6 +109,7 @@ const businesses: Business[] = [
     description:
       "Connecting talent with opportunity across skilled and semi-skilled labour supply. We handle recruitment, payroll, and workforce management for industries nationwide.",
     icon: Users,
+    logoSrc: "/images/staffing-logo.png",
     logoMark: "JT",
   },
 ];
@@ -239,17 +243,17 @@ function BusinessCard({ business }: { business: Business }) {
       <div className="relative px-6 pt-6 pb-5 border-b border-border bg-gradient-to-br from-jotofa-navy/[0.04] to-transparent dark:from-white/[0.04] dark:to-transparent">
         <div className="flex items-start justify-between gap-3">
           {/* Logo / monogram mark */}
-          <div className="flex items-center justify-center h-14 w-14 rounded-xl bg-white dark:bg-white/[0.06] border border-jotofa-navy/10 dark:border-white/10 shadow-sm flex-shrink-0 overflow-hidden">
+          <div className="flex items-center justify-center h-14 w-14 rounded-xl bg-white border border-jotofa-navy/10 dark:border-white/10 shadow-sm flex-shrink-0 overflow-hidden">
             {business.logoSrc ? (
               <Image
                 src={business.logoSrc}
                 alt={`${business.name} logo`}
                 width={56}
                 height={56}
-                className="h-10 w-auto object-contain"
+                className="h-10 w-10 object-contain"
               />
             ) : (
-              <span className="text-lg font-black tracking-tight text-jotofa-navy dark:text-white">
+              <span className="text-lg font-black tracking-tight text-jotofa-navy">
                 {business.logoMark}
               </span>
             )}

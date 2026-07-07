@@ -40,6 +40,8 @@ interface FooterLink {
   page: PageId;
   iconSrc?: string;
   iconAlt?: string;
+  /** "wordmark" = wide horizontal logo (e.g. UTEC). "icon" = square logo mark. */
+  iconType?: "wordmark" | "icon";
 }
 
 const quickLinks: FooterLink[] = [
@@ -62,11 +64,12 @@ const businessLinks: FooterLink[] = [
     page: "utec",
     iconSrc: "/images/utec-logo.png",
     iconAlt: "UTEC logo",
+    iconType: "wordmark",
   },
-  { label: "Courier & Logistics", page: "courier" },
-  { label: "Cleaning & Maids", page: "cleaning" },
-  { label: "Security", page: "security" },
-  { label: "Staffing & Labour", page: "staffing" },
+  { label: "Courier & Logistics", page: "courier", iconSrc: "/images/courier-logo.png", iconAlt: "Courier & Logistics logo", iconType: "icon" },
+  { label: "Cleaning & Maids", page: "cleaning", iconSrc: "/images/cleaning-logo.png", iconAlt: "Cleaning & Maids logo", iconType: "icon" },
+  { label: "Security", page: "security", iconSrc: "/images/security-logo.png", iconAlt: "Security logo", iconType: "icon" },
+  { label: "Staffing & Labour", page: "staffing", iconSrc: "/images/staffing-logo.png", iconAlt: "Staffing & Labour logo", iconType: "icon" },
 ];
 
 const socialLinks = [
@@ -124,7 +127,7 @@ function LinkColumn({
               onClick={() => setActivePage(link.page)}
               className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-1 focus-visible:ring-offset-background text-left"
             >
-              {link.iconSrc && (
+              {link.iconSrc && link.iconType === "wordmark" && (
                 <Image
                   src={link.iconSrc}
                   alt={link.iconAlt ?? ""}
@@ -132,6 +135,17 @@ function LinkColumn({
                   height={14}
                   className="h-3.5 w-auto object-contain inline-block align-middle"
                 />
+              )}
+              {link.iconSrc && link.iconType === "icon" && (
+                <span className="inline-flex items-center justify-center w-4 h-4 rounded-sm bg-white border border-black/5 dark:border-white/10 flex-shrink-0 overflow-hidden align-middle">
+                  <Image
+                    src={link.iconSrc}
+                    alt={link.iconAlt ?? ""}
+                    width={16}
+                    height={16}
+                    className="w-3.5 h-3.5 object-contain"
+                  />
+                </span>
               )}
               <span>{link.label}</span>
             </button>
