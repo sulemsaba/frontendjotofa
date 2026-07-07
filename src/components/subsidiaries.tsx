@@ -11,39 +11,48 @@ import {
   ArrowRight,
   ExternalLink,
 } from "lucide-react";
-import { ScrollReveal, StaggerContainer, StaggerItem } from "./scroll-reveal";
+import { ScrollReveal } from "./scroll-reveal";
 import { usePage, PageId } from "@/lib/page-context";
 import { storeProductsPageUrl } from "@/lib/store-config";
 
 /* ──────────────────────────────────────────────────────────────────────────
-   "Five Arms, One Vision"
+   "Five Arms, One Vision" — Home page subsidiaries section.
 
-   Five equal, roomy columns on desktop — each subsidiary gets its own
-   column (not a cramped 5-up row). BRAND COLOURS ONLY: JOTOFA navy +
-   teal. No per-subsidiary accent colours — every card uses the same
-   navy/teal palette so the section reads as ONE united group, not five
-   differently-coloured tiles.
-
-   Card anatomy (vertical):
-     • Real photograph (object-cover, hover zoom)
-     • Navy number badge (01–05) overlapping the photo edge
-     • Icon + tagline + name
-     • Description
-     • Service list (teal bullets)
-     • "Explore →" CTA (+ "Visit Store" for UTEC)
-
-   Layout: 1-col mobile → 2-col sm → 3-col md → 5-col lg+.
+   Redesigned as SPLIT-SCREEN STACKED CARDS to match the businesses page:
+   • Full-width alternating split sections — one image LEFT, next image RIGHT
+     ("one image look right, the other look left"), repeating down the page.
+   • Image side: full-bleed photograph with navy brand overlay, giant
+     watermark index number (01–05), logo tile, tagline pill.
+   • Content side: sector badges, company name (h2), value proposition,
+     2-column services grid, "Explore" CTA (navigates to the subsidiary
+     detail page) + optional UTEC store link.
+   • Scroll-triggered fade-in (framer-motion whileInView).
+   • BRAND COLOURS ONLY: JOTOFA navy + teal. Theme-aware (light + dark).
+   • Slightly more compact than the businesses page so the home page
+     stays scannable after the hero.
    ────────────────────────────────────────────────────────────────────────── */
 
 interface Subsidiary {
   id: PageId;
+  /** "01" – "05" — used as the big watermark number */
   index: string;
   name: string;
+  /** Short sector tagline, e.g. "ICT & Telecommunications" */
   tagline: string;
-  description: string;
+  /** Small UI sector badges */
+  sectors: string[];
+  /** Service line-items shown in the 2-col grid */
   services: string[];
+  /** Concise value proposition */
+  description: string;
   icon: React.ComponentType<{ className?: string }>;
+  /** Full-bleed photograph for the split-section image side */
   image: string;
+  /** Real logo — if absent, falls back to a styled monogram mark */
+  logoSrc?: string;
+  /** 2-letter monogram used when no real logo asset exists */
+  logoMark: string;
+  /** Optional outbound store link (UTEC) */
   storeUrl?: string;
   storeLabel?: string;
 }
@@ -54,6 +63,7 @@ const subsidiaries: Subsidiary[] = [
     index: "01",
     name: "UTEC Solutions",
     tagline: "ICT & Telecommunications",
+    sectors: ["ICT", "Telecom", "Cloud"],
     description:
       "Cutting-edge ICT infrastructure, telecommunications, and digital transformation services connecting businesses and communities across Tanzania.",
     services: [
@@ -65,6 +75,8 @@ const subsidiaries: Subsidiary[] = [
     ],
     icon: Monitor,
     image: "/images/subsidiaries/utec.jpg",
+    logoSrc: "/images/utec-logo.png",
+    logoMark: "UT",
     storeUrl: storeProductsPageUrl(),
     storeLabel: "Visit Online Store",
   },
@@ -73,6 +85,7 @@ const subsidiaries: Subsidiary[] = [
     index: "02",
     name: "Courier & Logistics",
     tagline: "Reliable Delivery Network",
+    sectors: ["Logistics", "Freight", "Last-Mile"],
     description:
       "A trusted logistics and courier network ensuring timely, secure delivery of goods and documents across Tanzania and East Africa.",
     services: [
@@ -84,12 +97,15 @@ const subsidiaries: Subsidiary[] = [
     ],
     icon: Truck,
     image: "/images/subsidiaries/courier.jpg",
+    logoSrc: "/images/courier-logo.png",
+    logoMark: "JC",
   },
   {
     id: "cleaning",
     index: "03",
     name: "Cleaning & Maids",
     tagline: "Professional Cleaning",
+    sectors: ["Facilities", "Hygiene", "Maintenance"],
     description:
       "Premium cleaning and housekeeping for commercial, residential, and industrial spaces — ensuring hygiene and pristine environments every time.",
     services: [
@@ -101,12 +117,15 @@ const subsidiaries: Subsidiary[] = [
     ],
     icon: Sparkles,
     image: "/images/subsidiaries/cleaning.jpg",
+    logoSrc: "/images/cleaning-logo.png",
+    logoMark: "JM",
   },
   {
     id: "security",
     index: "04",
     name: "JOTOFA Security",
     tagline: "Comprehensive Security",
+    sectors: ["Security", "Surveillance", "Risk"],
     description:
       "Robust security services from manned guarding to electronic surveillance — protecting people, assets, and operations with integrity and vigilance.",
     services: [
@@ -118,12 +137,15 @@ const subsidiaries: Subsidiary[] = [
     ],
     icon: ShieldCheck,
     image: "/images/subsidiaries/security.jpg",
+    logoSrc: "/images/security-logo.png",
+    logoMark: "JS",
   },
   {
     id: "staffing",
     index: "05",
     name: "Staffing & Labour",
     tagline: "Workforce Solutions",
+    sectors: ["Recruitment", "HR", "Workforce"],
     description:
       "Connecting talent with opportunity — skilled and semi-skilled labour supply, recruitment, and workforce management for industries across Tanzania.",
     services: [
@@ -135,137 +157,202 @@ const subsidiaries: Subsidiary[] = [
     ],
     icon: Users,
     image: "/images/subsidiaries/staffing.jpg",
+    logoSrc: "/images/staffing-logo.png",
+    logoMark: "JT",
   },
 ];
 
-function SubsidiaryCard({ subsidiary }: { subsidiary: Subsidiary }) {
+/* ──────────────────────────────────────────────────────────────────────────
+   SplitSection — one full-width alternating split section per subsidiary.
+
+   Alternation rule: even index (0,2,4) → image LEFT / content RIGHT.
+                     odd  index (1,3)   → image RIGHT / content LEFT.
+   This produces the "one image look right, the other look left" rhythm
+   the user asked for.
+   ────────────────────────────────────────────────────────────────────────── */
+function SplitSection({
+  subsidiary,
+  index,
+}: {
+  subsidiary: Subsidiary;
+  index: number;
+}) {
   const { setActivePage } = usePage();
   const Icon = subsidiary.icon;
+  const reversed = index % 2 === 1;
 
   return (
-    <motion.div
-      role="button"
-      tabIndex={0}
-      onClick={() => setActivePage(subsidiary.id)}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          setActivePage(subsidiary.id);
-        }
-      }}
-      className="group relative flex flex-col rounded-2xl overflow-hidden bg-card border border-border transition-all duration-300 hover:-translate-y-1.5 hover:border-jotofa-accent/40 hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.4)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+    <motion.section
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      className="relative flex flex-col lg:flex-row min-h-[52vh] lg:min-h-[68vh] border-b border-border"
     >
-      {/* ── Photograph ── */}
-      <div className="relative aspect-[4/3] overflow-hidden">
+      {/* ─── Image / Visual Side ─── */}
+      <div
+        className={`group/img relative flex-1 min-h-[38vh] lg:min-h-full overflow-hidden ${
+          reversed ? "lg:order-2" : ""
+        }`}
+      >
         <Image
           src={subsidiary.image}
           alt={subsidiary.name}
           fill
-          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 20vw"
-          className="object-cover transition-transform duration-700 group-hover:scale-110"
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          className="object-cover transition-transform duration-[1.2s] ease-out group-hover/img:scale-105"
         />
-        {/* Navy readability gradient at bottom of photo → blends into card */}
-        <div className="absolute inset-0 bg-gradient-to-t from-jotofa-navy via-jotofa-navy/30 to-transparent" />
+        {/* Navy brand overlay — keeps every section on-palette */}
+        <div className="absolute inset-0 bg-gradient-to-br from-jotofa-navy-deep/92 via-jotofa-navy/80 to-jotofa-navy/65" />
+        {/* Teal glow accent */}
+        <div className="absolute -top-24 -right-24 w-72 h-72 bg-jotofa-accent/20 rounded-full blur-[100px] pointer-events-none" />
 
-        {/* Navy number badge — overlaps photo bottom edge */}
-        <div className="absolute top-4 left-4 flex items-center gap-2">
-          <span className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-jotofa-navy text-white text-sm font-bold border border-white/15">
+        {/* Giant watermark index number */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <span className="text-[150px] sm:text-[210px] lg:text-[250px] font-black text-white/[0.09] leading-none select-none">
             {subsidiary.index}
           </span>
-          <div className="w-9 h-9 rounded-lg bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center">
-            <Icon className="w-4.5 h-4.5 text-white" />
+        </div>
+
+        {/* Logo tile — top-left */}
+        <div className="absolute top-6 left-6 sm:top-8 sm:left-8 z-10">
+          <div className="flex items-center justify-center h-14 w-14 rounded-xl bg-white border border-white/20 shadow-lg overflow-hidden">
+            {subsidiary.logoSrc ? (
+              <Image
+                src={subsidiary.logoSrc}
+                alt={`${subsidiary.name} logo`}
+                width={48}
+                height={48}
+                className="h-9 w-9 object-contain"
+              />
+            ) : (
+              <span className="text-lg font-black text-jotofa-navy">
+                {subsidiary.logoMark}
+              </span>
+            )}
           </div>
         </div>
 
-        {/* Tagline + name — bottom of photo, white on navy gradient */}
-        <div className="absolute bottom-0 left-0 right-0 p-5">
-          <span className="text-[11px] font-semibold uppercase tracking-wider text-jotofa-accent-light">
-            {subsidiary.tagline}
-          </span>
-          <h3 className="text-lg font-bold text-white leading-tight mt-1">
+        {/* Tagline pill — bottom-left */}
+        <div className="absolute bottom-6 left-6 sm:bottom-8 sm:left-8 z-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md">
+            <Icon className="w-3.5 h-3.5 text-jotofa-accent-light" />
+            <span className="text-xs font-semibold uppercase tracking-wider text-white/95">
+              {subsidiary.tagline}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* ─── Content Side ─── */}
+      <div
+        className={`relative flex-1 flex flex-col justify-center px-6 py-12 sm:px-10 sm:py-14 lg:px-14 lg:py-16 xl:px-16 bg-background ${
+          reversed ? "lg:order-1" : ""
+        }`}
+      >
+        {/* Faint watermark number — top right */}
+        <span
+          aria-hidden
+          className="absolute top-4 right-6 sm:top-6 sm:right-10 text-[90px] sm:text-[130px] lg:text-[150px] font-black text-jotofa-navy/[0.04] dark:text-white/[0.04] leading-none select-none pointer-events-none"
+        >
+          {subsidiary.index}
+        </span>
+
+        <div className="relative z-10 max-w-xl mx-auto lg:mx-0 w-full">
+          {/* Sector badges */}
+          <div className="flex flex-wrap gap-1.5 mb-5">
+            {subsidiary.sectors.map((sector) => (
+              <span
+                key={sector}
+                className="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-semibold uppercase tracking-wide bg-jotofa-navy/[0.06] dark:bg-white/[0.08] text-jotofa-navy/70 dark:text-white/70 border border-jotofa-navy/5 dark:border-white/5"
+              >
+                {sector}
+              </span>
+            ))}
+          </div>
+
+          {/* Name */}
+          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-foreground mb-3 leading-[1.1]">
             {subsidiary.name}
           </h3>
-        </div>
-      </div>
 
-      {/* ── Content panel ── */}
-      <div className="flex flex-col flex-1 p-5">
-        <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-          {subsidiary.description}
-        </p>
+          {/* Value proposition */}
+          <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-7">
+            {subsidiary.description}
+          </p>
 
-        {/* Service list — teal bullets, brand-only palette */}
-        <ul className="space-y-2 mb-6">
-          {subsidiary.services.map((service) => (
-            <li key={service} className="flex items-center gap-2.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-jotofa-accent flex-shrink-0" />
-              <span className="text-[13px] text-foreground/80 leading-tight">
-                {service}
-              </span>
-            </li>
-          ))}
-        </ul>
+          {/* Services grid — 2 columns */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-8">
+            {subsidiary.services.map((service) => (
+              <div
+                key={service}
+                className="flex items-center gap-2.5 px-4 py-2.5 rounded-lg bg-jotofa-navy/[0.03] dark:bg-white/[0.04] border border-border hover:border-jotofa-accent/40 hover:bg-jotofa-accent/[0.06] transition-all duration-200"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-jotofa-accent flex-shrink-0" />
+                <span className="text-sm font-medium text-foreground/80">
+                  {service}
+                </span>
+              </div>
+            ))}
+          </div>
 
-        {/* CTA row — pushed to bottom */}
-        <div className="mt-auto flex items-center justify-between gap-2 pt-4 border-t border-border">
-          <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-jotofa-accent group-hover:gap-2.5 transition-all">
-            Explore
-            <ArrowRight className="w-4 h-4" />
-          </span>
-
-          {subsidiary.storeUrl && (
-            <a
-              href={subsidiary.storeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="inline-flex items-center gap-1 text-xs font-medium text-jotofa-accent hover:opacity-70 transition-opacity"
+          {/* CTA row — primary "Explore" + optional store link */}
+          <div className="flex flex-wrap items-center gap-3">
+            <button
+              onClick={() => setActivePage(subsidiary.id)}
+              className="group/btn inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-jotofa-navy dark:bg-jotofa-accent text-white text-sm font-semibold transition-all hover:bg-jotofa-navy-deep dark:hover:bg-jotofa-accent-dark shadow-[0_6px_18px_-8px_rgba(0,59,100,0.4)] dark:shadow-[0_6px_18px_-8px_rgba(0,169,183,0.5)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
-              {subsidiary.storeLabel ?? "Store"}
-              <ExternalLink className="w-3 h-3" />
-            </a>
-          )}
+              Explore
+              <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5" />
+            </button>
+
+            {subsidiary.storeUrl && (
+              <a
+                href={subsidiary.storeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-5 py-3 rounded-xl border border-jotofa-navy/15 dark:border-white/15 text-sm font-semibold text-jotofa-navy dark:text-white hover:bg-jotofa-navy/[0.04] dark:hover:bg-white/[0.05] transition-all"
+              >
+                {subsidiary.storeLabel ?? "Store"}
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            )}
+          </div>
         </div>
       </div>
-    </motion.div>
+    </motion.section>
   );
 }
 
 export function Subsidiaries() {
   return (
-    <section className="relative py-24 sm:py-32">
-      {/* Section background */}
-      <div className="absolute inset-0 bg-background" />
+    <section className="relative">
+      {/* Section header */}
+      <ScrollReveal className="text-center py-20 sm:py-24">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-jotofa-accent/20 bg-jotofa-accent/5 mb-6">
+          <span className="text-xs font-semibold uppercase tracking-widest text-jotofa-accent">
+            Our Portfolio
+          </span>
+        </div>
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4">
+          Five Arms, <span className="text-gold-gradient">One Vision</span>
+        </h2>
+        <p className="mx-auto max-w-2xl text-muted-foreground text-lg">
+          Each subsidiary is a pillar of our group — specialized, yet united
+          by a commitment to quality, innovation, and impact.
+        </p>
+      </ScrollReveal>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
-        <ScrollReveal className="text-center mb-14 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-jotofa-accent/20 bg-jotofa-accent/5 mb-6">
-            <span className="text-jotofa-gold text-sm font-medium">
-              Our Portfolio
-            </span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4">
-            Five Arms,{" "}
-            <span className="text-gold-gradient">One Vision</span>
-          </h2>
-          <p className="mx-auto max-w-2xl text-muted-foreground text-lg">
-            Each subsidiary is a pillar of our group — specialized, yet united
-            by a commitment to quality, innovation, and impact.
-          </p>
-        </ScrollReveal>
-
-        {/* 5 equal columns on desktop — each subsidiary gets its own column */}
-        <StaggerContainer
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 lg:gap-6"
-          staggerDelay={0.08}
-        >
-          {subsidiaries.map((s) => (
-            <StaggerItem key={s.id}>
-              <SubsidiaryCard subsidiary={s} />
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
+      {/* Split-screen stacked sections — each subsidiary gets a full-width
+          alternating split section (image left ↔ right). */}
+      <div className="border-t border-border">
+        {subsidiaries.map((subsidiary, index) => (
+          <SplitSection
+            key={subsidiary.id}
+            subsidiary={subsidiary}
+            index={index}
+          />
+        ))}
       </div>
     </section>
   );
