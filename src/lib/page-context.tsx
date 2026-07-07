@@ -21,11 +21,14 @@ export type PageId =
 interface PageContextType {
   activePage: PageId;
   setActivePage: (page: PageId) => void;
+  /** True while a client-side navigation is in flight (for the top progress bar). */
+  navigating: boolean;
 }
 
 const PageContext = createContext<PageContextType>({
   activePage: "home",
   setActivePage: () => {},
+  navigating: false,
 });
 
 /**
@@ -65,26 +68,31 @@ function pathnameToPageId(pathname: string | null): PageId {
 export function PageProvider({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
-  const [activePage, setActivePageState] = useState<PageId>(() => pathnameToPageId(pathname));
+  // activePage is DERIVED from the pathname — always in sync with the URL,
+  // no state/effect needed (works for nav clicks, back/forward, deep links).
+  const activePage = pathnameToPageId(pathname);
+  const [navigating, setNavigating] = useState(false);
 
-  // Sync activePage with URL on mount and whenever the pathname changes.
-  // This ensures direct navigation (URL paste, refresh, browser back/forward)
-  // keeps the navbar's active-state indicator accurate (NN/g #5).
+  // Clear the "navigating" flag once the new route lands. This is the only
+  // way to detect route completion in the App Router (router.push has no
+  // completion callback), so the setState-in-effect here is intentional.
   useEffect(() => {
-    setActivePageState(pathnameToPageId(pathname));
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setNavigating(false);
   }, [pathname]);
 
-  // Real URL-based navigation: pushing the route lets the browser back/forward,
-  // refresh, and deep-linking all work correctly. The pathname effect above
-  // syncs `activePage` once the route change lands.
+  // Real URL-based navigation: set the progress flag BEFORE router.push so the
+  // top bar appears instantly on click, then push the URL. The effect above
+  // clears the flag once the new route renders.
   const setActivePage = useCallback((page: PageId) => {
+    setNavigating(true);
     const url = page === "home" ? "/" : `/${page}`;
     router.push(url);
     window.scrollTo({ top: 0 });
   }, [router]);
 
   return (
-    <PageContext.Provider value={{ activePage, setActivePage }}>
+    <PageContext.Provider value={{ activePage, setActivePage, navigating }}>
       {children}
     </PageContext.Provider>
   );

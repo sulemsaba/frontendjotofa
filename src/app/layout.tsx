@@ -4,6 +4,7 @@ import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { PageProvider } from "@/lib/page-context";
+import { RouteProgress } from "@/components/route-progress";
 
 // Per JOTOFA Visual Identity Guidelines p.16: Open Sans for web/digital.
 const openSans = Open_Sans({
@@ -63,6 +64,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <PageProvider>
+            <RouteProgress />
             {children}
             <Toaster />
           </PageProvider>
