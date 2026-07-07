@@ -2,7 +2,15 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import {
+  ArrowRight,
+  Handshake,
+  Lightbulb,
+  Star,
+  Link2,
+  Globe,
+  type LucideIcon,
+} from "lucide-react";
 import { usePage, PageId } from "@/lib/page-context";
 
 /* ──────────────────────────────────────────────────────────────────────────
@@ -75,17 +83,17 @@ const timeline: Milestone[] = [
 ];
 
 interface Value {
-  icon: string;
+  icon: LucideIcon;
   title: string;
   description: string;
 }
 
 const values: Value[] = [
-  { icon: "🤝", title: "Integrity", description: "Honesty and transparency in every interaction" },
-  { icon: "💡", title: "Innovation", description: "Cutting-edge technology solving real problems" },
-  { icon: "⭐", title: "Excellence", description: "Highest standards in everything we do" },
-  { icon: "🔗", title: "Unity", description: "Five arms, one unified vision" },
-  { icon: "🌍", title: "Impact", description: "Empowering communities across East Africa" },
+  { icon: Handshake, title: "Integrity", description: "Honesty and transparency in every interaction" },
+  { icon: Lightbulb, title: "Innovation", description: "Cutting-edge technology solving real problems" },
+  { icon: Star, title: "Excellence", description: "Highest standards in everything we do" },
+  { icon: Link2, title: "Unity", description: "Five arms, one unified vision" },
+  { icon: Globe, title: "Impact", description: "Empowering communities across East Africa" },
 ];
 
 interface EcoSubsidiary {
@@ -293,12 +301,16 @@ function Purpose() {
           {...fadeUp}
           className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6"
         >
-          {values.map((value) => (
+          {values.map((value) => {
+            const Icon = value.icon;
+            return (
             <div
               key={value.title}
               className="p-6 sm:p-8 bg-background border border-border rounded-xl text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)] hover:border-jotofa-accent"
             >
-              <div className="text-3xl mb-4">{value.icon}</div>
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-jotofa-accent/10 text-jotofa-accent mb-4">
+                <Icon className="w-6 h-6" />
+              </div>
               <h4 className="text-base font-semibold text-foreground mb-2">
                 {value.title}
               </h4>
@@ -306,7 +318,8 @@ function Purpose() {
                 {value.description}
               </p>
             </div>
-          ))}
+            );
+          })}
         </motion.div>
       </div>
     </section>
