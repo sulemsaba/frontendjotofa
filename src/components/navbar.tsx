@@ -30,7 +30,7 @@ const aboutItems = [
   { id: "about", label: "Overview", description: "Who we are and what drives us", page: "about" as PageId, icon: Building2 },
   { id: "strategy", label: "Leadership & Strategy", description: "Our vision, mission and leadership", page: "strategy" as PageId, icon: BarChart3 },
   { id: "csr", label: "CSR & Sustainability", description: "Our social impact programs", page: "csr" as PageId, icon: Heart },
-  { id: "strategy", label: "Investor Relations", description: "Financial performance & reports", page: "strategy" as PageId, icon: BarChart3 },
+  { id: "investor", label: "Investor Relations", description: "Financial performance & reports", page: "strategy" as PageId, icon: BarChart3 },
 ];
 
 const PHONE_NUMBER = "0773 383 800";
