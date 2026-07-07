@@ -28,87 +28,149 @@ import { storeProductsPageUrl } from "@/lib/store-config";
    "Our Businesses" — premium holding-company directory page.
 
    Layout (top → bottom):
-     1. Hero banner  — bold headline "Diversified Expertise. Shared Values."
-     2. Directory    — 5 IDENTICAL, equal-sized container cards. Each card:
-                         • company logo (real logo for UTEC, monogram mark
-                           for the rest) on a soft branded zone
-                         • sector badge tags (ICT / Telecom / Cloud, etc.)
-                         • concise TWO-sentence value proposition
-                         • high-contrast primary outbound button labelled
-                           "Visit Website" (UTEC store) or "Explore Entity"
-     3. Group impact — massive aggregate data counters band (5+ Subsidiaries,
-                       12,000+ Employees, 50+ Global Offices, 25+ Years) with
-                       scroll-triggered count-up animation
-     4. Footer       — already global; CTA band at top captures investor /
-                       partner / job-seeker inquiries
+     1. Hero banner    — bold headline "Diversified Expertise. Shared Values."
+     2. Split sections — 5 full-width split-screen sections, one per subsidiary.
+                         Each section alternates image left / right and contains:
+                         • full-bleed photograph with navy brand overlay
+                         • giant watermark index number (01–05)
+                         • company logo tile
+                         • tagline pill + sector badges
+                         • concise two-sentence value proposition
+                         • 2-column services grid
+                         • high-contrast primary CTA — "Visit Website"
+                           (UTEC store) or "Explore Entity" (internal route)
+     3. Group impact   — massive aggregate data counters band (5+ Subsidiaries,
+                         12,000+ Employees, 50+ Global Offices, 25+ Years) with
+                         scroll-triggered count-up animation
+     4. Footer         — already global; CTA band at top captures investor /
+                         partner / job-seeker inquiries
 
    Brand palette ONLY: JOTOFA navy + teal. Theme-aware (light + dark).
    ────────────────────────────────────────────────────────────────────────── */
 
 interface Business {
   id: PageId;
+  /** "01" – "05" — used as the big watermark number */
+  index: string;
   name: string;
+  /** Short sector tagline, e.g. "ICT & Telecommunications" */
+  tagline: string;
+  /** Small UI sector badges */
   sectors: string[];
+  /** Service line-items shown in the 2-col grid */
+  services: string[];
   /** Concise two-sentence value proposition */
   description: string;
   icon: React.ComponentType<{ className?: string }>;
-  /** Real logo (UTEC) — if absent, falls back to a styled monogram mark */
+  /** Full-bleed photograph for the split-section image side */
+  image: string;
+  /** Real logo — if absent, falls back to a styled monogram mark */
   logoSrc?: string;
   /** 2-letter monogram used when no real logo asset exists */
   logoMark: string;
-  /** Outbound link (UTEC store). If absent, card button routes internally */
+  /** Outbound link (UTEC store). If absent, button routes internally */
   website?: { label: string; url: string };
 }
 
 const businesses: Business[] = [
   {
     id: "utec",
+    index: "01",
     name: "UTEC Solutions",
+    tagline: "ICT & Telecommunications",
     sectors: ["ICT", "Telecom", "Cloud"],
+    services: [
+      "Network Infrastructure",
+      "Cloud Solutions",
+      "Cybersecurity",
+      "Software Development",
+      "Telecom Services",
+    ],
     description:
       "Cutting-edge ICT infrastructure, telecommunications, and digital transformation services for modern enterprises. We connect businesses and communities across Tanzania with reliable, scalable technology.",
     icon: Monitor,
+    image: "/images/subsidiaries/utec.jpg",
     logoSrc: "/images/utec-logo.png",
     logoMark: "UT",
     website: { label: "Visit Website", url: storeProductsPageUrl() },
   },
   {
     id: "courier",
+    index: "02",
     name: "Courier & Logistics",
+    tagline: "Reliable Delivery Network",
     sectors: ["Logistics", "Freight", "Last-Mile"],
+    services: [
+      "Express Delivery",
+      "Freight & Cargo",
+      "Warehousing",
+      "Last-Mile Solutions",
+      "Cross-Border Logistics",
+    ],
     description:
       "A trusted logistics and courier network ensuring timely, secure delivery of goods and documents. We operate across Tanzania and East Africa with end-to-end tracking and last-mile coverage.",
     icon: Truck,
+    image: "/images/subsidiaries/courier.jpg",
     logoSrc: "/images/courier-logo.png",
     logoMark: "JC",
   },
   {
     id: "cleaning",
+    index: "03",
     name: "Cleaning & Maids",
+    tagline: "Professional Cleaning",
     sectors: ["Facilities", "Hygiene", "Maintenance"],
+    services: [
+      "Commercial Cleaning",
+      "Residential Services",
+      "Industrial Cleaning",
+      "Specialized Sanitization",
+      "Staffed Housekeeping",
+    ],
     description:
       "Premium cleaning and housekeeping for commercial, residential, and industrial spaces. We deliver hygiene and pristine environments through trained, supervised crews.",
     icon: Sparkles,
+    image: "/images/subsidiaries/cleaning.jpg",
     logoSrc: "/images/cleaning-logo.png",
     logoMark: "JM",
   },
   {
     id: "security",
+    index: "04",
     name: "JOTOFA Security",
+    tagline: "Comprehensive Security",
     sectors: ["Security", "Surveillance", "Risk"],
+    services: [
+      "Manned Guarding",
+      "Electronic Surveillance",
+      "Event Security",
+      "Risk Assessment",
+      "Security Consulting",
+    ],
     description:
       "Robust security services from manned guarding to electronic surveillance. We protect people, assets, and operations with integrity and round-the-clock vigilance.",
     icon: ShieldCheck,
+    image: "/images/subsidiaries/security.jpg",
     logoSrc: "/images/security-logo.png",
     logoMark: "JS",
   },
   {
     id: "staffing",
+    index: "05",
     name: "Staffing & Labour",
+    tagline: "Workforce Solutions",
     sectors: ["Recruitment", "HR", "Workforce"],
+    services: [
+      "Recruitment Services",
+      "Labour Outsourcing",
+      "Payroll Management",
+      "Training & Development",
+      "HR Consulting",
+    ],
     description:
       "Connecting talent with opportunity across skilled and semi-skilled labour supply. We handle recruitment, payroll, and workforce management for industries nationwide.",
     icon: Users,
+    image: "/images/subsidiaries/staffing.jpg",
     logoSrc: "/images/staffing-logo.png",
     logoMark: "JT",
   },
@@ -231,127 +293,189 @@ function BusinessesHero() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   2. DIRECTORY GRID — equal-sized cards
+   2. SPLIT-SCREEN STACKED SECTIONS — one full-width section per subsidiary.
+      Each section alternates image left / right (even = image left, odd = right)
+      and gives every subsidiary its own immersive "moment" with a full-bleed
+      photograph, giant watermark index, logo tile, services grid, and CTA.
    ────────────────────────────────────────────────────────────────────────── */
-function BusinessCard({ business }: { business: Business }) {
+function SplitSection({
+  business,
+  index,
+}: {
+  business: Business;
+  index: number;
+}) {
   const router = useRouter();
   const Icon = business.icon;
+  const reversed = index % 2 === 1;
 
   return (
-    <motion.div className="group relative flex flex-col h-full rounded-2xl bg-card border border-border overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:border-jotofa-accent/50 hover:shadow-[0_24px_60px_-24px_rgba(0,59,100,0.25)] dark:hover:shadow-[0_24px_60px_-24px_rgba(0,0,0,0.6)]">
-      {/* ─── Logo zone ─── */}
-      <div className="relative px-6 pt-6 pb-5 border-b border-border bg-gradient-to-br from-jotofa-navy/[0.04] to-transparent dark:from-white/[0.04] dark:to-transparent">
-        <div className="flex items-start justify-between gap-3">
-          {/* Logo / monogram mark */}
-          <div className="flex items-center justify-center h-14 w-14 rounded-xl bg-white border border-jotofa-navy/10 dark:border-white/10 shadow-sm flex-shrink-0 overflow-hidden">
+    <motion.section
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      className="relative flex flex-col lg:flex-row min-h-[60vh] lg:min-h-[78vh] border-b border-border"
+    >
+      {/* ─── Image / Visual Side ─── */}
+      <div
+        className={`group/img relative flex-1 min-h-[42vh] lg:min-h-full overflow-hidden ${
+          reversed ? "lg:order-2" : ""
+        }`}
+      >
+        <Image
+          src={business.image}
+          alt={business.name}
+          fill
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          className="object-cover transition-transform duration-[1.2s] ease-out group-hover/img:scale-105"
+        />
+        {/* Navy brand overlay — keeps every section on-palette */}
+        <div className="absolute inset-0 bg-gradient-to-br from-jotofa-navy-deep/92 via-jotofa-navy/80 to-jotofa-navy/65" />
+        {/* Teal glow accent */}
+        <div className="absolute -top-24 -right-24 w-72 h-72 bg-jotofa-accent/20 rounded-full blur-[100px] pointer-events-none" />
+
+        {/* Giant watermark index number */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <span className="text-[160px] sm:text-[220px] lg:text-[260px] font-black text-white/[0.09] leading-none select-none">
+            {business.index}
+          </span>
+        </div>
+
+        {/* Logo tile — top-left */}
+        <div className="absolute top-6 left-6 sm:top-8 sm:left-8 z-10">
+          <div className="flex items-center justify-center h-14 w-14 rounded-xl bg-white border border-white/20 shadow-lg overflow-hidden">
             {business.logoSrc ? (
               <Image
                 src={business.logoSrc}
                 alt={`${business.name} logo`}
-                width={56}
-                height={56}
-                className="h-10 w-10 object-contain"
+                width={48}
+                height={48}
+                className="h-9 w-9 object-contain"
               />
             ) : (
-              <span className="text-lg font-black tracking-tight text-jotofa-navy">
+              <span className="text-lg font-black text-jotofa-navy">
                 {business.logoMark}
               </span>
             )}
           </div>
+        </div>
 
-          {/* Icon chip */}
-          <div className="flex items-center justify-center h-9 w-9 rounded-lg bg-jotofa-accent/10 text-jotofa-accent flex-shrink-0">
-            <Icon className="w-4 h-4" />
+        {/* Tagline pill — bottom-left */}
+        <div className="absolute bottom-6 left-6 sm:bottom-8 sm:left-8 z-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md">
+            <Icon className="w-3.5 h-3.5 text-jotofa-accent-light" />
+            <span className="text-xs font-semibold uppercase tracking-wider text-white/95">
+              {business.tagline}
+            </span>
           </div>
         </div>
       </div>
 
-      {/* ─── Body ─── */}
-      <div className="flex flex-col flex-1 px-6 py-5">
-        {/* Sector badge tags */}
-        <div className="flex flex-wrap gap-1.5 mb-3">
-          {business.sectors.map((sector) => (
-            <span
-              key={sector}
-              className="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold uppercase tracking-wide bg-jotofa-navy/[0.06] dark:bg-white/[0.08] text-jotofa-navy/70 dark:text-white/70 border border-jotofa-navy/5 dark:border-white/5"
-            >
-              {sector}
-            </span>
-          ))}
-        </div>
+      {/* ─── Content Side ─── */}
+      <div
+        className={`relative flex-1 flex flex-col justify-center px-6 py-14 sm:px-10 sm:py-16 lg:px-16 lg:py-20 xl:px-20 bg-background ${
+          reversed ? "lg:order-1" : ""
+        }`}
+      >
+        {/* Faint watermark number — top right */}
+        <span
+          aria-hidden
+          className="absolute top-4 right-6 sm:top-6 sm:right-10 text-[100px] sm:text-[140px] lg:text-[160px] font-black text-jotofa-navy/[0.04] dark:text-white/[0.04] leading-none select-none pointer-events-none"
+        >
+          {business.index}
+        </span>
 
-        {/* Name */}
-        <h3 className="text-lg font-bold text-foreground mb-2 leading-tight">
-          {business.name}
-        </h3>
+        <div className="relative z-10 max-w-xl mx-auto lg:mx-0 w-full">
+          {/* Sector badges */}
+          <div className="flex flex-wrap gap-1.5 mb-5">
+            {business.sectors.map((sector) => (
+              <span
+                key={sector}
+                className="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-semibold uppercase tracking-wide bg-jotofa-navy/[0.06] dark:bg-white/[0.08] text-jotofa-navy/70 dark:text-white/70 border border-jotofa-navy/5 dark:border-white/5"
+              >
+                {sector}
+              </span>
+            ))}
+          </div>
 
-        {/* Two-sentence value proposition */}
-        <p className="text-sm text-muted-foreground leading-relaxed mb-5">
-          {business.description}
-        </p>
+          {/* Name */}
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4 leading-[1.1]">
+            {business.name}
+          </h2>
 
-        {/* High-contrast primary outbound button — full-width, pushed to bottom */}
-        <div className="mt-auto pt-2">
-          {business.website ? (
-            <a
-              href={business.website.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 w-full px-5 py-3 rounded-xl bg-jotofa-navy dark:bg-jotofa-accent text-white text-sm font-semibold transition-all hover:bg-jotofa-navy-deep dark:hover:bg-jotofa-accent-dark shadow-[0_6px_18px_-8px_rgba(0,59,100,0.4)] dark:shadow-[0_6px_18px_-8px_rgba(0,169,183,0.5)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-            >
-              {business.website.label}
-              <ExternalLink className="w-4 h-4" />
-            </a>
-          ) : (
-            <button
-              onClick={() => router.push(`/${business.id}`)}
-              className="inline-flex items-center justify-center gap-2 w-full px-5 py-3 rounded-xl bg-jotofa-navy dark:bg-jotofa-accent text-white text-sm font-semibold transition-all hover:bg-jotofa-navy-deep dark:hover:bg-jotofa-accent-dark shadow-[0_6px_18px_-8px_rgba(0,59,100,0.4)] dark:shadow-[0_6px_18px_-8px_rgba(0,169,183,0.5)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-            >
-              Explore Entity
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-            </button>
-          )}
+          {/* Value proposition */}
+          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-8">
+            {business.description}
+          </p>
+
+          {/* Services grid — 2 columns */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-9">
+            {business.services.map((service) => (
+              <div
+                key={service}
+                className="flex items-center gap-2.5 px-4 py-2.5 rounded-lg bg-jotofa-navy/[0.03] dark:bg-white/[0.04] border border-border hover:border-jotofa-accent/40 hover:bg-jotofa-accent/[0.06] transition-all duration-200"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-jotofa-accent flex-shrink-0" />
+                <span className="text-sm font-medium text-foreground/80">
+                  {service}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* High-contrast primary CTA */}
+          <div>
+            {business.website ? (
+              <a
+                href={business.website.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group/btn inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-jotofa-navy dark:bg-jotofa-accent text-white text-sm font-semibold transition-all hover:bg-jotofa-navy-deep dark:hover:bg-jotofa-accent-dark shadow-[0_6px_18px_-8px_rgba(0,59,100,0.4)] dark:shadow-[0_6px_18px_-8px_rgba(0,169,183,0.5)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              >
+                {business.website.label}
+                <ExternalLink className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5" />
+              </a>
+            ) : (
+              <button
+                onClick={() => router.push(`/${business.id}`)}
+                className="group/btn inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-jotofa-navy dark:bg-jotofa-accent text-white text-sm font-semibold transition-all hover:bg-jotofa-navy-deep dark:hover:bg-jotofa-accent-dark shadow-[0_6px_18px_-8px_rgba(0,59,100,0.4)] dark:shadow-[0_6px_18px_-8px_rgba(0,169,183,0.5)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              >
+                Explore Entity
+                <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5" />
+              </button>
+            )}
+          </div>
         </div>
       </div>
-    </motion.div>
+    </motion.section>
   );
 }
 
-function DirectoryGrid() {
+function SplitSections() {
   return (
-    <section className="relative py-20 sm:py-28">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
-        <ScrollReveal className="text-center mb-12 sm:mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4">
-            Our Subsidiaries
-          </h2>
-          <p className="mx-auto max-w-2xl text-muted-foreground text-lg">
-            Five independent entities. Five areas of expertise. One shared
-            standard of excellence.
-          </p>
-        </ScrollReveal>
+    <section className="relative">
+      {/* Section header */}
+      <ScrollReveal className="text-center py-20 sm:py-24">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4">
+          Our Subsidiaries
+        </h2>
+        <p className="mx-auto max-w-2xl text-muted-foreground text-lg">
+          Five independent entities. Five areas of expertise. One shared
+          standard of excellence.
+        </p>
+      </ScrollReveal>
 
-        {/* Equal-sized cards grid.
-            On lg+, uses a 6-col grid with each card spanning 2 cols, and the
-            4th card offset to col-start-2 so the 2nd row (cards 4 + 5) is
-            centered under the first row of 3 — a polished "magazine" layout
-            that keeps every card IDENTICAL in size and corporate weight. */}
-        <StaggerContainer
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-5 lg:gap-6"
-          staggerDelay={0.08}
-        >
-          {businesses.map((b, i) => (
-            <StaggerItem
-              key={b.id}
-              className={`sm:col-span-1 lg:col-span-2 ${
-                i === 3 ? "lg:col-start-2" : ""
-              }`}
-            >
-              <BusinessCard business={b} />
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
+      {/* Split-screen stacked sections — each subsidiary gets a full-width
+          immersive split section. */}
+      <div className="border-t border-border">
+        {businesses.map((business, index) => (
+          <SplitSection
+            key={business.id}
+            business={business}
+            index={index}
+          />
+        ))}
       </div>
     </section>
   );
@@ -469,14 +593,14 @@ function GroupImpact() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   Page — composes Hero + Directory + Group Impact.
+   Page — composes Hero + Split Sections + Group Impact.
    (Footer is rendered globally by the page shell.)
    ────────────────────────────────────────────────────────────────────────── */
 export function BusinessesPage() {
   return (
     <>
       <BusinessesHero />
-      <DirectoryGrid />
+      <SplitSections />
       <GroupImpact />
     </>
   );
