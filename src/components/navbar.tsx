@@ -47,7 +47,7 @@ export function Navbar() {
   const [hoveredBizIndex, setHoveredBizIndex] = useState(0);
   const [mobileExpanded, setMobileExpanded] = useState<"businesses" | "about" | null>(null);
   const { setTheme, resolvedTheme } = useTheme();
-  const { activePage, setActivePage } = usePage();
+  const { activePage, setActivePage, prefetchPage } = usePage();
   const dropdownContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -128,7 +128,7 @@ export function Navbar() {
                 <div
                   key={item.id}
                   className="relative flex items-stretch"
-                  onMouseEnter={item.hasDropdown ? () => openMenu(item.hasDropdown) : undefined}
+                  onMouseEnter={() => { prefetchPage(item.id); if (item.hasDropdown) openMenu(item.hasDropdown); }}
                   onMouseLeave={item.hasDropdown ? scheduleCloseMenu : undefined}
                 >
                   <button
@@ -174,7 +174,7 @@ export function Navbar() {
                             <div className="border-r border-jotofa-navy/6 dark:border-white/6 p-2">
                               <div className="px-3 py-1.5 mb-1"><span className="text-[10px] font-semibold uppercase tracking-widest text-jotofa-navy/40 dark:text-white/30">Subsidiaries</span></div>
                               {businessItems.map((biz, idx) => (
-                                <button key={biz.id} onMouseEnter={() => setHoveredBizIndex(idx)} onFocus={() => setHoveredBizIndex(idx)} onClick={() => handleNavClick(biz.page)}
+                                <button key={biz.id} onMouseEnter={() => { setHoveredBizIndex(idx); prefetchPage(biz.page); }} onFocus={() => setHoveredBizIndex(idx)} onClick={() => handleNavClick(biz.page)}
                                   className={`flex items-center gap-3 w-full text-left px-3 py-2 rounded-lg transition-all duration-200 group/biz cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent ${hoveredBizIndex === idx ? "bg-jotofa-navy/[0.04] dark:bg-white/[0.06]" : "hover:bg-jotofa-navy/[0.02] dark:hover:bg-white/[0.03]"}`}>
                                   <div className="flex-shrink-0 w-9 h-9 rounded-lg overflow-hidden flex items-center justify-center bg-white border border-black/5 dark:border-white/10 shadow-sm">
                                     <Image

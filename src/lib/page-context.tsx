@@ -21,6 +21,8 @@ export type PageId =
 interface PageContextType {
   activePage: PageId;
   setActivePage: (page: PageId) => void;
+  /** Prefetch a route's data so the next click is instant. Call on hover/focus. */
+  prefetchPage: (page: PageId) => void;
   /** True while a client-side navigation is in flight (for the top progress bar). */
   navigating: boolean;
 }
@@ -28,6 +30,7 @@ interface PageContextType {
 const PageContext = createContext<PageContextType>({
   activePage: "home",
   setActivePage: () => {},
+  prefetchPage: () => {},
   navigating: false,
 });
 
@@ -83,16 +86,24 @@ export function PageProvider({ children }: { children: ReactNode }) {
 
   // Real URL-based navigation: set the progress flag BEFORE router.push so the
   // top bar appears instantly on click, then push the URL. The effect above
-  // clears the flag once the new route renders.
+  // clears the flag once the new route renders. Next.js App Router handles
+  // scroll-to-top automatically on navigation (and respects
+  // data-scroll-behavior on <html> to disable smooth scroll during the jump).
   const setActivePage = useCallback((page: PageId) => {
     setNavigating(true);
     const url = page === "home" ? "/" : `/${page}`;
     router.push(url);
-    window.scrollTo({ top: 0 });
+  }, [router]);
+
+  // Prefetch a route on hover/focus so the actual click is near-instant.
+  // Next.js App Router caches the prefetched RSC payload + assets.
+  const prefetchPage = useCallback((page: PageId) => {
+    const url = page === "home" ? "/" : `/${page}`;
+    router.prefetch(url);
   }, [router]);
 
   return (
-    <PageContext.Provider value={{ activePage, setActivePage, navigating }}>
+    <PageContext.Provider value={{ activePage, setActivePage, prefetchPage, navigating }}>
       {children}
     </PageContext.Provider>
   );

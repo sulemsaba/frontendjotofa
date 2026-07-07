@@ -29,16 +29,20 @@ import { usePage, PageId } from "@/lib/page-context";
      6. CTA        — centered "Ready to Partner..." + Contact button.
 
    Brand palette ONLY (JOTOFA navy + teal). Theme-aware (light + dark).
-   Scroll fade-up animations via framer-motion whileInView.
+   Scroll fade-up animations via framer-motion whileInView — NO stagger
+   delays so content appears together rather than trickling in.
+   Fully responsive: mobile-first grids, appropriate type scale, compact
+   spacing on small screens.
    ────────────────────────────────────────────────────────────────────────── */
 
-/* Shared framer-motion variant — opacity 0 → 1, y 24 → 0 (matches the
-   mockup's `.fade` IntersectionObserver behaviour). */
+/* Shared framer-motion variant — opacity 0 → 1, y 16 → 0. Short duration
+   (0.4s) so sections arrive quickly. NO stagger delays — every element in
+   a section animates together so content "shows up all at once" on load. */
 const fadeUp = {
-  initial: { opacity: 0, y: 24 },
+  initial: { opacity: 0, y: 16 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-50px" },
-  transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const },
+  viewport: { once: true, margin: "-40px" },
+  transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] as const },
 };
 
 /* ─── Data ─── */
@@ -159,20 +163,20 @@ const stats: Stat[] = [
 
 function AboutHero() {
   return (
-    <section className="border-b border-border py-20 sm:py-28 lg:py-32">
+    <section className="border-b border-border pt-14 pb-16 sm:pt-20 sm:pb-24 lg:pt-32 lg:pb-32">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-10 lg:gap-20 items-center">
           <motion.div {...fadeUp}>
-            <div className="text-xs font-semibold uppercase tracking-[0.15em] text-jotofa-accent mb-6">
+            <div className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.15em] text-jotofa-accent mb-5 sm:mb-6">
               About JOTOFA Group
             </div>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground leading-[1.05] mb-8">
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-foreground leading-[1.1] sm:leading-[1.05] mb-6 sm:mb-8">
               Five Arms.
               <br />
               One Unified{" "}
               <span className="text-gold-gradient">Vision.</span>
             </h1>
-            <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-[540px]">
+            <p className="text-base sm:text-xl text-muted-foreground leading-relaxed max-w-[540px]">
               A diversified Tanzanian holding company driving excellence through
               ICT, logistics, professional services, security, and staffing —
               empowering communities and industries across East Africa.
@@ -181,7 +185,6 @@ function AboutHero() {
 
           <motion.div
             {...fadeUp}
-            transition={{ ...fadeUp.transition, delay: 0.15 }}
             className="relative rounded-2xl overflow-hidden aspect-[4/5] shadow-[0_20px_60px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
           >
             <Image
@@ -201,16 +204,16 @@ function AboutHero() {
 
 function Story() {
   return (
-    <section className="border-b border-border py-20 sm:py-28 lg:py-32">
+    <section className="border-b border-border py-14 sm:py-20 lg:py-32">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-8">
-        <motion.div {...fadeUp} className="max-w-[640px] mb-16 lg:mb-20">
-          <div className="text-xs font-semibold uppercase tracking-[0.15em] text-jotofa-accent mb-4">
+        <motion.div {...fadeUp} className="max-w-[640px] mb-12 sm:mb-16 lg:mb-20">
+          <div className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.15em] text-jotofa-accent mb-4">
             Our Journey
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-bold tracking-tight text-foreground leading-[1.2] mb-6">
+          <h2 className="text-2xl sm:text-4xl lg:text-[2.75rem] font-bold tracking-tight text-foreground leading-[1.2] mb-5 sm:mb-6">
             Expanding into East African Markets
           </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">
+          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
             What began as a vision to deliver integrated business solutions in
             Tanzania has evolved into a regional powerhouse through five
             specialized subsidiaries.
@@ -218,23 +221,20 @@ function Story() {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-16 lg:gap-x-20 gap-y-0">
-          {timeline.map((item, i) => (
+          {timeline.map((item) => (
             <motion.div
               key={item.year}
               {...fadeUp}
-              transition={{ ...fadeUp.transition, delay: i * 0.08 }}
-              className={`grid grid-cols-[80px_1fr] gap-8 py-8 border-t border-border ${
-                i === timeline.length - 1 ? "lg:border-b border-b" : ""
-              }`}
+              className="grid grid-cols-[56px_1fr] sm:grid-cols-[80px_1fr] gap-4 sm:gap-8 py-6 sm:py-8 border-t border-border last:border-b"
             >
               <div className="text-sm font-bold text-jotofa-accent pt-1">
                 {item.year}
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-foreground mb-2">
+                <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2">
                   {item.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed text-[0.95rem]">
+                <p className="text-sm sm:text-[0.95rem] text-muted-foreground leading-relaxed">
                   {item.description}
                 </p>
               </div>
@@ -248,33 +248,33 @@ function Story() {
 
 function Purpose() {
   return (
-    <section className="py-20 sm:py-28 lg:py-32 bg-muted/40 dark:bg-white/[0.02]">
+    <section className="py-14 sm:py-20 lg:py-32 bg-muted/40 dark:bg-white/[0.02]">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 mb-20 lg:mb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 mb-16 sm:mb-20 lg:mb-24">
           <motion.div {...fadeUp}>
-            <div className="text-xs font-semibold uppercase tracking-[0.15em] text-jotofa-accent mb-4">
+            <div className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.15em] text-jotofa-accent mb-4">
               Our Purpose
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-bold tracking-tight text-foreground leading-[1.2] mb-12">
+            <h2 className="text-2xl sm:text-4xl lg:text-[2.75rem] font-bold tracking-tight text-foreground leading-[1.2] mb-8 sm:mb-12">
               Driven by Excellence, Guided by Impact
             </h2>
 
-            <div className="mb-10 pl-6 border-l-2 border-jotofa-accent">
-              <h3 className="text-lg font-semibold text-foreground mb-2">
+            <div className="mb-8 sm:mb-10 pl-5 sm:pl-6 border-l-2 border-jotofa-accent">
+              <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">
                 Our Mission
               </h3>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                 To empower businesses and communities across East Africa by
                 delivering specialized, high-quality solutions in technology,
                 logistics, facility management, security, and human capital.
               </p>
             </div>
 
-            <div className="pl-6 border-l-2 border-jotofa-accent">
-              <h3 className="text-lg font-semibold text-foreground mb-2">
+            <div className="pl-5 sm:pl-6 border-l-2 border-jotofa-accent">
+              <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">
                 Our Vision
               </h3>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                 To be East Africa&apos;s most trusted and integrated holding
                 company, recognized for uniting five specialized arms under one
                 commitment to quality, innovation, and impact.
@@ -284,8 +284,7 @@ function Purpose() {
 
           <motion.div
             {...fadeUp}
-            transition={{ ...fadeUp.transition, delay: 0.15 }}
-            className="relative rounded-2xl overflow-hidden aspect-square shadow-[0_20px_60px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
+            className="relative rounded-2xl overflow-hidden aspect-[4/3] sm:aspect-square shadow-[0_20px_60px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
           >
             <Image
               src="/images/jotofa-hero-3.jpeg"
@@ -299,22 +298,22 @@ function Purpose() {
 
         <motion.div
           {...fadeUp}
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6"
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6"
         >
           {values.map((value) => {
             const Icon = value.icon;
             return (
             <div
               key={value.title}
-              className="p-6 sm:p-8 bg-background border border-border rounded-xl text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)] hover:border-jotofa-accent"
+              className="p-5 sm:p-6 lg:p-8 bg-background border border-border rounded-xl text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)] hover:border-jotofa-accent"
             >
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-jotofa-accent/10 text-jotofa-accent mb-4">
-                <Icon className="w-6 h-6" />
+              <div className="inline-flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-jotofa-accent/10 text-jotofa-accent mb-3 sm:mb-4">
+                <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
-              <h4 className="text-base font-semibold text-foreground mb-2">
+              <h4 className="text-sm sm:text-base font-semibold text-foreground mb-1.5 sm:mb-2">
                 {value.title}
               </h4>
-              <p className="text-sm text-muted-foreground leading-relaxed">
+              <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
                 {value.description}
               </p>
             </div>
@@ -330,34 +329,33 @@ function Ecosystem() {
   const { setActivePage } = usePage();
 
   return (
-    <section className="border-b border-border py-20 sm:py-28 lg:py-32">
+    <section className="border-b border-border py-14 sm:py-20 lg:py-32">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-8">
-        <motion.div {...fadeUp} className="max-w-[640px] mb-12 lg:mb-16">
-          <div className="text-xs font-semibold uppercase tracking-[0.15em] text-jotofa-accent mb-4">
+        <motion.div {...fadeUp} className="max-w-[640px] mb-10 sm:mb-12 lg:mb-16">
+          <div className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.15em] text-jotofa-accent mb-4">
             Our Companies
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-bold tracking-tight text-foreground leading-[1.2] mb-6">
+          <h2 className="text-2xl sm:text-4xl lg:text-[2.75rem] font-bold tracking-tight text-foreground leading-[1.2] mb-5 sm:mb-6">
             Five Arms, <span className="text-gold-gradient">One Vision</span>
           </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">
+          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
             Each subsidiary is a pillar of our group — specialized, yet united
             by a commitment to quality, innovation, and impact.
           </p>
         </motion.div>
 
-        <div className="grid gap-4">
-          {ecosystem.map((item, i) => (
+        <div className="grid gap-3 sm:gap-4">
+          {ecosystem.map((item) => (
             <motion.button
               key={item.number}
               {...fadeUp}
-              transition={{ ...fadeUp.transition, delay: i * 0.06 }}
               onClick={() => setActivePage(item.page)}
-              className="group grid grid-cols-[60px_1fr_auto] sm:grid-cols-[60px_1fr_auto] items-center gap-6 sm:gap-8 p-6 sm:p-8 bg-muted/40 dark:bg-white/[0.03] rounded-xl text-left transition-all duration-300 hover:bg-background hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:translate-x-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="group grid grid-cols-[44px_1fr_auto] sm:grid-cols-[60px_1fr_auto] items-center gap-3 sm:gap-8 p-4 sm:p-6 lg:p-8 bg-muted/40 dark:bg-white/[0.03] rounded-xl text-left transition-all duration-300 hover:bg-background hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:translate-x-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
-              <span className="text-2xl font-extrabold text-jotofa-accent tabular-nums">
+              <span className="text-xl sm:text-2xl font-extrabold text-jotofa-accent tabular-nums">
                 {item.number}
               </span>
-              <div className="flex items-center gap-4 min-w-0">
+              <div className="flex items-center gap-3 sm:gap-4 min-w-0">
                 <div className="hidden sm:flex flex-shrink-0 w-11 h-11 rounded-lg overflow-hidden items-center justify-center bg-white border border-black/5 dark:border-white/10 shadow-sm">
                   <Image
                     src={item.logo}
@@ -368,15 +366,15 @@ function Ecosystem() {
                   />
                 </div>
                 <div className="min-w-0">
-                  <h3 className="text-xl sm:text-2xl font-semibold text-foreground mb-1">
+                  <h3 className="text-base sm:text-2xl font-semibold text-foreground mb-0.5 sm:mb-1">
                     {item.name}
                   </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
+                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed line-clamp-2 sm:line-clamp-none">
                     {item.description}
                   </p>
                 </div>
               </div>
-              <ArrowRight className="w-6 h-6 text-muted-foreground/60 transition-all duration-300 group-hover:text-jotofa-accent group-hover:translate-x-1 flex-shrink-0" />
+              <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-muted-foreground/60 transition-all duration-300 group-hover:text-jotofa-accent group-hover:translate-x-1 flex-shrink-0" />
             </motion.button>
           ))}
         </div>
@@ -387,18 +385,18 @@ function Ecosystem() {
 
 function Stats() {
   return (
-    <section className="border-b border-border py-20 sm:py-28 lg:py-32">
+    <section className="border-b border-border py-14 sm:py-20 lg:py-32">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-8">
         <motion.div
           {...fadeUp}
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-10 lg:gap-12"
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8 sm:gap-10 lg:gap-12"
         >
           {stats.map((stat) => (
             <div key={stat.label} className="text-center">
-              <div className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-jotofa-accent leading-none mb-2 tracking-tight tabular-nums">
+              <div className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-jotofa-accent leading-none mb-2 tracking-tight tabular-nums">
                 {stat.number}
               </div>
-              <div className="text-sm sm:text-base text-muted-foreground font-medium">
+              <div className="text-xs sm:text-base text-muted-foreground font-medium">
                 {stat.label}
               </div>
             </div>
@@ -413,21 +411,21 @@ function CTA() {
   const { setActivePage } = usePage();
 
   return (
-    <section className="py-20 sm:py-28 lg:py-32 text-center">
+    <section className="py-14 sm:py-20 lg:py-32 text-center">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-8">
         <motion.div {...fadeUp}>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground leading-[1.2] mb-6 max-w-[800px] mx-auto">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground leading-[1.2] mb-5 sm:mb-6 max-w-[800px] mx-auto">
             Ready to Partner with East Africa&apos;s{" "}
             <span className="text-gold-gradient">Unified Powerhouse?</span>
           </h2>
-          <p className="text-lg text-muted-foreground mb-10 max-w-[600px] mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg text-muted-foreground mb-8 sm:mb-10 max-w-[600px] mx-auto leading-relaxed">
             Whether you need ICT solutions, logistics support, facility
             management, security services, or workforce solutions — JOTOFA Group
             delivers excellence under one trusted roof.
           </p>
           <button
             onClick={() => setActivePage("contact")}
-            className="inline-flex items-center justify-center gap-2 px-10 py-4 rounded-lg bg-jotofa-navy dark:bg-jotofa-accent text-white text-base font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(0,59,100,0.3)] dark:hover:shadow-[0_12px_40px_rgba(0,169,183,0.4)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            className="inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-3.5 sm:py-4 rounded-lg bg-jotofa-navy dark:bg-jotofa-accent text-white text-sm sm:text-base font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(0,59,100,0.3)] dark:hover:shadow-[0_12px_40px_rgba(0,169,183,0.4)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             Contact JOTOFA Group
             <ArrowRight className="w-4 h-4" />
