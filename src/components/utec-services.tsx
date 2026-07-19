@@ -143,7 +143,7 @@ function ServiceCell({ service, index }: { service: Service; index: number }) {
                 featured ? "w-14 h-14" : "w-11 h-11"
               }`}
             >
-              <Icon className={featured ? "w-7 h-7" : "w-5 h-5"} style={{ color: "#67e8f9" }} />
+              <Icon className={`${featured ? "w-7 h-7" : "w-5 h-5"} text-jotofa-accent-light`} />
             </span>
             <span className="text-[11px] font-mono font-semibold text-white/60 tracking-widest">
               {num}

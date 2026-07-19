@@ -77,19 +77,19 @@ const socialLinks = [
     icon: Linkedin,
     label: "LinkedIn",
     href: "https://linkedin.com/company/jotofagroup",
-    hoverBg: "hover:bg-[#0A66C2]",
+    hoverBg: "hover:bg-social-linkedin",
   },
   {
     icon: Twitter,
     label: "Twitter / X",
     href: "https://twitter.com/jotofagroup",
-    hoverBg: "hover:bg-[#1DA1F2]",
+    hoverBg: "hover:bg-social-twitter",
   },
   {
     icon: Facebook,
     label: "Facebook",
     href: "https://facebook.com/jotofagroup",
-    hoverBg: "hover:bg-[#1877F2]",
+    hoverBg: "hover:bg-social-facebook",
   },
 ];
 
@@ -219,11 +219,11 @@ function CtaBand() {
     <div className="py-10 sm:py-12 border-b border-border">
       <div className="flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
         <div className="max-w-xl">
-          <h3 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight">
+          <h3 className="h2 text-foreground">
             Let&apos;s{" "}
             <span className="text-gold-gradient">Build Together</span>
           </h3>
-          <p className="mt-2 text-sm sm:text-base text-muted-foreground">
+          <p className="mt-2 body-sm text-sm sm:text-base">
             Whether you&apos;re looking for a partnership, a service inquiry,
             or just want to learn more — we&apos;re here to help.
           </p>
@@ -247,7 +247,7 @@ function CtaBand() {
 export function Footer() {
   return (
     <footer className="relative border-t border-border bg-background">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="container-page">
         {/* ─── CTA band — replaces the old homepage Contact section ─── */}
         <CtaBand />
 
@@ -348,7 +348,7 @@ export function Footer() {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-[#25D366]/10 text-[#25D366] text-xs font-medium hover:bg-[#25D366]/20 transition-colors"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-social-whatsapp/10 text-social-whatsapp text-xs font-medium hover:bg-social-whatsapp/20 transition-colors"
             >
               <Phone className="w-3 h-3" />
               Chat on WhatsApp

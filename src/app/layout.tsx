@@ -103,15 +103,8 @@ export default function RootLayout({
 
         {/* Noscript fallback for users with JS disabled */}
         <noscript>
-          <div
-            style={{
-              padding: "2rem",
-              textAlign: "center",
-              fontFamily: "system-ui, sans-serif",
-              color: "#003B64",
-            }}
-          >
-            <h1 style={{ fontSize: "1.5rem", marginBottom: "0.5rem" }}>
+          <div className="p-8 text-center text-jotofa-navy" style={{ fontFamily: "system-ui, sans-serif" }}>
+            <h1 className="text-2xl mb-2 font-bold">
               JOTOFA GROUP
             </h1>
             <p>

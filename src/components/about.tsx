@@ -163,20 +163,20 @@ const stats: Stat[] = [
 
 function AboutHero() {
   return (
-    <section className="border-b border-border pt-14 pb-16 sm:pt-20 sm:pb-24 lg:pt-32 lg:pb-32">
-      <div className="mx-auto max-w-[1280px] px-4 sm:px-8">
+    <section className="border-b border-border section-py">
+      <div className="container-wide">
         <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-10 lg:gap-20 items-center">
           <motion.div {...fadeUp}>
-            <div className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.15em] text-jotofa-accent mb-5 sm:mb-6">
+            <div className="eyebrow mb-5 sm:mb-6">
               About JOTOFA Group
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-foreground leading-[1.1] sm:leading-[1.05] mb-6 sm:mb-8">
+            <h1 className="h1 text-foreground mb-6 sm:mb-8">
               Five Arms.
               <br />
               One Unified{" "}
               <span className="text-gold-gradient">Vision.</span>
             </h1>
-            <p className="text-base sm:text-xl text-muted-foreground leading-relaxed max-w-[540px]">
+            <p className="lead max-w-[540px]">
               A diversified Tanzanian holding company driving excellence through
               ICT, logistics, professional services, security, and staffing —
               empowering communities and industries across East Africa.
@@ -204,16 +204,16 @@ function AboutHero() {
 
 function Story() {
   return (
-    <section className="border-b border-border py-14 sm:py-20 lg:py-32">
-      <div className="mx-auto max-w-[1280px] px-4 sm:px-8">
+    <section className="border-b border-border section-py">
+      <div className="container-wide">
         <motion.div {...fadeUp} className="max-w-[640px] mb-12 sm:mb-16 lg:mb-20">
-          <div className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.15em] text-jotofa-accent mb-4">
+          <div className="eyebrow mb-4">
             Our Journey
           </div>
-          <h2 className="text-2xl sm:text-4xl lg:text-[2.75rem] font-bold tracking-tight text-foreground leading-[1.2] mb-5 sm:mb-6">
+          <h2 className="h2 text-foreground mb-5 sm:mb-6">
             Expanding into East African Markets
           </h2>
-          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
+          <p className="lead">
             What began as a vision to deliver integrated business solutions in
             Tanzania has evolved into a regional powerhouse through five
             specialized subsidiaries.
@@ -227,14 +227,14 @@ function Story() {
               {...fadeUp}
               className="grid grid-cols-[56px_1fr] sm:grid-cols-[80px_1fr] gap-4 sm:gap-8 py-6 sm:py-8 border-t border-border last:border-b"
             >
-              <div className="text-sm font-bold text-jotofa-accent pt-1">
+              <div className="text-sm font-bold text-jotofa-accent pt-1 tabular-nums">
                 {item.year}
               </div>
               <div>
-                <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2">
+                <h3 className="h3 text-foreground mb-2">
                   {item.title}
                 </h3>
-                <p className="text-sm sm:text-[0.95rem] text-muted-foreground leading-relaxed">
+                <p className="body-sm">
                   {item.description}
                 </p>
               </div>
@@ -248,22 +248,22 @@ function Story() {
 
 function Purpose() {
   return (
-    <section className="py-14 sm:py-20 lg:py-32 bg-muted/40 dark:bg-white/[0.02]">
-      <div className="mx-auto max-w-[1280px] px-4 sm:px-8">
+    <section className="section-py bg-muted/40 dark:bg-white/[0.02]">
+      <div className="container-wide">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 mb-16 sm:mb-20 lg:mb-24">
           <motion.div {...fadeUp}>
-            <div className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.15em] text-jotofa-accent mb-4">
+            <div className="eyebrow mb-4">
               Our Purpose
             </div>
-            <h2 className="text-2xl sm:text-4xl lg:text-[2.75rem] font-bold tracking-tight text-foreground leading-[1.2] mb-8 sm:mb-12">
+            <h2 className="h2 text-foreground mb-8 sm:mb-12">
               Driven by Excellence, Guided by Impact
             </h2>
 
             <div className="mb-8 sm:mb-10 pl-5 sm:pl-6 border-l-2 border-jotofa-accent">
-              <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">
+              <h3 className="h4 text-foreground mb-2">
                 Our Mission
               </h3>
-              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+              <p className="body-sm">
                 To empower businesses and communities across East Africa by
                 delivering specialized, high-quality solutions in technology,
                 logistics, facility management, security, and human capital.
@@ -271,10 +271,10 @@ function Purpose() {
             </div>
 
             <div className="pl-5 sm:pl-6 border-l-2 border-jotofa-accent">
-              <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">
+              <h3 className="h4 text-foreground mb-2">
                 Our Vision
               </h3>
-              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+              <p className="body-sm">
                 To be East Africa&apos;s most trusted and integrated holding
                 company, recognized for uniting five specialized arms under one
                 commitment to quality, innovation, and impact.
@@ -310,10 +310,10 @@ function Purpose() {
               <div className="inline-flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-jotofa-accent/10 text-jotofa-accent mb-3 sm:mb-4">
                 <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
-              <h4 className="text-sm sm:text-base font-semibold text-foreground mb-1.5 sm:mb-2">
+              <h4 className="h4 text-foreground mb-1.5 sm:mb-2">
                 {value.title}
               </h4>
-              <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+              <p className="body-sm">
                 {value.description}
               </p>
             </div>
@@ -329,16 +329,16 @@ function Ecosystem() {
   const { setActivePage } = usePage();
 
   return (
-    <section className="border-b border-border py-14 sm:py-20 lg:py-32">
-      <div className="mx-auto max-w-[1280px] px-4 sm:px-8">
+    <section className="border-b border-border section-py">
+      <div className="container-wide">
         <motion.div {...fadeUp} className="max-w-[640px] mb-10 sm:mb-12 lg:mb-16">
-          <div className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.15em] text-jotofa-accent mb-4">
+          <div className="eyebrow mb-4">
             Our Companies
           </div>
-          <h2 className="text-2xl sm:text-4xl lg:text-[2.75rem] font-bold tracking-tight text-foreground leading-[1.2] mb-5 sm:mb-6">
+          <h2 className="h2 text-foreground mb-5 sm:mb-6">
             Five Arms, <span className="text-gold-gradient">One Vision</span>
           </h2>
-          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
+          <p className="lead">
             Each subsidiary is a pillar of our group — specialized, yet united
             by a commitment to quality, innovation, and impact.
           </p>
@@ -366,10 +366,10 @@ function Ecosystem() {
                   />
                 </div>
                 <div className="min-w-0">
-                  <h3 className="text-base sm:text-2xl font-semibold text-foreground mb-0.5 sm:mb-1">
+                  <h3 className="h3 text-foreground mb-0.5 sm:mb-1">
                     {item.name}
                   </h3>
-                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed line-clamp-2 sm:line-clamp-none">
+                  <p className="body-sm line-clamp-2 sm:line-clamp-none">
                     {item.description}
                   </p>
                 </div>
@@ -385,8 +385,8 @@ function Ecosystem() {
 
 function Stats() {
   return (
-    <section className="border-b border-border py-14 sm:py-20 lg:py-32">
-      <div className="mx-auto max-w-[1280px] px-4 sm:px-8">
+    <section className="border-b border-border section-py">
+      <div className="container-wide">
         <motion.div
           {...fadeUp}
           className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8 sm:gap-10 lg:gap-12"
@@ -396,7 +396,7 @@ function Stats() {
               <div className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-jotofa-accent leading-none mb-2 tracking-tight tabular-nums">
                 {stat.number}
               </div>
-              <div className="text-xs sm:text-base text-muted-foreground font-medium">
+              <div className="body-sm text-xs sm:text-base font-medium">
                 {stat.label}
               </div>
             </div>
@@ -411,14 +411,14 @@ function CTA() {
   const { setActivePage } = usePage();
 
   return (
-    <section className="py-14 sm:py-20 lg:py-32 text-center">
-      <div className="mx-auto max-w-[1280px] px-4 sm:px-8">
+    <section className="section-py text-center">
+      <div className="container-wide">
         <motion.div {...fadeUp}>
-          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground leading-[1.2] mb-5 sm:mb-6 max-w-[800px] mx-auto">
+          <h2 className="h2 text-foreground mb-5 sm:mb-6 max-w-[800px] mx-auto">
             Ready to Partner with East Africa&apos;s{" "}
             <span className="text-gold-gradient">Unified Powerhouse?</span>
           </h2>
-          <p className="text-base sm:text-lg text-muted-foreground mb-8 sm:mb-10 max-w-[600px] mx-auto leading-relaxed">
+          <p className="lead mb-8 sm:mb-10 max-w-[600px] mx-auto">
             Whether you need ICT solutions, logistics support, facility
             management, security services, or workforce solutions — JOTOFA Group
             delivers excellence under one trusted roof.

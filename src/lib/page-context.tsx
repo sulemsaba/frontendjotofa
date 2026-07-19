@@ -102,6 +102,31 @@ export function PageProvider({ children }: { children: ReactNode }) {
     router.prefetch(url);
   }, [router]);
 
+  // ─── Idle-time prefetching of ALL routes ───────────────────────────
+  // On first load, once the browser is idle, prefetch every route so that
+  // the FIRST click to any nav item is instant (no 700–1700ms dev compile
+  // wait). Uses requestIdleCallback with a fallback to setTimeout. Runs
+  // only once per page mount. In production these are already pre-built,
+  // so this is mostly a dev-mode win — but it also warms the RSC cache.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const allPages: PageId[] = [
+      "about", "businesses", "strategy", "csr", "news",
+      "careers", "contact", "utec", "courier", "cleaning",
+      "security", "staffing",
+    ];
+    const schedule = (cb: () => void) =>
+      "requestIdleCallback" in window
+        ? (window as Window).requestIdleCallback(cb, { timeout: 3000 })
+        : window.setTimeout(cb, 1200);
+    schedule(() => {
+      allPages.forEach((p) => {
+        const url = p === "home" ? "/" : `/${p}`;
+        router.prefetch(url);
+      });
+    });
+  }, [router]);
+
   return (
     <PageContext.Provider value={{ activePage, setActivePage, prefetchPage, navigating }}>
       {children}

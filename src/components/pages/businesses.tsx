@@ -216,11 +216,11 @@ function Counter({
    ────────────────────────────────────────────────────────────────────────── */
 function BusinessesHero() {
   return (
-    <section className="relative overflow-hidden bg-[#F4FAFC] dark:bg-jotofa-navy-mid py-24 sm:py-32">
+    <section className="relative overflow-hidden bg-jotofa-accent/5 dark:bg-jotofa-navy-mid py-24 sm:py-32">
       {/* Background layers */}
       <div
         aria-hidden
-        className="absolute inset-0 bg-gradient-to-br from-white via-[#F4FAFC] to-[#E6F4F6] dark:hidden"
+        className="absolute inset-0 bg-gradient-to-br from-white via-jotofa-accent/5 to-jotofa-accent/10 dark:hidden"
       />
       <div
         aria-hidden
@@ -233,12 +233,12 @@ function BusinessesHero() {
       {/* Teal glow — top right */}
       <div
         aria-hidden
-        className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#00A9B7]/15 dark:bg-jotofa-accent/10 rounded-full blur-[140px] pointer-events-none"
+        className="absolute top-0 right-0 w-[500px] h-[500px] bg-jotofa-accent/15 dark:bg-jotofa-accent/10 rounded-full blur-[140px] pointer-events-none"
       />
       {/* Navy glow — bottom left (light mode) */}
       <div
         aria-hidden
-        className="absolute bottom-0 left-0 w-[420px] h-[420px] bg-[#003B64]/8 dark:hidden rounded-full blur-[120px] pointer-events-none"
+        className="absolute bottom-0 left-0 w-[420px] h-[420px] bg-jotofa-navy/[0.08] dark:hidden rounded-full blur-[120px] pointer-events-none"
       />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -259,7 +259,7 @@ function BusinessesHero() {
           </h1>
 
           {/* Mission subtitle */}
-          <p className="mx-auto max-w-2xl text-base sm:text-lg text-[#5E6A75] dark:text-white/75 leading-relaxed mb-10">
+          <p className="mx-auto max-w-2xl text-base sm:text-lg text-jotofa-text-secondary dark:text-white/75 leading-relaxed mb-10">
             JOTOFA Group unites five specialized subsidiaries under one
             corporate umbrella — each an independent leader in its sector, all
             bound by the same commitment to quality, integrity, and lasting

@@ -39,8 +39,7 @@ export function WhatsAppButton() {
         aria-label="Chat on WhatsApp"
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
-        className="flex items-center justify-center w-12 h-12 rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
-        style={{ backgroundColor: "#25D366" }}
+        className="flex items-center justify-center w-12 h-12 rounded-full bg-social-whatsapp shadow-lg hover:shadow-xl transition-all duration-200"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
       >

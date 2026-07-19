@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
   ChevronLeft,
@@ -12,7 +12,19 @@ import {
 } from "lucide-react";
 import { usePage } from "@/lib/page-context";
 
-// ─── Data ──────────────────────────────────────────────
+/* ──────────────────────────────────────────────────────────────────────────
+   Hero — home page landing section.
+
+   PERFORMANCE NOTES:
+   • Entry animations use CSS (.animate-fade-up) instead of framer-motion
+     initial/animate. CSS animations run on first paint — no JS hydration
+     wait — so the hero text is visible almost instantly.
+   • framer-motion is kept ONLY for the slideshow crossfade (AnimatePresence),
+     which is below the fold and non-critical for first paint.
+   • All colors use design tokens (no raw hex). Typography uses the .h-display
+     / .lead / .eyebrow utility classes from globals.css.
+   • The vertical image ticker is pure CSS (scrollVertical keyframe).
+   ────────────────────────────────────────────────────────────────────────── */
 
 // First entry of each column has descriptive alt text; subsequent duplicates
 // use empty alt="" so screen readers don't announce the same description 9×.
@@ -41,35 +53,75 @@ const tickerImagesCol2 = [
 ];
 
 const newsSlides = [
-  {
-    title: "Expanding into East African Markets",
-    image: "/images/jotofa-hero-1.jpeg",
-    page: "news" as const,
-  },
-  {
-    title: "JOTOFA Group: Delivering Excellence Across Industries",
-    image: "/images/jotofa-hero-2.jpeg",
-    page: "news" as const,
-  },
-  {
-    title: "Empowering Women in the Workplace",
-    image: "/images/jotofa-hero-3.jpeg",
-    page: "news" as const,
-  },
-  {
-    title: "UTEC Deploys Smart City Infrastructure",
-    image: "/images/jotofa-hero-1.jpeg",
-    page: "news" as const,
-  },
-  {
-    title: "Security Division Awarded Top Certification",
-    image: "/images/jotofa-hero-2.jpeg",
-    page: "news" as const,
-  },
+  { title: "Expanding into East African Markets", image: "/images/jotofa-hero-1.jpeg" },
+  { title: "JOTOFA Group: Delivering Excellence Across Industries", image: "/images/jotofa-hero-2.jpeg" },
+  { title: "Empowering Women in the Workplace", image: "/images/jotofa-hero-3.jpeg" },
+  { title: "UTEC Deploys Smart City Infrastructure", image: "/images/jotofa-hero-1.jpeg" },
+  { title: "Security Division Awarded Top Certification", image: "/images/jotofa-hero-2.jpeg" },
 ];
 
-// ─── Component ──────────────────────────────────────────
+// ─── Ticker sub-component (pure CSS animation, no JS) ───────────────────
+function TickerColumn({
+  images,
+  reverse = false,
+  paused = false,
+  reducedMotion = false,
+}: {
+  images: typeof tickerImagesCol1;
+  reverse?: boolean;
+  paused: boolean;
+  reducedMotion: boolean;
+}) {
+  return (
+    <div className="flex-1 h-full overflow-hidden relative">
+      <div
+        className="flex flex-col"
+        style={{
+          gap: "var(--ticker-gap, 12px)",
+          animation: reducedMotion ? "none" : `scrollVertical 160s linear infinite${reverse ? " reverse" : ""}`,
+          animationPlayState: paused ? "paused" : "running",
+        }}
+      >
+        {[...images, ...images].map((img, i) => (
+          <div
+            key={i}
+            className="relative w-full flex-shrink-0 overflow-hidden rounded-lg group"
+            style={{ aspectRatio: "3/4" }}
+          >
+            <Image
+              src={img.src}
+              alt={img.alt}
+              fill
+              sizes="(max-width: 1024px) 50vw, 22vw"
+              className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+            />
+            <div
+              aria-hidden
+              className="absolute inset-0 pointer-events-none"
+              style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2))" }}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
+// ─── Pause button (44×44 touch target, WCAG 2.5.5) ──────────────────────
+function TickerPauseButton({ paused, onToggle }: { paused: boolean; onToggle: () => void }) {
+  return (
+    <button
+      onClick={onToggle}
+      className="flex items-center justify-center transition-transform duration-300 hover:scale-105 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background bg-background rounded-full border border-border text-jotofa-navy dark:text-white"
+      style={{ width: "44px", height: "44px" }}
+      aria-label={paused ? "Play animation" : "Pause animation"}
+    >
+      {paused ? <Play className="w-4 h-4" fill="currentColor" /> : <Pause className="w-4 h-4" fill="currentColor" />}
+    </button>
+  );
+}
+
+// ─── Main Hero ──────────────────────────────────────────────────────────
 export function Hero() {
   const { setActivePage } = usePage();
   const prefersReducedMotion = useReducedMotion();
@@ -85,173 +137,73 @@ export function Hero() {
     return () => clearInterval(timer);
   }, [isPlaying]);
 
-  const prevSlide = () => {
+  const prevSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev - 1 + newsSlides.length) % newsSlides.length);
-  };
-
-  const nextSlide = () => {
+  }, []);
+  const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % newsSlides.length);
-  };
+  }, []);
 
   return (
-    <section className="relative w-full min-h-screen lg:h-screen lg:overflow-hidden bg-[#F4FAFC] dark:bg-jotofa-navy-mid">
+    <section className="relative w-full min-h-screen lg:h-screen lg:overflow-hidden bg-muted dark:bg-jotofa-navy-mid">
       {/* Light gradient base — light mode only */}
-      <div aria-hidden className="absolute inset-0 bg-gradient-to-br from-white via-[#F4FAFC] to-[#E6F4F6] dark:hidden" />
-      {/* Faint grid — uses .bg-grid-pattern which has light/dark variants */}
+      <div aria-hidden className="absolute inset-0 bg-gradient-to-br from-background via-muted to-secondary dark:hidden" />
+      {/* Faint grid */}
       <div aria-hidden className="absolute inset-0 bg-grid-pattern opacity-50 dark:opacity-30" />
       {/* Soft teal glow — top right */}
-      <div aria-hidden className="absolute top-0 right-0 w-[560px] h-[560px] bg-[#00A9B7]/12 dark:bg-utec-cyan/5 rounded-full blur-[140px] pointer-events-none" />
+      <div aria-hidden className="absolute top-0 right-0 w-[560px] h-[560px] bg-jotofa-accent/10 dark:bg-utec-cyan/5 rounded-full blur-[140px] pointer-events-none" />
       {/* Soft navy glow — bottom left (light mode only) */}
-      <div aria-hidden className="absolute bottom-0 left-0 w-[420px] h-[420px] bg-[#003B64]/8 rounded-full blur-[120px] pointer-events-none dark:hidden" />
-      {/* Decorative top accent bar — visible teal line across the top */}
-      <div className="absolute top-0 left-0 right-0 z-[1] h-[3px] bg-gradient-to-r from-transparent via-[#00A9B7]/70 to-transparent" />
+      <div aria-hidden className="absolute bottom-0 left-0 w-[420px] h-[420px] bg-jotofa-navy/[0.08] rounded-full blur-[120px] pointer-events-none dark:hidden" />
+      {/* Decorative top accent bar */}
+      <div aria-hidden className="absolute top-0 left-0 right-0 z-[1] h-[3px] bg-gradient-to-r from-transparent via-jotofa-accent/70 to-transparent" />
 
       <div className="flex flex-col lg:flex-row w-full min-h-full lg:h-full">
 
-        {/* ══════════════════════════════════════════════
-            MOBILE: Animated Ticker (TOP)
-            ══════════════════════════════════════════════ */}
+        {/* ════════════ MOBILE: Animated Ticker (TOP) ════════════ */}
         <div aria-hidden className="lg:hidden relative dark:bg-jotofa-navy-mid">
-          {/* Extra top padding to clear the pill nav */}
           <div className="flex w-full" style={{ height: "55vh", gap: "8px", padding: "8px", paddingTop: "72px" }}>
-            <div className="flex-1 h-full overflow-hidden relative">
-              <div
-                className="flex flex-col"
-                style={{
-                  gap: "8px",
-                  animation: prefersReducedMotion ? "none" : "scrollVertical 160s linear infinite",
-                  animationPlayState: tickerPaused ? "paused" : "running",
-                }}
-              >
-                {[...tickerImagesCol1, ...tickerImagesCol1].map((img, i) => (
-                  <div key={`mc1-${i}`} className="relative w-full flex-shrink-0 overflow-hidden rounded-lg" style={{ aspectRatio: "3/4" }}>
-                    <Image
-                      src={img.src}
-                      alt=""
-                      fill
-                      sizes="(max-width: 640px) 50vw, 33vw"
-                      className="object-cover"
-                      priority={i === 0}
-                    />
-                    <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2))" }} />
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="flex-1 h-full overflow-hidden relative">
-              <div
-                className="flex flex-col"
-                style={{
-                  gap: "8px",
-                  animation: prefersReducedMotion ? "none" : "scrollVertical 160s linear infinite reverse",
-                  animationPlayState: tickerPaused ? "paused" : "running",
-                }}
-              >
-                {[...tickerImagesCol2, ...tickerImagesCol2].map((img, i) => (
-                  <div key={`mc2-${i}`} className="relative w-full flex-shrink-0 overflow-hidden rounded-lg" style={{ aspectRatio: "3/4" }}>
-                    <Image
-                      src={img.src}
-                      alt=""
-                      fill
-                      sizes="(max-width: 640px) 50vw, 33vw"
-                      className="object-cover"
-                    />
-                    <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2))" }} />
-                  </div>
-                ))}
-              </div>
-            </div>
+            <TickerColumn images={tickerImagesCol1} paused={tickerPaused} reducedMotion={!!prefersReducedMotion} />
+            <TickerColumn images={tickerImagesCol2} reverse paused={tickerPaused} reducedMotion={!!prefersReducedMotion} />
           </div>
-
-          {/* Pause button — 44×44px touch target (WCAG 2.5.5) */}
           <div className="absolute top-[80px] right-[16px] z-10">
-            <button
-              onClick={() => setTickerPaused(!tickerPaused)}
-              className="flex items-center justify-center transition-all duration-300 hover:scale-105 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-              style={{ background: "#fff", borderRadius: "50%", width: "44px", height: "44px", border: "none", color: "#003951" }}
-              aria-label={tickerPaused ? "Play animation" : "Pause animation"}
-            >
-              {tickerPaused ? (
-                <Play className="w-4 h-4" fill="currentColor" />
-              ) : (
-                <Pause className="w-4 h-4" fill="currentColor" />
-              )}
-            </button>
+            <TickerPauseButton paused={tickerPaused} onToggle={() => setTickerPaused(!tickerPaused)} />
           </div>
         </div>
 
-        {/* ══════════════════════════════════════════════
-            LEFT COLUMN — Text + News Slider
-            ══════════════════════════════════════════════ */}
+        {/* ════════════ LEFT COLUMN — Text + News Slider ════════════ */}
         <div className="w-full lg:w-[45%] flex flex-col justify-between relative z-[2] dark:bg-jotofa-navy-card">
           <div className="flex flex-col justify-center flex-1 px-8 sm:px-10 lg:px-[60px] pt-24 pb-6 lg:pt-[140px] lg:pb-0">
-            {/* Decorative accent line above title for visibility */}
-            <motion.div
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: 0.8, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
-              className="h-[3px] w-20 bg-jotofa-accent mb-6 rounded-full origin-left"
-              style={{ boxShadow: "0 0 12px rgba(0, 169, 183, 0.4)" }}
-            />
+            {/* Accent line — CSS animation, visible on first paint */}
+            <div className="h-[3px] w-20 bg-jotofa-accent mb-6 rounded-full animate-fade-up" style={{ boxShadow: "0 0 12px rgba(0, 169, 183, 0.4)" }} />
 
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="mb-6 text-5xl md:text-7xl lg:text-8xl font-black leading-[0.9] tracking-tight"
-            >
-              <motion.span
-                className="block text-jotofa-navy dark:text-white drop-shadow-sm"
-                initial={{ opacity: 0, transform: "translateY(20px)" }}
-                animate={{ opacity: 1, transform: "translateY(0)" }}
-                transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              >
+            <h1 className="mb-6 h-display animate-fade-up-delay-1">
+              <span className="block text-jotofa-navy dark:text-white drop-shadow-sm">
                 JOTOFA
-              </motion.span>
-              <motion.span
-                className="block text-gold-gradient"
-                style={{ textShadow: "0 0 30px rgba(0, 169, 183, 0.15)" }}
-                initial={{ opacity: 0, transform: "translateY(20px)" }}
-                animate={{ opacity: 1, transform: "translateY(0)" }}
-                transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              >
+              </span>
+              <span className="block text-gold-gradient">
                 GROUP
-              </motion.span>
-            </motion.h1>
+              </span>
+            </h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="mb-8 text-lg leading-relaxed text-[#5E6A75] dark:text-white/80 max-w-[450px]"
-            >
+            <p className="mb-8 lead text-jotofa-text-secondary dark:text-white/80 max-w-[450px] animate-fade-up-delay-2">
               A diversified Tanzanian holding company driving excellence through
               ICT, logistics, professional services, security, and staffing —
               empowering communities and industries alike.
-            </motion.p>
+            </p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            >
+            <div className="animate-fade-up-delay-3">
               <button
                 onClick={() => setActivePage("about")}
-                className="group inline-flex items-center gap-2 font-semibold transition-all duration-300 px-10 py-3.5 rounded-full text-[0.95rem] bg-jotofa-navy text-white hover:bg-jotofa-navy-deep cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00A9B7] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F4FAFC] dark:border-[1.5px] dark:border-white dark:bg-transparent dark:text-white dark:hover:bg-white dark:hover:text-jotofa-navy-mid dark:shadow-none dark:focus-visible:ring-offset-jotofa-navy-card shadow-[0_8px_24px_-8px_rgba(0,59,100,0.35)]"
+                className="group inline-flex items-center gap-2 font-semibold transition-all duration-300 px-10 py-3.5 rounded-full bg-jotofa-navy text-white hover:bg-jotofa-navy-deep cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background dark:border-[1.5px] dark:border-white dark:bg-transparent dark:text-white dark:hover:bg-white dark:hover:text-jotofa-navy-mid shadow-[0_8px_24px_-8px_rgba(0,59,100,0.35)]"
               >
                 Our Company
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </button>
-            </motion.div>
+            </div>
           </div>
 
-          {/* ══════════════════════════════════════════════
-              BOTTOM NEWS SLIDER
-              ══════════════════════════════════════════════ */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
+          {/* ════════════ BOTTOM NEWS SLIDER ════════════ */}
+          <div
             className="mt-8 lg:mt-0 lg:pb-10 px-8 sm:px-10 lg:px-[60px] pb-8 lg:pb-10"
             onMouseEnter={() => setIsPlaying(false)}
             onMouseLeave={() => setIsPlaying(true)}
@@ -278,7 +230,7 @@ export function Hero() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 dark:from-jotofa-navy/70 to-transparent" />
                   </div>
                   <div className="flex-1 pt-1">
-                    <h3 className="text-jotofa-navy dark:text-white font-semibold text-sm sm:text-base leading-snug group-hover:text-[#00A9B7] dark:group-hover:text-jotofa-accent transition-colors">
+                    <h3 className="text-jotofa-navy dark:text-white font-semibold text-sm sm:text-base leading-snug group-hover:text-jotofa-accent dark:group-hover:text-jotofa-accent transition-colors">
                       {newsSlides[currentSlide].title}
                     </h3>
                   </div>
@@ -288,91 +240,49 @@ export function Hero() {
 
             <div className="flex items-center justify-between mt-4">
               <div className="flex items-center gap-3">
-                <span className="text-jotofa-navy/60 dark:text-white/60 text-sm font-medium tabular-nums">{currentSlide + 1}/{newsSlides.length}</span>
-                {/* "Family of Businesses" is now a real link, not just a label */}
+                <span className="text-jotofa-navy/60 dark:text-white/60 text-sm font-medium tabular-nums">
+                  {currentSlide + 1}/{newsSlides.length}
+                </span>
                 <button
                   onClick={() => setActivePage("businesses")}
-                  className="text-jotofa-navy/60 hover:text-jotofa-navy dark:text-white/60 dark:hover:text-white text-sm transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00A9B7] rounded-sm"
+                  className="text-jotofa-navy/60 hover:text-jotofa-navy dark:text-white/60 dark:hover:text-white text-sm transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent rounded-sm"
                 >
                   Family of Businesses
                 </button>
               </div>
               <div className="flex items-center gap-2">
-                <button onClick={prevSlide} className="w-9 h-9 rounded-full border border-jotofa-navy/15 dark:border-white/15 flex items-center justify-center text-jotofa-navy/60 dark:text-white/60 hover:text-jotofa-navy dark:hover:text-white hover:border-jotofa-navy/40 dark:hover:border-white/40 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00A9B7] focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label="Previous slide">
+                <button
+                  onClick={prevSlide}
+                  className="w-9 h-9 rounded-full border border-jotofa-navy/15 dark:border-white/15 flex items-center justify-center text-jotofa-navy/60 dark:text-white/60 hover:text-jotofa-navy dark:hover:text-white hover:border-jotofa-navy/40 dark:hover:border-white/40 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  aria-label="Previous slide"
+                >
                   <ChevronLeft className="w-4 h-4" />
                 </button>
-                <button onClick={nextSlide} className="w-9 h-9 rounded-full border border-jotofa-navy/15 dark:border-white/15 flex items-center justify-center text-jotofa-navy/60 dark:text-white/60 hover:text-jotofa-navy dark:hover:text-white hover:border-jotofa-navy/40 dark:hover:border-white/40 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00A9B7] focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label="Next slide">
+                <button
+                  onClick={nextSlide}
+                  className="w-9 h-9 rounded-full border border-jotofa-navy/15 dark:border-white/15 flex items-center justify-center text-jotofa-navy/60 dark:text-white/60 hover:text-jotofa-navy dark:hover:text-white hover:border-jotofa-navy/40 dark:hover:border-white/40 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  aria-label="Next slide"
+                >
                   <ChevronRight className="w-4 h-4" />
                 </button>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
 
-        {/* ══════════════════════════════════════════════
-            RIGHT COLUMN — Vertical Image Ticker (Desktop)
-            ══════════════════════════════════════════════ */}
-        <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="hidden lg:flex flex-1 relative h-full dark:bg-jotofa-navy-mid"
-          aria-hidden
-        >
-          {/* Extra top padding to clear the pill nav */}
+        {/* ════════════ RIGHT COLUMN — Vertical Image Ticker (Desktop) ════════════ */}
+        <div className="hidden lg:flex flex-1 relative h-full dark:bg-jotofa-navy-mid animate-fade-up-delay-2" aria-hidden>
           <div className="flex w-full h-full" style={{ gap: "12px", padding: "12px", paddingTop: "80px" }}>
-            <div className="flex-1 h-full overflow-hidden relative">
-              <div className="flex flex-col" style={{ gap: "12px", animation: prefersReducedMotion ? "none" : "scrollVertical 160s linear infinite", animationPlayState: tickerPaused ? "paused" : "running" }}>
-                {[...tickerImagesCol1, ...tickerImagesCol1].map((img, i) => (
-                  <div key={`c1-${i}`} className="relative w-full flex-shrink-0 overflow-hidden rounded-lg group" style={{ aspectRatio: "3/4" }}>
-                    <Image
-                      src={img.src}
-                      alt=""
-                      fill
-                      sizes="22vw"
-                      className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                    />
-                    <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2))" }} />
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="flex-1 h-full overflow-hidden relative">
-              <div className="flex flex-col" style={{ gap: "12px", animation: prefersReducedMotion ? "none" : "scrollVertical 160s linear infinite reverse", animationPlayState: tickerPaused ? "paused" : "running" }}>
-                {[...tickerImagesCol2, ...tickerImagesCol2].map((img, i) => (
-                  <div key={`c2-${i}`} className="relative w-full flex-shrink-0 overflow-hidden rounded-lg group" style={{ aspectRatio: "3/4" }}>
-                    <Image
-                      src={img.src}
-                      alt=""
-                      fill
-                      sizes="22vw"
-                      className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                    />
-                    <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2))" }} />
-                  </div>
-                ))}
-              </div>
-            </div>
+            <TickerColumn images={tickerImagesCol1} paused={tickerPaused} reducedMotion={!!prefersReducedMotion} />
+            <TickerColumn images={tickerImagesCol2} reverse paused={tickerPaused} reducedMotion={!!prefersReducedMotion} />
           </div>
-
           <div className="absolute bottom-[90px] right-[30px] z-10">
-            <button
-              onClick={() => setTickerPaused(!tickerPaused)}
-              className="flex items-center justify-center transition-all duration-300 hover:scale-105 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-              style={{ background: "#fff", borderRadius: "50%", width: "44px", height: "44px", border: "none", color: "#003951" }}
-              aria-label={tickerPaused ? "Play animation" : "Pause animation"}
-            >
-              {tickerPaused ? (
-                <Play className="w-5 h-5" fill="currentColor" />
-              ) : (
-                <Pause className="w-5 h-5" fill="currentColor" />
-              )}
-            </button>
+            <TickerPauseButton paused={tickerPaused} onToggle={() => setTickerPaused(!tickerPaused)} />
           </div>
-        </motion.div>
+        </div>
       </div>
 
-      {/* Smooth fade from the light hero into the dark content below */}
+      {/* Smooth fade from hero into content below */}
       <div aria-hidden className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-b from-transparent to-background pointer-events-none z-[5]" />
     </section>
   );
