@@ -147,10 +147,10 @@ export function Navbar() {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-jotofa-navy-mid border-b border-jotofa-navy/10 dark:border-white/10"
       >
-        <div className="mx-auto max-w-[1400px] h-14 sm:h-16 px-4 sm:px-6 grid grid-cols-2 lg:grid-cols-3 items-stretch">
+        <div className="mx-auto max-w-[1400px] h-14 sm:h-16 px-4 sm:px-6 flex items-center gap-6 lg:gap-10">
 
           {/* ───────── LEFT: Logo Block ───────── */}
-          <div className="flex justify-start items-center">
+          <div className="flex-shrink-0 flex justify-start items-center">
             <button onClick={() => handleNavClick("home")} className="flex items-center group" aria-label="JOTOFA Group home">
               <Image
                 src="/images/jotofa-logo.png"
@@ -163,8 +163,9 @@ export function Navbar() {
             </button>
           </div>
 
-          {/* ───────── CENTER: Navigation Links (desktop lg+) ───────── */}
-          <div ref={dropdownContainerRef} className="hidden lg:flex justify-center items-stretch">
+          {/* ───────── LEFT-CONT: Navigation Links (desktop lg+) ────
+              Nav starts from the left, immediately after the logo.   */}
+          <div ref={dropdownContainerRef} className="hidden lg:flex justify-start items-stretch">
             <div className="flex items-stretch gap-1">
               {navItems.map((item) => {
                 const isActive = activePage === item.id || (item.hasDropdown && isDropdownActive(item.hasDropdown));
@@ -269,8 +270,8 @@ export function Navbar() {
             </div>
           </div>
 
-          {/* ───────── RIGHT: Theme toggle + Mobile menu ───────── */}
-          <div className="flex justify-end items-center gap-2 sm:gap-3">
+          {/* ───────── RIGHT: Theme toggle + Mobile menu (pushed to end) ───────── */}
+          <div className="ml-auto flex justify-end items-center gap-2 sm:gap-3">
             <button
               onClick={toggleTheme}
               className="p-2 rounded-sm text-jotofa-navy/70 dark:text-white/70 hover:text-jotofa-navy dark:hover:text-white hover:bg-jotofa-navy/[0.05] dark:hover:bg-white/[0.08] transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
