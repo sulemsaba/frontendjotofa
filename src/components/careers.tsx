@@ -30,6 +30,7 @@ import {
 import { usePage } from "@/lib/page-context";
 import { JobApplyModal } from "@/components/job-apply-modal";
 import { getJobs, getSubsidiaries, type PublicJob, type PublicSubsidiary } from "@/lib/api";
+import Image from "next/image";
 
 /* ─────────────────────────────────────────────
    TYPES
@@ -806,20 +807,24 @@ export function Careers() {
           ═══════════════════════════════════════ */}
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-4">
         <div className="relative w-full h-[180px] sm:h-[220px] rounded-2xl overflow-hidden">
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{
-              backgroundImage: `url('${heroData.heroImage}')`,
-            }}
+          <Image
+            src={heroData.heroImage}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#003B64]/90 via-[#003B64]/75 to-[#003B64]/50" />
 
           <div className="relative z-10 flex items-center h-full px-6 sm:px-8">
             <div className="flex items-center gap-4 sm:gap-5">
               <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20 shrink-0">
-                <img
+                <Image
                   src={heroData.logo}
                   alt={heroData.name}
+                  width={40}
+                  height={40}
                   className="w-9 h-9 sm:w-10 sm:h-10 object-contain brightness-0 invert"
                 />
               </div>
@@ -833,7 +838,7 @@ export function Careers() {
                 <div className="flex items-center gap-2 sm:gap-3 mt-1.5 flex-wrap">
                   {heroData.stats.map((stat, idx) => (
                     <span key={stat.label} className="contents">
-                      <div className="flex items-center gap-1.5 text-white/50 text-xs">
+                      <div className="flex items-center gap-1.5 text-white/70 text-xs">
                         {idx === 0 && <Users className="w-3.5 h-3.5" />}
                         <span>
                           {stat.value} {stat.label}
@@ -1135,7 +1140,10 @@ export function Careers() {
                   >
                     {/* ─── Collapsed Card Row ─── */}
                     <div
-                      className="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-0 px-5 sm:px-6 py-4 cursor-pointer hover:bg-muted/30 dark:hover:bg-[#003B64]/20 transition-colors"
+                      role="button"
+                      tabIndex={0}
+                      aria-expanded={isExpanded}
+                      className="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-0 px-5 sm:px-6 py-4 cursor-pointer hover:bg-muted/30 dark:hover:bg-[#003B64]/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-inset"
                       onClick={() => {
                         if (isFullExpanded) {
                           setExpandedFullJob(null);
@@ -1145,6 +1153,20 @@ export function Careers() {
                         } else {
                           setExpandedJob(job.id);
                           setExpandedFullJob(null);
+                        }
+                      }}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          if (isFullExpanded) {
+                            setExpandedFullJob(null);
+                            setExpandedJob(null);
+                          } else if (isPreview) {
+                            setExpandedJob(null);
+                          } else {
+                            setExpandedJob(job.id);
+                            setExpandedFullJob(null);
+                          }
                         }
                       }}
                     >
@@ -1630,7 +1652,7 @@ export function Careers() {
       {/* ═══════════════════════════════════════
           6. TALENT COMMUNITY SECTION
           ═══════════════════════════════════════ */}
-      <div id="talent-community" className="bg-[#003B64]">
+      <div id="talent-community" className="scroll-mt-20 bg-[#003B64]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
           <div className="grid md:grid-cols-2 gap-10 items-center">
             <div>
@@ -1653,9 +1675,11 @@ export function Careers() {
             </div>
 
             <div className="relative rounded-2xl overflow-hidden aspect-[4/3]">
-              <img
+              <Image
                 src="/images/jotofa-hero-3.jpeg"
                 alt="JOTOFA GROUP team"
+                fill
+                sizes="100vw"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#003B64]/40 to-transparent" />

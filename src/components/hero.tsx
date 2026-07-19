@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
   ChevronLeft,
@@ -72,8 +72,9 @@ const newsSlides = [
 
 export function Hero() {
   const { setActivePage } = usePage();
+  const prefersReducedMotion = useReducedMotion();
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(!prefersReducedMotion);
   const [tickerPaused, setTickerPaused] = useState(false);
 
   useEffect(() => {
@@ -110,7 +111,7 @@ export function Hero() {
         {/* ══════════════════════════════════════════════
             MOBILE: Animated Ticker (TOP)
             ══════════════════════════════════════════════ */}
-        <div className="lg:hidden relative dark:bg-jotofa-navy-mid">
+        <div aria-hidden className="lg:hidden relative dark:bg-jotofa-navy-mid">
           {/* Extra top padding to clear the pill nav */}
           <div className="flex w-full" style={{ height: "55vh", gap: "8px", padding: "8px", paddingTop: "72px" }}>
             <div className="flex-1 h-full overflow-hidden relative">
@@ -118,7 +119,7 @@ export function Hero() {
                 className="flex flex-col"
                 style={{
                   gap: "8px",
-                  animation: "scrollVertical 160s linear infinite",
+                  animation: prefersReducedMotion ? "none" : "scrollVertical 160s linear infinite",
                   animationPlayState: tickerPaused ? "paused" : "running",
                 }}
               >
@@ -126,11 +127,11 @@ export function Hero() {
                   <div key={`mc1-${i}`} className="relative w-full flex-shrink-0 overflow-hidden rounded-lg" style={{ aspectRatio: "3/4" }}>
                     <Image
                       src={img.src}
-                      alt={img.alt}
+                      alt=""
                       fill
                       sizes="(max-width: 640px) 50vw, 33vw"
                       className="object-cover"
-                      priority={i < 2}
+                      priority={i === 0}
                     />
                     <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2))" }} />
                   </div>
@@ -142,7 +143,7 @@ export function Hero() {
                 className="flex flex-col"
                 style={{
                   gap: "8px",
-                  animation: "scrollVertical 160s linear infinite reverse",
+                  animation: prefersReducedMotion ? "none" : "scrollVertical 160s linear infinite reverse",
                   animationPlayState: tickerPaused ? "paused" : "running",
                 }}
               >
@@ -150,11 +151,10 @@ export function Hero() {
                   <div key={`mc2-${i}`} className="relative w-full flex-shrink-0 overflow-hidden rounded-lg" style={{ aspectRatio: "3/4" }}>
                     <Image
                       src={img.src}
-                      alt={img.alt}
+                      alt=""
                       fill
                       sizes="(max-width: 640px) 50vw, 33vw"
                       className="object-cover"
-                      priority={i < 2}
                     />
                     <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2))" }} />
                   </div>
@@ -163,13 +163,12 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Pause button — repositioned to top-right of the ticker so it
-              doesn't overlap the news slider below on small screens. */}
+          {/* Pause button — 44×44px touch target (WCAG 2.5.5) */}
           <div className="absolute top-[80px] right-[16px] z-10">
             <button
               onClick={() => setTickerPaused(!tickerPaused)}
-              className="flex items-center justify-center transition-all duration-300 hover:scale-105 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#F4FAFC] dark:focus-visible:ring-offset-jotofa-navy-mid"
-              style={{ background: "#fff", borderRadius: "50%", width: "36px", height: "36px", border: "none", color: "#003951" }}
+              className="flex items-center justify-center transition-all duration-300 hover:scale-105 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              style={{ background: "#fff", borderRadius: "50%", width: "44px", height: "44px", border: "none", color: "#003951" }}
               aria-label={tickerPaused ? "Play animation" : "Pause animation"}
             >
               {tickerPaused ? (
@@ -289,20 +288,20 @@ export function Hero() {
 
             <div className="flex items-center justify-between mt-4">
               <div className="flex items-center gap-3">
-                <span className="text-jotofa-navy/40 dark:text-white/30 text-sm font-medium tabular-nums">{currentSlide + 1}/{newsSlides.length}</span>
+                <span className="text-jotofa-navy/60 dark:text-white/60 text-sm font-medium tabular-nums">{currentSlide + 1}/{newsSlides.length}</span>
                 {/* "Family of Businesses" is now a real link, not just a label */}
                 <button
                   onClick={() => setActivePage("businesses")}
-                  className="text-jotofa-navy/30 hover:text-jotofa-navy/60 dark:text-white/20 dark:hover:text-white/60 text-sm transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00A9B7] rounded-sm"
+                  className="text-jotofa-navy/60 hover:text-jotofa-navy dark:text-white/60 dark:hover:text-white text-sm transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00A9B7] rounded-sm"
                 >
                   Family of Businesses
                 </button>
               </div>
               <div className="flex items-center gap-2">
-                <button onClick={prevSlide} className="w-9 h-9 rounded-full border border-jotofa-navy/15 dark:border-white/15 flex items-center justify-center text-jotofa-navy/40 dark:text-white/40 hover:text-jotofa-navy dark:hover:text-white hover:border-jotofa-navy/40 dark:hover:border-white/40 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00A9B7] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F4FAFC] dark:focus-visible:ring-offset-jotofa-navy-card" aria-label="Previous slide">
+                <button onClick={prevSlide} className="w-9 h-9 rounded-full border border-jotofa-navy/15 dark:border-white/15 flex items-center justify-center text-jotofa-navy/60 dark:text-white/60 hover:text-jotofa-navy dark:hover:text-white hover:border-jotofa-navy/40 dark:hover:border-white/40 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00A9B7] focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label="Previous slide">
                   <ChevronLeft className="w-4 h-4" />
                 </button>
-                <button onClick={nextSlide} className="w-9 h-9 rounded-full border border-jotofa-navy/15 dark:border-white/15 flex items-center justify-center text-jotofa-navy/40 dark:text-white/40 hover:text-jotofa-navy dark:hover:text-white hover:border-jotofa-navy/40 dark:hover:border-white/40 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00A9B7] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F4FAFC] dark:focus-visible:ring-offset-jotofa-navy-card" aria-label="Next slide">
+                <button onClick={nextSlide} className="w-9 h-9 rounded-full border border-jotofa-navy/15 dark:border-white/15 flex items-center justify-center text-jotofa-navy/60 dark:text-white/60 hover:text-jotofa-navy dark:hover:text-white hover:border-jotofa-navy/40 dark:hover:border-white/40 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00A9B7] focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label="Next slide">
                   <ChevronRight className="w-4 h-4" />
                 </button>
               </div>
@@ -318,20 +317,20 @@ export function Hero() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="hidden lg:flex flex-1 relative h-full dark:bg-jotofa-navy-mid"
+          aria-hidden
         >
           {/* Extra top padding to clear the pill nav */}
           <div className="flex w-full h-full" style={{ gap: "12px", padding: "12px", paddingTop: "80px" }}>
             <div className="flex-1 h-full overflow-hidden relative">
-              <div className="flex flex-col" style={{ gap: "12px", animation: "scrollVertical 160s linear infinite", animationPlayState: tickerPaused ? "paused" : "running" }}>
+              <div className="flex flex-col" style={{ gap: "12px", animation: prefersReducedMotion ? "none" : "scrollVertical 160s linear infinite", animationPlayState: tickerPaused ? "paused" : "running" }}>
                 {[...tickerImagesCol1, ...tickerImagesCol1].map((img, i) => (
                   <div key={`c1-${i}`} className="relative w-full flex-shrink-0 overflow-hidden rounded-lg group" style={{ aspectRatio: "3/4" }}>
                     <Image
                       src={img.src}
-                      alt={img.alt}
+                      alt=""
                       fill
                       sizes="22vw"
                       className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                      priority={i < 2}
                     />
                     <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2))" }} />
                   </div>
@@ -339,16 +338,15 @@ export function Hero() {
               </div>
             </div>
             <div className="flex-1 h-full overflow-hidden relative">
-              <div className="flex flex-col" style={{ gap: "12px", animation: "scrollVertical 160s linear infinite reverse", animationPlayState: tickerPaused ? "paused" : "running" }}>
+              <div className="flex flex-col" style={{ gap: "12px", animation: prefersReducedMotion ? "none" : "scrollVertical 160s linear infinite reverse", animationPlayState: tickerPaused ? "paused" : "running" }}>
                 {[...tickerImagesCol2, ...tickerImagesCol2].map((img, i) => (
                   <div key={`c2-${i}`} className="relative w-full flex-shrink-0 overflow-hidden rounded-lg group" style={{ aspectRatio: "3/4" }}>
                     <Image
                       src={img.src}
-                      alt={img.alt}
+                      alt=""
                       fill
                       sizes="22vw"
                       className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                      priority={i < 2}
                     />
                     <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2))" }} />
                   </div>
@@ -360,7 +358,7 @@ export function Hero() {
           <div className="absolute bottom-[90px] right-[30px] z-10">
             <button
               onClick={() => setTickerPaused(!tickerPaused)}
-              className="flex items-center justify-center transition-all duration-300 hover:scale-105 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#F4FAFC] dark:focus-visible:ring-offset-jotofa-navy-mid"
+              className="flex items-center justify-center transition-all duration-300 hover:scale-105 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               style={{ background: "#fff", borderRadius: "50%", width: "44px", height: "44px", border: "none", color: "#003951" }}
               aria-label={tickerPaused ? "Play animation" : "Pause animation"}
             >

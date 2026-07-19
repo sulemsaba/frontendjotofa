@@ -13,6 +13,7 @@ import {
   Filter,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "./scroll-reveal";
 import { usePage } from "@/lib/page-context";
 import { NewsDetail } from "./news-detail";
@@ -134,11 +135,24 @@ const statsHighlights = [
 export function News() {
   const { setActivePage } = usePage();
   const [selectedArticle, setSelectedArticle] = useState<typeof featuredArticle | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string>("all");
 
-  const handleArticleClick = useCallback((article: typeof allArticles[number]) => {
+  const handleArticleClick = useCallback((article: typeof featuredArticle) => {
     setSelectedArticle(article as typeof featuredArticle);
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
+
+  const handleArticleKeyDown = useCallback((e: React.KeyboardEvent, article: typeof featuredArticle) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      handleArticleClick(article);
+    }
+  }, [handleArticleClick]);
+
+  // Filter articles by selected category (falls back to all)
+  const filteredNewsItems = activeCategory === "all"
+    ? newsItems
+    : newsItems.filter((item) => item.categoryKey === activeCategory);
 
   const handleBack = useCallback(() => {
     setSelectedArticle(null);
@@ -263,15 +277,23 @@ export function News() {
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <div
-              className="group relative rounded-2xl border border-border overflow-hidden hover:border-jotofa-accent/25 transition-all duration-500 cursor-pointer"
+              className="group relative rounded-2xl border border-border overflow-hidden hover:border-jotofa-accent/25 transition-all duration-500 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              role="button"
+              tabIndex={0}
+              aria-label={`Read featured article: ${featuredArticle.title}`}
               onClick={() => handleArticleClick(featuredArticle)}
+              onKeyDown={(e) => handleArticleKeyDown(e, featuredArticle)}
             >
               <div className="grid md:grid-cols-2">
                 {/* Image */}
                 <div className="relative min-h-[300px] md:min-h-[420px] overflow-hidden">
-                  <div
-                    className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                    style={{ backgroundImage: `url('${featuredArticle.image}')` }}
+                  <Image
+                    src={featuredArticle.image}
+                    alt=""
+                    fill
+                    priority
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-r dark:from-jotofa-navy-deep/80 dark:to-jotofa-navy-deep/40 from-background/80 to-background/40 md:bg-gradient-to-r md:dark:from-transparent md:dark:to-transparent md:from-transparent md:to-transparent" />
                   <div className="absolute inset-0 md:bg-gradient-to-l md:from-transparent md:to-jotofa-navy-deep/60 hidden md:block" />
@@ -342,13 +364,15 @@ export function News() {
               </p>
             </div>
             <div className="flex items-center gap-2">
-              <Filter className="w-4 h-4 text-muted-foreground" />
-              <div className="flex items-center gap-1.5 flex-wrap">
-                {categories.map((cat, i) => (
+              <Filter className="w-4 h-4 text-muted-foreground" aria-hidden />
+              <div className="flex items-center gap-1.5 flex-wrap" role="group" aria-label="Filter articles by category">
+                {categories.map((cat) => (
                   <button
                     key={cat.id}
-                    className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
-                      i === 0
+                    onClick={() => setActiveCategory(cat.id)}
+                    aria-pressed={activeCategory === cat.id}
+                    className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent ${
+                      activeCategory === cat.id
                         ? "bg-jotofa-accent/10 border-jotofa-accent/20 text-jotofa-accent"
                         : "border-border text-muted-foreground hover:border-jotofa-accent/20 hover:text-foreground"
                     }`}
@@ -361,15 +385,25 @@ export function News() {
           </ScrollReveal>
 
           {/* News grid — 3 columns */}
+          {filteredNewsItems.length === 0 ? (
+            <div className="text-center py-16">
+              <Newspaper className="w-12 h-12 text-muted-foreground/40 mx-auto mb-4" />
+              <p className="text-muted-foreground">No articles in this category yet.</p>
+            </div>
+          ) : (
           <StaggerContainer
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
             staggerDelay={0.1}
           >
-            {newsItems.map((item) => (
+            {filteredNewsItems.map((item) => (
               <StaggerItem key={item.title}>
                 <article
-                  className="group h-full flex flex-col p-6 sm:p-7 rounded-2xl bg-card border border-border hover:border-jotofa-accent/25 transition-all duration-300 hover:bg-secondary cursor-pointer"
+                  className="group h-full flex flex-col p-6 sm:p-7 rounded-2xl bg-card border border-border hover:border-jotofa-accent/25 transition-all duration-300 hover:bg-secondary cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Read article: ${item.title}`}
                   onClick={() => handleArticleClick(item)}
+                  onKeyDown={(e) => handleArticleKeyDown(e, item)}
                 >
                   {/* Category badge */}
                   <div
@@ -408,6 +442,7 @@ export function News() {
               </StaggerItem>
             ))}
           </StaggerContainer>
+          )}
         </div>
       </section>
 

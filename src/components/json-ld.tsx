@@ -31,9 +31,9 @@ export function JsonLd() {
       },
     ],
     sameAs: [
-      "https://instagram.com/jotofagroup",
-      "https://twitter.com/jotofagroup",
       "https://linkedin.com/company/jotofagroup",
+      "https://twitter.com/jotofagroup",
+      "https://facebook.com/jotofagroup",
     ],
     knowsAbout: [
       "Information and Communications Technology",

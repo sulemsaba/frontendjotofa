@@ -276,50 +276,10 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* Card hover glow effect */
-.card-glow {
-  position: relative;
-  overflow: hidden;
-}
-
-.card-glow::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  border-radius: inherit;
-  pointer-events: none;
-}
-
-.card-glow:hover::before {
-  opacity: 1;
-}
-
 /* Custom selection color — teal */
 ::selection {
   background: rgba(0, 169, 183, 0.3);
   color: #ffffff;
-}
-
-/* Phone ring animation */
-@keyframes phone-ring {
-  0% { transform: rotate(0deg); }
-  10% { transform: rotate(14deg); }
-  20% { transform: rotate(-12deg); }
-  30% { transform: rotate(10deg); }
-  40% { transform: rotate(-8deg); }
-  50% { transform: rotate(4deg); }
-  60% { transform: rotate(0deg); }
-  100% { transform: rotate(0deg); }
-}
-
-.animate-phone-ring {
-  animation: phone-ring 2s ease-in-out infinite;
-  transform-origin: 50% 0%;
 }
 
 /* ═══════════════════════════════════════════
@@ -407,4 +367,33 @@
 html,
 body {
   overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════════
+   SCROLLBAR-HIDE UTILITY
+   Hides scrollbar on horizontal tab strips etc.
+   while keeping scroll behavior intact.
+   ═══════════════════════════════════════════ */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* ═══════════════════════════════════════════
+   REDUCED MOTION — respect user preference (WCAG 2.3.3)
+   Disables animations, transitions, and auto-advancing
+   carousels for users who request reduced motion.
+   ═══════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

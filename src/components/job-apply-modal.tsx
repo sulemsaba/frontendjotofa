@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import {
   X,
   MapPin,
@@ -166,13 +166,13 @@ function FileUploadField({
             </div>
           ))}
           {allowMultiple && (
-            <label className="flex items-center gap-2 p-2.5 rounded-lg border-2 border-dashed border-input cursor-pointer hover:bg-secondary/50 transition-colors">
+            <label tabIndex={0} className="flex items-center gap-2 p-2.5 rounded-lg border-2 border-dashed border-input cursor-pointer hover:bg-secondary/50 transition-colors">
               <Plus className="w-4 h-4 text-muted-foreground shrink-0" />
               <span className="text-xs text-muted-foreground">Add another file</span>
               <input
                 type="file"
                 accept={accept}
-                className="hidden"
+                className="sr-only"
                 onChange={(e) => {
                   const f = e.target.files?.[0];
                   if (f) onFileChange?.(f);
@@ -183,6 +183,7 @@ function FileUploadField({
         </div>
       ) : (
         <label
+          tabIndex={0}
           className={`flex items-center gap-3 p-4 rounded-lg border-2 border-dashed cursor-pointer hover:bg-secondary/50 transition-colors ${
             error ? "border-red-500" : "border-input"
           }`}
@@ -192,7 +193,7 @@ function FileUploadField({
           <input
             type="file"
             accept={accept}
-            className="hidden"
+            className="sr-only"
             onChange={(e) => {
               const f = e.target.files?.[0];
               if (f) onFileChange?.(f);
@@ -389,6 +390,38 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
     setTimeout(handleReset, 300);
   }, [onClose, handleReset]);
 
+  const modalPanelRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!isOpen) return;
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    const panel = modalPanelRef.current;
+    // Move focus into modal shortly after open animation
+    const t = setTimeout(() => {
+      const first = panel?.querySelector<HTMLElement>('input, button, [tabindex]:not([tabindex="-1"])');
+      first?.focus();
+    }, 100);
+    const trap = (e: KeyboardEvent) => {
+      if (e.key === "Escape") { e.preventDefault(); handleClose(); return; }
+      if (e.key !== "Tab" || !panel) return;
+      const focusable = panel.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    };
+    document.addEventListener("keydown", trap);
+    document.body.style.overflow = "hidden";
+    return () => {
+      clearTimeout(t);
+      document.removeEventListener("keydown", trap);
+      document.body.style.overflow = "";
+      previouslyFocused?.focus?.();
+    };
+  }, [isOpen, handleClose]);
+
   const addCertificateFile = useCallback((f: File) => {
     setCertificateFiles((prev) => [...prev, f]);
   }, []);
@@ -419,8 +452,11 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="fixed inset-0 z-[61] flex items-center justify-center p-4"
             onClick={(e) => e.target === e.currentTarget && handleClose()}
+            role="dialog"
+            aria-modal="true"
+            aria-label={`Apply for ${job.title} at ${job.company}`}
           >
-            <div className="relative w-full max-w-2xl lg:max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl bg-white dark:bg-[#0a1e30] shadow-2xl border border-border">
+            <div ref={modalPanelRef} className="relative w-full max-w-2xl lg:max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl bg-white dark:bg-[#0a1e30] shadow-2xl border border-border">
               {/* ─── Header ─── */}
               <div className="sticky top-0 z-10 bg-white dark:bg-[#0a1e30] border-b border-border px-5 sm:px-6 py-4 flex items-center justify-between">
                 <div>
@@ -483,10 +519,11 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                       {/* First / Last Name */}
                       <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-xs font-medium text-foreground mb-1.5">
+                          <label htmlFor="apply-firstName" className="block text-xs font-medium text-foreground mb-1.5">
                             First Name <span className="text-red-500">*</span>
                           </label>
                           <input
+                            id="apply-firstName"
                             type="text"
                             value={formData.firstName}
                             onChange={(e) =>
@@ -496,19 +533,22 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                               errors.firstName ? "border-red-500" : "border-input"
                             }`}
                             placeholder="John"
+                            aria-invalid={errors.firstName ? "true" : undefined}
+                            aria-describedby={errors.firstName ? "apply-firstName-error" : undefined}
                           />
                           {errors.firstName && (
-                            <p className="text-xs text-red-500 mt-1 flex items-center gap-1">
+                            <p id="apply-firstName-error" className="text-xs text-red-500 mt-1 flex items-center gap-1">
                               <AlertCircle className="w-3 h-3" />
                               {errors.firstName}
                             </p>
                           )}
                         </div>
                         <div>
-                          <label className="block text-xs font-medium text-foreground mb-1.5">
+                          <label htmlFor="apply-lastName" className="block text-xs font-medium text-foreground mb-1.5">
                             Last Name <span className="text-red-500">*</span>
                           </label>
                           <input
+                            id="apply-lastName"
                             type="text"
                             value={formData.lastName}
                             onChange={(e) =>
@@ -518,9 +558,11 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                               errors.lastName ? "border-red-500" : "border-input"
                             }`}
                             placeholder="Doe"
+                            aria-invalid={errors.lastName ? "true" : undefined}
+                            aria-describedby={errors.lastName ? "apply-lastName-error" : undefined}
                           />
                           {errors.lastName && (
-                            <p className="text-xs text-red-500 mt-1 flex items-center gap-1">
+                            <p id="apply-lastName-error" className="text-xs text-red-500 mt-1 flex items-center gap-1">
                               <AlertCircle className="w-3 h-3" />
                               {errors.lastName}
                             </p>
@@ -530,10 +572,11 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
 
                       {/* Email */}
                       <div>
-                        <label className="block text-xs font-medium text-foreground mb-1.5">
+                        <label htmlFor="apply-email" className="block text-xs font-medium text-foreground mb-1.5">
                           Email Address <span className="text-red-500">*</span>
                         </label>
                         <input
+                          id="apply-email"
                           type="email"
                           value={formData.email}
                           onChange={(e) =>
@@ -543,9 +586,11 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                             errors.email ? "border-red-500" : "border-input"
                           }`}
                           placeholder="john.doe@email.com"
+                          aria-invalid={errors.email ? "true" : undefined}
+                          aria-describedby={errors.email ? "apply-email-error" : undefined}
                         />
                         {errors.email && (
-                          <p className="text-xs text-red-500 mt-1 flex items-center gap-1">
+                          <p id="apply-email-error" className="text-xs text-red-500 mt-1 flex items-center gap-1">
                             <AlertCircle className="w-3 h-3" />
                             {errors.email}
                           </p>
@@ -554,11 +599,13 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
 
                       {/* Phone */}
                       <div>
-                        <label className="block text-xs font-medium text-foreground mb-1.5">
+                        <label htmlFor="apply-phone" className="block text-xs font-medium text-foreground mb-1.5">
                           Phone Number <span className="text-red-500">*</span>
                         </label>
                         <input
+                          id="apply-phone"
                           type="tel"
+                          inputMode="tel"
                           value={formData.phone}
                           onChange={(e) =>
                             setFormData({ ...formData, phone: e.target.value })
@@ -567,9 +614,11 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                             errors.phone ? "border-red-500" : "border-input"
                           }`}
                           placeholder="+255 7XX XXX XXX"
+                          aria-invalid={errors.phone ? "true" : undefined}
+                          aria-describedby={errors.phone ? "apply-phone-error" : undefined}
                         />
                         {errors.phone && (
-                          <p className="text-xs text-red-500 mt-1 flex items-center gap-1">
+                          <p id="apply-phone-error" className="text-xs text-red-500 mt-1 flex items-center gap-1">
                             <AlertCircle className="w-3 h-3" />
                             {errors.phone}
                           </p>
@@ -578,10 +627,11 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
 
                       {/* Location */}
                       <div>
-                        <label className="block text-xs font-medium text-foreground mb-1.5">
+                        <label htmlFor="apply-location" className="block text-xs font-medium text-foreground mb-1.5">
                           Current Location
                         </label>
                         <input
+                          id="apply-location"
                           type="text"
                           value={formData.location}
                           onChange={(e) =>
@@ -606,7 +656,7 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
 
                       {/* Cover Letter - Upload or Type */}
                       <div>
-                        <label className="block text-xs font-medium text-foreground mb-1.5">
+                        <label htmlFor="apply-coverLetter" className="block text-xs font-medium text-foreground mb-1.5">
                           Cover Letter
                         </label>
                         <div className="space-y-3">
@@ -624,6 +674,7 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                             <div className="flex-1 h-px bg-border" />
                           </div>
                           <textarea
+                            id="apply-coverLetter"
                             value={formData.coverLetterText}
                             onChange={(e) =>
                               setFormData({ ...formData, coverLetterText: e.target.value })
@@ -637,7 +688,7 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
 
                       {/* Academic Certificates Upload */}
                       <div>
-                        <label className="block text-xs font-medium text-foreground mb-1.5">
+                        <label htmlFor="apply-certificates-desktop" className="block text-xs font-medium text-foreground mb-1.5">
                           Academic Certificates
                         </label>
                         {certificateFiles.length > 0 ? (
@@ -665,13 +716,13 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                                 </button>
                               </div>
                             ))}
-                            <label className="flex items-center gap-2 p-2.5 rounded-lg border-2 border-dashed border-input cursor-pointer hover:bg-secondary/50 transition-colors">
+                            <label tabIndex={0} className="flex items-center gap-2 p-2.5 rounded-lg border-2 border-dashed border-input cursor-pointer hover:bg-secondary/50 transition-colors">
                               <Plus className="w-4 h-4 text-muted-foreground shrink-0" />
                               <span className="text-xs text-muted-foreground">Add another certificate</span>
                               <input
                                 type="file"
                                 accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
-                                className="hidden"
+                                className="sr-only"
                                 onChange={(e) => {
                                   const f = e.target.files?.[0];
                                   if (f) addCertificateFile(f);
@@ -681,6 +732,7 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                           </div>
                         ) : (
                           <label
+                            tabIndex={0}
                             className="flex items-center gap-3 p-4 rounded-lg border-2 border-dashed border-input cursor-pointer hover:bg-secondary/50 transition-colors"
                           >
                             <Upload className="w-5 h-5 text-muted-foreground shrink-0" />
@@ -688,9 +740,10 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                               Upload academic certificates (PDF, DOC, DOCX, JPG, PNG, max 5MB each)
                             </span>
                             <input
+                              id="apply-certificates-desktop"
                               type="file"
                               accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
-                              className="hidden"
+                              className="sr-only"
                               onChange={(e) => {
                                 const f = e.target.files?.[0];
                                 if (f) addCertificateFile(f);
@@ -740,10 +793,11 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                       )}
                       <div className="grid grid-cols-2 gap-3">
                         <div>
-                          <label className="block text-xs font-medium text-foreground mb-1">
+                          <label htmlFor="apply-firstName-m" className="block text-xs font-medium text-foreground mb-1">
                             First Name <span className="text-red-500">*</span>
                           </label>
                           <input
+                            id="apply-firstName-m"
                             type="text"
                             value={formData.firstName}
                             onChange={(e) =>
@@ -753,16 +807,19 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                               errors.firstName ? "border-red-500" : "border-input"
                             }`}
                             placeholder="John"
+                            aria-invalid={errors.firstName ? "true" : undefined}
+                            aria-describedby={errors.firstName ? "apply-firstName-m-error" : undefined}
                           />
                           {errors.firstName && (
-                            <p className="text-xs text-red-500 mt-1">{errors.firstName}</p>
+                            <p id="apply-firstName-m-error" className="text-xs text-red-500 mt-1">{errors.firstName}</p>
                           )}
                         </div>
                         <div>
-                          <label className="block text-xs font-medium text-foreground mb-1">
+                          <label htmlFor="apply-lastName-m" className="block text-xs font-medium text-foreground mb-1">
                             Last Name <span className="text-red-500">*</span>
                           </label>
                           <input
+                            id="apply-lastName-m"
                             type="text"
                             value={formData.lastName}
                             onChange={(e) =>
@@ -772,18 +829,21 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                               errors.lastName ? "border-red-500" : "border-input"
                             }`}
                             placeholder="Doe"
+                            aria-invalid={errors.lastName ? "true" : undefined}
+                            aria-describedby={errors.lastName ? "apply-lastName-m-error" : undefined}
                           />
                           {errors.lastName && (
-                            <p className="text-xs text-red-500 mt-1">{errors.lastName}</p>
+                            <p id="apply-lastName-m-error" className="text-xs text-red-500 mt-1">{errors.lastName}</p>
                           )}
                         </div>
                       </div>
 
                       <div>
-                        <label className="block text-xs font-medium text-foreground mb-1">
+                        <label htmlFor="apply-email-m" className="block text-xs font-medium text-foreground mb-1">
                           Email <span className="text-red-500">*</span>
                         </label>
                         <input
+                          id="apply-email-m"
                           type="email"
                           value={formData.email}
                           onChange={(e) =>
@@ -793,18 +853,22 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                             errors.email ? "border-red-500" : "border-input"
                           }`}
                           placeholder="john@email.com"
+                          aria-invalid={errors.email ? "true" : undefined}
+                          aria-describedby={errors.email ? "apply-email-m-error" : undefined}
                         />
                         {errors.email && (
-                          <p className="text-xs text-red-500 mt-1">{errors.email}</p>
+                          <p id="apply-email-m-error" className="text-xs text-red-500 mt-1">{errors.email}</p>
                         )}
                       </div>
 
                       <div>
-                        <label className="block text-xs font-medium text-foreground mb-1">
+                        <label htmlFor="apply-phone-m" className="block text-xs font-medium text-foreground mb-1">
                           Phone <span className="text-red-500">*</span>
                         </label>
                         <input
+                          id="apply-phone-m"
                           type="tel"
+                          inputMode="tel"
                           value={formData.phone}
                           onChange={(e) =>
                             setFormData({ ...formData, phone: e.target.value })
@@ -813,9 +877,11 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                             errors.phone ? "border-red-500" : "border-input"
                           }`}
                           placeholder="+255 7XX XXX XXX"
+                          aria-invalid={errors.phone ? "true" : undefined}
+                          aria-describedby={errors.phone ? "apply-phone-m-error" : undefined}
                         />
                         {errors.phone && (
-                          <p className="text-xs text-red-500 mt-1">{errors.phone}</p>
+                          <p id="apply-phone-m-error" className="text-xs text-red-500 mt-1">{errors.phone}</p>
                         )}
                       </div>
 
@@ -833,7 +899,7 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
 
                       {/* Cover Letter */}
                       <div>
-                        <label className="block text-xs font-medium text-foreground mb-1">
+                        <label htmlFor="apply-coverLetter-m" className="block text-xs font-medium text-foreground mb-1">
                           Cover Letter
                         </label>
                         <div className="space-y-3">
@@ -851,6 +917,7 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                             <div className="flex-1 h-px bg-border" />
                           </div>
                           <textarea
+                            id="apply-coverLetter-m"
                             value={formData.coverLetterText}
                             onChange={(e) =>
                               setFormData({ ...formData, coverLetterText: e.target.value })
@@ -864,7 +931,7 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
 
                       {/* Academic Certificates */}
                       <div>
-                        <label className="block text-xs font-medium text-foreground mb-1">
+                        <label htmlFor="apply-certificates-mobile" className="block text-xs font-medium text-foreground mb-1">
                           Academic Certificates
                         </label>
                         {certificateFiles.length > 0 ? (
@@ -889,13 +956,13 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                                 </button>
                               </div>
                             ))}
-                            <label className="flex items-center gap-2 p-2 rounded-lg border-2 border-dashed border-input cursor-pointer hover:bg-secondary/50 transition-colors">
+                            <label tabIndex={0} className="flex items-center gap-2 p-2 rounded-lg border-2 border-dashed border-input cursor-pointer hover:bg-secondary/50 transition-colors">
                               <Plus className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
                               <span className="text-xs text-muted-foreground">Add more</span>
                               <input
                                 type="file"
                                 accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
-                                className="hidden"
+                                className="sr-only"
                                 onChange={(e) => {
                                   const f = e.target.files?.[0];
                                   if (f) addCertificateFile(f);
@@ -905,6 +972,7 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                           </div>
                         ) : (
                           <label
+                            tabIndex={0}
                             className="flex items-center gap-2 p-3 rounded-lg border-2 border-dashed border-input cursor-pointer hover:bg-secondary/50 transition-colors"
                           >
                             <Upload className="w-4 h-4 text-muted-foreground shrink-0" />
@@ -912,9 +980,10 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                               Upload certificates (PDF, DOCX, JPG, PNG)
                             </span>
                             <input
+                              id="apply-certificates-mobile"
                               type="file"
                               accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
-                              className="hidden"
+                              className="sr-only"
                               onChange={(e) => {
                                 const f = e.target.files?.[0];
                                 if (f) addCertificateFile(f);

@@ -43,6 +43,13 @@ const newsItems = [
 export function NewsSection() {
   const { setActivePage } = usePage();
 
+  const handleCardKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      setActivePage("news");
+    }
+  };
+
   return (
     <section className="relative py-20 sm:py-28">
       {/* Background */}
@@ -76,7 +83,11 @@ export function NewsSection() {
             <StaggerItem key={item.title}>
               <article
                 onClick={() => setActivePage("news")}
-                className="group h-full p-6 rounded-2xl bg-card border border-border hover:border-jotofa-accent/25 transition-all duration-300 hover:bg-secondary cursor-pointer"
+                onKeyDown={handleCardKeyDown}
+                role="button"
+                tabIndex={0}
+                aria-label="View all news and insights"
+                className="group h-full p-6 rounded-2xl bg-card border border-border hover:border-jotofa-accent/25 transition-all duration-300 hover:bg-secondary cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 {/* Category badge */}
                 <div

@@ -363,11 +363,23 @@ export function Footer() {
               © {new Date().getFullYear()} JOTOFA GROUP LIMITED
             </div>
             <div className="flex items-center gap-4 text-xs text-muted-foreground">
-              <button className="hover:text-foreground transition-colors cursor-pointer">
+              <button
+                type="button"
+                disabled
+                aria-disabled="true"
+                title="Privacy Policy — coming soon"
+                className="hover:text-foreground transition-colors cursor-not-allowed opacity-60"
+              >
                 Privacy Policy
               </button>
-              <span className="text-muted-foreground/40">·</span>
-              <button className="hover:text-foreground transition-colors cursor-pointer">
+              <span className="text-muted-foreground/40" aria-hidden>·</span>
+              <button
+                type="button"
+                disabled
+                aria-disabled="true"
+                title="Terms of Service — coming soon"
+                className="hover:text-foreground transition-colors cursor-not-allowed opacity-60"
+              >
                 Terms of Service
               </button>
             </div>

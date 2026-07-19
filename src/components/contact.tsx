@@ -141,7 +141,7 @@ export function Contact() {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
                   {submitError && (
-                    <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                    <div role="alert" className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
                       {submitError}
                     </div>
                   )}
@@ -212,27 +212,28 @@ export function Contact() {
                         name="subsidiary"
                         value={formState.subsidiary}
                         onChange={handleChange}
-                        className="w-full h-9 rounded-md border border-border bg-card px-3 text-sm text-foreground focus:border-jotofa-accent/40 focus:ring-1 focus:ring-jotofa-accent/20 focus:outline-none"
+                        aria-invalid={false}
+                        className="w-full h-9 rounded-md border border-input bg-card px-3 text-sm text-foreground focus:border-jotofa-accent/40 focus:ring-1 focus:ring-jotofa-accent/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent cursor-pointer"
                       >
-                        <option value="" className="dark:bg-dark-card bg-white">
+                        <option value="">
                           Select a subsidiary
                         </option>
-                        <option value="utec" className="dark:bg-dark-card bg-white">
+                        <option value="utec">
                           UTEC Solutions (ICT & Telecom)
                         </option>
-                        <option value="courier" className="dark:bg-dark-card bg-white">
+                        <option value="courier">
                           JOTOFA Courier & Logistics
                         </option>
-                        <option value="cleaning" className="dark:bg-dark-card bg-white">
+                        <option value="cleaning">
                           JOTOFA Cleaning & Maids
                         </option>
-                        <option value="security" className="dark:bg-dark-card bg-white">
+                        <option value="security">
                           JOTOFA Security
                         </option>
-                        <option value="staffing" className="dark:bg-dark-card bg-white">
+                        <option value="staffing">
                           Staffing & Labour Supply
                         </option>
-                        <option value="general" className="dark:bg-dark-card bg-white">
+                        <option value="general">
                           General Inquiry
                         </option>
                       </select>
@@ -261,7 +262,7 @@ export function Contact() {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full sm:w-auto bg-jotofa-gold hover:bg-jotofa-gold-light text-black font-semibold px-8 py-3 rounded-full transition-all hover:shadow-lg hover:shadow-jotofa-gold/20 disabled:opacity-50"
+                    className="w-full sm:w-auto bg-jotofa-gold hover:bg-jotofa-gold-light text-black font-semibold px-8 py-3 rounded-full transition-all hover:shadow-lg hover:shadow-jotofa-gold/20 disabled:opacity-60 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? (
                       <span className="flex items-center gap-2">
