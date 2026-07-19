@@ -15,14 +15,61 @@ import {
   Truck,
   Sparkles,
   ShieldCheck,
+  Check,
 } from "lucide-react";
 import {
   ScrollReveal,
   StaggerContainer,
   StaggerItem,
 } from "@/components/scroll-reveal";
-import { PageId } from "@/lib/page-context";
+import { PageId, usePage } from "@/lib/page-context";
 import { storeProductsPageUrl } from "@/lib/store-config";
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Accent color tokens — each subsidiary has its own brand accent used for
+   sector badges, service check icons, and hover/border states.
+   Static class strings so Tailwind can statically extract them.
+   ────────────────────────────────────────────────────────────────────────── */
+const accentClasses: Record<
+  "utec-cyan" | "courier-orange" | "cleaning-green" | "security-red" | "staffing-purple",
+  { bg: string; text: string; border: string; hoverBorder: string; hoverBg: string }
+> = {
+  "utec-cyan": {
+    bg: "bg-utec-cyan/10",
+    text: "text-utec-cyan",
+    border: "border-utec-cyan/20",
+    hoverBorder: "hover:border-utec-cyan/40",
+    hoverBg: "hover:bg-utec-cyan/[0.06]",
+  },
+  "courier-orange": {
+    bg: "bg-courier-orange/10",
+    text: "text-courier-orange",
+    border: "border-courier-orange/20",
+    hoverBorder: "hover:border-courier-orange/40",
+    hoverBg: "hover:bg-courier-orange/[0.06]",
+  },
+  "cleaning-green": {
+    bg: "bg-cleaning-green/10",
+    text: "text-cleaning-green",
+    border: "border-cleaning-green/20",
+    hoverBorder: "hover:border-cleaning-green/40",
+    hoverBg: "hover:bg-cleaning-green/[0.06]",
+  },
+  "security-red": {
+    bg: "bg-security-red/10",
+    text: "text-security-red",
+    border: "border-security-red/20",
+    hoverBorder: "hover:border-security-red/40",
+    hoverBg: "hover:bg-security-red/[0.06]",
+  },
+  "staffing-purple": {
+    bg: "bg-staffing-purple/10",
+    text: "text-staffing-purple",
+    border: "border-staffing-purple/20",
+    hoverBorder: "hover:border-staffing-purple/40",
+    hoverBg: "hover:bg-staffing-purple/[0.06]",
+  },
+};
 
 /* ──────────────────────────────────────────────────────────────────────────
    "Our Businesses" — premium holding-company directory page.
@@ -68,8 +115,10 @@ interface Business {
   logoSrc?: string;
   /** 2-letter monogram used when no real logo asset exists */
   logoMark: string;
-  /** Outbound link (UTEC store). If absent, button routes internally */
+  /** Outbound link (UTEC store). If absent, only the internal CTA shows */
   website?: { label: string; url: string };
+  /** Per-subsidiary accent color used for badges, checks, and hover states */
+  accent: "utec-cyan" | "courier-orange" | "cleaning-green" | "security-red" | "staffing-purple";
 }
 
 const businesses: Business[] = [
@@ -93,6 +142,7 @@ const businesses: Business[] = [
     logoSrc: "/images/utec-logo.png",
     logoMark: "UT",
     website: { label: "Visit Website", url: storeProductsPageUrl() },
+    accent: "utec-cyan",
   },
   {
     id: "courier",
@@ -113,6 +163,7 @@ const businesses: Business[] = [
     image: "/images/subsidiaries/courier.jpg",
     logoSrc: "/images/courier-logo.png",
     logoMark: "JC",
+    accent: "courier-orange",
   },
   {
     id: "cleaning",
@@ -133,6 +184,7 @@ const businesses: Business[] = [
     image: "/images/subsidiaries/cleaning.jpg",
     logoSrc: "/images/cleaning-logo.png",
     logoMark: "JM",
+    accent: "cleaning-green",
   },
   {
     id: "security",
@@ -153,6 +205,7 @@ const businesses: Business[] = [
     image: "/images/subsidiaries/security.jpg",
     logoSrc: "/images/security-logo.png",
     logoMark: "JS",
+    accent: "security-red",
   },
   {
     id: "staffing",
@@ -173,6 +226,7 @@ const businesses: Business[] = [
     image: "/images/subsidiaries/staffing.jpg",
     logoSrc: "/images/staffing-logo.png",
     logoMark: "JT",
+    accent: "staffing-purple",
   },
 ];
 
@@ -267,15 +321,15 @@ function BusinessesHero() {
           </p>
 
           {/* Mini stats bar */}
-          <div className="inline-flex items-center gap-3 sm:gap-6 px-5 py-3 rounded-full bg-white/80 dark:bg-white/5 backdrop-blur border border-jotofa-navy/10 dark:border-white/10 text-sm">
+          <div className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white/80 dark:bg-white/5 backdrop-blur border border-jotofa-navy/10 dark:border-white/10 text-sm">
             <span className="font-semibold text-jotofa-navy dark:text-white">
               5 Subsidiaries
             </span>
-            <span className="text-jotofa-accent">·</span>
+            <span className="text-jotofa-accent" aria-hidden>·</span>
             <span className="font-semibold text-jotofa-navy dark:text-white">
               5 Sectors
             </span>
-            <span className="text-jotofa-accent">·</span>
+            <span className="text-jotofa-accent" aria-hidden>·</span>
             <span className="font-semibold text-jotofa-navy dark:text-white">
               1 Vision
             </span>
@@ -387,16 +441,19 @@ function SplitSection({
         </span>
 
         <div className="relative z-10 max-w-xl mx-auto lg:mx-0 w-full">
-          {/* Sector badges */}
+          {/* Sector badges — each pill uses the subsidiary's accent color */}
           <div className="flex flex-wrap gap-1.5 mb-5">
-            {business.sectors.map((sector) => (
-              <span
-                key={sector}
-                className="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-semibold uppercase tracking-wide bg-jotofa-navy/[0.06] dark:bg-white/[0.08] text-jotofa-navy/70 dark:text-white/70 border border-jotofa-navy/5 dark:border-white/5"
-              >
-                {sector}
-              </span>
-            ))}
+            {business.sectors.map((sector) => {
+              const a = accentClasses[business.accent];
+              return (
+                <span
+                  key={sector}
+                  className={`inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-semibold uppercase tracking-wide ${a.bg} ${a.text} ${a.border} border`}
+                >
+                  {sector}
+                </span>
+              );
+            })}
           </div>
 
           {/* Name */}
@@ -409,41 +466,43 @@ function SplitSection({
             {business.description}
           </p>
 
-          {/* Services grid — 2 columns */}
+          {/* Services grid — 2 columns with accent-colored check icons */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-9">
-            {business.services.map((service) => (
-              <div
-                key={service}
-                className="flex items-center gap-2.5 px-4 py-2.5 rounded-lg bg-jotofa-navy/[0.03] dark:bg-white/[0.04] border border-border hover:border-jotofa-accent/40 hover:bg-jotofa-accent/[0.06] transition-all duration-200"
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-jotofa-accent flex-shrink-0" />
-                <span className="text-sm font-medium text-foreground/80">
-                  {service}
-                </span>
-              </div>
-            ))}
+            {business.services.map((service) => {
+              const a = accentClasses[business.accent];
+              return (
+                <div
+                  key={service}
+                  className={`flex items-center gap-2.5 px-4 py-2.5 rounded-lg bg-jotofa-navy/[0.03] dark:bg-white/[0.04] border border-border ${a.hoverBorder} ${a.hoverBg} transition-all duration-200`}
+                >
+                  <Check className={`w-3.5 h-3.5 flex-shrink-0 ${a.text}`} />
+                  <span className="text-sm font-medium text-foreground/80">
+                    {service}
+                  </span>
+                </div>
+              );
+            })}
           </div>
 
-          {/* High-contrast primary CTA */}
-          <div>
-            {business.website ? (
+          {/* CTA row — primary "Explore Entity" + optional secondary "Visit Website" link */}
+          <div className="flex flex-wrap items-center gap-3">
+            <button
+              onClick={() => router.push(`/${business.id}`)}
+              className="group/btn inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-jotofa-navy dark:bg-jotofa-accent text-white text-sm font-semibold transition-all hover:bg-jotofa-navy-deep dark:hover:bg-jotofa-accent-dark shadow-[0_6px_18px_-8px_rgba(0,59,100,0.4)] dark:shadow-[0_6px_18px_-8px_rgba(0,169,183,0.5)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              Explore Entity
+              <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5" />
+            </button>
+            {business.website && (
               <a
                 href={business.website.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group/btn inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-jotofa-navy dark:bg-jotofa-accent text-white text-sm font-semibold transition-all hover:bg-jotofa-navy-deep dark:hover:bg-jotofa-accent-dark shadow-[0_6px_18px_-8px_rgba(0,59,100,0.4)] dark:shadow-[0_6px_18px_-8px_rgba(0,169,183,0.5)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-jotofa-navy dark:text-white/85 hover:text-jotofa-accent dark:hover:text-jotofa-accent-light transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
               >
                 {business.website.label}
-                <ExternalLink className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5" />
+                <ExternalLink className="w-3.5 h-3.5" />
               </a>
-            ) : (
-              <button
-                onClick={() => router.push(`/${business.id}`)}
-                className="group/btn inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-jotofa-navy dark:bg-jotofa-accent text-white text-sm font-semibold transition-all hover:bg-jotofa-navy-deep dark:hover:bg-jotofa-accent-dark shadow-[0_6px_18px_-8px_rgba(0,59,100,0.4)] dark:shadow-[0_6px_18px_-8px_rgba(0,169,183,0.5)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-              >
-                Explore Entity
-                <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5" />
-              </button>
             )}
           </div>
         </div>
@@ -593,7 +652,37 @@ function GroupImpact() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   Page — composes Hero + Split Sections + Group Impact.
+   4. CONTACT CTA — closing call-to-action band that routes visitors to the
+      contact page. Reinforces the group's cross-sector value proposition.
+   ────────────────────────────────────────────────────────────────────────── */
+function ContactCTA() {
+  const { setActivePage } = usePage();
+  return (
+    <section className="section-py border-t border-border">
+      <div className="container-page text-center">
+        <div className="eyebrow mb-4">Ready to Partner?</div>
+        <h2 className="h2 text-foreground mb-4 max-w-2xl mx-auto">
+          Interested in our services?{" "}
+          <span className="text-gold-gradient">Let&rsquo;s talk.</span>
+        </h2>
+        <p className="lead mb-8 max-w-xl mx-auto">
+          From ICT to security, logistics to staffing — JOTOFA Group delivers
+          excellence under one trusted roof.
+        </p>
+        <button
+          onClick={() => setActivePage("contact")}
+          className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-jotofa-accent text-white font-semibold text-sm hover:bg-jotofa-accent-dark transition-all shadow-[0_8px_24px_-8px_rgba(0,169,183,0.5)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2"
+        >
+          Contact JOTOFA Group
+          <ArrowRight className="w-4 h-4" />
+        </button>
+      </div>
+    </section>
+  );
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Page — composes Hero + Split Sections + Group Impact + Contact CTA.
    (Footer is rendered globally by the page shell.)
    ────────────────────────────────────────────────────────────────────────── */
 export function BusinessesPage() {
@@ -602,6 +691,7 @@ export function BusinessesPage() {
       <BusinessesHero />
       <SplitSections />
       <GroupImpact />
+      <ContactCTA />
     </>
   );
 }

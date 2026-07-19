@@ -10,10 +10,57 @@ import {
   Users,
   ArrowRight,
   ExternalLink,
+  Check,
 } from "lucide-react";
 import { ScrollReveal } from "./scroll-reveal";
 import { usePage, PageId } from "@/lib/page-context";
 import { storeProductsPageUrl } from "@/lib/store-config";
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Accent color tokens — each subsidiary has its own brand accent used for
+   sector badges, service check icons, and hover/border states.
+   Static class strings so Tailwind can statically extract them.
+   ────────────────────────────────────────────────────────────────────────── */
+const accentClasses: Record<
+  "utec-cyan" | "courier-orange" | "cleaning-green" | "security-red" | "staffing-purple",
+  { bg: string; text: string; border: string; hoverBorder: string; hoverBg: string }
+> = {
+  "utec-cyan": {
+    bg: "bg-utec-cyan/10",
+    text: "text-utec-cyan",
+    border: "border-utec-cyan/20",
+    hoverBorder: "hover:border-utec-cyan/40",
+    hoverBg: "hover:bg-utec-cyan/[0.06]",
+  },
+  "courier-orange": {
+    bg: "bg-courier-orange/10",
+    text: "text-courier-orange",
+    border: "border-courier-orange/20",
+    hoverBorder: "hover:border-courier-orange/40",
+    hoverBg: "hover:bg-courier-orange/[0.06]",
+  },
+  "cleaning-green": {
+    bg: "bg-cleaning-green/10",
+    text: "text-cleaning-green",
+    border: "border-cleaning-green/20",
+    hoverBorder: "hover:border-cleaning-green/40",
+    hoverBg: "hover:bg-cleaning-green/[0.06]",
+  },
+  "security-red": {
+    bg: "bg-security-red/10",
+    text: "text-security-red",
+    border: "border-security-red/20",
+    hoverBorder: "hover:border-security-red/40",
+    hoverBg: "hover:bg-security-red/[0.06]",
+  },
+  "staffing-purple": {
+    bg: "bg-staffing-purple/10",
+    text: "text-staffing-purple",
+    border: "border-staffing-purple/20",
+    hoverBorder: "hover:border-staffing-purple/40",
+    hoverBg: "hover:bg-staffing-purple/[0.06]",
+  },
+};
 
 /* ──────────────────────────────────────────────────────────────────────────
    "Five Arms, One Vision" — Home page subsidiaries section.
@@ -55,6 +102,8 @@ interface Subsidiary {
   /** Optional outbound store link (UTEC) */
   storeUrl?: string;
   storeLabel?: string;
+  /** Per-subsidiary accent color used for badges, checks, and hover states */
+  accent: "utec-cyan" | "courier-orange" | "cleaning-green" | "security-red" | "staffing-purple";
 }
 
 const subsidiaries: Subsidiary[] = [
@@ -78,7 +127,8 @@ const subsidiaries: Subsidiary[] = [
     logoSrc: "/images/utec-logo.png",
     logoMark: "UT",
     storeUrl: storeProductsPageUrl(),
-    storeLabel: "Visit Online Store",
+    storeLabel: "Visit Website",
+    accent: "utec-cyan",
   },
   {
     id: "courier",
@@ -99,6 +149,7 @@ const subsidiaries: Subsidiary[] = [
     image: "/images/subsidiaries/courier.jpg",
     logoSrc: "/images/courier-logo.png",
     logoMark: "JC",
+    accent: "courier-orange",
   },
   {
     id: "cleaning",
@@ -119,6 +170,7 @@ const subsidiaries: Subsidiary[] = [
     image: "/images/subsidiaries/cleaning.jpg",
     logoSrc: "/images/cleaning-logo.png",
     logoMark: "JM",
+    accent: "cleaning-green",
   },
   {
     id: "security",
@@ -139,6 +191,7 @@ const subsidiaries: Subsidiary[] = [
     image: "/images/subsidiaries/security.jpg",
     logoSrc: "/images/security-logo.png",
     logoMark: "JS",
+    accent: "security-red",
   },
   {
     id: "staffing",
@@ -159,6 +212,7 @@ const subsidiaries: Subsidiary[] = [
     image: "/images/subsidiaries/staffing.jpg",
     logoSrc: "/images/staffing-logo.png",
     logoMark: "JT",
+    accent: "staffing-purple",
   },
 ];
 
@@ -259,16 +313,19 @@ function SplitSection({
         </span>
 
         <div className="relative z-10 max-w-xl mx-auto lg:mx-0 w-full">
-          {/* Sector badges */}
+          {/* Sector badges — each pill uses the subsidiary's accent color */}
           <div className="flex flex-wrap gap-1.5 mb-5">
-            {subsidiary.sectors.map((sector) => (
-              <span
-                key={sector}
-                className="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-semibold uppercase tracking-wide bg-jotofa-navy/[0.06] dark:bg-white/[0.08] text-jotofa-navy/70 dark:text-white/70 border border-jotofa-navy/5 dark:border-white/5"
-              >
-                {sector}
-              </span>
-            ))}
+            {subsidiary.sectors.map((sector) => {
+              const a = accentClasses[subsidiary.accent];
+              return (
+                <span
+                  key={sector}
+                  className={`inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-semibold uppercase tracking-wide ${a.bg} ${a.text} ${a.border} border`}
+                >
+                  {sector}
+                </span>
+              );
+            })}
           </div>
 
           {/* Name */}
@@ -281,28 +338,31 @@ function SplitSection({
             {subsidiary.description}
           </p>
 
-          {/* Services grid — 2 columns */}
+          {/* Services grid — 2 columns with accent-colored check icons */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-8">
-            {subsidiary.services.map((service) => (
-              <div
-                key={service}
-                className="flex items-center gap-2.5 px-4 py-2.5 rounded-lg bg-jotofa-navy/[0.03] dark:bg-white/[0.04] border border-border hover:border-jotofa-accent/40 hover:bg-jotofa-accent/[0.06] transition-all duration-200"
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-jotofa-accent flex-shrink-0" />
-                <span className="text-sm font-medium text-foreground/80">
-                  {service}
-                </span>
-              </div>
-            ))}
+            {subsidiary.services.map((service) => {
+              const a = accentClasses[subsidiary.accent];
+              return (
+                <div
+                  key={service}
+                  className={`flex items-center gap-2.5 px-4 py-2.5 rounded-lg bg-jotofa-navy/[0.03] dark:bg-white/[0.04] border border-border ${a.hoverBorder} ${a.hoverBg} transition-all duration-200`}
+                >
+                  <Check className={`w-3.5 h-3.5 flex-shrink-0 ${a.text}`} />
+                  <span className="text-sm font-medium text-foreground/80">
+                    {service}
+                  </span>
+                </div>
+              );
+            })}
           </div>
 
-          {/* CTA row — primary "Explore" + optional store link */}
+          {/* CTA row — primary "Explore" + optional subtle "Visit Website" text link */}
           <div className="flex flex-wrap items-center gap-3">
             <button
               onClick={() => setActivePage(subsidiary.id)}
               className="group/btn inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-jotofa-navy dark:bg-jotofa-accent text-white text-sm font-semibold transition-all hover:bg-jotofa-navy-deep dark:hover:bg-jotofa-accent-dark shadow-[0_6px_18px_-8px_rgba(0,59,100,0.4)] dark:shadow-[0_6px_18px_-8px_rgba(0,169,183,0.5)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
-              Explore
+              Explore Entity
               <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5" />
             </button>
 
@@ -311,9 +371,9 @@ function SplitSection({
                 href={subsidiary.storeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-5 py-3 rounded-xl border border-jotofa-navy/15 dark:border-white/15 text-sm font-semibold text-jotofa-navy dark:text-white hover:bg-jotofa-navy/[0.04] dark:hover:bg-white/[0.05] transition-all"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-jotofa-navy dark:text-white/85 hover:text-jotofa-accent dark:hover:text-jotofa-accent-light transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
               >
-                {subsidiary.storeLabel ?? "Store"}
+                {subsidiary.storeLabel ?? "Visit Website"}
                 <ExternalLink className="w-3.5 h-3.5" />
               </a>
             )}

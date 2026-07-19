@@ -147,7 +147,7 @@ export function Navbar() {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-jotofa-navy-mid border-b border-jotofa-navy/10 dark:border-white/10"
       >
-        <div className="mx-auto max-w-[1400px] h-14 sm:h-16 px-4 sm:px-6 flex items-center gap-6 lg:gap-10">
+        <div className="mx-auto max-w-[1400px] h-14 sm:h-16 px-4 sm:px-6 flex items-center gap-4 lg:gap-8">
 
           {/* ───────── LEFT: Logo Block ───────── */}
           <div className="flex-shrink-0 flex justify-start items-center">
@@ -163,9 +163,11 @@ export function Navbar() {
             </button>
           </div>
 
-          {/* ───────── LEFT-CONT: Navigation Links (desktop lg+) ────
-              Nav starts from the left, immediately after the logo.   */}
-          <div ref={dropdownContainerRef} className="hidden lg:flex justify-start items-stretch">
+          {/* ───────── CENTER: Navigation Links (desktop lg+) ────
+              Nav is centered in the remaining space (flex-1 + justify-center).
+              The "Our Businesses" dropdown aligns its left edge to the start
+              of the "Our Businesses" label (left-0, not right-0).            */}
+          <div ref={dropdownContainerRef} className="hidden lg:flex flex-1 justify-center items-stretch">
             <div className="flex items-stretch gap-1">
               {navItems.map((item) => {
                 const isActive = activePage === item.id || (item.hasDropdown && isDropdownActive(item.hasDropdown));
@@ -202,11 +204,11 @@ export function Navbar() {
                     />
                   </button>
 
-                  {/* Our Businesses Mega Dropdown — right-aligned to avoid viewport overflow */}
+                  {/* Our Businesses Mega Dropdown — left-aligned to the "Our Businesses" label */}
                   {item.hasDropdown === "businesses" && openDropdown === "businesses" && (
                     <AnimatePresence>
                       <motion.div initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} transition={{ duration: 0.2, ease: "easeOut" }}
-                        className="absolute top-full right-0 pt-2"
+                        className="absolute top-full left-0 pt-2"
                         onMouseEnter={() => openMenu("businesses")}
                         onMouseLeave={scheduleCloseMenu}>
                         <div className="w-[640px] max-w-[calc(100vw-2rem)] bg-white dark:bg-jotofa-navy-card backdrop-blur-[20px] border border-jotofa-navy/8 dark:border-white/10 rounded-lg shadow-[0_12px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_24px_60px_rgba(0,0,0,0.5)] overflow-hidden">
