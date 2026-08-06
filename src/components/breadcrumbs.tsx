@@ -12,6 +12,7 @@ const pathLabels: Record<string, string> = {
   news: "News & Insights",
   careers: "Careers",
   contact: "Contact Us",
+  faq: "FAQ",
   utec: "UTEC Solutions",
   courier: "Courier & Logistics",
   cleaning: "Cleaning & Maids",

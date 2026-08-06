@@ -49,6 +49,7 @@ const quickLinks: FooterLink[] = [
   { label: "Our Strategy", page: "strategy" },
   { label: "Investor Relations", page: "strategy" },
   { label: "CSR Initiatives", page: "csr" },
+  { label: "FAQ", page: "faq" },
   { label: "News & Insights", page: "news" },
 ];
 
@@ -273,9 +274,7 @@ export function Footer() {
               className="h-9 w-auto object-contain dark:brightness-0 dark:invert mb-4"
             />
             <p className="text-sm text-muted-foreground leading-relaxed max-w-[220px]">
-              A diversified Tanzanian holding company delivering excellence
-              across industries through ICT, logistics, professional services,
-              security, and staffing.
+              Diverse Expertise, Unified Excellence.
             </p>
           </div>
 
@@ -341,22 +340,11 @@ export function Footer() {
                   <social.icon className="w-4 h-4" />
                 </a>
               ))}
-            </div>
+             </div>
+           </div>
+         </div>
 
-            {/* WhatsApp CTA */}
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-social-whatsapp/10 text-social-whatsapp text-xs font-medium hover:bg-social-whatsapp/20 transition-colors"
-            >
-              <Phone className="w-3 h-3" />
-              Chat on WhatsApp
-            </a>
-          </div>
-        </div>
-
-        {/* ─── Bottom bar — legal ─── */}
+         {/* ─── Bottom bar — legal ─── */}
         <div className="py-5 border-t border-border">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="text-xs text-muted-foreground text-center sm:text-left">

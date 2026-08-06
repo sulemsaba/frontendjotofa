@@ -16,7 +16,8 @@ export type PageId =
   | "courier"
   | "cleaning"
   | "security"
-  | "staffing";
+  | "staffing"
+  | "faq";
 
 interface PageContextType {
   activePage: PageId;
@@ -58,6 +59,7 @@ function pathnameToPageId(pathname: string | null): PageId {
     "cleaning",
     "security",
     "staffing",
+    "faq",
   ];
 
   // Treat news detail pages (e.g. /news/some-article) as the news page
@@ -113,7 +115,7 @@ export function PageProvider({ children }: { children: ReactNode }) {
     const allPages: PageId[] = [
       "about", "businesses", "strategy", "csr", "news",
       "careers", "contact", "utec", "courier", "cleaning",
-      "security", "staffing",
+      "security", "staffing", "faq",
     ];
     const schedule = (cb: () => void) =>
       "requestIdleCallback" in window
