@@ -28,9 +28,9 @@ export default function Home() {
         <Subsidiaries />
         <Testimonials
           eyebrow="Client Voices"
-          title={<>Trusted by <span className="text-gold-gradient">Businesses Across Tanzania</span></>}
+          title={<>Trusted by <span className="text-jotofa-accent">Businesses Across Tanzania</span></>}
           subtitle="Organizations from Dar es Salaam to Kigali rely on JOTOFA Group for diversified, dependable, professional services."
-          accent="text-jotofa-gold"
+          accent="text-jotofa-accent"
           accentBg="bg-jotofa-accent/10"
           accentBorder="border-jotofa-accent/20"
           testimonials={homeTestimonials}

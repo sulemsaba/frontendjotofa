@@ -116,7 +116,7 @@ export function Navbar() {
 
   const handleNavClick = (pageId: PageId) => { setActivePage(pageId); setMobileOpen(false); setOpenDropdown(null); setMobileExpanded(null); };
   const toggleTheme = () => setTheme(resolvedTheme === "dark" ? "light" : "dark");
-  const isDropdownActive = (t: "businesses") => businessesPages.includes(activePage);
+  const isDropdownActive = (t: "businesses" | "about") => t === "businesses" && businessesPages.includes(activePage);
 
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const openMenu = (type: "businesses" | "about") => {

@@ -18,7 +18,7 @@ const objectives = [
     title: "Market Leadership",
     description:
       "Establish JOTOFA GROUP as the leading diversified holding company in Tanzania and East Africa through strategic investments and operational excellence.",
-    accent: "text-jotofa-gold",
+    accent: "text-jotofa-accent",
     bg: "bg-jotofa-accent/10",
   },
   {
@@ -96,13 +96,13 @@ export function Strategy() {
         {/* Section header */}
         <ScrollReveal className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-jotofa-accent/20 bg-jotofa-accent/5 mb-6">
-            <span className="text-jotofa-gold text-sm font-medium">
+            <span className="text-jotofa-accent text-sm font-medium">
               Our Strategy
             </span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4">
             Strategic{" "}
-            <span className="text-gold-gradient">Objectives</span>
+            <span className="text-jotofa-accent">Objectives</span>
           </h2>
           <p className="mx-auto max-w-2xl text-muted-foreground text-lg">
             Our roadmap for growth, impact, and sustainable value creation —
@@ -152,7 +152,7 @@ export function Strategy() {
                 {values.map((value, i) => (
                   <div key={value.title} className="text-center">
                     <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-jotofa-accent/10 border border-jotofa-accent/20 mb-4">
-                      <span className="text-jotofa-gold font-bold text-sm">
+                      <span className="text-jotofa-accent font-bold text-sm">
                         {String(i + 1).padStart(2, "0")}
                       </span>
                     </div>
@@ -174,9 +174,9 @@ export function Strategy() {
     {/* Testimonials */}
     <Testimonials
       eyebrow="Investor & Partner Voices"
-      title={<>What Investors & <span className="text-gold-gradient">Partners Say</span></>}
+      title={<>What Investors & <span className="text-jotofa-accent">Partners Say</span></>}
       subtitle="Why strategic partners and investors back JOTOFA Group's regional growth strategy."
-      accent="text-jotofa-gold"
+      accent="text-jotofa-accent"
       accentBg="bg-jotofa-accent/10"
       accentBorder="border-jotofa-accent/20"
       testimonials={strategyTestimonials}

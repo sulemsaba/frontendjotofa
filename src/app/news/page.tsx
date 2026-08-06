@@ -4,7 +4,6 @@ import { News } from "@/components/news";
 import { Footer } from "@/components/footer";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { BackToTopButton } from "@/components/back-to-top-button";
-import { getNews, type PublicNewsArticle } from "@/lib/api";
 
 export const metadata: Metadata = {
   title: "News & Insights",
@@ -14,23 +13,16 @@ export const metadata: Metadata = {
     title: "News & Insights — JOTOFA GROUP",
     description:
       "Stay updated with the latest news, insights, and press releases from JOTOFA GROUP and our subsidiaries.",
-    images: [{ url: "/images/jotofa-hero-1.webp", width: 1200, height: 630, alt: "JOTOFA GROUP News" }],
+    images: [{ url: "/images/jotofa-hero-1.jpeg", width: 1200, height: 630, alt: "JOTOFA GROUP News" }],
   },
 };
 
-export default async function NewsPage() {
-  let initialArticles: PublicNewsArticle[] | null = null;
-  try {
-    initialArticles = await getNews();
-  } catch {
-    // Fall back to client-side fetch if API unavailable during SSR
-  }
-
+export default function NewsPage() {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Navbar />
       <main id="main-content" className="flex-1 pt-14 sm:pt-16">
-        <News initialArticles={initialArticles} />
+        <News />
       </main>
       <Footer />
       <WhatsAppButton />

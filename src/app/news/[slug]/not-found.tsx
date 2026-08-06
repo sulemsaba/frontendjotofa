@@ -4,7 +4,7 @@ export default function NewsArticleNotFound() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background px-4">
       <div className="text-center max-w-md">
-        <h1 className="text-4xl font-bold text-jotofa-gold mb-4">Article Not Found</h1>
+        <h1 className="text-4xl font-bold text-jotofa-accent mb-4">Article Not Found</h1>
         <p className="text-muted-foreground mb-8 leading-relaxed">
           The article you are looking for does not exist or has been removed.
           Please browse our latest news and insights.

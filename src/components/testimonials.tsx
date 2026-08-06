@@ -7,11 +7,11 @@ import type { Testimonial } from "@/lib/testimonials-data";
 interface TestimonialsProps {
   /** Section eyebrow / kicker — small label above the title */
   eyebrow?: string;
-  /** Section title — supports a highlighted word via <span class="text-gold-gradient"> */
+  /** Section title — supports a highlighted word via <span class="text-jotofa-accent"> */
   title: React.ReactNode;
   /** Optional subtitle paragraph below the title */
   subtitle?: string;
-  /** Tailwind accent color token class, e.g. "text-utec-cyan" or "text-jotofa-gold" */
+  /** Tailwind accent color token class, e.g. "text-utec-cyan" or "text-jotofa-accent" */
   accent?: string;
   /** Tailwind bg tint class for icon/avatars, e.g. "bg-utec-cyan/10" */
   accentBg?: string;
@@ -31,7 +31,7 @@ export function Testimonials({
   eyebrow = "Client Voices",
   title,
   subtitle,
-  accent = "text-jotofa-gold",
+  accent = "text-jotofa-accent",
   accentBg = "bg-jotofa-accent/10",
   accentBorder = "border-jotofa-accent/20",
   testimonials,
@@ -39,14 +39,14 @@ export function Testimonials({
   return (
     <section className="relative py-20 sm:py-28">
       <div className="absolute inset-0 bg-background" />
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-jotofa-gold/15 to-transparent" />
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-jotofa-accent/15 to-transparent" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <ScrollReveal className="text-center mb-14">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-jotofa-accent/20 bg-jotofa-accent/5 mb-6">
             <Quote className={`w-4 h-4 ${accent}`} />
-            <span className="text-jotofa-gold text-sm font-medium">{eyebrow}</span>
+            <span className="text-jotofa-accent text-sm font-medium">{eyebrow}</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-foreground mb-4">
             {title}
@@ -81,7 +81,7 @@ export function Testimonials({
                       key={i}
                       className={`w-4 h-4 ${
                         i < t.rating
-                          ? "fill-jotofa-gold text-jotofa-gold"
+                          ? "fill-jotofa-accent text-jotofa-accent"
                           : "text-muted-foreground/30"
                       }`}
                     />

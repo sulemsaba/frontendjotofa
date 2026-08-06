@@ -2,10 +2,6 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "standalone",
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  reactStrictMode: false,
   allowedDevOrigins: [
     ".space-z.ai",
     "preview-chat-1dd5fb44-60a7-4ba0-81e1-3032129ca33f.space-z.ai",

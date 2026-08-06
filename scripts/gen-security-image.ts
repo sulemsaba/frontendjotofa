@@ -13,18 +13,17 @@ async function main() {
   const res = await zai.images.generations.create({
     model: "dall-e-3",
     prompt,
-    n: 1,
-    size: "1792x1024",
+    size: "1440x720",
   });
 
   // SDK returns { data: [{ base64 | url }] }
-  const item = res?.data?.[0];
+  const item = (res?.data?.[0]) as any;
   if (!item) {
     console.error("No image data returned");
     process.exit(1);
   }
 
-  const b64 = item.b64_json || item.base64;
+  const b64 = (item as any).b64_json || (item as any).base64 || item.base64;
   if (b64) {
     const buf = Buffer.from(b64, "base64");
     writeFileSync("public/images/subsidiaries/security.jpg", buf);

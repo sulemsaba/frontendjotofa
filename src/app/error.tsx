@@ -19,7 +19,7 @@ export default function Error({
       className="min-h-screen flex items-center justify-center bg-background px-4"
     >
       <div className="text-center max-w-md">
-        <h1 className="text-6xl font-bold text-jotofa-gold mb-4">500</h1>
+        <h1 className="text-6xl font-bold text-jotofa-accent mb-4">500</h1>
         <h2 className="text-2xl font-semibold text-foreground mb-3">
           Something went wrong
         </h2>

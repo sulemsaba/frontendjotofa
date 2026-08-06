@@ -36,7 +36,7 @@ export function CourierPage() {
     <div className="bg-background">
       <section className="relative min-h-[70vh] flex items-center py-28 sm:py-36 overflow-hidden">
         <div className="absolute inset-0 bg-background" />
-        <div className="absolute inset-0 bg-grid-pattern opacity-30" />
+        <div className="absolute inset-0  opacity-30" />
         <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-courier-orange/5 rounded-full blur-[140px]" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -50,7 +50,7 @@ export function CourierPage() {
           <ScrollReveal delay={0.1}>
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-foreground mb-6">
               Reliable{" "}
-              <span className="text-gold-gradient">Delivery Network</span>
+              <span className="text-jotofa-accent">Delivery Network</span>
             </h1>
           </ScrollReveal>
 
@@ -104,7 +104,7 @@ export function CourierPage() {
       {/* Testimonials */}
       <Testimonials
         eyebrow="Courier Client Stories"
-        title={<>What Our <span className="text-gold-gradient">Logistics Clients Say</span></>}
+        title={<>What Our <span className="text-jotofa-accent">Logistics Clients Say</span></>}
         subtitle="Why businesses across Tanzania and East Africa trust JOTOFA Courier & Logistics with their deliveries."
         accent="text-courier-orange"
         accentBg="bg-courier-orange/10"

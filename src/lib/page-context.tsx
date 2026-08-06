@@ -117,8 +117,8 @@ export function PageProvider({ children }: { children: ReactNode }) {
     ];
     const schedule = (cb: () => void) =>
       "requestIdleCallback" in window
-        ? (window as Window).requestIdleCallback(cb, { timeout: 3000 })
-        : window.setTimeout(cb, 1200);
+        ? window.requestIdleCallback(cb, { timeout: 3000 })
+        : setTimeout(cb, 1200);
     schedule(() => {
       allPages.forEach((p) => {
         const url = p === "home" ? "/" : `/${p}`;

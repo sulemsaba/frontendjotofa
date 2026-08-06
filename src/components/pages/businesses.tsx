@@ -282,7 +282,7 @@ function BusinessesHero() {
       />
       <div
         aria-hidden
-        className="absolute inset-0 bg-grid-pattern opacity-40 dark:opacity-25"
+        className="absolute inset-0  opacity-40 dark:opacity-25"
       />
       {/* Teal glow — top right */}
       <div
@@ -309,7 +309,7 @@ function BusinessesHero() {
           <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight text-jotofa-navy dark:text-white leading-[1.05] mb-6">
             Diversified Expertise.
             <br />
-            <span className="text-gold-gradient">Shared Values.</span>
+            <span className="text-jotofa-accent">Shared Values.</span>
           </h1>
 
           {/* Mission subtitle */}
@@ -586,7 +586,7 @@ function GroupImpact() {
   return (
     <section className="relative overflow-hidden bg-jotofa-navy dark:bg-jotofa-navy-deep py-20 sm:py-28">
       {/* Background decoration */}
-      <div aria-hidden className="absolute inset-0 bg-grid-pattern opacity-20" />
+      <div aria-hidden className="absolute inset-0  opacity-20" />
       <div
         aria-hidden
         className="absolute top-0 right-0 w-[600px] h-[600px] bg-jotofa-accent/10 rounded-full blur-[160px] pointer-events-none"
@@ -607,7 +607,7 @@ function GroupImpact() {
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white mb-4">
             The Scale of{" "}
-            <span className="text-gold-gradient">JOTOFA Group</span>
+            <span className="text-jotofa-accent">JOTOFA Group</span>
           </h2>
           <p className="mx-auto max-w-2xl text-white/70 text-lg">
             Five subsidiaries working as one — the aggregate reach of our
@@ -663,7 +663,7 @@ function ContactCTA() {
         <div className="eyebrow mb-4">Ready to Partner?</div>
         <h2 className="h2 text-foreground mb-4 max-w-2xl mx-auto">
           Interested in our services?{" "}
-          <span className="text-gold-gradient">Let&rsquo;s talk.</span>
+          <span className="text-jotofa-accent">Let&rsquo;s talk.</span>
         </h2>
         <p className="lead mb-8 max-w-xl mx-auto">
           From ICT to security, logistics to staffing — JOTOFA Group delivers

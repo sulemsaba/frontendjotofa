@@ -31,7 +31,7 @@ const categories = [
 const featuredArticle = {
   category: "Group Update",
   categoryKey: "group",
-  categoryColor: "text-jotofa-gold",
+  categoryColor: "text-jotofa-accent",
   categoryBg: "bg-jotofa-accent/10",
   categoryBorder: "border-jotofa-accent/20",
   title: "JOTOFA GROUP Expands into East African Markets",
@@ -126,7 +126,7 @@ const newsItems = [
 const allArticles = [featuredArticle, ...newsItems];
 
 const statsHighlights = [
-  { icon: Newspaper, value: "50+", label: "Press Releases", accent: "text-jotofa-gold", bg: "bg-jotofa-accent/10" },
+  { icon: Newspaper, value: "50+", label: "Press Releases", accent: "text-jotofa-accent", bg: "bg-jotofa-accent/10" },
   { icon: TrendingUp, value: "3", label: "Countries Covered", accent: "text-utec-cyan", bg: "bg-utec-cyan/10" },
   { icon: Users, value: "5", label: "Subsidiary Updates", accent: "text-cleaning-green", bg: "bg-cleaning-green/10" },
   { icon: Globe, value: "24/7", label: "Industry Coverage", accent: "text-courier-orange", bg: "bg-courier-orange/10" },
@@ -141,13 +141,6 @@ export function News() {
     setSelectedArticle(article as typeof featuredArticle);
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
-
-  const handleArticleKeyDown = useCallback((e: React.KeyboardEvent, article: typeof featuredArticle) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      handleArticleClick(article);
-    }
-  }, [handleArticleClick]);
 
   // Filter articles by selected category (falls back to all)
   const filteredNewsItems = activeCategory === "all"
@@ -188,22 +181,22 @@ export function News() {
       <section className="relative min-h-[85vh] flex flex-col items-center justify-center py-28 sm:py-36 overflow-hidden">
         {/* Background layers */}
         <div className="absolute inset-0 bg-background" />
-        <div className="absolute inset-0 bg-grid-pattern opacity-40" />
+        <div className="absolute inset-0  opacity-40" />
         <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-jotofa-accent/5 rounded-full blur-[140px]" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-utec-cyan/5 rounded-full blur-[120px]" />
 
         {/* Decorative corner accents */}
-        <div className="absolute top-12 left-8 w-20 h-20 border-l-2 border-t-2 border-jotofa-accent/10 rounded-tl-lg hidden lg:block" />
-        <div className="absolute top-12 right-8 w-20 h-20 border-r-2 border-t-2 border-jotofa-accent/10 rounded-tr-lg hidden lg:block" />
-        <div className="absolute bottom-24 left-8 w-20 h-20 border-l-2 border-b-2 border-jotofa-accent/10 rounded-bl-lg hidden lg:block" />
-        <div className="absolute bottom-24 right-8 w-20 h-20 border-r-2 border-b-2 border-jotofa-accent/10 rounded-br-lg hidden lg:block" />
+        <div className="absolute top-12 left-8 w-20 h-20 border border-jotofa-accent/10 rounded-tl-lg hidden lg:block" />
+        <div className="absolute top-12 right-8 w-20 h-20 border border-jotofa-accent/10 rounded-tr-lg hidden lg:block" />
+        <div className="absolute bottom-24 left-8 w-20 h-20 border border-jotofa-accent/10 rounded-bl-lg hidden lg:block" />
+        <div className="absolute bottom-24 right-8 w-20 h-20 border border-jotofa-accent/10 rounded-br-lg hidden lg:block" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center flex-1 flex flex-col items-center justify-center">
           {/* Badge */}
           <ScrollReveal>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-jotofa-accent/20 bg-jotofa-accent/5 mb-8">
-              <Newspaper className="w-4 h-4 text-jotofa-gold" />
-              <span className="text-jotofa-gold text-sm font-medium">Newsroom</span>
+              <Newspaper className="w-4 h-4 text-jotofa-accent" />
+              <span className="text-jotofa-accent text-sm font-medium">Newsroom</span>
             </div>
           </ScrollReveal>
 
@@ -211,7 +204,7 @@ export function News() {
           <ScrollReveal delay={0.1}>
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-foreground mb-6">
               News &{" "}
-              <span className="text-gold-gradient">Insights</span>
+              <span className="text-jotofa-accent">Insights</span>
             </h1>
           </ScrollReveal>
 
@@ -264,7 +257,7 @@ export function News() {
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           >
-            <ChevronDown className="w-5 h-5 text-jotofa-gold/60" />
+            <ChevronDown className="w-5 h-5 text-jotofa-accent/60" />
           </motion.div>
         </motion.div>
       </section>
@@ -272,17 +265,18 @@ export function News() {
       {/* ── Featured Article ── */}
       <section className="relative py-16 sm:py-20">
         <div className="absolute inset-0 bg-background" />
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-jotofa-gold/15 to-transparent" />
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-jotofa-accent/15 to-transparent" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
-            <div
-              className="group relative rounded-2xl border border-border overflow-hidden hover:border-jotofa-accent/25 transition-all duration-500 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-              role="button"
-              tabIndex={0}
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                handleArticleClick(featuredArticle);
+              }}
+              className="group relative rounded-2xl border border-border overflow-hidden hover:border-jotofa-accent/25 transition-all duration-500 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background block"
               aria-label={`Read featured article: ${featuredArticle.title}`}
-              onClick={() => handleArticleClick(featuredArticle)}
-              onKeyDown={(e) => handleArticleKeyDown(e, featuredArticle)}
             >
               <div className="grid md:grid-cols-2">
                 {/* Image */}
@@ -306,7 +300,7 @@ export function News() {
                 {/* Content */}
                 <div className="p-8 sm:p-10 flex flex-col justify-center">
                   <div className="flex items-center gap-3 mb-4">
-                    <span className="text-xs font-semibold uppercase tracking-widest text-jotofa-gold">
+                    <span className="text-xs font-semibold uppercase tracking-widest text-jotofa-accent">
                       Featured
                     </span>
                     <div
@@ -318,7 +312,7 @@ export function News() {
                     </div>
                   </div>
 
-                  <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4 group-hover:text-jotofa-gold transition-colors leading-snug">
+                  <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4 group-hover:text-jotofa-accent transition-colors leading-snug">
                     {featuredArticle.title}
                   </h2>
 
@@ -337,19 +331,19 @@ export function News() {
                         {featuredArticle.readTime}
                       </span>
                     </div>
-                    <ArrowUpRight className="w-5 h-5 text-muted-foreground/30 group-hover:text-jotofa-gold transition-colors" />
+                    <ArrowUpRight className="w-5 h-5 text-muted-foreground/30 group-hover:text-jotofa-accent transition-colors" />
                   </div>
                 </div>
-              </div>
-            </div>
-          </ScrollReveal>
+                </div>
+              </a>
+              </ScrollReveal>
         </div>
       </section>
 
       {/* ── All News Grid ── */}
       <section className="relative py-16 sm:py-20">
         <div className="absolute inset-0 bg-background" />
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-jotofa-gold/15 to-transparent" />
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-jotofa-accent/15 to-transparent" />
         <div className="absolute bottom-1/3 right-0 w-80 h-80 bg-jotofa-accent/5 rounded-full blur-[100px]" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -357,7 +351,7 @@ export function News() {
           <ScrollReveal className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-12">
             <div>
               <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
-                Latest <span className="text-gold-gradient">Stories</span>
+                Latest <span className="text-jotofa-accent">Stories</span>
               </h2>
               <p className="text-muted-foreground">
                 Updates from across our subsidiaries and group operations
@@ -397,13 +391,14 @@ export function News() {
           >
             {filteredNewsItems.map((item) => (
               <StaggerItem key={item.title}>
-                <article
-                  className="group h-full flex flex-col p-6 sm:p-7 rounded-2xl bg-card border border-border hover:border-jotofa-accent/25 transition-all duration-300 hover:bg-secondary cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                  role="button"
-                  tabIndex={0}
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleArticleClick(item);
+                  }}
+                  className="group h-full flex flex-col p-6 sm:p-7 rounded-2xl bg-card border border-border hover:border-jotofa-accent/25 transition-all duration-300 hover:bg-secondary cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background block"
                   aria-label={`Read article: ${item.title}`}
-                  onClick={() => handleArticleClick(item)}
-                  onKeyDown={(e) => handleArticleKeyDown(e, item)}
                 >
                   {/* Category badge */}
                   <div
@@ -415,7 +410,7 @@ export function News() {
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-base sm:text-lg font-semibold text-foreground mb-3 group-hover:text-jotofa-gold transition-colors leading-snug">
+                  <h3 className="text-base sm:text-lg font-semibold text-foreground mb-3 group-hover:text-jotofa-accent transition-colors leading-snug">
                     {item.title}
                   </h3>
 
@@ -436,10 +431,10 @@ export function News() {
                         {item.readTime}
                       </span>
                     </div>
-                    <ArrowUpRight className="w-4 h-4 text-muted-foreground/30 group-hover:text-jotofa-gold transition-colors" />
+                    <ArrowUpRight className="w-4 h-4 text-muted-foreground/30 group-hover:text-jotofa-accent transition-colors" />
                   </div>
-                </article>
-              </StaggerItem>
+                  </a>
+                </StaggerItem>
             ))}
           </StaggerContainer>
           )}
@@ -449,16 +444,16 @@ export function News() {
       {/* ── Newsletter CTA ── */}
       <section className="relative py-20 sm:py-28">
         <div className="absolute inset-0 bg-background" />
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-jotofa-gold/15 to-transparent" />
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-jotofa-accent/15 to-transparent" />
 
         <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
           <ScrollReveal>
             <div className="p-10 sm:p-14 rounded-2xl border border-jotofa-accent/15 bg-jotofa-accent/[0.03]">
               <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-jotofa-accent/10 mb-6">
-                <Lightbulb className="w-7 h-7 text-jotofa-gold" />
+                <Lightbulb className="w-7 h-7 text-jotofa-accent" />
               </div>
               <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
-                Stay <span className="text-gold-gradient">Informed</span>
+                Stay <span className="text-jotofa-accent">Informed</span>
               </h2>
               <p className="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto">
                 Get the latest updates from JOTOFA GROUP delivered to your inbox.

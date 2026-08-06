@@ -221,7 +221,7 @@ function CtaBand() {
         <div className="max-w-xl">
           <h3 className="h2 text-foreground">
             Let&apos;s{" "}
-            <span className="text-gold-gradient">Build Together</span>
+            <span className="text-jotofa-accent">Build Together</span>
           </h3>
           <p className="mt-2 body-sm text-sm sm:text-base">
             Whether you&apos;re looking for a partnership, a service inquiry,
