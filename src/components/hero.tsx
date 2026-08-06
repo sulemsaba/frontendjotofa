@@ -93,6 +93,7 @@ function TickerColumn({
               alt={img.alt}
               fill
               sizes="(max-width: 1024px) 50vw, 22vw"
+              loading={i === 0 ? "eager" : "lazy"}
               className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
             />
             <div

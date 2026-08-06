@@ -208,7 +208,7 @@ export function Navbar() {
                   {item.hasDropdown === "businesses" && openDropdown === "businesses" && (
                     <AnimatePresence>
                       <motion.div initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} transition={{ duration: 0.2, ease: "easeOut" }}
-                        className="absolute top-full left-0 pt-2"
+                        className="absolute top-full left-4 pt-2"
                         onMouseEnter={() => openMenu("businesses")}
                         onMouseLeave={scheduleCloseMenu}>
                         <div className="w-[640px] max-w-[calc(100vw-2rem)] bg-white dark:bg-jotofa-navy-card backdrop-blur-[20px] border border-jotofa-navy/8 dark:border-white/10 rounded-lg shadow-[0_12px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_24px_60px_rgba(0,0,0,0.5)] overflow-hidden">
