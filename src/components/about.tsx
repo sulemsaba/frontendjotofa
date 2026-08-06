@@ -174,7 +174,7 @@ function AboutHero() {
               Five Arms.
               <br />
               One Unified{" "}
-              <span className="text-gold-gradient">Vision.</span>
+              <span className="text-jotofa-accent">Vision.</span>
             </h1>
             <p className="lead max-w-[540px]">
               A diversified Tanzanian holding company driving excellence through
@@ -336,7 +336,7 @@ function Ecosystem() {
             Our Companies
           </div>
           <h2 className="h2 text-foreground mb-5 sm:mb-6">
-            Five Arms, <span className="text-gold-gradient">One Vision</span>
+            Five Arms, <span className="text-jotofa-accent">One Vision</span>
           </h2>
           <p className="lead">
             Each subsidiary is a pillar of our group — specialized, yet united
@@ -416,7 +416,7 @@ function CTA() {
         <motion.div {...fadeUp}>
           <h2 className="h2 text-foreground mb-5 sm:mb-6 max-w-[800px] mx-auto">
             Ready to Partner with East Africa&apos;s{" "}
-            <span className="text-gold-gradient">Unified Powerhouse?</span>
+            <span className="text-jotofa-accent">Unified Powerhouse?</span>
           </h2>
           <p className="lead mb-8 sm:mb-10 max-w-[600px] mx-auto">
             Whether you need ICT solutions, logistics support, facility

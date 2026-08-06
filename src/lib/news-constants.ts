@@ -11,17 +11,17 @@ export const CATEGORY_MAP: Record<string, {
   border: string;
   label: string;
 }> = {
-  "Company News":      { key: "group",       color: "text-jotofa-gold",     bg: "bg-jotofa-accent/10",   border: "border-jotofa-accent/20",   label: "Group Update" },
-  "Group Update":       { key: "group",       color: "text-jotofa-gold",     bg: "bg-jotofa-accent/10",   border: "border-jotofa-accent/20",   label: "Group Update" },
+  "Company News":      { key: "group",       color: "text-jotofa-accent",     bg: "bg-jotofa-accent/10",   border: "border-jotofa-accent/20",   label: "Group Update" },
+  "Group Update":       { key: "group",       color: "text-jotofa-accent",     bg: "bg-jotofa-accent/10",   border: "border-jotofa-accent/20",   label: "Group Update" },
   "UTEC Solutions":     { key: "utec",        color: "text-utec-cyan",      bg: "bg-utec-cyan/10",       border: "border-utec-cyan/20",       label: "UTEC Solutions" },
   "Technology":         { key: "utec",        color: "text-utec-cyan",      bg: "bg-utec-cyan/10",       border: "border-utec-cyan/20",       label: "UTEC Solutions" },
   "CSR":                { key: "csr",         color: "text-cleaning-green", bg: "bg-cleaning-green/10",  border: "border-cleaning-green/20",  label: "CSR" },
   "Innovation":         { key: "innovation",  color: "text-staffing-purple", bg: "bg-staffing-purple/10", border: "border-staffing-purple/20",  label: "Innovation" },
   "Logistics":          { key: "logistics",   color: "text-courier-orange", bg: "bg-courier-orange/10",  border: "border-courier-orange/20",  label: "Logistics" },
-  "Partnerships":       { key: "group",       color: "text-jotofa-gold",     bg: "bg-jotofa-accent/10",   border: "border-jotofa-accent/20",   label: "Partnerships" },
+  "Partnerships":       { key: "group",       color: "text-jotofa-accent",     bg: "bg-jotofa-accent/10",   border: "border-jotofa-accent/20",   label: "Partnerships" },
 };
 
-export const DEFAULT_CATEGORY = { key: "group", color: "text-jotofa-gold", bg: "bg-jotofa-accent/10", border: "border-jotofa-accent/20", label: "Company News" };
+export const DEFAULT_CATEGORY = { key: "group", color: "text-jotofa-accent", bg: "bg-jotofa-accent/10", border: "border-jotofa-accent/20", label: "Company News" };
 
 // ─── Helper functions ───
 
@@ -82,7 +82,7 @@ export const FALLBACK_ARTICLES: RawArticle[] = [
   {
     id: "f-1", slug: "jotofa-expands-east-africa",
     category: "Group Update", categoryKey: "group",
-    categoryColor: "text-jotofa-gold", categoryBg: "bg-jotofa-accent/10", categoryBorder: "border-jotofa-accent/20",
+    categoryColor: "text-jotofa-accent", categoryBg: "bg-jotofa-accent/10", categoryBorder: "border-jotofa-accent/20",
     title: "JOTOFA GROUP Expands into East African Markets with Kenya and Uganda Operations",
     excerpt: "Our regional growth strategy takes a major step forward with new offices in Nairobi and Kampala, strengthening cross-border logistics and ICT services across the EAC.",
     content: "", author: "JOTOFA Group", date: "MAR 15, 2026", readTime: "4 MIN READ", image: "/images/jotofa-hero-1.webp",
@@ -114,7 +114,7 @@ export const FALLBACK_ARTICLES: RawArticle[] = [
   {
     id: "f-5", slug: "security-iso-certification",
     category: "Group Update", categoryKey: "group",
-    categoryColor: "text-jotofa-gold", categoryBg: "bg-jotofa-accent/10", categoryBorder: "border-jotofa-accent/20",
+    categoryColor: "text-jotofa-accent", categoryBg: "bg-jotofa-accent/10", categoryBorder: "border-jotofa-accent/20",
     title: "JOTOFA Security Achieves ISO 18788:2015 Certification",
     excerpt: "Our security division becomes one of the first private security firms in Tanzania to earn this international standard, reinforcing our commitment to operational excellence.",
     content: "", author: "JOTOFA Group", date: "NOV 8, 2025", readTime: "2 MIN READ", image: "/images/security.webp",
@@ -138,7 +138,7 @@ export const FALLBACK_ARTICLES: RawArticle[] = [
   {
     id: "f-8", slug: "cleaning-hospital-contracts",
     category: "Group Update", categoryKey: "group",
-    categoryColor: "text-jotofa-gold", categoryBg: "bg-jotofa-accent/10", categoryBorder: "border-jotofa-accent/20",
+    categoryColor: "text-jotofa-accent", categoryBg: "bg-jotofa-accent/10", categoryBorder: "border-jotofa-accent/20",
     title: "Cleaning & Maids Wins Three Major Hospital Sanitization Contracts",
     excerpt: "Our cleaning division secures contracts with Muhimbili National Hospital, Aga Khan Hospital, and Kilimanjaro Christian Medical Centre for specialized healthcare-grade sanitization.",
     content: "", author: "JOTOFA Group", date: "AUG 3, 2025", readTime: "3 MIN READ", image: "/images/cleaning.webp",
@@ -178,7 +178,7 @@ export const FALLBACK_ARTICLES: RawArticle[] = [
   {
     id: "f-13", slug: "group-annual-report-2025",
     category: "Group Update", categoryKey: "group",
-    categoryColor: "text-jotofa-gold", categoryBg: "bg-jotofa-accent/10", categoryBorder: "border-jotofa-accent/20",
+    categoryColor: "text-jotofa-accent", categoryBg: "bg-jotofa-accent/10", categoryBorder: "border-jotofa-accent/20",
     title: "JOTOFA GROUP Reports 35% Revenue Growth in 2025 Annual Results",
     excerpt: "The group's diversified portfolio drives record performance with ICT and logistics divisions leading growth, while cleaning and security expand market share across Tanzania.",
     content: "", author: "JOTOFA Group", date: "MAR 1, 2025", readTime: "5 MIN READ", image: "/images/jotofa-hero-1.webp",

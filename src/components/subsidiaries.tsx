@@ -395,7 +395,7 @@ export function Subsidiaries() {
           </span>
         </div>
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4">
-          Five Arms, <span className="text-gold-gradient">One Vision</span>
+          Five Arms, <span className="text-jotofa-accent">One Vision</span>
         </h2>
         <p className="mx-auto max-w-2xl text-muted-foreground text-lg">
           Each subsidiary is a pillar of our group — specialized, yet united

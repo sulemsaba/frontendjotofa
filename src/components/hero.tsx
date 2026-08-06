@@ -150,7 +150,7 @@ export function Hero() {
       {/* Light gradient base — light mode only */}
       <div aria-hidden className="absolute inset-0 bg-gradient-to-br from-background via-muted to-secondary dark:hidden" />
       {/* Faint grid */}
-      <div aria-hidden className="absolute inset-0 bg-grid-pattern opacity-50 dark:opacity-30" />
+      <div aria-hidden className="absolute inset-0  opacity-50 dark:opacity-30" />
       {/* Soft teal glow — top right */}
       <div aria-hidden className="absolute top-0 right-0 w-[560px] h-[560px] bg-jotofa-accent/10 dark:bg-utec-cyan/5 rounded-full blur-[140px] pointer-events-none" />
       {/* Soft navy glow — bottom left (light mode only) */}
@@ -181,7 +181,7 @@ export function Hero() {
               <span className="block text-jotofa-navy dark:text-white drop-shadow-sm">
                 JOTOFA
               </span>
-              <span className="block text-gold-gradient">
+              <span className="block text-jotofa-accent">
                 GROUP
               </span>
             </h1>

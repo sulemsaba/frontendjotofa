@@ -181,7 +181,7 @@ The contact form also has a Next.js route handler at `src/app/api/contact/route.
 - **Standalone output**: `next.config.ts` sets `output: "standalone"`. After `bun run build`, copy `.next/standalone`, `.next/static`, and `public/` to your server and run `node .next/standalone/server.js` (or `bun .next/standalone/server.js`).
 - **Caddy / reverse proxy**: if you were previously using the `Caddyfile` and `start-all.sh` from the old monorepo, those now belong in your deployment repo / host config, not here.
 - **Allowed dev origins**: `next.config.ts` allows `.space-z.ai` for dev previews. Add your own preview domain pattern there if needed.
-- **TypeScript**: `ignoreBuildErrors: true` is set in `next.config.ts` for now. Remove this once the codebase is fully typed and you want CI to enforce type safety.
+- **TypeScript**: Type checking is enforced in `next.config.ts`. Fix type errors rather than suppressing them.
 
 ---
 

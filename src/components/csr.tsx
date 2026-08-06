@@ -74,13 +74,13 @@ export function CSR() {
         {/* Section header */}
         <ScrollReveal className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-jotofa-accent/20 bg-jotofa-accent/5 mb-6">
-            <span className="text-jotofa-gold text-sm font-medium">
+            <span className="text-jotofa-accent text-sm font-medium">
               Social Impact
             </span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4">
             Corporate Social{" "}
-            <span className="text-gold-gradient">Responsibility</span>
+            <span className="text-jotofa-accent">Responsibility</span>
           </h2>
           <p className="mx-auto max-w-2xl text-muted-foreground text-lg">
             We believe that true success is measured not just in profits, but in
@@ -158,7 +158,7 @@ export function CSR() {
             </p>
             <div className="mt-6 flex items-center justify-center gap-3">
               <div className="w-10 h-10 rounded-full bg-jotofa-accent/20 flex items-center justify-center">
-                <span className="text-jotofa-gold font-bold text-sm">JG</span>
+                <span className="text-jotofa-accent font-bold text-sm">JG</span>
               </div>
               <div className="text-left">
                 <div className="text-sm font-semibold text-foreground">
@@ -177,7 +177,7 @@ export function CSR() {
     {/* Testimonials */}
     <Testimonials
       eyebrow="Community Voices"
-      title={<>What Our <span className="text-gold-gradient">Community Partners Say</span></>}
+      title={<>What Our <span className="text-jotofa-accent">Community Partners Say</span></>}
       subtitle="Real impact, told by the schools, health partners, and communities we serve."
       accent="text-cleaning-green"
       accentBg="bg-cleaning-green/10"

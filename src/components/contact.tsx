@@ -103,13 +103,13 @@ export function Contact() {
         {/* Section header */}
         <ScrollReveal className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-jotofa-accent/20 bg-jotofa-accent/5 mb-6">
-            <span className="text-jotofa-gold text-sm font-medium">
+            <span className="text-jotofa-accent text-sm font-medium">
               Get in Touch
             </span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4">
             Let&apos;s Build{" "}
-            <span className="text-gold-gradient">Together</span>
+            <span className="text-jotofa-accent">Together</span>
           </h2>
           <p className="mx-auto max-w-2xl text-muted-foreground text-lg">
             Whether you&apos;re looking for a partnership, service inquiry, or
@@ -212,7 +212,6 @@ export function Contact() {
                         name="subsidiary"
                         value={formState.subsidiary}
                         onChange={handleChange}
-                        aria-invalid={false}
                         className="w-full h-9 rounded-md border border-input bg-card px-3 text-sm text-foreground focus:border-jotofa-accent/40 focus:ring-1 focus:ring-jotofa-accent/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent cursor-pointer"
                       >
                         <option value="">
@@ -262,7 +261,7 @@ export function Contact() {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full sm:w-auto bg-jotofa-gold hover:bg-jotofa-gold-light text-black font-semibold px-8 py-3 rounded-full transition-all hover:shadow-lg hover:shadow-jotofa-gold/20 disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="w-full sm:w-auto bg-jotofa-accent hover:bg-jotofa-accent-light text-black font-semibold px-8 py-3 rounded-full transition-all hover:shadow-lg hover:shadow-jotofa-accent/20 disabled:opacity-60 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? (
                       <span className="flex items-center gap-2">
@@ -300,7 +299,7 @@ export function Contact() {
                 {contactInfo.map((info) => (
                   <div key={info.label} className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-xl bg-jotofa-accent/10 flex items-center justify-center flex-shrink-0">
-                      <info.icon className="w-5 h-5 text-jotofa-gold" />
+                      <info.icon className="w-5 h-5 text-jotofa-accent" />
                     </div>
                     <div>
                       <div className="text-xs text-muted-foreground mb-0.5">
@@ -308,7 +307,7 @@ export function Contact() {
                       </div>
                       <div className="text-sm text-foreground font-medium">
                         {"href" in info ? (
-                          <a href={info.href} className="hover:text-jotofa-gold transition-colors">
+                          <a href={info.href} className="hover:text-jotofa-accent transition-colors">
                             {info.value}
                           </a>
                         ) : (

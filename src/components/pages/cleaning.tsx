@@ -37,7 +37,7 @@ export function CleaningPage() {
     <div className="bg-background">
       <section className="relative min-h-[70vh] flex items-center py-28 sm:py-36 overflow-hidden">
         <div className="absolute inset-0 bg-background" />
-        <div className="absolute inset-0 bg-grid-pattern opacity-30" />
+        <div className="absolute inset-0  opacity-30" />
         <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-cleaning-green/5 rounded-full blur-[140px]" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -51,7 +51,7 @@ export function CleaningPage() {
           <ScrollReveal delay={0.1}>
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-foreground mb-6">
               Professional{" "}
-              <span className="text-gold-gradient">Cleaning Services</span>
+              <span className="text-jotofa-accent">Cleaning Services</span>
             </h1>
           </ScrollReveal>
 
@@ -105,7 +105,7 @@ export function CleaningPage() {
       {/* Testimonials */}
       <Testimonials
         eyebrow="Cleaning Client Stories"
-        title={<>What Our <span className="text-gold-gradient">Cleaning Clients Say</span></>}
+        title={<>What Our <span className="text-jotofa-accent">Cleaning Clients Say</span></>}
         subtitle="From office towers to lodges — why organizations across Tanzania choose JOTOFA Cleaning & Maids."
         accent="text-cleaning-green"
         accentBg="bg-cleaning-green/10"

@@ -7,7 +7,7 @@ import { usePage } from "@/lib/page-context";
 const newsItems = [
   {
     category: "Group Update",
-    categoryColor: "text-jotofa-gold",
+    categoryColor: "text-jotofa-accent",
     categoryBg: "bg-jotofa-accent/10",
     categoryBorder: "border-jotofa-accent/20",
     title: "JOTOFA GROUP Expands into East African Markets",
@@ -43,31 +43,24 @@ const newsItems = [
 export function NewsSection() {
   const { setActivePage } = usePage();
 
-  const handleCardKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      setActivePage("news");
-    }
-  };
-
   return (
     <section className="relative py-20 sm:py-28">
       {/* Background */}
       <div className="absolute inset-0 bg-background" />
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-jotofa-gold/15 to-transparent" />
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-jotofa-accent/15 to-transparent" />
       <div className="absolute bottom-1/3 right-0 w-80 h-80 bg-jotofa-accent/5 rounded-full blur-[100px]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <ScrollReveal className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-jotofa-accent/20 bg-jotofa-accent/5 mb-6">
-            <span className="text-jotofa-gold text-sm font-medium">
+            <span className="text-jotofa-accent text-sm font-medium">
               Latest Updates
             </span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4">
             News &{" "}
-            <span className="text-gold-gradient">Insights</span>
+            <span className="text-jotofa-accent">Insights</span>
           </h2>
           <p className="mx-auto max-w-2xl text-muted-foreground text-lg">
             Stay informed about our group&apos;s latest developments and community impact.
@@ -81,13 +74,14 @@ export function NewsSection() {
         >
           {newsItems.map((item) => (
             <StaggerItem key={item.title}>
-              <article
-                onClick={() => setActivePage("news")}
-                onKeyDown={handleCardKeyDown}
-                role="button"
-                tabIndex={0}
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setActivePage("news");
+                }}
+                className="group h-full p-6 rounded-2xl bg-card border border-border hover:border-jotofa-accent/25 transition-all duration-300 hover:bg-secondary cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background block"
                 aria-label="View all news and insights"
-                className="group h-full p-6 rounded-2xl bg-card border border-border hover:border-jotofa-accent/25 transition-all duration-300 hover:bg-secondary cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 {/* Category badge */}
                 <div
@@ -101,7 +95,7 @@ export function NewsSection() {
                 </div>
 
                 {/* Title */}
-                <h3 className="text-base sm:text-lg font-semibold text-foreground mb-3 group-hover:text-jotofa-gold transition-colors leading-snug">
+                <h3 className="text-base sm:text-lg font-semibold text-foreground mb-3 group-hover:text-jotofa-accent transition-colors leading-snug">
                   {item.title}
                 </h3>
 
@@ -122,10 +116,10 @@ export function NewsSection() {
                       {item.readTime}
                     </span>
                   </div>
-                  <ArrowUpRight className="w-4 h-4 text-muted-foreground/30 group-hover:text-jotofa-gold transition-colors" />
+                  <ArrowUpRight className="w-4 h-4 text-muted-foreground/30 group-hover:text-jotofa-accent transition-colors" />
                 </div>
-              </article>
-            </StaggerItem>
+                  </a>
+                </StaggerItem>
           ))}
         </StaggerContainer>
 
@@ -133,7 +127,7 @@ export function NewsSection() {
         <ScrollReveal className="mt-10 text-center">
           <button
             onClick={() => setActivePage("news")}
-            className="inline-flex items-center gap-2 text-jotofa-gold hover:text-jotofa-gold-light font-medium transition-colors group"
+            className="inline-flex items-center gap-2 text-jotofa-accent hover:text-jotofa-accent-light font-medium transition-colors group"
           >
             View All News & Insights
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

@@ -30,7 +30,7 @@ export function UTECPage() {
       {/* Hero */}
       <section className="relative min-h-[70vh] flex items-center py-28 sm:py-36 overflow-hidden">
         <div className="absolute inset-0 bg-background" />
-        <div className="absolute inset-0 bg-grid-pattern opacity-30" />
+        <div className="absolute inset-0  opacity-30" />
         <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-utec-cyan/5 rounded-full blur-[140px]" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -44,7 +44,7 @@ export function UTECPage() {
           <ScrollReveal delay={0.1}>
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-foreground mb-6">
               ICT &{" "}
-              <span className="text-gold-gradient">Telecommunications</span>
+              <span className="text-jotofa-accent">Telecommunications</span>
             </h1>
           </ScrollReveal>
 
@@ -101,7 +101,7 @@ export function UTECPage() {
       {/* Testimonials */}
       <Testimonials
         eyebrow="UTEC Client Stories"
-        title={<>What UTEC <span className="text-gold-gradient">Clients Say</span></>}
+        title={<>What UTEC <span className="text-jotofa-accent">Clients Say</span></>}
         subtitle="Real outcomes from organizations that transformed their operations with UTEC Solutions."
         accent="text-utec-cyan"
         accentBg="bg-utec-cyan/10"
