@@ -248,7 +248,7 @@ function CtaBand() {
 export function Footer() {
   return (
     <footer className="relative border-t border-border bg-background">
-      <div className="container-page">
+      <div className="container">
         {/* ─── CTA band — replaces the old homepage Contact section ─── */}
         <CtaBand />
 

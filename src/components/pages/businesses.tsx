@@ -659,7 +659,7 @@ function ContactCTA() {
   const { setActivePage } = usePage();
   return (
     <section className="section-py border-t border-border">
-      <div className="container-page text-center">
+      <div className="container text-center">
         <div className="eyebrow mb-4">Ready to Partner?</div>
         <h2 className="h2 text-foreground mb-4 max-w-2xl mx-auto">
           Interested in our services?{" "}
