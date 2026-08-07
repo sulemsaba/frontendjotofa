@@ -290,12 +290,15 @@
 
 .contact-grid {
   display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: 80px;
+  grid-template-columns: minmax(280px, 1fr) 1.4fr;
+  gap: 60px;
   align-items: start;
 }
 
-.contact-left { padding-top: 8px; }
+.contact-left {
+  padding-top: 8px;
+  max-width: 380px;
+}
 
 .section-label {
   display: flex;
