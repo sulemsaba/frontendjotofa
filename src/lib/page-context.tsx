@@ -13,7 +13,6 @@ export type PageId =
   | "careers"
   | "contact"
   | "utec"
-  | "courier"
   | "cleaning"
   | "security"
   | "staffing"
@@ -55,7 +54,6 @@ function pathnameToPageId(pathname: string | null): PageId {
     "careers",
     "contact",
     "utec",
-    "courier",
     "cleaning",
     "security",
     "staffing",
@@ -114,7 +112,7 @@ export function PageProvider({ children }: { children: ReactNode }) {
     if (typeof window === "undefined") return;
     const allPages: PageId[] = [
       "about", "businesses", "strategy", "csr", "news",
-      "careers", "contact", "utec", "courier", "cleaning",
+      "careers", "contact", "utec", "cleaning",
       "security", "staffing", "faq",
     ];
     const schedule = (cb: () => void) =>

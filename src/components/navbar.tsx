@@ -14,41 +14,32 @@ import {
   Sun,
   Moon,
   Building2,
-  Users,
   Briefcase,
   Leaf,
 } from "lucide-react";
 
 const businessItems = [
   { id: "utec", label: "UTEC Solutions", description: "ICT & Telecommunications", page: "utec" as PageId, image: "/images/utec.png", logo: "/images/utec-logo.png" },
-  { id: "courier", label: "Courier & Logistics", description: "Reliable Delivery Network", page: "courier" as PageId, image: "/images/courier.png", logo: "/images/courier-logo.png" },
   { id: "cleaning", label: "Cleaning & Maids", description: "Professional Cleaning Services", page: "cleaning" as PageId, image: "/images/cleaning.png", logo: "/images/cleaning-logo.png" },
   { id: "security", label: "Security", description: "Comprehensive Security Solutions", page: "security" as PageId, image: "/images/security.png", logo: "/images/security-logo.png" },
   { id: "staffing", label: "Staffing & Labour", description: "Workforce Solutions Partner", page: "staffing" as PageId, image: "/images/staffing.png", logo: "/images/staffing-logo.png" },
 ];
 
-const aboutItems = [
-  { id: "about", label: "Overview", page: "about" as PageId, Icon: Users },
-  { id: "strategy", label: "Leadership & Strategy", page: "strategy" as PageId, Icon: Briefcase },
-  { id: "csr", label: "CSR & Sustainability", page: "csr" as PageId, Icon: Leaf },
-];
-
 const PHONE_NUMBER = "0794 974 996";
 const PHONE_TEL = "+255794974996";
 
-interface NavItem { id: PageId; label: string; hasDropdown?: "subsidiaries" | "about"; }
+interface NavItem { id: PageId; label: string; hasDropdown?: "subsidiaries"; }
 
 const navItems: NavItem[] = [
   { id: "home", label: "Home" },
-  { id: "about", label: "About Us", hasDropdown: "about" },
+  { id: "about", label: "About Us" },
   { id: "businesses", label: "Subsidiaries", hasDropdown: "subsidiaries" },
   { id: "news", label: "News & Insights" },
   { id: "careers", label: "Careers" },
   { id: "contact", label: "Contact" },
 ];
 
-const subsidiariesPages: PageId[] = ["businesses", "utec", "courier", "cleaning", "security", "staffing"];
-const aboutPages: PageId[] = ["about", "strategy", "csr"];
+const subsidiariesPages: PageId[] = ["businesses", "utec", "cleaning", "security", "staffing"];
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -127,9 +118,9 @@ export function Navbar() {
 
   const handleNavClick = (pageId: PageId) => { setActivePage(pageId); setMobileOpen(false); setOpenDropdown(null); setMobileExpanded(null); };
   const toggleTheme = () => setTheme(resolvedTheme === "dark" ? "light" : "dark");
-  const isDropdownActive = (t: "subsidiaries" | "about") => {
+  const isDropdownActive = (t: "subsidiaries") => {
     if (t === "subsidiaries") return subsidiariesPages.includes(activePage);
-    return aboutPages.includes(activePage);
+    return false;
   };
 
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -161,8 +152,8 @@ export function Navbar() {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className={`fixed top-0 left-0 right-0 z-50 border-b border-jotofa-navy/10 dark:border-white/10 transition-all duration-200 ${
           scrolled
-            ? "bg-white dark:bg-jotofa-navy-mid"
-            : "bg-white/80 dark:bg-jotofa-navy-mid/80 backdrop-blur-md"
+            ? "bg-background dark:bg-jotofa-navy-mid"
+            : "bg-background/80 dark:bg-jotofa-navy-mid/80 backdrop-blur-md"
         }`}
       >
         <div className="mx-auto max-w-[1440px] h-14 sm:h-16 px-4 sm:px-6 flex items-center gap-4 lg:gap-8">
@@ -219,30 +210,6 @@ export function Navbar() {
                     />
                   </button>
 
-                  {/* About Us Dropdown — compact icon list */}
-                  {item.hasDropdown === "about" && openDropdown === "about" && (
-                    <AnimatePresence>
-                      <motion.div initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} transition={{ duration: 0.2, ease: "easeOut" }}
-                        className="absolute top-full left-4 pt-2"
-                        onMouseEnter={() => openMenu("about")}
-                        onMouseLeave={scheduleCloseMenu}>
-                        <div className="w-[240px] bg-white dark:bg-jotofa-navy-card backdrop-blur-[20px] border border-jotofa-navy/8 dark:border-white/10 rounded-lg shadow-[0_12px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_24px_60px_rgba(0,0,0,0.5)] overflow-hidden p-1.5">
-                          {aboutItems.map((item) => {
-                            const Icon = item.Icon;
-                            return (
-                              <button key={item.id} onClick={() => handleNavClick(item.page)} onFocus={() => {}} className={`flex items-center gap-3 w-full text-left px-3 py-2 rounded-lg transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent hover:bg-jotofa-navy/[0.04] dark:hover:bg-white/[0.06]`}>
-                                <div className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center bg-jotofa-accent/10 text-jotofa-accent">
-                                  <Icon className="w-4 h-4" />
-                                </div>
-                                <span className="text-xs font-medium text-jotofa-navy dark:text-white">{item.label}</span>
-                              </button>
-                            );
-                          })}
-                        </div>
-                      </motion.div>
-                    </AnimatePresence>
-                  )}
-
                   {/* Subsidiaries Mega Dropdown — left-aligned to the "Subsidiaries" label */}
                   {item.hasDropdown === "subsidiaries" && openDropdown === "subsidiaries" && (
                     <AnimatePresence>
@@ -251,49 +218,49 @@ export function Navbar() {
                         onMouseEnter={() => openMenu("subsidiaries")}
                         onMouseLeave={scheduleCloseMenu}>
                         <div className="w-[640px] max-w-[calc(100vw-2rem)] bg-white dark:bg-jotofa-navy-card backdrop-blur-[20px] border border-jotofa-navy/8 dark:border-white/10 rounded-lg shadow-[0_12px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_24px_60px_rgba(0,0,0,0.5)] overflow-hidden">
-                          <div className="grid grid-cols-[45%_55%] min-h-[260px]">
-                            <div className="border-r border-jotofa-navy/6 dark:border-white/6 p-2">
-                              <div className="px-3 py-1.5 mb-1"><span className="text-[10px] font-semibold uppercase tracking-widest text-jotofa-navy/60 dark:text-white/50">Subsidiaries</span></div>
-                              {businessItems.map((biz, idx) => (
-                                <button key={biz.id} onMouseEnter={() => { setHoveredBizIndex(idx); prefetchPage(biz.page); }} onFocus={() => setHoveredBizIndex(idx)} onClick={() => handleNavClick(biz.page)}
-                                  className={`flex items-center gap-3 w-full text-left px-3 py-2 rounded-lg transition-all duration-200 group/biz cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent ${hoveredBizIndex === idx ? "bg-jotofa-navy/[0.04] dark:bg-white/[0.06]" : "hover:bg-jotofa-navy/[0.02] dark:hover:bg-white/[0.03]"}`}>
-                                  <div className="flex-shrink-0 w-9 h-9 rounded-lg overflow-hidden flex items-center justify-center bg-white border border-black/5 dark:border-white/10 shadow-sm">
-                                    <Image
-                                      src={biz.logo}
-                                      alt={`${biz.label} logo`}
-                                      width={28}
-                                      height={28}
-                                      className="w-7 h-7 object-contain"
-                                    />
-                                  </div>
-                                  <div className="min-w-0 flex-1">
-                                    <div className={`text-xs font-medium ${hoveredBizIndex === idx ? "text-jotofa-navy dark:text-white font-semibold" : "text-jotofa-navy/70 dark:text-white/70 group-hover/biz:text-jotofa-navy dark:group-hover/biz:text-white/90"}`}>{biz.label}</div>
-                                    <div className="text-[10px] text-jotofa-navy/50 dark:text-white/50 truncate mt-0.5">{biz.description}</div>
-                                  </div>
-                                  <ArrowRight className={`w-3 h-3 flex-shrink-0 ml-2 transition-all duration-200 text-jotofa-navy dark:text-white ${hoveredBizIndex === idx ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-1"}`} />
-                                </button>
-                              ))}
-                            </div>
-                            {/* Right panel — Next.js Image (not CSS background) */}
-                            <div className="relative min-h-[340px] overflow-hidden">
-                              <AnimatePresence mode="wait">
-                                <motion.div key={currentBiz.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="absolute inset-0">
-                                  <Image
-                                    src={currentBiz.image}
-                                    alt=""
-                                    fill
-                                    sizes="352px"
-                                    className="object-cover"
-                                  />
-                                  <div className="absolute inset-0 bg-gradient-to-t from-jotofa-navy via-jotofa-navy/40 to-transparent" />
-                                  <div className="absolute bottom-0 left-0 right-0 p-5">
-                                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/10 border border-white/10 mb-2"><span className="text-[11px] font-medium text-white">{currentBiz.description}</span></div>
-                                    <div className="text-white text-base font-semibold">{currentBiz.label}</div>
-                                  </div>
-                                </motion.div>
-                              </AnimatePresence>
-                            </div>
-                          </div>
+                           <div className="grid grid-cols-[45%_55%] min-h-[300px]">
+                             <div className="border-r border-jotofa-navy/6 dark:border-white/6 p-2">
+                               <div className="px-3 py-1.5 mb-1"><span className="text-[10px] font-semibold uppercase tracking-widest text-jotofa-navy/60 dark:text-white/50">Subsidiaries</span></div>
+                               {businessItems.map((biz, idx) => (
+                                 <button key={biz.id} onMouseEnter={() => { setHoveredBizIndex(idx); prefetchPage(biz.page); }} onClick={() => handleNavClick(biz.page)}
+                                   className={`flex items-center gap-3 w-full text-left px-3 py-2 rounded-lg transition-all duration-200 group/biz cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent ${hoveredBizIndex === idx ? "bg-jotofa-navy/[0.04] dark:bg-white/[0.06]" : "hover:bg-jotofa-navy/[0.02] dark:hover:bg-white/[0.03]"}`}>
+                                   <div className="flex-shrink-0 w-9 h-9 rounded-lg overflow-hidden flex items-center justify-center bg-gray-50 border border-black/5 dark:bg-white/10 dark:border-white/20 shadow-sm">
+                                     <Image
+                                       src={biz.logo}
+                                       alt={`${biz.label} logo`}
+                                       width={28}
+                                       height={28}
+                                       className="w-7 h-7 object-contain"
+                                     />
+                                   </div>
+                                   <div className="min-w-0 flex-1">
+                                     <div className={`text-xs font-medium ${hoveredBizIndex === idx ? "text-jotofa-navy dark:text-white font-semibold" : "text-jotofa-navy/70 dark:text-white/70 group-hover/biz:text-jotofa-navy dark:group-hover/biz:text-white/90"}`}>{biz.label}</div>
+                                     <div className="text-[10px] text-jotofa-navy/50 dark:text-white/50 truncate mt-0.5">{biz.description}</div>
+                                   </div>
+                                   <ArrowRight className={`w-3 h-3 flex-shrink-0 ml-2 transition-all duration-200 text-jotofa-accent ${hoveredBizIndex === idx ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-1"}`} />
+                                 </button>
+                               ))}
+                             </div>
+                             {/* Right panel — Next.js Image (not CSS background) */}
+                             <div className="relative min-h-[300px] overflow-hidden">
+                               <AnimatePresence>
+                                 <motion.div key={currentBiz.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="absolute inset-0">
+                                   <Image
+                                     src={currentBiz.image}
+                                     alt=""
+                                     fill
+                                     sizes="352px"
+                                     className="object-cover"
+                                   />
+                                   <div className="absolute inset-0 bg-gradient-to-t from-jotofa-navy/90 via-jotofa-navy/40 to-transparent" />
+                                   <div className="absolute bottom-0 left-0 right-0 p-5">
+                                     <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/10 border border-white/10 mb-2"><span className="text-[11px] font-medium text-white">{currentBiz.description}</span></div>
+                                     <div className="text-white text-base font-semibold">{currentBiz.label}</div>
+                                   </div>
+                                 </motion.div>
+                               </AnimatePresence>
+                             </div>
+                           </div>
                           <div className="border-t border-jotofa-navy/6 dark:border-white/6 px-5 py-2.5 flex items-center justify-between">
                             <button onClick={() => handleNavClick("businesses")} className="text-[12px] text-jotofa-navy dark:text-white/70 hover:text-jotofa-navy/70 dark:hover:text-white transition-colors flex items-center gap-1.5 group/viewall font-medium cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm">
                               View All Subsidiaries <ArrowRight className="w-3 h-3 group-hover/viewall:translate-x-0.5 transition-transform" />
@@ -384,25 +351,7 @@ export function Navbar() {
                       <span className="text-sm">{item.label}</span>
                       {item.hasDropdown && <ChevronDown className={`w-4 h-4 transition-transform ${mobileExpanded === item.hasDropdown ? "rotate-180" : ""}`} />}
                     </button>
-                     {item.hasDropdown === "about" && mobileExpanded === "about" && (
-                       <div className="pl-4 space-y-0.5 pb-1">
-                         <button onClick={() => handleNavClick("about")} className="flex items-center gap-3 w-full text-left px-4 py-2 text-jotofa-navy dark:text-white font-medium hover:bg-jotofa-navy/[0.03] dark:hover:bg-white/[0.04] rounded-lg">
-                           <Users className="w-3.5 h-3.5" /><span className="text-sm">About Us</span>
-                         </button>
-                         {aboutItems.map(item => {
-                           const Icon = item.Icon;
-                           return (
-                             <button key={item.id} onClick={() => handleNavClick(item.page)} className="flex items-center gap-3 w-full text-left px-4 py-2 text-jotofa-navy/70 dark:text-white/70 hover:text-jotofa-navy dark:hover:text-white hover:bg-jotofa-navy/[0.03] dark:hover:bg-white/[0.04] rounded-lg">
-                               <div className="w-6 h-6 rounded-md flex items-center justify-center bg-jotofa-accent/10 text-jotofa-accent flex-shrink-0">
-                                 <Icon className="w-3.5 h-3.5" />
-                               </div>
-                               <span className="text-sm">{item.label}</span>
-                             </button>
-                           );
-                         })}
-                       </div>
-                      )}
-                      {item.hasDropdown === "subsidiaries" && mobileExpanded === "subsidiaries" && (
+                       {item.hasDropdown === "subsidiaries" && mobileExpanded === "subsidiaries" && (
                       <div className="pl-4 space-y-0.5 pb-1">
                         <button onClick={() => handleNavClick("businesses")} className="flex items-center gap-3 w-full text-left px-4 py-2 text-jotofa-navy dark:text-white font-medium hover:bg-jotofa-navy/[0.03] dark:hover:bg-white/[0.04] rounded-lg">
                           <Building2 className="w-3.5 h-3.5" /><span className="text-sm">View All Subsidiaries</span>

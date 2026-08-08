@@ -6,6 +6,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-footer-bg: var(--footer-bg);
   --font-sans: var(--font-open-sans);
   --font-mono: var(--font-geist-mono);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -76,7 +77,8 @@
   --color-jotofa-text-muted: #999DA0;
 
   /* Subsidiary colours — official complementary palette */
-  --color-utec-cyan: #00A9B7;        /* Teal (same as accent) */
+  --color-utec-cyan: #68CCD1;        /* UTEC brand teal */
+  --color-utec-red: #d60b0b;         /* UTEC brand red */
   --color-courier-orange: #FF4D7D;   /* Pink (no orange in guide) */
   --color-cleaning-green: #8ED644;   /* Lime Green */
   --color-security-red: #E73323;     /* Red */
@@ -106,12 +108,13 @@
   --radius: 0.625rem;
 
   /* Backgrounds */
-  --background: #FFFFFF;
+  --background: #e8e6e1;
   --foreground: #003B64;
   --card: #FFFFFF;
   --card-foreground: #003B64;
   --popover: #FFFFFF;
   --popover-foreground: #003B64;
+  --footer-bg: #FFFFFF;
 
   /* Primary = JOTOFA Blue (buttons, strong elements) */
   --primary: #003B64;
@@ -159,13 +162,14 @@
    DARK MODE
    ═══════════════════════════════════════════ */
 .dark {
-  /* Backgrounds */
-  --background: #00253F;
-  --foreground: #FFFFFF;
-  --card: #0A4A75;
-  --card-foreground: #FFFFFF;
-  --popover: #0A4A75;
-  --popover-foreground: #FFFFFF;
+   /* Backgrounds */
+   --background: #00253F;
+   --foreground: #FFFFFF;
+   --card: #0A4A75;
+   --card-foreground: #FFFFFF;
+   --popover: #0A4A75;
+   --popover-foreground: #FFFFFF;
+   --footer-bg: #00253F;
 
   /* Primary = JOTOFA Blue (still navy in dark for buttons) */
   --primary: #003B64;
@@ -268,24 +272,40 @@
    HERO TICKER ANIMATION
    Vertical infinite scroll for image columns
    ═══════════════════════════════════════════ */
-@keyframes scrollVertical {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-50%);
-  }
-}
+ @keyframes scrollVertical {
+   0% {
+     transform: translateY(0);
+   }
+   100% {
+     transform: translateY(-50%);
+   }
+ }
 
-/* ═══════════════════════════════════════════
-   LIGHT MODE OVERRIDES
-   ═══════════════════════════════════════════ */
+ @keyframes floatBlob {
+   0%, 100% {
+     transform: translate(0, 0) scale(1);
+   }
+   33% {
+     transform: translate(24px, -18px) scale(1.07);
+   }
+   66% {
+     transform: translate(-18px, 12px) scale(0.94);
+   }
+ }
+
+ .animate-float-blob {
+   animation: floatBlob ease-in-out infinite;
+ }
+
+ /* ═══════════════════════════════════════════
+    LIGHT MODE OVERRIDES
+    ═══════════════════════════════════════════ */
 
 /* ═══════════════════════════════════════════
    CONTACT PAGE
    ═══════════════════════════════════════════ */
 .contact-section {
-  padding: 80px 0 60px;
+  padding: 80px 24px 60px;
 }
 
 .contact-grid {
@@ -335,6 +355,70 @@
   color: #5c5c8a;
   line-height: 1.7;
   max-width: 320px;
+}
+
+/* Contact info unified card */
+.contact-cards {
+  margin-top: 32px;
+}
+
+.contact-card {
+  background: #ffffff;
+  border: 1px solid rgba(26, 35, 126, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+.contact-card-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px 20px;
+  transition: background-color 0.2s ease;
+}
+
+.contact-card-row:hover {
+  background-color: rgba(26, 35, 126, 0.02);
+}
+
+.contact-card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #1a237e;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.contact-card-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #5c5c8a;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-bottom: 5px;
+}
+
+.contact-card-value {
+  font-size: 14px;
+  color: #1a237e;
+  line-height: 1.55;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.contact-card-value:hover {
+  color: #0d1464;
+}
+
+.contact-card-divider {
+  height: 1px;
+  background: rgba(26, 35, 126, 0.06);
+  margin: 0 20px;
 }
 
 .contact-form {
@@ -462,7 +546,7 @@
 
 /* ── Map Section ── */
 .map-section {
-  padding: 60px 0 80px;
+  padding: 60px 24px 80px;
   text-align: center;
 }
 
@@ -578,14 +662,18 @@
     display: none;
   }
 
+  .contact-cards {
+    grid-template-columns: 1fr;
+  }
+
   .contact-info-section {
     display: block;
   }
 }
 
 @media (max-width: 480px) {
-  .contact-section { padding: 48px 0 40px; }
-  .map-section { padding: 40px 0 60px; }
+  .contact-section { padding: 48px 16px 40px; }
+  .map-section { padding: 40px 16px 60px; }
   .contact-left h2 { font-size: 24px; }
   .map-section h2 { font-size: 26px; }
   .submit-btn { width: 100%; justify-content: center; }
@@ -699,4 +787,71 @@
 
 .animate-fade-up-delay-2 {
   animation: fadeUpDelay2 0.8s ease-out 0.2s both;
+}
+
+/* Contact page dark mode */
+.dark .contact-page header {
+  background-color: #00253F;
+}
+
+.dark .contact-card {
+  background: #0A4A75;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark .contact-card-row:hover {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.dark .contact-card-icon {
+  background: #00A9B7;
+  color: #00253F;
+}
+
+.dark .contact-card-label {
+  color: #C7D1DA;
+}
+
+.dark .contact-card-value {
+  color: #FFFFFF;
+}
+
+.dark .contact-card-value:hover {
+  color: #00A9B7;
+}
+
+.dark .contact-card-divider {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.dark .contact-form input,
+.dark .contact-form select,
+.dark .contact-form textarea {
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+  color: #FFFFFF;
+}
+
+.dark .contact-form input::placeholder,
+.dark .contact-form textarea::placeholder,
+.dark .contact-form select:invalid {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.dark .contact-form input:focus,
+.dark .contact-form select:focus,
+.dark .contact-form textarea:focus {
+  border-bottom-color: #00A9B7;
+}
+
+.dark .contact-form select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.4)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+}
+
+.dark .submit-btn {
+  background-color: #00A9B7;
+  color: #00253F;
+}
+
+.dark .submit-btn:hover {
+  background-color: #008799;
 }

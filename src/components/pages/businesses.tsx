@@ -31,7 +31,7 @@ import { storeProductsPageUrl } from "@/lib/store-config";
    Static class strings so Tailwind can statically extract them.
    ────────────────────────────────────────────────────────────────────────── */
 const accentClasses: Record<
-  "utec-cyan" | "courier-orange" | "cleaning-green" | "security-red" | "staffing-purple",
+  "utec-cyan" | "cleaning-green" | "security-red" | "staffing-purple",
   { bg: string; text: string; border: string; hoverBorder: string; hoverBg: string }
 > = {
   "utec-cyan": {
@@ -40,13 +40,6 @@ const accentClasses: Record<
     border: "border-utec-cyan/20",
     hoverBorder: "hover:border-utec-cyan/40",
     hoverBg: "hover:bg-utec-cyan/[0.06]",
-  },
-  "courier-orange": {
-    bg: "bg-courier-orange/10",
-    text: "text-courier-orange",
-    border: "border-courier-orange/20",
-    hoverBorder: "hover:border-courier-orange/40",
-    hoverBg: "hover:bg-courier-orange/[0.06]",
   },
   "cleaning-green": {
     bg: "bg-cleaning-green/10",
@@ -118,7 +111,7 @@ interface Business {
   /** Outbound link (UTEC store). If absent, only the internal CTA shows */
   website?: { label: string; url: string };
   /** Per-subsidiary accent color used for badges, checks, and hover states */
-  accent: "utec-cyan" | "courier-orange" | "cleaning-green" | "security-red" | "staffing-purple";
+  accent: "utec-cyan" | "cleaning-green" | "security-red" | "staffing-purple";
 }
 
 const businesses: Business[] = [
@@ -145,29 +138,8 @@ const businesses: Business[] = [
     accent: "utec-cyan",
   },
   {
-    id: "courier",
-    index: "02",
-    name: "Courier & Logistics",
-    tagline: "Reliable Delivery Network",
-    sectors: ["Logistics", "Freight", "Last-Mile"],
-    services: [
-      "Express Delivery",
-      "Freight & Cargo",
-      "Warehousing",
-      "Last-Mile Solutions",
-      "Cross-Border Logistics",
-    ],
-    description:
-      "A trusted logistics and courier network ensuring timely, secure delivery of goods and documents. We operate across Tanzania and East Africa with end-to-end tracking and last-mile coverage.",
-    icon: Truck,
-    image: "/images/subsidiaries/courier.jpg",
-    logoSrc: "/images/courier-logo.png",
-    logoMark: "JC",
-    accent: "courier-orange",
-  },
-  {
     id: "cleaning",
-    index: "03",
+    index: "02",
     name: "Cleaning & Maids",
     tagline: "Professional Cleaning",
     sectors: ["Facilities", "Hygiene", "Maintenance"],
@@ -188,7 +160,7 @@ const businesses: Business[] = [
   },
   {
     id: "security",
-    index: "04",
+    index: "03",
     name: "JOTOFA Security",
     tagline: "Comprehensive Security",
     sectors: ["Security", "Surveillance", "Risk"],
@@ -209,7 +181,7 @@ const businesses: Business[] = [
   },
   {
     id: "staffing",
-    index: "05",
+    index: "04",
     name: "Staffing & Labour",
     tagline: "Workforce Solutions",
     sectors: ["Recruitment", "HR", "Workforce"],
@@ -270,30 +242,9 @@ function Counter({
    ────────────────────────────────────────────────────────────────────────── */
 function BusinessesHero() {
   return (
-    <section className="relative overflow-hidden bg-jotofa-accent/5 dark:bg-jotofa-navy-mid py-24 sm:py-32">
-      {/* Background layers */}
-      <div
-        aria-hidden
-        className="absolute inset-0 bg-gradient-to-br from-white via-jotofa-accent/5 to-jotofa-accent/10 dark:hidden"
-      />
-      <div
-        aria-hidden
-        className="absolute inset-0 bg-gradient-to-br from-jotofa-navy-mid via-jotofa-navy to-jotofa-navy-deep hidden dark:block"
-      />
-      <div
-        aria-hidden
-        className="absolute inset-0  opacity-40 dark:opacity-25"
-      />
-      {/* Teal glow — top right */}
-      <div
-        aria-hidden
-        className="absolute top-0 right-0 w-[500px] h-[500px] bg-jotofa-accent/15 dark:bg-jotofa-accent/10 rounded-full blur-[140px] pointer-events-none"
-      />
-      {/* Navy glow — bottom left (light mode) */}
-      <div
-        aria-hidden
-        className="absolute bottom-0 left-0 w-[420px] h-[420px] bg-jotofa-navy/[0.08] dark:hidden rounded-full blur-[120px] pointer-events-none"
-      />
+    <section className="relative overflow-hidden bg-background dark:bg-jotofa-navy-mid py-24 sm:py-32">
+      {/* Decorative top accent bar */}
+      <div aria-hidden className="absolute top-0 left-0 right-0 z-[1] h-[3px] bg-gradient-to-r from-transparent via-jotofa-accent/70 to-transparent" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <ScrollReveal className="text-center max-w-4xl mx-auto">
@@ -321,16 +272,16 @@ function BusinessesHero() {
           </p>
 
           {/* Mini stats bar */}
-          <div className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white/80 dark:bg-white/5 backdrop-blur border border-jotofa-navy/10 dark:border-white/10 text-sm">
-            <span className="font-semibold text-jotofa-navy dark:text-white">
+          <div className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-muted/80 dark:bg-white/5 backdrop-blur border border-border text-sm">
+            <span className="font-semibold text-foreground dark:text-white">
               5 Subsidiaries
             </span>
             <span className="text-jotofa-accent" aria-hidden>·</span>
-            <span className="font-semibold text-jotofa-navy dark:text-white">
+            <span className="font-semibold text-foreground dark:text-white">
               5 Sectors
             </span>
             <span className="text-jotofa-accent" aria-hidden>·</span>
-            <span className="font-semibold text-jotofa-navy dark:text-white">
+            <span className="font-semibold text-foreground dark:text-white">
               1 Vision
             </span>
           </div>

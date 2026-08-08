@@ -85,7 +85,7 @@ export function Contact() {
 
   return (
     <section className="contact-section">
-      <div className="container">
+      <div className="container-page">
         <div className="contact-grid">
           {/* Left: Contact Info */}
           <div className="contact-left">
@@ -97,6 +97,48 @@ export function Contact() {
             </div>
             <h2>Let Us Know How We<br />Can Help</h2>
             <p>JOTOFA GROUP maintains a focused and selective approach to communication. Our team reviews all submissions and responds where appropriate.</p>
+
+            <div className="contact-card">
+              <div className="contact-card-row">
+                <div className="contact-card-icon">
+                  <MapPin className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="contact-card-label">Head Office</div>
+                  <div className="contact-card-value">HT House, 2nd Floor, Ubungo, Simu 2000 Road, P.O. Box 75075, Dar es Salaam</div>
+                </div>
+              </div>
+              <div className="contact-card-divider" />
+              <div className="contact-card-row">
+                <div className="contact-card-icon">
+                  <Phone className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="contact-card-label">Phone</div>
+                  <a href="tel:+255773383800" className="contact-card-value">0773 383 800</a>
+                </div>
+              </div>
+              <div className="contact-card-divider" />
+              <div className="contact-card-row">
+                <div className="contact-card-icon">
+                  <Mail className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="contact-card-label">Email</div>
+                  <a href="mailto:info@jotofagroup.co.tz" className="contact-card-value">info@jotofagroup.co.tz</a>
+                </div>
+              </div>
+              <div className="contact-card-divider" />
+              <div className="contact-card-row">
+                <div className="contact-card-icon">
+                  <Clock className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="contact-card-label">Business Hours</div>
+                  <div className="contact-card-value">Monday to Friday, 8:00am - 6:00pm</div>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Right: Form */}
@@ -173,7 +215,7 @@ export function Contact() {
 
       {/* Map Section */}
       <section className="map-section">
-        <div className="container">
+        <div className="container-page">
           <div className="section-label" style={{ justifyContent: "center" }}>
             <svg viewBox="0 0 24 24" className="w-4 h-4">
               <circle cx="12" cy="10" r="3" fill="none" stroke="currentColor" strokeWidth="2" />
@@ -185,53 +227,12 @@ export function Contact() {
 
           <div className="map-wrapper">
             <iframe
-              src="https://maps.google.com/maps?q=HT+House+2nd+Floor+Ubungo+Simu+2000+Road+Dar+es+Salaam&t=&z=16&ie=UTF8&iwloc=&output=embed"
+              src="https://maps.google.com/maps?q=HT+House%2C+Ubungo%2C+Simu+2000+Road%2C+Dar+es+Salaam&t=m&z=15&ie=UTF8&iwloc=&output=embed"
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
+              title="JOTOFA GROUP Office Location"
             />
-
-            {/* Desktop overlay */}
-            <div className="map-overlay">
-              <h3>Contact Us</h3>
-              <div className="info-row">
-                <svg viewBox="0 0 24 24" className="w-4 h-4"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><circle cx="12" cy="10" r="3" fill="none" stroke="currentColor" strokeWidth="2" /></svg>
-                <p>HT House, 2nd Floor, Ubungo, Simu 2000 Road, P.O. Box 75075, Dar es Salaam</p>
-              </div>
-              <div className="info-row">
-                <svg viewBox="0 0 24 24" className="w-4 h-4"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                <a href="tel:+255773383800">0773 383 800</a>
-              </div>
-              <div className="info-row">
-                <svg viewBox="0 0 24 24" className="w-4 h-4"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><polyline points="22,6 12,13 2,6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                <a href="mailto:info@jotofagroup.co.tz">info@jotofagroup.co.tz</a>
-              </div>
-              <div className="info-row">
-                <svg viewBox="0 0 24 24" className="w-4 h-4"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" strokeWidth="2"/><polyline points="12 6 12 12 16 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                <p>Mon – Fri, 8:00am – 6:00pm</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Mobile contact info */}
-          <div className="contact-info-section">
-            <h3>Contact Us</h3>
-            <div className="info-row">
-              <svg viewBox="0 0 24 24" className="w-4 h-4"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><circle cx="12" cy="10" r="3" fill="none" stroke="currentColor" strokeWidth="2" /></svg>
-              <p>HT House, 2nd Floor, Ubungo, Simu 2000 Road, P.O. Box 75075, Dar es Salaam</p>
-            </div>
-            <div className="info-row">
-              <svg viewBox="0 0 24 24" className="w-4 h-4"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-              <a href="tel:+255773383800">0773 383 800</a>
-            </div>
-            <div className="info-row">
-              <svg viewBox="0 0 24 24" className="w-4 h-4"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><polyline points="22,6 12,13 2,6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-              <a href="mailto:info@jotofagroup.co.tz">info@jotofagroup.co.tz</a>
-            </div>
-            <div className="info-row">
-              <svg viewBox="0 0 24 24" className="w-4 h-4"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" strokeWidth="2"/><polyline points="12 6 12 12 16 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-              <p>Mon – Fri, 8:00am – 6:00pm</p>
-            </div>
           </div>
         </div>
       </section>

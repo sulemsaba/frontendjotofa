@@ -2,6 +2,7 @@
 
 import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/hero";
+import { UnifyingExcellence } from "@/components/unifying-excellence";
 import { Subsidiaries } from "@/components/subsidiaries";
 import { NewsSection } from "@/components/news-section";
 import { Footer } from "@/components/footer";
@@ -25,6 +26,7 @@ export default function Home() {
       <Navbar />
       <main id="main-content" className="flex-1">
         <Hero />
+        <UnifyingExcellence />
         <Subsidiaries />
         <Testimonials
           eyebrow="Client Voices"

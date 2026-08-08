@@ -3,12 +3,11 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import {
-  Wifi,
-  Cloud,
-  Shield,
-  Code,
-  PhoneCall,
+  Radio,
+  ShieldCheck,
+  Sun,
   Monitor,
+  PhoneCall,
   ArrowUpRight,
   type LucideIcon,
 } from "lucide-react";
@@ -32,63 +31,54 @@ interface Service {
 
 const services: Service[] = [
   {
-    id: "network",
-    icon: Wifi,
-    title: "Network Infrastructure",
+    id: "radio-calls",
+    icon: Radio,
+    title: "Radio Calls Solutions",
     description:
-      "Fiber optic, wireless, and structured cabling solutions for enterprises and governments — designed, deployed, and maintained end-to-end.",
+      "Professional two-way radio communication systems for reliable, instant connectivity across operations.",
     image: "/images/utec-services/network.jpg",
     span: "lg:col-span-2 lg:row-span-2",
     featured: true,
     highlights: [
-      "Fiber & wireless backhaul",
-      "Structured cabling (Cat6A / fiber)",
-      "Active monitoring & SLAs",
+      "Two-way radio networks",
+      "Coverage planning & optimization",
+      "Field-ready deployment",
     ],
   },
   {
-    id: "cloud",
-    icon: Cloud,
-    title: "Cloud Solutions",
+    id: "security-systems",
+    icon: ShieldCheck,
+    title: "Security System Installations",
     description:
-      "Scalable cloud hosting, migration, and management tailored for the East African market.",
-    image: "/images/utec-services/cloud.jpg",
-    span: "lg:col-span-2",
-  },
-  {
-    id: "cybersecurity",
-    icon: Shield,
-    title: "Cybersecurity",
-    description:
-      "Threat protection, vulnerability assessment, and compliance.",
+      "End-to-end installation of CCTV, access control, intrusion detection, and integrated security systems.",
     image: "/images/utec-services/cyber.jpg",
     span: "lg:col-span-1",
   },
   {
-    id: "software",
-    icon: Code,
-    title: "Software Development",
+    id: "safety-security-sales",
+    icon: ShieldCheck,
+    title: "Safety and Security Systems Sales",
     description:
-      "Custom apps, mobile solutions, and digital platforms built for local needs.",
+      "Supply of trusted security and safety equipment for commercial, industrial, and institutional clients.",
     image: "/images/utec-services/software.jpg",
     span: "lg:col-span-1",
   },
   {
-    id: "telecom",
-    icon: PhoneCall,
-    title: "Telecom Services",
+    id: "general-ict",
+    icon: Monitor,
+    title: "General ICT & IT",
     description:
-      "VoIP, unified communications, and PBX connecting businesses across the region.",
-    image: "/images/utec-services/telecom.jpg",
+      "Comprehensive IT infrastructure, hardware, software, and support services for modern enterprises.",
+    image: "/images/utec-services/consulting.jpg",
     span: "lg:col-span-2",
   },
   {
-    id: "consulting",
-    icon: Monitor,
-    title: "IT Consulting",
+    id: "solar",
+    icon: Sun,
+    title: "Solar Solutions",
     description:
-      "Strategic technology advisory helping organizations navigate digital transformation.",
-    image: "/images/utec-services/consulting.jpg",
+      "Reliable solar power systems designed to reduce energy costs and ensure uninterrupted operations.",
+    image: "/images/utec-services/cloud.jpg",
     span: "lg:col-span-2",
   },
 ];
@@ -109,8 +99,8 @@ function ServiceCell({ service, index }: { service: Service; index: number }) {
         transition={{ delay: 0.08 * index, duration: 0.5, ease: "easeOut" }}
         className={`group relative w-full h-full text-left overflow-hidden rounded-3xl border transition-all duration-300 ${
           featured
-            ? "min-h-[340px] sm:min-h-[420px] lg:min-h-[520px] border-utec-cyan/30 hover:border-utec-cyan/60 hover:shadow-[0_28px_70px_-22px_rgba(0,169,183,0.45)]"
-            : "min-h-[260px] sm:min-h-[300px] border-border/60 hover:border-utec-cyan/45 hover:-translate-y-0.5 hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.5)]"
+            ? "min-h-[340px] sm:min-h-[420px] lg:min-h-[520px] border-[#d60b0b]/40 hover:border-[#d60b0b]/70 hover:shadow-[0_28px_70px_-22px_rgba(214,11,11,0.45)]"
+            : "min-h-[260px] sm:min-h-[300px] border-white/10 hover:border-[#d60b0b]/40 hover:-translate-y-0.5 hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)]"
         }`}
       >
         {/* ── Background image (fills the card, zooms on hover) ── */}
@@ -128,10 +118,10 @@ function ServiceCell({ service, index }: { service: Service; index: number }) {
           aria-hidden
           className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-black/15"
         />
-        {/* Subtle teal tint that strengthens on hover — ties to UTEC brand */}
+         {/* Subtle red tint that strengthens on hover - ties to UTEC brand */}
         <div
           aria-hidden
-          className="absolute inset-0 bg-utec-cyan/0 group-hover:bg-utec-cyan/15 transition-colors duration-500"
+          className="absolute inset-0 bg-[#d60b0b]/0 group-hover:bg-[#d60b0b]/15 transition-colors duration-500"
         />
 
         {/* ── Content ── */}
@@ -143,7 +133,7 @@ function ServiceCell({ service, index }: { service: Service; index: number }) {
                 featured ? "w-14 h-14" : "w-11 h-11"
               }`}
             >
-              <Icon className={`${featured ? "w-7 h-7" : "w-5 h-5"} text-jotofa-accent-light`} />
+              <Icon className={`${featured ? "w-7 h-7" : "w-5 h-5"} text-[#d60b0b]`} />
             </span>
             <span className="text-[11px] font-mono font-semibold text-white/60 tracking-widest">
               {num}
@@ -153,9 +143,9 @@ function ServiceCell({ service, index }: { service: Service; index: number }) {
           {/* Bottom-anchored content */}
           <div className="mt-auto">
             {featured && (
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-utec-cyan/25 border border-utec-cyan/40 backdrop-blur-sm mb-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-utec-cyan animate-pulse" />
-                <span className="text-[11px] font-semibold text-cyan-100 uppercase tracking-wide">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#d60b0b]/25 border border-[#d60b0b]/40 backdrop-blur-sm mb-3">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#d60b0b] animate-pulse" />
+                <span className="text-[11px] font-semibold text-red-100 uppercase tracking-wide">
                   Core Capability
                 </span>
               </div>
@@ -183,8 +173,8 @@ function ServiceCell({ service, index }: { service: Service; index: number }) {
                     key={h}
                     className="flex items-center gap-2.5 text-sm text-white/90"
                   >
-                    <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-utec-cyan/30 ring-1 ring-utec-cyan/40">
-                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-200" />
+                    <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#d60b0b]/30 ring-1 ring-[#d60b0b]/40">
+                      <span className="w-1.5 h-1.5 rounded-full bg-red-200" />
                     </span>
                     {h}
                   </li>
@@ -211,30 +201,30 @@ function ServiceCell({ service, index }: { service: Service; index: number }) {
 
 export function UtecServices() {
   return (
-    <section className="relative py-20 sm:py-28">
-      <div className="absolute inset-0 bg-background" />
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-utec-cyan/15 to-transparent" />
+    <section className="relative py-20 sm:py-28 bg-[#0a0a0a]">
+      <div className="absolute inset-0 bg-[#0a0a0a]" />
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#d60b0b]/30 to-transparent" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <ScrollReveal className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12 sm:mb-14">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-utec-cyan/20 bg-utec-cyan/5 mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-utec-cyan" />
-              <span className="text-utec-cyan text-xs font-semibold tracking-wide uppercase">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#d60b0b]/30 bg-[#d60b0b]/10 mb-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#d60b0b]" />
+              <span className="text-[#d60b0b] text-xs font-semibold tracking-wide uppercase">
                 What we do
               </span>
             </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-foreground mb-3">
-              Our <span className="text-utec-cyan">Services</span>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white mb-3">
+              Our <span className="text-[#d60b0b]">Services</span>
             </h2>
-            <p className="text-muted-foreground">
+            <p className="text-white/70">
               Comprehensive ICT and telecom solutions designed for the modern
-              enterprise — engineered, deployed, and supported locally.
+              enterprise - engineered, deployed, and supported locally.
             </p>
           </div>
-          <p className="text-sm text-muted-foreground/80 sm:text-right max-w-xs">
-            Six interconnected practices, one accountable delivery team.
+          <p className="text-sm text-white/50 sm:text-right max-w-xs">
+            Five core expertise areas, one accountable delivery team.
           </p>
         </ScrollReveal>
 

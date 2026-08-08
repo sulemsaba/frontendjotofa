@@ -6,7 +6,6 @@ import {
   ExternalLink,
   ArrowRight,
   Star,
-  Quote,
   Award,
   TrendingUp,
   Sparkles,
@@ -96,7 +95,7 @@ const editorialSlots: EditorialSlot[] = [
     icon: Award,
     accent: "emerald",
     comment:
-      "The dependable workhorse our enterprise clients reach for first — proven in the field, day after day.",
+      "The dependable workhorse our enterprise clients reach for first - proven in the field, day after day.",
   },
   {
     tag: "Editor's Choice",
@@ -111,7 +110,7 @@ const editorialSlots: EditorialSlot[] = [
     icon: TrendingUp,
     accent: "amber",
     comment:
-      "Strong value without compromise — a sensible choice for teams scaling up their fleet.",
+      "Strong value without compromise - a sensible choice for teams scaling up their fleet.",
   },
 ];
 
@@ -266,12 +265,9 @@ function SpotlightCard({
             )}
           </div>
 
-          {/* Editorial comment — the "curated" voice */}
+          {/* Editorial comment — plain text, no quote styling */}
           <div className={`relative rounded-xl ${accent.soft} ${accent.border} border p-3.5 mb-4`}>
-            <Quote
-              className={`absolute -top-2 left-3 w-4 h-4 ${accent.text} bg-background rounded-full p-0.5`}
-            />
-            <p className="text-[13px] leading-relaxed text-muted-foreground italic pl-1">
+            <p className="text-[13px] leading-relaxed text-muted-foreground">
               {slot.comment}
             </p>
           </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import {
@@ -11,6 +12,8 @@ import {
   ArrowRight,
   ExternalLink,
   Check,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { ScrollReveal } from "./scroll-reveal";
 import { usePage, PageId } from "@/lib/page-context";
@@ -22,7 +25,7 @@ import { storeProductsPageUrl } from "@/lib/store-config";
    Static class strings so Tailwind can statically extract them.
    ────────────────────────────────────────────────────────────────────────── */
 const accentClasses: Record<
-  "utec-cyan" | "courier-orange" | "cleaning-green" | "security-red" | "staffing-purple",
+  "utec-cyan" | "cleaning-green" | "security-red" | "staffing-purple",
   { bg: string; text: string; border: string; hoverBorder: string; hoverBg: string }
 > = {
   "utec-cyan": {
@@ -31,13 +34,6 @@ const accentClasses: Record<
     border: "border-utec-cyan/20",
     hoverBorder: "hover:border-utec-cyan/40",
     hoverBg: "hover:bg-utec-cyan/[0.06]",
-  },
-  "courier-orange": {
-    bg: "bg-courier-orange/10",
-    text: "text-courier-orange",
-    border: "border-courier-orange/20",
-    hoverBorder: "hover:border-courier-orange/40",
-    hoverBg: "hover:bg-courier-orange/[0.06]",
   },
   "cleaning-green": {
     bg: "bg-cleaning-green/10",
@@ -103,7 +99,7 @@ interface Subsidiary {
   storeUrl?: string;
   storeLabel?: string;
   /** Per-subsidiary accent color used for badges, checks, and hover states */
-  accent: "utec-cyan" | "courier-orange" | "cleaning-green" | "security-red" | "staffing-purple";
+  accent: "utec-cyan" | "cleaning-green" | "security-red" | "staffing-purple";
 }
 
 const subsidiaries: Subsidiary[] = [
@@ -131,29 +127,8 @@ const subsidiaries: Subsidiary[] = [
     accent: "utec-cyan",
   },
   {
-    id: "courier",
-    index: "02",
-    name: "Courier & Logistics",
-    tagline: "Reliable Delivery Network",
-    sectors: ["Logistics", "Freight", "Last-Mile"],
-    description:
-      "A trusted logistics and courier network ensuring timely, secure delivery of goods and documents across Tanzania and East Africa.",
-    services: [
-      "Express Delivery",
-      "Freight & Cargo",
-      "Warehousing",
-      "Last-Mile Solutions",
-      "Cross-Border Logistics",
-    ],
-    icon: Truck,
-    image: "/images/subsidiaries/courier.jpg",
-    logoSrc: "/images/courier-logo.png",
-    logoMark: "JC",
-    accent: "courier-orange",
-  },
-  {
     id: "cleaning",
-    index: "03",
+    index: "02",
     name: "Cleaning & Maids",
     tagline: "Professional Cleaning",
     sectors: ["Facilities", "Hygiene", "Maintenance"],
@@ -174,7 +149,7 @@ const subsidiaries: Subsidiary[] = [
   },
   {
     id: "security",
-    index: "04",
+    index: "03",
     name: "JOTOFA Security",
     tagline: "Comprehensive Security",
     sectors: ["Security", "Surveillance", "Risk"],
@@ -195,7 +170,7 @@ const subsidiaries: Subsidiary[] = [
   },
   {
     id: "staffing",
-    index: "05",
+    index: "04",
     name: "Staffing & Labour",
     tagline: "Workforce Solutions",
     sectors: ["Recruitment", "HR", "Workforce"],
@@ -215,6 +190,450 @@ const subsidiaries: Subsidiary[] = [
     accent: "staffing-purple",
   },
 ];
+
+/* ──────────────────────────────────────────────────────────────────────────
+   UtecShowcase — image carousel + tabbed content card for UTEC.
+   ────────────────────────────────────────────────────────────────────────── */
+
+const utecSlides = [
+  {
+    src: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80",
+    title: "Safety & Security Sales",
+    caption: "Reduce workplace incidents with certified protective gear and advanced threat detection technology.",
+    tab: "Radio Call Solution",
+    heading: "Protect Your Team & Assets",
+    description:
+      "Don't let outdated safety gear put your people at risk. We supply certified protective equipment and detection systems that meet international standards.",
+    benefits: [
+      "Reduce workplace injuries with certified safety boots, helmets, and high-visibility uniforms",
+      "Secure entry points with walk-through metal detectors and handheld screening mirrors",
+      "Stay connected with ICOM portable radios and reliable power backup systems",
+    ],
+  },
+  {
+    src: "https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=1200&q=80",
+    title: "Security System Installations",
+    caption: "24/7 surveillance and access control tailored to protect your assets and monitor your premises.",
+    tab: "Installations",
+    heading: "Monitor & Control Your Premises",
+    description:
+      "Sleep better knowing every corner of your property is watched. We design and install integrated security systems that deter threats and provide evidence when you need it.",
+    benefits: [
+      "Never miss a thing with HD/UHD CCTV surveillance and remote mobile viewing",
+      "Control who enters with biometric access control and automated gate motors",
+      "Instant threat alerts from intruder alarms, fire detection, and vehicle screening systems",
+    ],
+  },
+  {
+    src: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1200&q=80",
+    title: "IT & ICT Solutions",
+    caption: "Enterprise-grade hardware and cloud infrastructure that keeps your business connected and competitive.",
+    tab: "IT & ICT",
+    heading: "Power Your Business with Modern Tech",
+    description:
+      "Downtime costs money. We build reliable IT infrastructure that keeps your team productive and your data secure — from networking hardware to cloud migration.",
+    benefits: [
+      "Boost productivity with enterprise laptops, desktops, and peripherals built for heavy workloads",
+      "Zero downtime networking with professional design, switches, and structured cabling",
+      "Collaborate seamlessly with video conferencing, cloud storage, and custom web solutions",
+    ],
+  },
+  {
+    src: "https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1200&q=80",
+    title: "Renewable Solar Solutions",
+    caption: "Cut energy costs by up to 70% with our high-efficiency solar systems for homes and businesses.",
+    tab: "Solar",
+    heading: "Cut Energy Costs with Solar Power",
+    description:
+      "Tanzania's sun is your biggest asset. Our solar systems reduce your electricity bills by up to 70% while giving you energy independence from the grid.",
+    benefits: [
+      "Save up to 70% on electricity with high-efficiency home and office solar lighting",
+      "Hot water, zero bills with solar water heaters designed for Tanzanian climates",
+      "Light up your street with durable solar street lights and reliable water pumping systems",
+    ],
+  },
+];
+
+const cleaningSlides = [
+  {
+    src: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1200&q=80",
+    title: "Commercial Cleaning",
+    caption: "Professional office and commercial space cleaning that maintains hygiene and impresses clients.",
+    tab: "Commercial",
+    heading: "Spotless Commercial Spaces",
+    description:
+      "We deliver consistent, detail-oriented cleaning for offices, retail spaces, and commercial facilities — creating healthy environments your team and customers notice.",
+    benefits: [
+      "Daily, weekly, or custom schedules tailored to your operations",
+      "Trained cleaners using industrial-grade equipment and supplies",
+      "Quality audits and feedback loops for continuous improvement",
+    ],
+  },
+  {
+    src: "https://images.unsplash.com/photo-1527515545081-5db817c4b62f?auto=format&fit=crop&w=1200&q=80",
+    title: "Residential Cleaning",
+    caption: "Reliable home cleaning services that give you more time for what matters most.",
+    tab: "Residential",
+    heading: "Homes That Feel Brand New",
+    description:
+      "From routine maintenance to deep cleaning, our residential teams treat every home with care — using safe products and proven checklists for consistent results.",
+    benefits: [
+      "Flexible scheduling including weekends and same-day service",
+      "Eco-friendly cleaning products safe for families and pets",
+      "Vetted, insured, and background-checked cleaning professionals",
+    ],
+  },
+  {
+    src: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1200&q=80",
+    title: "Industrial Cleaning",
+    caption: "Specialized industrial and warehouse cleaning that meets safety and compliance standards.",
+    tab: "Industrial",
+    heading: "Heavy-Duty Industrial Cleaning",
+    description:
+      "Factories, warehouses, and industrial facilities need more than standard cleaning. We bring specialized equipment and processes to handle tough jobs safely.",
+    benefits: [
+      "High-reach and machinery-safe cleaning methods",
+      "Hazardous material handling and disposal compliance",
+      "After-hours and weekend availability to avoid downtime",
+    ],
+  },
+];
+
+const securitySlides = [
+  {
+    src: "https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=1200&q=80",
+    title: "Security System Installations",
+    caption: "24/7 surveillance and access control tailored to protect your assets and monitor your premises.",
+    tab: "Installations",
+    heading: "Monitor & Control Your Premises",
+    description:
+      "Sleep better knowing every corner of your property is watched. We design and install integrated security systems that deter threats and provide evidence when you need it.",
+    benefits: [
+      "Never miss a thing with HD/UHD CCTV surveillance and remote mobile viewing",
+      "Control who enters with biometric access control and automated gate motors",
+      "Instant threat alerts from intruder alarms, fire detection, and vehicle screening systems",
+    ],
+  },
+  {
+    src: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=80",
+    title: "Manned Guarding",
+    caption: "Professional, licensed security officers who protect your people, assets, and reputation.",
+    tab: "Guarding",
+    heading: "Professional Manned Guarding",
+    description:
+      "Our security officers are trained, licensed, and deployed with clear protocols — providing visible deterrence and rapid response when it matters most.",
+    benefits: [
+      "Uniformed officers for corporate, residential, and event sites",
+      "Access control, patrols, and incident reporting included",
+      "24/7 supervision and backup coverage",
+    ],
+  },
+  {
+    src: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80",
+    title: "Electronic Surveillance",
+    caption: "Advanced surveillance and alarm systems designed to detect, deter, and document threats.",
+    tab: "Surveillance",
+    heading: "Intelligent Surveillance Systems",
+    description:
+      "From CCTV to smart alarms, we design systems that give you real-time visibility and recorded evidence — fully integrated with your existing infrastructure.",
+    benefits: [
+      "Remote monitoring via mobile app and desktop dashboards",
+      "AI-enhanced analytics for unusual activity detection",
+      "Maintenance plans and firmware updates included",
+    ],
+  },
+];
+
+const staffingSlides = [
+  {
+    src: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80",
+    title: "Recruitment Services",
+    caption: "We find the right talent, fast — so you can focus on running your business.",
+    tab: "Recruitment",
+    heading: "Talent That Fits Your Team",
+    description:
+      "We source, screen, and present candidates who match your skills requirements and culture — reducing bad hires and accelerating onboarding.",
+    benefits: [
+      "Permanent, contract, and temporary placement options",
+      "Industry-specific candidate pools and assessment tools",
+      "End-to-end onboarding support and follow-up",
+    ],
+  },
+  {
+    src: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80",
+    title: "Labour Outsourcing",
+    caption: "Flexible workforce solutions that scale up or down with your business needs.",
+    tab: "Outsourcing",
+    heading: "Workforce Flexibility on Demand",
+    description:
+      "From seasonal peaks to project-based needs, our labour outsourcing gives you access to trained workers without the overhead of direct employment.",
+    benefits: [
+      "Skilled and semi-skilled workers across multiple sectors",
+      "Payroll, compliance, and HR administration handled for you",
+      "Rapid deployment for urgent staffing requirements",
+    ],
+  },
+  {
+    src: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1200&q=80",
+    title: "HR Consulting",
+    caption: "Strategic HR support that improves performance, retention, and workplace culture.",
+    tab: "HR Consulting",
+    heading: "Smarter People Strategy",
+    description:
+      "We help you build policies, structures, and culture frameworks that attract talent, reduce turnover, and keep your team performing at its best.",
+    benefits: [
+      "Policy design, org structuring, and role profiling",
+      "Performance management and employee engagement frameworks",
+      "Training programs tailored to your industry and goals",
+    ],
+  },
+];
+
+/* ──────────────────────────────────────────────────────────────────────────
+   SubsidiaryShowcase — reusable image carousel + tabbed content card
+   used for every subsidiary on the home page.
+   ────────────────────────────────────────────────────────────────────────── */
+
+interface Slide {
+  src: string;
+  title: string;
+  caption: string;
+  tab: string;
+  heading: string;
+  description: string;
+  benefits: string[];
+}
+
+interface ShowcaseProps {
+  logo: string;
+  logoAlt: string;
+  headerTitle: string;
+  headerSubtitle: string;
+  trustBadge: string;
+  slides: Slide[];
+  onExplore: () => void;
+}
+
+function SubsidiaryShowcase({
+  logo,
+  logoAlt,
+  headerTitle,
+  headerSubtitle,
+  trustBadge,
+  slides,
+  onExplore,
+}: ShowcaseProps) {
+  const [current, setCurrent] = useState(0);
+  const [autoInterval, setAutoInterval] = useState<NodeJS.Timeout | null>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const total = slides.length;
+
+  const activate = (index: number) => {
+    if (index < 0) index = total - 1;
+    if (index >= total) index = 0;
+    setCurrent(index);
+  };
+
+  const startAuto = () => {
+    stopAuto();
+    const id = setInterval(() => activate(current + 1), 6000);
+    setAutoInterval(id);
+  };
+
+  const stopAuto = () => {
+    if (autoInterval) clearInterval(autoInterval);
+    setAutoInterval(null);
+  };
+
+  useEffect(() => {
+    startAuto();
+    return stopAuto;
+  }, [current]);
+
+  const slide = slides[current];
+
+  return (
+    <section className="py-16 sm:py-20 bg-background">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-10">
+        {/* Page header */}
+        <div className="w-full bg-white dark:bg-white/[0.03] border border-border rounded-2xl px-6 sm:px-10 lg:px-16 py-8 sm:py-10 mb-10 sm:mb-12">
+          <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-10">
+            <div className="flex-shrink-0">
+              <Image
+                src={logo}
+                alt={logoAlt}
+                width={180}
+                height={60}
+                className="h-16 sm:h-20 w-auto object-contain"
+              />
+            </div>
+            <div className="text-center sm:text-left">
+              <h1 className="text-2xl sm:text-3xl lg:text-[2.6rem] font-extrabold text-foreground tracking-tight mb-2">
+                {headerTitle}
+              </h1>
+              <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mb-4">
+                {headerSubtitle}
+              </p>
+              <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-background border border-border text-xs sm:text-sm font-semibold text-foreground shadow-[0_2px_12px_rgba(0,0,0,0.06)]">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-green-600">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                  <polyline points="22 4 12 14.01 9 11.01" />
+                </svg>
+                {trustBadge}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div
+          ref={cardRef}
+          className="flex flex-col lg:flex-row w-full bg-white dark:bg-white/[0.03] rounded-2xl border border-border overflow-hidden shadow-[0_24px_60px_rgba(0,0,0,0.12)] min-h-[620px]"
+          onMouseEnter={stopAuto}
+          onMouseLeave={startAuto}
+        >
+          {/* LEFT: Image Slider */}
+          <div className="relative w-full lg:w-[52%] min-h-[320px] sm:min-h-[420px] lg:min-h-[620px] bg-[#1a1a1a] overflow-hidden">
+            {slides.map((item, i) => (
+              <div
+                key={i}
+                className={`absolute inset-0 transition-opacity duration-700 ${
+                  i === current ? "opacity-100 z-[2]" : "opacity-0 z-[1]"
+                }`}
+              >
+                <img
+                  src={item.src}
+                  alt={item.title}
+                  loading={i === 0 ? "eager" : "lazy"}
+                  className="w-full h-full object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.05) 35%, rgba(0,0,0,0.6) 100%)",
+                  }}
+                />
+                <div className="absolute inset-0 p-6 sm:p-10 flex flex-col justify-between z-[3]">
+                  <div>
+                    <h2 className="text-white text-xl sm:text-2xl lg:text-[2.4rem] font-bold leading-tight max-w-[90%]">
+                      {item.title}
+                    </h2>
+                  </div>
+                  <p className="text-white/95 text-sm sm:text-base max-w-md bg-black/30 backdrop-blur-md border border-white/10 rounded-lg p-3 sm:p-4">
+                    {item.caption}
+                  </p>
+                </div>
+              </div>
+            ))}
+
+            {/* Arrows */}
+            <button
+              type="button"
+              onClick={() => { stopAuto(); activate(current - 1); }}
+              className="absolute top-1/2 left-4 z-[4] -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 border border-white/15 text-white flex items-center justify-center opacity-0 lg:opacity-100 transition-opacity"
+              aria-label="Previous slide"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              type="button"
+              onClick={() => { stopAuto(); activate(current + 1); }}
+              className="absolute top-1/2 right-4 z-[4] -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 border border-white/15 text-white flex items-center justify-center opacity-0 lg:opacity-100 transition-opacity"
+              aria-label="Next slide"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+
+            {/* Dots */}
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-[4] flex gap-2">
+              {slides.map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => { stopAuto(); activate(i); }}
+                  className={`w-2.5 h-2.5 rounded-full transition-all ${
+                    i === current ? "bg-white scale-125" : "bg-white/40 hover:bg-white/70"
+                  }`}
+                  aria-label={`Go to slide ${i + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* RIGHT: Content */}
+          <div className="w-full lg:w-[48%] bg-[#f4f4f2] dark:bg-white/[0.03] p-6 sm:p-8 lg:p-10 flex flex-col">
+            <div className="hidden lg:flex absolute top-6 right-6 z-10 bg-[#1a1a1a] text-white px-4 py-2 rounded-md text-sm font-bold tracking-wider">
+              {headerTitle.split(" ").slice(0, 2).join(" ").toUpperCase()}{" "}
+              <span className="block text-[10px] font-normal opacity-75 tracking-widest">SOLUTIONS</span>
+            </div>
+
+            {/* Tabs */}
+            <div className="flex gap-6 border-b border-black/10 dark:border-white/10 mb-6 overflow-x-auto" role="tablist">
+              {slides.map((item, i) => (
+                <button
+                  key={item.tab}
+                  type="button"
+                  role="tab"
+                  aria-selected={i === current}
+                  onClick={() => activate(i)}
+                  className={`px-1 py-2.5 text-sm font-medium whitespace-nowrap transition-colors relative ${
+                    i === current
+                      ? "text-foreground font-semibold"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {item.tab}
+                  {i === current && (
+                    <span className="absolute bottom-0 left-0 right-0 h-[3px] bg-[#1a1a1a] rounded-full" />
+                  )}
+                </button>
+              ))}
+            </div>
+
+            {/* Panel */}
+            <div className="flex-1">
+              <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-3">{slide.heading}</h3>
+              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-6">{slide.description}</p>
+              <ul className="space-y-3 mb-8">
+                {slide.benefits.map((benefit) => (
+                  <li key={benefit} className="flex items-start gap-3 text-sm text-foreground">
+                    <Check className="w-5 h-5 text-[#c62828] flex-shrink-0 mt-0.5" />
+                    <span>{benefit}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* CTA */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+              <button
+                type="button"
+                onClick={onExplore}
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#1a1a1a] dark:bg-[#d60b0b] text-white rounded-full font-semibold text-sm transition-all hover:shadow-lg"
+              >
+                Get a Quote
+                <ArrowRight className="w-4 h-4" />
+              </button>
+              <span className="inline-flex items-center gap-2 text-xs font-semibold text-green-700 bg-green-50 border border-green-100 px-3 py-2 rounded-full">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+                {trustBadge}
+              </span>
+            </div>
+            <a href="tel:+255773383800" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mt-4">
+              <span className="w-8 h-8 rounded-full border border-border flex items-center justify-center">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.79 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </span>
+              Prefer to call? 0773 383 800
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 /* ──────────────────────────────────────────────────────────────────────────
    SplitSection — one full-width alternating split section per subsidiary.
@@ -270,14 +689,14 @@ function SplitSection({
 
         {/* Logo tile — top-left */}
         <div className="absolute top-6 left-6 sm:top-8 sm:left-8 z-10">
-          <div className="flex items-center justify-center h-14 w-14 rounded-xl bg-white border border-white/20 shadow-lg overflow-hidden">
+          <div className="flex items-center justify-center h-24 w-24 rounded-xl bg-transparent border border-white/20 shadow-lg overflow-hidden">
             {subsidiary.logoSrc ? (
               <Image
                 src={subsidiary.logoSrc}
                 alt={`${subsidiary.name} logo`}
-                width={48}
-                height={48}
-                className="h-9 w-9 object-contain"
+                width={88}
+                height={88}
+                className="h-[88px] w-[88px] object-contain"
               />
             ) : (
               <span className="text-lg font-black text-jotofa-navy">
@@ -385,6 +804,20 @@ function SplitSection({
 }
 
 export function Subsidiaries() {
+  const { setActivePage } = usePage();
+
+  const cleaningHeaderTitle = "Premium Cleaning & Housekeeping Solutions";
+  const cleaningHeaderSubtitle = "From commercial offices to residential homes — we deliver hygiene, consistency, and peace of mind across Tanzania.";
+  const cleaningTrustBadge = "Trusted by 200+ homes and businesses";
+
+  const securityHeaderTitle = "Professional Security & Surveillance Solutions";
+  const securityHeaderSubtitle = "Protecting people, assets, and operations with manned guarding, CCTV, and integrated security systems.";
+  const securityTrustBadge = "Trusted by 200+ businesses";
+
+  const staffingHeaderTitle = "Skilled Workforce & HR Solutions";
+  const staffingHeaderSubtitle = "Recruitment, labour outsourcing, and HR consulting — connecting the right talent with the right opportunity.";
+  const staffingTrustBadge = "Trusted by 100+ companies";
+
   return (
     <section className="relative">
       {/* Section header */}
@@ -403,16 +836,58 @@ export function Subsidiaries() {
         </p>
       </ScrollReveal>
 
-      {/* Split-screen stacked sections — each subsidiary gets a full-width
-          alternating split section (image left ↔ right). */}
-      <div className="border-t border-border">
-        {subsidiaries.map((subsidiary, index) => (
-          <SplitSection
-            key={subsidiary.id}
-            subsidiary={subsidiary}
-            index={index}
-          />
-        ))}
+      {/* Card showcase for all subsidiaries */}
+      <div className="space-y-10 sm:space-y-12">
+        {subsidiaries.map((subsidiary) => {
+          if (subsidiary.id === "staffing") return null;
+
+          const slides =
+            subsidiary.id === "utec"
+              ? utecSlides
+              : subsidiary.id === "cleaning"
+                ? cleaningSlides
+                : securitySlides;
+
+          const headerTitle =
+            subsidiary.id === "utec"
+              ? "Complete Safety, Security & Technology Solutions"
+              : subsidiary.id === "cleaning"
+                ? cleaningHeaderTitle
+                : subsidiary.id === "security"
+                  ? securityHeaderTitle
+                  : staffingHeaderTitle;
+
+          const headerSubtitle =
+            subsidiary.id === "utec"
+              ? "From CCTV installations to solar power systems — we protect and power businesses across Tanzania."
+              : subsidiary.id === "cleaning"
+                ? cleaningHeaderSubtitle
+                : subsidiary.id === "security"
+                  ? securityHeaderSubtitle
+                  : staffingHeaderSubtitle;
+
+          const trustBadge =
+            subsidiary.id === "utec"
+              ? "Trusted by 200+ businesses in Dar es Salaam"
+              : subsidiary.id === "cleaning"
+                ? cleaningTrustBadge
+                : subsidiary.id === "security"
+                  ? securityTrustBadge
+                  : staffingTrustBadge;
+
+          return (
+            <SubsidiaryShowcase
+              key={subsidiary.id}
+              logo={subsidiary.logoSrc ?? ""}
+              logoAlt={subsidiary.name}
+              headerTitle={headerTitle}
+              headerSubtitle={headerSubtitle}
+              trustBadge={trustBadge}
+              slides={slides}
+              onExplore={() => setActivePage(subsidiary.id)}
+            />
+          );
+        })}
       </div>
     </section>
   );
