@@ -161,24 +161,24 @@ export function Navbar() {
            {/* ───────── LEFT: Logo Block ───────── */}
            <div className="flex-shrink-0 flex justify-start items-center">
              <button onClick={() => handleNavClick("home")} className="flex items-center group" aria-label="JOTOFA Group home">
-               <div className="relative w-[110px] h-9 sm:w-[130px] sm:h-10">
-                 <Image
-                   src="/images/jotofa-logo-light.png"
-                   alt="JOTOFA Group Logo"
-                   width={222}
-                   height={73}
-                   priority
-                   className="absolute inset-0 w-full h-full object-contain transition-all duration-300 group-hover:opacity-80 cursor-pointer dark:hidden"
-                 />
-                 <Image
-                   src="/images/jotofa-logo-dark.png"
-                   alt="JOTOFA Group Logo"
-                   width={222}
-                   height={73}
-                   priority
-                   className="absolute inset-0 w-full h-full object-contain transition-all duration-300 group-hover:opacity-80 cursor-pointer hidden dark:block"
-                 />
-               </div>
+<div className="relative w-[110px] h-9 sm:w-[130px] sm:h-10 dark:h-12 sm:dark:h-12">
+                  <Image
+                    src="/images/jotofa-logo-light.png"
+                    alt="JOTOFA Group Logo"
+                    width={222}
+                    height={73}
+                    priority
+                    className="absolute inset-0 w-full h-full object-contain transition-all duration-300 group-hover:opacity-80 cursor-pointer dark:hidden"
+                  />
+                  <Image
+                    src="/images/jotofa-logo-dark.png"
+                    alt="JOTOFA Group Logo"
+                    width={222}
+                    height={73}
+                    priority
+                    className="absolute inset-0 w-full h-full object-contain transition-all duration-300 group-hover:opacity-80 cursor-pointer hidden dark:block"
+                  />
+                </div>
              </button>
            </div>
 
@@ -342,7 +342,7 @@ export function Navbar() {
             <motion.div ref={mobileDrawerRef} initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }} transition={{ duration: 0.3, ease: "easeOut" }}
               className="absolute right-0 top-0 bottom-0 w-[300px] max-w-[85vw] bg-white dark:bg-jotofa-navy-card backdrop-blur-xl border-l border-jotofa-navy/8 dark:border-white/8">
                <div className="flex items-center justify-between p-4 border-b border-jotofa-navy/6 dark:border-white/6">
-                <div className="relative w-[88px] h-8">
+                <div className="relative w-[88px] h-8 dark:h-10">
                   <Image
                     src="/images/jotofa-logo-light.png"
                     alt="JOTOFA Group Logo"
