@@ -206,7 +206,14 @@ export function Footer() {
               alt="JOTOFA Group Logo"
               width={222}
               height={73}
-              className="h-16 w-auto object-contain dark:brightness-0 dark:invert mb-5"
+              className="h-16 w-auto object-contain dark:hidden"
+            />
+            <Image
+              src="/images/jotofa-logo-dark.png"
+              alt="JOTOFA Group Logo"
+              width={222}
+              height={73}
+              className="h-16 w-auto object-contain hidden dark:block"
             />
           <p className="text-[15px] font-semibold text-foreground text-center">
             Diverse Expertise, Unified Excellence.
