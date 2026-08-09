@@ -161,24 +161,24 @@ export function Navbar() {
            {/* ───────── LEFT: Logo Block ───────── */}
            <div className="flex-shrink-0 flex justify-start items-center">
              <button onClick={() => handleNavClick("home")} className="flex items-center group" aria-label="JOTOFA Group home">
-               <div className="relative">
-                 <Image
-                   src="/images/jotofa-logo-light.png"
-                   alt="JOTOFA Group Logo"
-                   width={222}
-                   height={73}
-                   priority
-                   className="h-8 sm:h-9 w-auto object-contain transition-all duration-300 group-hover:opacity-80 cursor-pointer dark:hidden"
-                 />
-                 <Image
-                   src="/images/jotofa-logo-dark.png"
-                   alt="JOTOFA Group Logo"
-                   width={222}
-                   height={73}
-                   priority
-                   className="h-10 sm:h-[46px] w-auto object-contain transition-all duration-300 group-hover:opacity-80 cursor-pointer hidden dark:block"
-                 />
-               </div>
+                <div className="relative">
+                  <Image
+                    src="/images/jotofa-logo-light.png"
+                    alt="JOTOFA Group Logo"
+                    width={222}
+                    height={73}
+                    priority
+                    className="h-9 sm:h-10 w-auto object-contain transition-all duration-300 group-hover:opacity-80 cursor-pointer dark:hidden"
+                  />
+                  <Image
+                    src="/images/jotofa-logo-dark.png"
+                    alt="JOTOFA Group Logo"
+                    width={222}
+                    height={73}
+                    priority
+                    className="h-9 sm:h-10 w-auto object-contain transition-all duration-300 group-hover:opacity-80 cursor-pointer hidden dark:block"
+                  />
+                </div>
              </button>
            </div>
 
@@ -343,22 +343,22 @@ export function Navbar() {
             <motion.div ref={mobileDrawerRef} initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }} transition={{ duration: 0.3, ease: "easeOut" }}
               className="absolute right-0 top-0 bottom-0 w-[300px] max-w-[85vw] bg-white dark:bg-jotofa-navy-card backdrop-blur-xl border-l border-jotofa-navy/8 dark:border-white/8">
                <div className="flex items-center justify-between p-4 border-b border-jotofa-navy/6 dark:border-white/6">
-                 <div className="relative">
-                   <Image
-                     src="/images/jotofa-logo-light.png"
-                     alt="JOTOFA Group Logo"
-                     width={222}
-                     height={73}
-                     className="h-7 w-auto object-contain dark:hidden"
-                   />
-                   <Image
-                     src="/images/jotofa-logo-dark.png"
-                     alt="JOTOFA Group Logo"
-                     width={222}
-                     height={73}
-                     className="h-8 w-auto object-contain hidden dark:block"
-                   />
-                 </div>
+                <div className="relative">
+                  <Image
+                    src="/images/jotofa-logo-light.png"
+                    alt="JOTOFA Group Logo"
+                    width={222}
+                    height={73}
+                    className="h-8 w-auto object-contain dark:hidden"
+                  />
+                  <Image
+                    src="/images/jotofa-logo-dark.png"
+                    alt="JOTOFA Group Logo"
+                    width={222}
+                    height={73}
+                    className="h-8 w-auto object-contain hidden dark:block"
+                  />
+                </div>
                  <button ref={mobileCloseBtnRef} onClick={() => setMobileOpen(false)} className="p-2 text-jotofa-navy/60 dark:text-white/60 hover:text-jotofa-navy dark:hover:text-white transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent rounded-md" aria-label="Close menu"><X size={20} /></button>
                </div>
               <div className="py-3 px-2 space-y-0.5 max-h-[calc(100vh-120px)] overflow-y-auto">

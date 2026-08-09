@@ -158,7 +158,7 @@ const subsidiaryHeroData: Record<
   all: {
     name: "JOTOFA Group",
     tagline: "Explore career opportunities across all our subsidiaries",
-    logo: "/images/jotofa-logo.png",
+    logo: "/images/jotofa-logo-dark.png",
     heroImage: "/images/jotofa-hero-1.jpeg",
     stats: [
       { label: "Employees", value: "1,200+" },

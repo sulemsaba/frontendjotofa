@@ -214,7 +214,7 @@ export function Footer() {
                 alt="JOTOFA Group Logo"
                 width={222}
                 height={73}
-                className="h-[76px] w-auto object-contain hidden dark:block"
+                className="h-16 w-auto object-contain hidden dark:block"
               />
             </div>
           <p className="text-[15px] font-semibold text-foreground text-center">
