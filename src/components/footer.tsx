@@ -201,20 +201,20 @@ export function Footer() {
       <div className="relative z-10 max-w-7xl mx-auto px-10">
         {/* Brand */}
         <div className="flex flex-col items-center mb-16">
-            <div className="relative">
+            <div className="relative w-[160px] h-16">
               <Image
                 src="/images/jotofa-logo-light.png"
                 alt="JOTOFA Group Logo"
                 width={222}
                 height={73}
-                className="h-16 w-auto object-contain dark:hidden"
+                className="absolute inset-0 w-full h-full object-contain dark:hidden"
               />
               <Image
                 src="/images/jotofa-logo-dark.png"
                 alt="JOTOFA Group Logo"
                 width={222}
                 height={73}
-                className="h-16 w-auto object-contain hidden dark:block"
+                className="absolute inset-0 w-full h-full object-contain hidden dark:block"
               />
             </div>
           <p className="text-[15px] font-semibold text-foreground text-center">
