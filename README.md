@@ -124,7 +124,7 @@ cp .env.example .env.local
 
 # 3. Start dev server
 bun dev
-# → http://localhost:3000
+# → http://localhost:3005
 ```
 
 ### Build for Production
@@ -145,7 +145,7 @@ All variables are loaded at build/runtime by Next.js. Client-exposed variables M
 | Variable                     | Required | Default                          | Description                                                       |
 | ---------------------------- | -------- | -------------------------------- | ----------------------------------------------------------------- |
 | `NEXT_PUBLIC_API_BASE_URL`   | yes      | `http://localhost:8000/api`      | Base URL of the FastAPI backend.                                  |
-| `NEXT_PUBLIC_SITE_URL`       | no       | `http://localhost:3000`          | Canonical site URL, used by sitemap, RSS feed, and JSON-LD.       |
+| `NEXT_PUBLIC_SITE_URL`       | no       | `http://localhost:3005`          | Canonical site URL, used by sitemap, RSS feed, and JSON-LD.       |
 | `NEXT_PUBLIC_WHATSAPP_NUMBER`| no       | —                                | E.164 phone number for the floating WhatsApp button, if enabled.  |
 
 Copy `.env.example` to `.env.local` and adjust values for your environment. Never commit `.env.local`.

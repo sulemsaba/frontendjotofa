@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Open_Sans, Geist_Mono, Playfair_Display } from "next/font/google";
+import localFont from "next/font/local";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "@/components/ui/sonner";
 import { PageProvider } from "@/lib/page-context";
@@ -8,24 +8,25 @@ import { JsonLd } from "@/components/json-ld";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 
-// Per JOTOFA Visual Identity Guidelines p.16: Open Sans for web/digital.
-const openSans = Open_Sans({
+const openSans = localFont({
+  src: "../../public/fonts/OpenSans-VariableFont_wdth,wght.ttf",
   variable: "--font-open-sans",
-  subsets: ["latin"],
   display: "swap",
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: "300 800",
 });
 
-const geistMono = Geist_Mono({
+const geistMono = localFont({
+  src: "../../public/fonts/GeistMono-VariableFont_wght.ttf",
   variable: "--font-geist-mono",
-  subsets: ["latin"],
+  display: "swap",
+  weight: "100 900",
 });
 
-const playfairDisplay = Playfair_Display({
+const playfairDisplay = localFont({
+  src: "../../public/fonts/PlayfairDisplay-VariableFont_wght.ttf",
   variable: "--font-playfair-display",
-  subsets: ["latin"],
   display: "swap",
-  weight: ["400", "700"],
+  weight: "400 700",
 });
 
 export const metadata: Metadata = {

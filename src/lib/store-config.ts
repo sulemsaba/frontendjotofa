@@ -14,7 +14,7 @@
 
 // Storefront base URL — public (exposed to the client so we can build links).
 export const UTEC_STORE_FRONTEND_URL = (
-  process.env.NEXT_PUBLIC_UTEC_STORE_FRONTEND_URL || "http://13.140.149.214:3000"
+  process.env.NEXT_PUBLIC_UTEC_STORE_FRONTEND_URL || "http://13.140.149.214:3005"
 ).replace(/\/$/, "");
 
 // Product API base URL — server-only (never prefix with NEXT_PUBLIC_).

@@ -377,7 +377,7 @@ export function Navbar() {
                         {businessItems.map(biz => (
                           <button key={biz.id} onClick={() => handleNavClick(biz.page)} className="flex items-center gap-3 w-full text-left px-4 py-2 text-jotofa-navy/70 dark:text-white/70 hover:text-jotofa-navy dark:hover:text-white hover:bg-jotofa-navy/[0.03] dark:hover:bg-white/[0.04] rounded-lg">
                             <div className="w-6 h-6 rounded-md overflow-hidden flex items-center justify-center bg-white border border-black/5 dark:border-white/10 flex-shrink-0">
-                              <Image src={biz.logo} alt={`${biz.label} logo`} width={20} height={20} className="w-5 h-5 object-contain" />
+                              <Image src={biz.logo} alt={`${biz.label} logo`} fill className="object-contain" />
                             </div>
                             <span className="text-sm">{biz.label}</span>
                           </button>
@@ -393,7 +393,7 @@ export function Navbar() {
                     className="flex items-center gap-2 px-4 py-2 rounded-xl text-jotofa-navy/70 dark:text-white/70 text-sm hover:bg-jotofa-navy/[0.03] dark:hover:bg-white/[0.04] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent"
                     aria-label={`Switch language (current: ${lang})`}
                   >
-                    <span className="relative inline-block h-4 w-6 overflow-hidden rounded-sm">
+<div className="relative h-4 w-6 inline-block overflow-hidden rounded-sm">
                       <Image
                         src={lang === "EN" ? "/images/flags/gb.png" : "/images/flags/tz.png"}
                         alt={lang === "EN" ? "English" : "Swahili"}
@@ -401,7 +401,7 @@ export function Navbar() {
                         sizes="24px"
                         className="object-cover"
                       />
-                    </span>
+                    </div>
                     <span>{lang === "EN" ? "English" : "Swahili"}</span>
                   </button>
                   <a href={`tel:${PHONE_TEL}`} className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-jotofa-navy/70 dark:text-white/70 text-sm hover:bg-jotofa-navy/[0.03] dark:hover:bg-white/[0.04] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent"><Phone className="w-4 h-4" /><span>{PHONE_NUMBER}</span></a>
