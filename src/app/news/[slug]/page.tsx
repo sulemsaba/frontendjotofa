@@ -1,9 +1,5 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
-import { WhatsAppButton } from "@/components/whatsapp-button";
-import { BackToTopButton } from "@/components/back-to-top-button";
 import { NewsDetailClient } from "./client";
 import { getNews, type PublicNewsArticle } from "@/lib/api";
 import { FALLBACK_ARTICLES, mapArticle, type RawArticle } from "@/lib/news-constants";
@@ -53,14 +49,8 @@ export default async function NewsDetailPage({ params }: Props) {
   const relatedArticles = allArticles.filter((a) => a.slug !== slug).slice(0, 3);
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
-      <Navbar />
-      <main id="main-content" className="flex-1 pt-14 sm:pt-16">
-        <NewsDetailClient article={article} relatedArticles={relatedArticles} />
-      </main>
-      <Footer />
-      <WhatsAppButton />
-      <BackToTopButton />
-    </div>
+    <main id="main-content" className="flex-1 pt-14 sm:pt-16">
+      <NewsDetailClient article={article} relatedArticles={relatedArticles} />
+    </main>
   );
 }

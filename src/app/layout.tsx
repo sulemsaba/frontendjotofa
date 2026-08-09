@@ -1,11 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import { Open_Sans, Geist_Mono, Playfair_Display } from "next/font/google";
 import { ThemeProvider } from "next-themes";
-import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { PageProvider } from "@/lib/page-context";
 import { RouteProgress } from "@/components/route-progress";
 import { JsonLd } from "@/components/json-ld";
+import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
 
 // Per JOTOFA Visual Identity Guidelines p.16: Open Sans for web/digital.
 const openSans = Open_Sans({
@@ -103,7 +104,11 @@ export default function RootLayout({
             <RouteProgress />
             {/* JSON-LD structured data — Organization, WebSite, BreadcrumbList */}
             <JsonLd />
-            {children}
+            <Navbar />
+            <main id="main-content" className="flex-1">
+              {children}
+            </main>
+            <Footer />
             <Toaster />
           </PageProvider>
         </ThemeProvider>
