@@ -176,7 +176,7 @@ export function Navbar() {
                    width={222}
                    height={73}
                    priority
-                   className="h-8 sm:h-9 w-auto object-contain transition-all duration-300 group-hover:opacity-80 cursor-pointer hidden dark:block"
+                   className="h-10 sm:h-[46px] w-auto object-contain transition-all duration-300 group-hover:opacity-80 cursor-pointer hidden dark:block"
                  />
                </div>
              </button>
@@ -356,7 +356,7 @@ export function Navbar() {
                      alt="JOTOFA Group Logo"
                      width={222}
                      height={73}
-                     className="h-7 w-auto object-contain hidden dark:block"
+                     className="h-8 w-auto object-contain hidden dark:block"
                    />
                  </div>
                  <button ref={mobileCloseBtnRef} onClick={() => setMobileOpen(false)} className="p-2 text-jotofa-navy/60 dark:text-white/60 hover:text-jotofa-navy dark:hover:text-white transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent rounded-md" aria-label="Close menu"><X size={20} /></button>
