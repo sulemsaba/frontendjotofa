@@ -454,45 +454,15 @@ function SubsidiaryShowcase({
 
   return (
     <section className="py-16 sm:py-20 bg-background">
-      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-10">
-        {/* Page header */}
-        <div className="w-full bg-white dark:bg-white/[0.03] border border-border rounded-2xl px-6 sm:px-10 lg:px-16 py-8 sm:py-10 mb-10 sm:mb-12">
-          <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-10">
-            <div className="flex-shrink-0">
-              <Image
-                src={logo}
-                alt={logoAlt}
-                width={180}
-                height={60}
-                className="h-16 sm:h-20 w-auto object-contain"
-              />
-            </div>
-            <div className="text-center sm:text-left">
-              <h1 className="text-2xl sm:text-3xl lg:text-[2.6rem] font-extrabold text-foreground tracking-tight mb-2">
-                {headerTitle}
-              </h1>
-              <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mb-4">
-                {headerSubtitle}
-              </p>
-              <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-background border border-border text-xs sm:text-sm font-semibold text-foreground shadow-[0_2px_12px_rgba(0,0,0,0.06)]">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-green-600">
-                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                  <polyline points="22 4 12 14.01 9 11.01" />
-                </svg>
-                {trustBadge}
-              </span>
-            </div>
-          </div>
-        </div>
-
+      <div className="mx-auto w-full max-w-none px-2 sm:px-4 lg:px-6">
         <div
           ref={cardRef}
-          className="flex flex-col lg:flex-row w-full bg-white dark:bg-white/[0.03] rounded-2xl border border-border overflow-hidden shadow-[0_24px_60px_rgba(0,0,0,0.12)] min-h-[620px]"
+          className="flex flex-col lg:flex-row w-full bg-white dark:bg-white/[0.03] rounded-2xl border border-border overflow-hidden shadow-[0_24px_60px_rgba(0,0,0,0.12)] min-h-[720px] lg:min-h-[680px]"
           onMouseEnter={stopAuto}
           onMouseLeave={startAuto}
         >
           {/* LEFT: Image Slider */}
-          <div className="relative w-full lg:w-[52%] min-h-[320px] sm:min-h-[420px] lg:min-h-[620px] bg-[#1a1a1a] overflow-hidden">
+          <div className="relative w-full lg:w-[52%] min-h-[340px] sm:min-h-[460px] lg:min-h-[680px] bg-[#1a1a1a] overflow-hidden">
             {slides.map((item, i) => (
               <div
                 key={i}
@@ -513,12 +483,7 @@ function SubsidiaryShowcase({
                       "linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.05) 35%, rgba(0,0,0,0.6) 100%)",
                   }}
                 />
-                <div className="absolute inset-0 p-6 sm:p-10 flex flex-col justify-between z-[3]">
-                  <div>
-                    <h2 className="text-white text-xl sm:text-2xl lg:text-[2.4rem] font-bold leading-tight max-w-[90%]">
-                      {item.title}
-                    </h2>
-                  </div>
+                <div className="absolute inset-0 p-6 sm:p-10 flex flex-col justify-end z-[3]">
                   <p className="text-white/95 text-sm sm:text-base max-w-md bg-black/30 backdrop-blur-md border border-white/10 rounded-lg p-3 sm:p-4">
                     {item.caption}
                   </p>
@@ -565,6 +530,21 @@ function SubsidiaryShowcase({
             <div className="hidden lg:flex absolute top-6 right-6 z-10 bg-[#1a1a1a] text-white px-4 py-2 rounded-md text-sm font-bold tracking-wider">
               {headerTitle.split(" ").slice(0, 2).join(" ").toUpperCase()}{" "}
               <span className="block text-[10px] font-normal opacity-75 tracking-widest">SOLUTIONS</span>
+            </div>
+
+            {/* Unified header */}
+            <div className="flex items-center gap-4 mb-6">
+              <Image
+                src={logo}
+                alt={logoAlt}
+                width={120}
+                height={48}
+                className="h-10 sm:h-12 w-auto object-contain"
+              />
+              <div>
+                <h2 className="text-lg sm:text-xl font-bold text-foreground leading-tight">{headerTitle}</h2>
+                <p className="text-xs sm:text-sm text-muted-foreground">{trustBadge}</p>
+              </div>
             </div>
 
             {/* Tabs */}
