@@ -87,7 +87,7 @@ const subsidiaryHeroData: Record<
     name: "JOTOFA Group",
     tagline:
       "Delivering excellence across industries through ICT, logistics, professional services, security, and staffing",
-    logo: "/images/jotofa-logo.png",
+    logo: "/images/jotofa-logo-dark.png",
     heroImage: "/images/jotofa-hero-1.jpeg",
     stats: [
       { label: "Employees", value: "1,200+" },
@@ -497,13 +497,13 @@ export function Careers() {
           <div className="relative z-10 flex items-center h-full px-6 sm:px-8">
             <div className="flex items-center gap-4 sm:gap-5">
               <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20 shrink-0">
-                <Image
-                  src={heroData.logo}
-                  alt={heroData.name}
-                  width={40}
-                  height={40}
-                  className="w-9 h-9 sm:w-10 sm:h-10 object-contain brightness-0 invert"
-                />
+                 <Image
+                   src={heroData.logo}
+                   alt={heroData.name}
+                   width={40}
+                   height={40}
+                   className="w-9 h-9 sm:w-10 sm:h-10 object-contain"
+                 />
               </div>
               <div>
                 <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-1">
