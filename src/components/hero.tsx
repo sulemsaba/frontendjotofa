@@ -89,7 +89,7 @@ function TickerColumn({
           <div
             key={i}
             className="relative w-full flex-shrink-0 overflow-hidden rounded-lg group"
-            style={{ aspectRatio: "3/4" }}
+            style={{ aspectRatio: "3/4", position: "relative" }}
           >
             <Image
               src={img.src}
