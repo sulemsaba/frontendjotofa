@@ -409,7 +409,6 @@ interface ShowcaseProps {
   logoAlt: string;
   headerTitle: string;
   headerSubtitle: string;
-  trustBadge: string;
   slides: Slide[];
   onExplore: () => void;
 }
@@ -419,7 +418,6 @@ function SubsidiaryShowcase({
   logoAlt,
   headerTitle,
   headerSubtitle,
-  trustBadge,
   slides,
   onExplore,
 }: ShowcaseProps) {
@@ -527,10 +525,6 @@ function SubsidiaryShowcase({
 
           {/* RIGHT: Content */}
           <div className="w-full lg:w-[48%] bg-[#f4f4f2] dark:bg-white/[0.03] p-6 sm:p-8 lg:p-10 flex flex-col">
-            <div className="hidden lg:flex absolute top-6 right-6 z-10 bg-[#1a1a1a] text-white px-4 py-2 rounded-md text-sm font-bold tracking-wider">
-              {headerTitle.split(" ").slice(0, 2).join(" ").toUpperCase()}{" "}
-              <span className="block text-[10px] font-normal opacity-75 tracking-widest">SOLUTIONS</span>
-            </div>
 
             {/* Unified header */}
             <div className="flex items-center gap-4 mb-6">
@@ -543,7 +537,6 @@ function SubsidiaryShowcase({
               />
               <div>
                 <h2 className="text-lg sm:text-xl font-bold text-foreground leading-tight">{headerTitle}</h2>
-                <p className="text-xs sm:text-sm text-muted-foreground">{trustBadge}</p>
               </div>
             </div>
 
@@ -594,20 +587,7 @@ function SubsidiaryShowcase({
                 Get a Quote
                 <ArrowRight className="w-4 h-4" />
               </button>
-              <span className="inline-flex items-center gap-2 text-xs font-semibold text-green-700 bg-green-50 border border-green-100 px-3 py-2 rounded-full">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
-                  <circle cx="12" cy="12" r="10" />
-                  <polyline points="12 6 12 12 16 14" />
-                </svg>
-                {trustBadge}
-              </span>
             </div>
-            <a href="tel:+255773383800" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mt-4">
-              <span className="w-8 h-8 rounded-full border border-border flex items-center justify-center">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.79 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              </span>
-              Prefer to call? 0773 383 800
-            </a>
           </div>
         </div>
       </div>
@@ -788,15 +768,12 @@ export function Subsidiaries() {
 
   const cleaningHeaderTitle = "Premium Cleaning & Housekeeping Solutions";
   const cleaningHeaderSubtitle = "From commercial offices to residential homes — we deliver hygiene, consistency, and peace of mind across Tanzania.";
-  const cleaningTrustBadge = "Trusted by 200+ homes and businesses";
 
   const securityHeaderTitle = "Professional Security & Surveillance Solutions";
   const securityHeaderSubtitle = "Protecting people, assets, and operations with manned guarding, CCTV, and integrated security systems.";
-  const securityTrustBadge = "Trusted by 200+ businesses";
 
   const staffingHeaderTitle = "Skilled Workforce & HR Solutions";
   const staffingHeaderSubtitle = "Recruitment, labour outsourcing, and HR consulting — connecting the right talent with the right opportunity.";
-  const staffingTrustBadge = "Trusted by 100+ companies";
 
   return (
     <section className="relative">
@@ -846,15 +823,6 @@ export function Subsidiaries() {
                   ? securityHeaderSubtitle
                   : staffingHeaderSubtitle;
 
-          const trustBadge =
-            subsidiary.id === "utec"
-              ? "Trusted by 200+ businesses in Dar es Salaam"
-              : subsidiary.id === "cleaning"
-                ? cleaningTrustBadge
-                : subsidiary.id === "security"
-                  ? securityTrustBadge
-                  : staffingTrustBadge;
-
           return (
             <SubsidiaryShowcase
               key={subsidiary.id}
@@ -862,7 +830,6 @@ export function Subsidiaries() {
               logoAlt={subsidiary.name}
               headerTitle={headerTitle}
               headerSubtitle={headerSubtitle}
-              trustBadge={trustBadge}
               slides={slides}
               onExplore={() => setActivePage(subsidiary.id)}
             />
