@@ -7,29 +7,18 @@ export function UnifyingExcellence() {
   const { setActivePage } = usePage();
 
   return (
-    <section className="relative w-full bg-jotofa-navy text-white overflow-hidden">
-      {/* Stable SVG curve — replaces the brittle negative-margin hack */}
+    <section className="relative w-full bg-jotofa-navy text-white overflow-hidden -mt-[60px]">
+      {/* Curve at top — creates smooth transition from Hero above */}
       <div
         aria-hidden
-        className="absolute top-0 left-0 w-full pointer-events-none"
-        style={{ transform: "translateY(-99%)", lineHeight: 0 }}
-      >
-        <svg
-          viewBox="0 0 1440 120"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-full h-[60px] sm:h-[80px]"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M0 0 C 480 110, 960 110, 1440 0 L 1440 120 L 0 120 Z"
-            fill="currentColor"
-            className="text-background"
-          />
-        </svg>
-      </div>
+        className="absolute top-0 left-0 w-full bg-background pointer-events-none"
+        style={{
+          height: "120px",
+          borderRadius: "0 0 50% 50% / 0 0 80px 80px",
+        }}
+      />
 
-      <div className="relative z-10 mx-auto max-w-[1280px] px-[5%] sm:px-[6%] pt-24 sm:pt-32 pb-20 sm:pb-24">
+      <div className="relative z-10 mx-auto max-w-[1280px] px-[5%] sm:px-[6%] pt-[140px] sm:pt-[120px] pb-20 sm:pb-24">
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start">
           {/* Left column */}
           <motion.div
