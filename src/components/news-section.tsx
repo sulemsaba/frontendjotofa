@@ -67,7 +67,7 @@ export function NewsSection() {
           </p>
         </ScrollReveal>
 
-        {/* Compact news grid — 3 columns on desktop */}
+        {/* Compact news grid   3 columns on desktop */}
         <StaggerContainer
           className="grid md:grid-cols-3 gap-6"
           staggerDelay={0.1}

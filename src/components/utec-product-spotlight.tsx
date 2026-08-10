@@ -26,11 +26,11 @@ interface FeaturedProduct {
 }
 
 /**
- * Level 1 (pre-admin) curated spotlight — REAL products from the UTEC store.
+ * Level 1 (pre-admin) curated spotlight   REAL products from the UTEC store.
  *
  * "For now" (until the admin/CMS backend ships) these three Motorola MOTOTRBO
  * radios are hardcoded with their REAL images (served locally from /public so
- * they always render — the store's image URLs use a flaky ../shared_utils path
+ * they always render   the store's image URLs use a flaky ../shared_utils path
  * with spaces), REAL USD prices, and REAL deep-links to each product page on
  * the store. When the admin backend is ready, replace this constant with a
  * fetch from the managed spotlight table; the component below stays the same.
@@ -192,7 +192,7 @@ function SpotlightCard({
           featured ? "md:z-10" : ""
         }`}
       >
-        {/* ───────── UPPER PART — product image, pierces ABOVE the box on desktop ─────────
+        {/* ───────── UPPER PART   product image, pierces ABOVE the box on desktop ─────────
             On mobile the image is in normal flow (no pierce). On md+ it is absolutely
             positioned with a negative top so it breaks out above the box's top border
             (the "outside the box" upper part). The featured (middle) card pierces higher.
@@ -209,7 +209,7 @@ function SpotlightCard({
               : `md:-top-[120px] ring-border ${accent.groupHoverRing} group-hover:shadow-xl`
           } group-hover:-translate-y-1`}
         >
-          {/* Image area — fixed height so the pierce math is predictable */}
+          {/* Image area   fixed height so the pierce math is predictable */}
           <div className="relative h-[260px] sm:h-[300px] md:h-[300px] lg:h-[340px] w-full">
             <Image
               src={product.image}
@@ -244,7 +244,7 @@ function SpotlightCard({
           </span>
         </a>
 
-        {/* ───────── LOWER PART — info + editorial comment, INSIDE the box ───────── */}
+        {/* ───────── LOWER PART   info + editorial comment, INSIDE the box ───────── */}
         <div className="flex flex-col flex-1 mt-5 md:mt-0">
           <h3
             className="text-base sm:text-lg font-semibold text-foreground leading-snug line-clamp-2 mb-2 min-h-[2.75rem]"
@@ -261,11 +261,11 @@ function SpotlightCard({
                 <span className="text-sm text-muted-foreground line-through">{origin}</span>
               </>
             ) : (
-              <span className="text-xl font-bold text-foreground">{origin ?? "—"}</span>
+              <span className="text-xl font-bold text-foreground">{origin ?? " "}</span>
             )}
           </div>
 
-          {/* Editorial comment — plain text, no quote styling */}
+          {/* Editorial comment   plain text, no quote styling */}
           <div className={`relative rounded-xl ${accent.soft} ${accent.border} border p-3.5 mb-4`}>
             <p className="text-[13px] leading-relaxed text-muted-foreground">
               {slot.comment}
@@ -311,7 +311,7 @@ export function UtecProductSpotlight() {
             Product <span className="text-utec-cyan">Spotlight</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            A hand-picked selection from the UTEC Solutions online store — each
+            A hand-picked selection from the UTEC Solutions online store   each
             product framed with an editorial take from our team. Click any item to
             view full details and purchase on the store.
           </p>
@@ -321,7 +321,7 @@ export function UtecProductSpotlight() {
             Product IMAGES (upper part) pierce ABOVE the box's top border on desktop
             ("outside the box"); the LOWER part of the box holds every product's info
             (name, price, editorial comment, deep-link CTA). The middle card is the
-            featured "Editor's Choice" — it breaks out higher, with an accent ring,
+            featured "Editor's Choice"   it breaks out higher, with an accent ring,
             shadow, and slight scale. */}
         <div className="relative">
           {/* Soft glow behind the featured (middle) card */}

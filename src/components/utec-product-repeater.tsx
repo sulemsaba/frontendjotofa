@@ -135,7 +135,7 @@ function CatalogCard({
                 <span className="text-xs text-muted-foreground line-through">{origin}</span>
               </>
             ) : (
-              <span className="text-base font-bold text-foreground">{origin ?? "—"}</span>
+              <span className="text-base font-bold text-foreground">{origin ?? " "}</span>
             )}
           </div>
         </div>
@@ -210,7 +210,7 @@ export function UtecProductRepeater() {
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Real products, live prices, straight from the UTEC Solutions store.
-            Browse by category — each item links to its store page for full specs
+            Browse by category   each item links to its store page for full specs
             and purchase.
           </p>
         </ScrollReveal>

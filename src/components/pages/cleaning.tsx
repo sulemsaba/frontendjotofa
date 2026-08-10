@@ -57,7 +57,7 @@ export function CleaningPage() {
 
           <ScrollReveal delay={0.2}>
             <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-2xl mb-10">
-              Premium cleaning and housekeeping services for commercial, residential, and industrial spaces —
+              Premium cleaning and housekeeping services for commercial, residential, and industrial spaces  
               ensuring hygiene, health, and pristine environments every time.
             </p>
           </ScrollReveal>
@@ -106,7 +106,7 @@ export function CleaningPage() {
       <Testimonials
         eyebrow="Cleaning Client Stories"
         title={<>What Our <span className="text-jotofa-accent">Cleaning Clients Say</span></>}
-        subtitle="From office towers to lodges — why organizations across Tanzania choose JOTOFA Cleaning & Maids."
+        subtitle="From office towers to lodges   why organizations across Tanzania choose JOTOFA Cleaning & Maids."
         accent="text-cleaning-green"
         accentBg="bg-cleaning-green/10"
         accentBorder="border-cleaning-green/20"

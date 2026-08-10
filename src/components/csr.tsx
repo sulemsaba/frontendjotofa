@@ -152,7 +152,7 @@ export function CSR() {
           <div className="text-center p-8 sm:p-12 rounded-2xl border border-jotofa-accent/10 bg-jotofa-accent/[0.02]">
             <p className="text-lg sm:text-xl text-foreground/80 font-medium max-w-3xl mx-auto leading-relaxed">
               &ldquo;At JOTOFA GROUP, we don&apos;t just do business in
-              Tanzania — we invest in its people, its health, and its
+              Tanzania   we invest in its people, its health, and its
               environment. Our growth is intertwined with the prosperity of
               the communities we serve.&rdquo;
             </p>

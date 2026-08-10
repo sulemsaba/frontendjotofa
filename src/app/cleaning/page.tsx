@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     title: "Cleaning & Facility Management | JOTOFA GROUP",
     description:
       "Professional cleaning, janitorial, and facility management services for commercial and residential clients across Tanzania.",
-    images: [{ url: "/images/cleaning.webp", width: 1200, height: 630, alt: "JOTOFA Cleaning — Facility Management" }],
+    images: [{ url: "/images/cleaning.webp", width: 1200, height: 630, alt: "JOTOFA Cleaning   Facility Management" }],
   },
 };
 

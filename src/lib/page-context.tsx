@@ -71,7 +71,7 @@ function pathnameToPageId(pathname: string | null): PageId {
 export function PageProvider({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
-  // activePage is DERIVED from the pathname — always in sync with the URL,
+  // activePage is DERIVED from the pathname   always in sync with the URL,
   // no state/effect needed (works for nav clicks, back/forward, deep links).
   const activePage = pathnameToPageId(pathname);
   const [navigating, setNavigating] = useState(false);
@@ -107,7 +107,7 @@ export function PageProvider({ children }: { children: ReactNode }) {
   // the FIRST click to any nav item is instant (no 700–1700ms dev compile
   // wait). Uses requestIdleCallback with a fallback to setTimeout. Runs
   // only once per page mount. In production these are already pre-built,
-  // so this is mostly a dev-mode win — but it also warms the RSC cache.
+  // so this is mostly a dev-mode win   but it also warms the RSC cache.
   useEffect(() => {
     if (typeof window === "undefined") return;
     const allPages: PageId[] = [

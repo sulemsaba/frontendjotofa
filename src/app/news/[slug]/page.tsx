@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       };
     }
   } catch { /* fall through to default */ }
-  return { title: "Article — JOTOFA GROUP" };
+  return { title: "Article   JOTOFA GROUP" };
 }
 
 // ─── Server-rendered page ───

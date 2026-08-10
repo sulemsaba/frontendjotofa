@@ -4,11 +4,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import { usePage } from "@/lib/page-context";
 
 /* ──────────────────────────────────────────────────────────────────────────
-   RouteProgress — slim top loading bar that gives INSTANT feedback on nav
+   RouteProgress   slim top loading bar that gives INSTANT feedback on nav
    clicks and completes when the new route lands.
 
    Driven entirely by the `navigating` flag from page-context (set true on
-   click, cleared when the pathname changes). No manual timers/state —
+   click, cleared when the pathname changes). No manual timers/state  
    framer-motion handles the trickle + completion sweep.
 
    Behaviour:
@@ -17,7 +17,7 @@ import { usePage } from "@/lib/page-context";
    • navigating → false (route landed): bar sweeps to 100% and fades out
      over 0.2s.
 
-   The short trickle keeps the bar from lingering — if a route is slow the
+   The short trickle keeps the bar from lingering   if a route is slow the
    bar still holds near 90% (implying progress) but doesn't feel stalled.
    ────────────────────────────────────────────────────────────────────────── */
 

@@ -105,7 +105,7 @@ export function Strategy() {
             <span className="text-jotofa-accent">Objectives</span>
           </h2>
           <p className="mx-auto max-w-2xl text-muted-foreground text-lg">
-            Our roadmap for growth, impact, and sustainable value creation —
+            Our roadmap for growth, impact, and sustainable value creation  
             guiding every decision and investment across the group.
           </p>
         </ScrollReveal>
@@ -143,7 +143,7 @@ export function Strategy() {
                   Our Core Values
                 </h3>
                 <p className="text-muted-foreground max-w-xl mx-auto">
-                  The principles that define who we are and how we operate —
+                  The principles that define who we are and how we operate  
                   non-negotiable foundations of the JOTOFA culture.
                 </p>
               </div>

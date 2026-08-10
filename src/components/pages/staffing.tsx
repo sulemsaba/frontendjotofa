@@ -57,7 +57,7 @@ export function StaffingPage() {
 
           <ScrollReveal delay={0.2}>
             <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-2xl mb-10">
-              Connecting talent with opportunity — providing skilled and semi-skilled labour supply,
+              Connecting talent with opportunity   providing skilled and semi-skilled labour supply,
               recruitment, and workforce management solutions for industries across Tanzania.
             </p>
           </ScrollReveal>

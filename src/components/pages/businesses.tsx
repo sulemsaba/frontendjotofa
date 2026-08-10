@@ -26,7 +26,7 @@ import { PageId, usePage } from "@/lib/page-context";
 import { storeProductsPageUrl } from "@/lib/store-config";
 
 /* ──────────────────────────────────────────────────────────────────────────
-   Accent color tokens — each subsidiary has its own brand accent used for
+   Accent color tokens   each subsidiary has its own brand accent used for
    sector badges, service check icons, and hover/border states.
    Static class strings so Tailwind can statically extract them.
    ────────────────────────────────────────────────────────────────────────── */
@@ -65,11 +65,11 @@ const accentClasses: Record<
 };
 
 /* ──────────────────────────────────────────────────────────────────────────
-   "Our Businesses" — premium holding-company directory page.
+   "Our Businesses"   premium holding-company directory page.
 
    Layout (top → bottom):
-     1. Hero banner    — bold headline "Diversified Expertise. Shared Values."
-     2. Split sections — 5 full-width split-screen sections, one per subsidiary.
+     1. Hero banner      bold headline "Diversified Expertise. Shared Values."
+     2. Split sections   5 full-width split-screen sections, one per subsidiary.
                          Each section alternates image left / right and contains:
                          • full-bleed photograph with navy brand overlay
                          • giant watermark index number (01–05)
@@ -77,12 +77,12 @@ const accentClasses: Record<
                          • tagline pill + sector badges
                          • concise two-sentence value proposition
                          • 2-column services grid
-                         • high-contrast primary CTA — "Visit Website"
+                         • high-contrast primary CTA   "Visit Website"
                            (UTEC store) or "Explore Entity" (internal route)
-     3. Group impact   — massive aggregate data counters band (5+ Subsidiaries,
+     3. Group impact     massive aggregate data counters band (5+ Subsidiaries,
                          12,000+ Employees, 50+ Global Offices, 25+ Years) with
                          scroll-triggered count-up animation
-     4. Footer         — already global; CTA band at top captures investor /
+     4. Footer           already global; CTA band at top captures investor /
                          partner / job-seeker inquiries
 
    Brand palette ONLY: JOTOFA navy + teal. Theme-aware (light + dark).
@@ -90,7 +90,7 @@ const accentClasses: Record<
 
 interface Business {
   id: PageId;
-  /** "01" – "05" — used as the big watermark number */
+  /** "01" – "05"   used as the big watermark number */
   index: string;
   name: string;
   /** Short sector tagline, e.g. "ICT & Telecommunications" */
@@ -104,7 +104,7 @@ interface Business {
   icon: React.ComponentType<{ className?: string }>;
   /** Full-bleed photograph for the split-section image side */
   image: string;
-  /** Real logo — if absent, falls back to a styled monogram mark */
+  /** Real logo   if absent, falls back to a styled monogram mark */
   logoSrc?: string;
   /** 2-letter monogram used when no real logo asset exists */
   logoMark: string;
@@ -203,7 +203,7 @@ const businesses: Business[] = [
 ];
 
 /* ──────────────────────────────────────────────────────────────────────────
-   Counter — scroll-triggered count-up animation.
+   Counter   scroll-triggered count-up animation.
    Animates from 0 → target the first time it scrolls into view.
    ────────────────────────────────────────────────────────────────────────── */
 function Counter({
@@ -256,7 +256,7 @@ function BusinessesHero() {
             </span>
           </div>
 
-          {/* Bold headline — "Diversified Expertise. Shared Values." */}
+          {/* Bold headline   "Diversified Expertise. Shared Values." */}
           <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight text-jotofa-navy dark:text-white leading-[1.05] mb-6">
             Diversified Expertise.
             <br />
@@ -266,7 +266,7 @@ function BusinessesHero() {
           {/* Mission subtitle */}
           <p className="mx-auto max-w-2xl text-base sm:text-lg text-jotofa-text-secondary dark:text-white/75 leading-relaxed mb-10">
             JOTOFA Group unites five specialized subsidiaries under one
-            corporate umbrella — each an independent leader in its sector, all
+            corporate umbrella   each an independent leader in its sector, all
             bound by the same commitment to quality, integrity, and lasting
             impact across Tanzania and East Africa.
           </p>
@@ -298,7 +298,7 @@ function BusinessesHero() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   2. SPLIT-SCREEN STACKED SECTIONS — one full-width section per subsidiary.
+   2. SPLIT-SCREEN STACKED SECTIONS   one full-width section per subsidiary.
       Each section alternates image left / right (even = image left, odd = right)
       and gives every subsidiary its own immersive "moment" with a full-bleed
       photograph, giant watermark index, logo tile, services grid, and CTA.
@@ -335,7 +335,7 @@ function SplitSection({
           sizes="(max-width: 1024px) 100vw, 50vw"
           className="object-cover transition-transform duration-[1.2s] ease-out group-hover/img:scale-105"
         />
-        {/* Navy brand overlay — keeps every section on-palette */}
+        {/* Navy brand overlay   keeps every section on-palette */}
         <div className="absolute inset-0 bg-gradient-to-br from-jotofa-navy-deep/92 via-jotofa-navy/80 to-jotofa-navy/65" />
         {/* Teal glow accent */}
         <div className="absolute -top-24 -right-24 w-72 h-72 bg-jotofa-accent/20 rounded-full blur-[100px] pointer-events-none" />
@@ -347,7 +347,7 @@ function SplitSection({
           </span>
         </div>
 
-        {/* Logo tile — top-left */}
+        {/* Logo tile   top-left */}
         <div className="absolute top-6 left-6 sm:top-8 sm:left-8 z-10">
           <div className="flex items-center justify-center h-14 w-14 rounded-xl bg-white border border-white/20 shadow-lg overflow-hidden">
             {business.logoSrc ? (
@@ -366,7 +366,7 @@ function SplitSection({
           </div>
         </div>
 
-        {/* Tagline pill — bottom-left */}
+        {/* Tagline pill   bottom-left */}
         <div className="absolute bottom-6 left-6 sm:bottom-8 sm:left-8 z-10">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md">
             <Icon className="w-3.5 h-3.5 text-jotofa-accent-light" />
@@ -383,7 +383,7 @@ function SplitSection({
           reversed ? "lg:order-1" : ""
         }`}
       >
-        {/* Faint watermark number — top right */}
+        {/* Faint watermark number   top right */}
         <span
           aria-hidden
           className="absolute top-4 right-6 sm:top-6 sm:right-10 text-[100px] sm:text-[140px] lg:text-[160px] font-black text-jotofa-navy/[0.04] dark:text-white/[0.04] leading-none select-none pointer-events-none"
@@ -392,7 +392,7 @@ function SplitSection({
         </span>
 
         <div className="relative z-10 max-w-xl mx-auto lg:mx-0 w-full">
-          {/* Sector badges — each pill uses the subsidiary's accent color */}
+          {/* Sector badges   each pill uses the subsidiary's accent color */}
           <div className="flex flex-wrap gap-1.5 mb-5">
             {business.sectors.map((sector) => {
               const a = accentClasses[business.accent];
@@ -417,7 +417,7 @@ function SplitSection({
             {business.description}
           </p>
 
-          {/* Services grid — 2 columns with accent-colored check icons */}
+          {/* Services grid   2 columns with accent-colored check icons */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-9">
             {business.services.map((service) => {
               const a = accentClasses[business.accent];
@@ -435,7 +435,7 @@ function SplitSection({
             })}
           </div>
 
-          {/* CTA row — primary "Explore Entity" + optional secondary "Visit Website" link */}
+          {/* CTA row   primary "Explore Entity" + optional secondary "Visit Website" link */}
           <div className="flex flex-wrap items-center gap-3">
             <button
               onClick={() => router.push(`/${business.id}`)}
@@ -476,7 +476,7 @@ function SplitSections() {
         </p>
       </ScrollReveal>
 
-      {/* Split-screen stacked sections — each subsidiary gets a full-width
+      {/* Split-screen stacked sections   each subsidiary gets a full-width
           immersive split section. */}
       <div className="border-t border-border">
         {businesses.map((business, index) => (
@@ -492,7 +492,7 @@ function SplitSections() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   3. GROUP IMPACT — massive aggregate data counters band
+   3. GROUP IMPACT   massive aggregate data counters band
    ────────────────────────────────────────────────────────────────────────── */
 interface ImpactStat {
   icon: React.ComponentType<{ className?: string }>;
@@ -561,7 +561,7 @@ function GroupImpact() {
             <span className="text-jotofa-accent">JOTOFA Group</span>
           </h2>
           <p className="mx-auto max-w-2xl text-white/70 text-lg">
-            Five subsidiaries working as one — the aggregate reach of our
+            Five subsidiaries working as one   the aggregate reach of our
             combined operations across Tanzania and East Africa.
           </p>
         </ScrollReveal>
@@ -580,7 +580,7 @@ function GroupImpact() {
                   <div className="inline-flex items-center justify-center h-12 w-12 rounded-xl bg-jotofa-accent/15 text-jotofa-accent mb-4">
                     <Icon className="w-5 h-5" />
                   </div>
-                  {/* Big number — count-up animation */}
+                  {/* Big number   count-up animation */}
                   <div className="text-4xl sm:text-5xl font-black text-white tracking-tight mb-2 tabular-nums">
                     <Counter to={stat.value} suffix={stat.suffix} />
                   </div>
@@ -603,7 +603,7 @@ function GroupImpact() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   4. CONTACT CTA — closing call-to-action band that routes visitors to the
+   4. CONTACT CTA   closing call-to-action band that routes visitors to the
       contact page. Reinforces the group's cross-sector value proposition.
    ────────────────────────────────────────────────────────────────────────── */
 function ContactCTA() {
@@ -617,7 +617,7 @@ function ContactCTA() {
           <span className="text-jotofa-accent">Let&rsquo;s talk.</span>
         </h2>
         <p className="lead mb-8 max-w-xl mx-auto">
-          From ICT to security, logistics to staffing — JOTOFA Group delivers
+          From ICT to security, logistics to staffing   JOTOFA Group delivers
           excellence under one trusted roof.
         </p>
         <button
@@ -633,7 +633,7 @@ function ContactCTA() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   Page — composes Hero + Split Sections + Group Impact + Contact CTA.
+   Page   composes Hero + Split Sections + Group Impact + Contact CTA.
    (Footer is rendered globally by the page shell.)
    ────────────────────────────────────────────────────────────────────────── */
 export function BusinessesPage() {

@@ -123,11 +123,11 @@ function generateArticleContent(article: NewsArticle): {
     "JOTOFA GROUP Expands into East African Markets": {
       lead: "In a landmark strategic move, JOTOFA GROUP has officially launched operations in Kenya and Uganda, marking the group's first expansion beyond Tanzania's borders and signaling a new era of cross-border growth across East Africa.",
       paragraphs: [
-        "The expansion, which has been in development for over 18 months, encompasses the full spectrum of JOTOFA's subsidiary operations — from ICT infrastructure deployment through UTEC Solutions to logistics and courier services via JOTOFA Courier. Initial investment exceeds $12 million, with plans to scale operations significantly over the next three years.",
+        "The expansion, which has been in development for over 18 months, encompasses the full spectrum of JOTOFA's subsidiary operations   from ICT infrastructure deployment through UTEC Solutions to logistics and courier services via JOTOFA Courier. Initial investment exceeds $12 million, with plans to scale operations significantly over the next three years.",
         "The Kenyan operations will be headquartered in Nairobi's Kilimani district, with satellite offices planned for Mombasa and Kisumu. In Uganda, the primary base of operations will be in Kampala, with secondary hubs in Jinja and Entebbe. Both operations are expected to create over 200 direct employment opportunities in their first year, with additional indirect jobs through partner networks and supply chains.",
         "Industry analysts have praised the move as well-timed, noting that both Kenya and Uganda are experiencing rapid digital transformation coupled with growing demand for reliable logistics infrastructure. The East African Community's push for greater economic integration, including streamlined customs procedures and harmonized trade regulations, further supports the viability of cross-border service delivery models like JOTOFA's.",
       ],
-      pullQuote: "Our entry into Kenya and Uganda is not merely geographic expansion — it is a commitment to building integrated, technology-driven solutions that serve businesses and communities across borders.",
+      pullQuote: "Our entry into Kenya and Uganda is not merely geographic expansion   it is a commitment to building integrated, technology-driven solutions that serve businesses and communities across borders.",
       pullQuoteAuthor: "JOTOFA GROUP CEO",
       subheading1: "Strategic Infrastructure Investment",
       subheading2: "Regional Growth Framework",
@@ -153,7 +153,7 @@ function generateArticleContent(article: NewsArticle): {
         "The public Wi-Fi component alone has already connected over 50,000 unique devices in its first month of operation, providing free high-speed internet access at 120 hotspot locations. The digital service kiosks offer residents access to government services, payment platforms, and health information without the need for personal internet connectivity, bridging the digital divide for underserved communities.",
         "Early results from pilot zones have shown a 23% reduction in average commute times and a 31% decrease in intersection congestion during peak hours, demonstrating the measurable impact of smart city infrastructure on daily life in Tanzania's commercial capital.",
       ],
-      pullQuote: "When a mother can get to the hospital faster, when a business can rely on predictable delivery times, when students can access free Wi-Fi — that is when smart city infrastructure truly delivers on its promise.",
+      pullQuote: "When a mother can get to the hospital faster, when a business can rely on predictable delivery times, when students can access free Wi-Fi   that is when smart city infrastructure truly delivers on its promise.",
       pullQuoteAuthor: "UTEC Solutions Managing Director",
       subheading1: "UrbanFlow Platform in Action",
       subheading2: "Digital Inclusion Initiatives",
@@ -176,10 +176,10 @@ function generateArticleContent(article: NewsArticle): {
       lead: "JOTOFA GROUP's environmental stewardship program has reached a significant milestone with the planting of over 2,000 trees across three regions in Tanzania, underscoring the group's commitment to sustainable operations and community-driven reforestation.",
       paragraphs: [
         "The Green JOTOFA Initiative, launched in early 2023, set out with an ambitious target of planting 5,000 trees within three years. Reaching the 2,000-tree mark ahead of schedule has galvanized the organization and its partners, with the program now on track to exceed its original goal by the end of 2025. Reforestation sites span the Morogoro, Tanga, and Pwani regions, each selected for their ecological significance and community needs.",
-        "More than 15 indigenous species have been planted, including miombo brachystegia, african teak, and red mahogany — species chosen for their carbon sequestration capacity, soil stabilization properties, and long-term economic value for local communities. The initiative has partnered with three local universities for ongoing monitoring and research, ensuring that survival rates and ecological impact are rigorously tracked.",
+        "More than 15 indigenous species have been planted, including miombo brachystegia, african teak, and red mahogany   species chosen for their carbon sequestration capacity, soil stabilization properties, and long-term economic value for local communities. The initiative has partnered with three local universities for ongoing monitoring and research, ensuring that survival rates and ecological impact are rigorously tracked.",
         "The program has also created economic opportunities for participating communities, employing over 120 local residents as tree nursery managers, planting crews, and maintenance workers. A community-managed fruit tree component provides sustainable food sources and potential income through harvest sales, ensuring the reforestation effort delivers both environmental and economic returns.",
       ],
-      pullQuote: "Environmental responsibility is not a peripheral CSR activity for JOTOFA — it is embedded in how we do business.",
+      pullQuote: "Environmental responsibility is not a peripheral CSR activity for JOTOFA   it is embedded in how we do business.",
       pullQuoteAuthor: "Head of Sustainability, JOTOFA GROUP",
       subheading1: "Community-Centered Reforestation",
       subheading2: "Sustainable Impact Goals",
@@ -201,11 +201,11 @@ function generateArticleContent(article: NewsArticle): {
     "Digital Transformation Across All Subsidiaries": {
       lead: "JOTOFA GROUP has embarked on a comprehensive digital transformation journey, investing in end-to-end platforms that integrate operations across all five subsidiaries under a unified technology architecture.",
       paragraphs: [
-        "The multi-year initiative, budgeted at approximately $15 million, encompasses cloud migration, enterprise resource planning, real-time analytics, and customer-facing digital platforms. The transformation touches every aspect of the group's operations — from GPS-enabled fleet tracking at JOTOFA Courier to automated scheduling systems at JOTOFA Cleaning, and from biometric access control at JOTOFA Security to digital recruitment pipelines at JOTOFA Staffing.",
-        "Central to the transformation is the JOTOFA Digital Core — a shared services platform built on modern cloud infrastructure that provides common capabilities including identity management, financial reporting, HR administration, and data analytics. By consolidating these functions, the group expects to reduce operational costs by 18% while improving data-driven decision-making across all business units.",
+        "The multi-year initiative, budgeted at approximately $15 million, encompasses cloud migration, enterprise resource planning, real-time analytics, and customer-facing digital platforms. The transformation touches every aspect of the group's operations   from GPS-enabled fleet tracking at JOTOFA Courier to automated scheduling systems at JOTOFA Cleaning, and from biometric access control at JOTOFA Security to digital recruitment pipelines at JOTOFA Staffing.",
+        "Central to the transformation is the JOTOFA Digital Core   a shared services platform built on modern cloud infrastructure that provides common capabilities including identity management, financial reporting, HR administration, and data analytics. By consolidating these functions, the group expects to reduce operational costs by 18% while improving data-driven decision-making across all business units.",
         "The transformation also includes a significant upskilling component, with over 300 employees enrolled in digital literacy and specialized technology training programs. Partnerships with global technology providers ensure access to cutting-edge tools, while local tech talent is being cultivated through internship programs and university collaborations, creating a sustainable pipeline of digital skills within the organization.",
       ],
-      pullQuote: "When a client engages with any part of our group, they should experience the same level of digital sophistication, responsiveness, and reliability — regardless of which subsidiary they are working with.",
+      pullQuote: "When a client engages with any part of our group, they should experience the same level of digital sophistication, responsiveness, and reliability   regardless of which subsidiary they are working with.",
       pullQuoteAuthor: "Group CTO, JOTOFA GROUP",
       subheading1: "The JOTOFA Digital Core",
       subheading2: "Technology Integration Roadmap",
@@ -225,10 +225,10 @@ function generateArticleContent(article: NewsArticle): {
       ],
     },
     "JOTOFA Courier Launches Same-Day Delivery in Dar es Salaam": {
-      lead: "JOTOFA Courier has introduced same-day delivery services across the Dar es Salaam metropolitan area, promising pickup-to-delivery completion within six hours for businesses and individuals — a first for Tanzania's logistics sector.",
+      lead: "JOTOFA Courier has introduced same-day delivery services across the Dar es Salaam metropolitan area, promising pickup-to-delivery completion within six hours for businesses and individuals   a first for Tanzania's logistics sector.",
       paragraphs: [
         "The express service leverages JOTOFA Courier's existing fleet of 85 vehicles, augmented by a newly acquired fleet of 30 electric motorcycles for rapid urban delivery. Orders placed before 10:00 AM are guaranteed delivery by 4:00 PM the same day, with real-time tracking available through the JOTOFA Courier mobile application and web portal.",
-        "Pricing for the same-day service starts at TZS 8,000 for packages up to 5kg within Zone 1 (central business district), with tiered pricing for heavier items and outlying zones. Early adopters include e-commerce platforms, pharmaceutical distributors, and legal firms requiring time-sensitive document delivery — segments that have historically relied on informal courier networks with unpredictable service levels.",
+        "Pricing for the same-day service starts at TZS 8,000 for packages up to 5kg within Zone 1 (central business district), with tiered pricing for heavier items and outlying zones. Early adopters include e-commerce platforms, pharmaceutical distributors, and legal firms requiring time-sensitive document delivery   segments that have historically relied on informal courier networks with unpredictable service levels.",
         "The service launch is supported by three newly established micro-hub facilities in Kariakoo, Mikocheni, and Kigamboni, serving as sorting and redistribution points that reduce last-mile delivery times. JOTOFA Courier plans to extend the same-day service to Arusha and Mwanza by Q3 2025, with eventual rollout to all major urban centers in Tanzania.",
       ],
       pullQuote: "Dar es Salaam is a city of over six million people where businesses lose billions annually to unreliable logistics. Our same-day service is designed to eliminate that uncertainty.",
@@ -253,11 +253,11 @@ function generateArticleContent(article: NewsArticle): {
     "JOTOFA GROUP Achieves ISO 9001 Certification": {
       lead: "JOTOFA GROUP has been awarded ISO 9001:2015 certification, the internationally recognized standard for quality management systems, validating the group's commitment to operational excellence and continuous improvement across all subsidiaries.",
       paragraphs: [
-        "The certification, issued by Bureau Veritas following an extensive eight-month audit process, covers the group's headquarters and all five subsidiary operations. The audit evaluated processes ranging from service delivery and customer satisfaction measurement to internal communication, document control, and corrective action procedures — with JOTOFA meeting or exceeding all requirements on the first assessment.",
+        "The certification, issued by Bureau Veritas following an extensive eight-month audit process, covers the group's headquarters and all five subsidiary operations. The audit evaluated processes ranging from service delivery and customer satisfaction measurement to internal communication, document control, and corrective action procedures   with JOTOFA meeting or exceeding all requirements on the first assessment.",
         "The certification process involved training over 150 staff members as internal quality auditors, establishing standardized quality management procedures across all subsidiaries, and implementing a digital document management system that ensures real-time compliance tracking. Monthly management reviews and quarterly internal audits create a self-reinforcing cycle of quality improvement.",
         "For JOTOFA's clients, particularly those in regulated industries such as financial services and healthcare, the ISO 9001 certification provides an additional layer of assurance when selecting service providers. The certification is expected to open doors to new corporate and institutional clients who mandate ISO compliance in their vendor qualification processes.",
       ],
-      pullQuote: "This is not simply a certificate on the wall — it represents a fundamental operational discipline that ensures every service we deliver is held to the highest international standards.",
+      pullQuote: "This is not simply a certificate on the wall   it represents a fundamental operational discipline that ensures every service we deliver is held to the highest international standards.",
       pullQuoteAuthor: "Group Quality Assurance Director",
       subheading1: "A Culture of Continuous Improvement",
       subheading2: "Quality Management Systems",
@@ -280,10 +280,10 @@ function generateArticleContent(article: NewsArticle): {
       lead: "UTEC Solutions has entered into a strategic partnership with the Tanzania Communications Regulatory Authority (TCRA) to accelerate the deployment of 5G infrastructure across Tanzania's major urban centers, with pilot deployments expected to begin in Q2 2025.",
       paragraphs: [
         "The partnership positions UTEC Solutions as a key infrastructure provider in Tanzania's 5G rollout strategy, combining UTEC's expertise in telecommunications engineering with TCRA's regulatory framework and spectrum management capabilities. Initial pilot deployments will target Dar es Salaam, Arusha, and Dodoma, with coverage expected to reach 40% of Tanzania's urban population by 2027.",
-        "The technical deployment plan calls for the installation of over 600 small cell nodes and 150 macro cell sites in the first phase, utilizing a combination of existing tower infrastructure and new purpose-built installations. UTEC's proprietary network management platform will provide real-time performance monitoring, predictive maintenance alerts, and automated optimization — ensuring consistent service quality as the network scales.",
+        "The technical deployment plan calls for the installation of over 600 small cell nodes and 150 macro cell sites in the first phase, utilizing a combination of existing tower infrastructure and new purpose-built installations. UTEC's proprietary network management platform will provide real-time performance monitoring, predictive maintenance alerts, and automated optimization   ensuring consistent service quality as the network scales.",
         "A significant component of the partnership focuses on digital inclusion, with plans to establish 5G-enabled community digital centers in underserved neighborhoods. These centers will provide free access to high-speed internet, digital skills training, and e-government services, ensuring that the benefits of 5G connectivity extend beyond commercial applications to serve Tanzania's broader development goals.",
       ],
-      pullQuote: "5G is not just about faster download speeds — it is the foundation for Tanzania's industrial digital transformation.",
+      pullQuote: "5G is not just about faster download speeds   it is the foundation for Tanzania's industrial digital transformation.",
       pullQuoteAuthor: "Technical Director, UTEC Solutions",
       subheading1: "Building Tomorrow's Connectivity Today",
       subheading2: "Digital Inclusion Strategy",
@@ -654,7 +654,7 @@ export function NewsDetail({ article, relatedArticles, onBack, onArticleClick }:
       </div>
 
       {/* ═══════════════════════════════════════════════════════
-          CTA BANNER — Execora-style bottom section
+          CTA BANNER   Execora-style bottom section
           ═══════════════════════════════════════════════════════ */}
       <div className="mx-auto max-w-[1260px] px-4 sm:px-6 mb-12">
         <motion.div

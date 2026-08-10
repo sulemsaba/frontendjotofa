@@ -7,7 +7,7 @@ export function UnifyingExcellence() {
 
   return (
     <section className="relative w-full bg-jotofa-navy text-white overflow-hidden -mt-[60px]">
-      {/* Light curve at top — creates smooth transition from Hero above */}
+      {/* Light curve at top   creates smooth transition from Hero above */}
       <div
         aria-hidden
         className="absolute top-0 left-0 w-full bg-background pointer-events-none"
@@ -59,14 +59,14 @@ export function UnifyingExcellence() {
                 fontSize: "clamp(1.6rem, 3.2vw, 2.8rem)",
               }}
             >
-              ICT, logistics, cleaning, security, and staffing — five subsidiaries united under one group.
+              ICT, logistics, cleaning, security, and staffing   five subsidiaries united under one group.
             </h2>
             <div className="space-y-6 text-white/80 leading-[1.8]">
               <p className="text-base sm:text-lg">
-                We empower businesses and communities by uniting five specialized subsidiaries under one trusted roof. From telecommunications infrastructure to reliable courier services, professional cleaning, trained security, and skilled staffing — every service is built to drive real impact.
+                We empower businesses and communities by uniting five specialized subsidiaries under one trusted roof. From telecommunications infrastructure to reliable courier services, professional cleaning, trained security, and skilled staffing   every service is built to drive real impact.
               </p>
               <p className="text-base sm:text-lg">
-                The JOTOFA Group is committed to integrity, innovation, and excellence — building a stronger East Africa through collaboration and forward-thinking solutions.
+                The JOTOFA Group is committed to integrity, innovation, and excellence   building a stronger East Africa through collaboration and forward-thinking solutions.
               </p>
             </div>
           </div>

@@ -13,12 +13,12 @@ import {
 import { usePage } from "@/lib/page-context";
 
 /* ──────────────────────────────────────────────────────────────────────────
-   Hero — home page landing section.
+   Hero   home page landing section.
 
    PERFORMANCE NOTES:
    • Entry animations use CSS (.animate-fade-up) instead of framer-motion
-     initial/animate. CSS animations run on first paint — no JS hydration
-     wait — so the hero text is visible almost instantly.
+     initial/animate. CSS animations run on first paint   no JS hydration
+     wait   so the hero text is visible almost instantly.
    • framer-motion is kept ONLY for the slideshow crossfade (AnimatePresence),
      which is below the fold and non-critical for first paint.
    • All colors use design tokens (no raw hex). Typography uses the .h-display
@@ -166,10 +166,10 @@ export function Hero() {
           </div>
         </div>
 
-        {/* ════════════ LEFT COLUMN — Text + News Slider ════════════ */}
+        {/* ════════════ LEFT COLUMN   Text + News Slider ════════════ */}
         <div className="w-full lg:w-[45%] flex flex-col justify-between relative z-[2]">
           <div className="flex flex-col justify-center flex-1 px-8 sm:px-10 lg:px-[60px] pt-24 pb-6 lg:pt-[140px] lg:pb-0">
-            {/* Accent line — CSS animation, visible on first paint */}
+            {/* Accent line   CSS animation, visible on first paint */}
             <div className="h-[3px] w-20 bg-jotofa-accent mb-6 rounded-full animate-fade-up" style={{ boxShadow: "0 0 12px rgba(0, 169, 183, 0.4)" }} />
 
             <h1 className="mb-6 h-display animate-fade-up-delay-1">
@@ -183,7 +183,7 @@ export function Hero() {
 
             <p className="mb-8 lead text-jotofa-text-secondary dark:text-white/80 max-w-[450px] animate-fade-up-delay-2">
               A diversified Tanzanian holding company driving excellence through
-              ICT, logistics, professional services, security, and staffing —
+              ICT, logistics, professional services, security, and staffing  
               empowering communities and industries alike.
             </p>
 
@@ -266,7 +266,7 @@ export function Hero() {
           </div>
         </div>
 
-        {/* ════════════ RIGHT COLUMN — Vertical Image Ticker (Desktop) ════════════ */}
+        {/* ════════════ RIGHT COLUMN   Vertical Image Ticker (Desktop) ════════════ */}
         <div className="hidden lg:flex flex-1 relative h-full dark:bg-jotofa-navy-mid animate-fade-up-delay-2" aria-hidden>
           <div className="flex w-full h-full" style={{ gap: "12px", padding: "12px", paddingTop: "80px" }}>
             <TickerColumn images={tickerImagesCol1} paused={tickerPaused} reducedMotion={!!prefersReducedMotion} />

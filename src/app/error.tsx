@@ -30,7 +30,7 @@ export default function Error({
         </p>
         <button
           onClick={reset}
-          aria-label="Try again — reload the page"
+          aria-label="Try again   reload the page"
           className="px-6 py-2.5 bg-jotofa-accent text-white font-semibold rounded-full hover:bg-jotofa-accent-dark transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
           Try Again

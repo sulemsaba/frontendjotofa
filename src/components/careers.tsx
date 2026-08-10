@@ -110,7 +110,7 @@ const subsidiaryHeroData: Record<
   courier: {
     name: "Courier & Logistics",
     tagline:
-      "Delivering reliability — connecting businesses across Tanzania every day",
+      "Delivering reliability   connecting businesses across Tanzania every day",
     logo: "/images/courier.png",
     heroImage: "/images/jotofa-hero-3.jpeg",
     stats: [
@@ -146,7 +146,7 @@ const subsidiaryHeroData: Record<
   staffing: {
     name: "Staffing & Labour",
     tagline:
-      "Connecting talent with opportunity — powering Tanzania's workforce",
+      "Connecting talent with opportunity   powering Tanzania's workforce",
     logo: "/images/staffing.png",
     heroImage: "/images/jotofa-hero-3.jpeg",
     stats: [
@@ -480,7 +480,7 @@ export function Careers() {
       onClick={closeAllDropdowns}
     >
       {/* ═══════════════════════════════════════
-          1. HERO BANNER (max-w-6xl — wider than job list)
+          1. HERO BANNER (max-w-6xl   wider than job list)
           ═══════════════════════════════════════ */}
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-4">
         <div className="relative w-full h-[180px] sm:h-[220px] rounded-2xl overflow-hidden">
@@ -575,7 +575,7 @@ export function Careers() {
             })}
           </div>
         </div>
-        {/* Scroll hint gradient on right edge — mobile only */}
+        {/* Scroll hint gradient on right edge   mobile only */}
         <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white dark:from-jotofa-navy-deep to-transparent pointer-events-none sm:hidden" />
       </div>
 
@@ -761,7 +761,7 @@ export function Careers() {
       </div>
 
       {/* ═══════════════════════════════════════
-          5. JOB LISTINGS — Single container with rows
+          5. JOB LISTINGS   Single container with rows
           ═══════════════════════════════════════ */}
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 mt-6 mb-20 sm:mb-12">
         {isLoading ? (
@@ -798,7 +798,7 @@ export function Careers() {
               </p>
             </div>
 
-            {/* Job list — ONE container */}
+            {/* Job list   ONE container */}
             <div className="bg-white dark:bg-jotofa-navy-deep rounded-lg border border-border shadow-sm overflow-hidden">
               {paginatedJobs.map((job, jobIdx) => {
                 const isPreview = expandedJob === job.id;
@@ -889,7 +889,7 @@ export function Careers() {
                         </div>
                       </div>
 
-                      {/* Middle: Labeled info columns — Desktop */}
+                      {/* Middle: Labeled info columns   Desktop */}
                       <div className="hidden lg:grid lg:grid-cols-3 lg:gap-8 lg:flex-none">
                         {/* Location */}
                         <div>
@@ -920,7 +920,7 @@ export function Careers() {
                         </div>
                       </div>
 
-                      {/* Mobile: Labeled info — icon-based rows */}
+                      {/* Mobile: Labeled info   icon-based rows */}
                       <div className="lg:hidden flex flex-wrap items-center gap-x-4 gap-y-1 pl-7">
                         <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
                           <MapPin className="w-3 h-3 shrink-0" />
@@ -936,7 +936,7 @@ export function Careers() {
                         </span>
                       </div>
 
-                      {/* Right: Apply Now button — hidden when expanded (shown in expanded section instead) */}
+                      {/* Right: Apply Now button   hidden when expanded (shown in expanded section instead) */}
                       {!isExpanded && (
                         <div className="flex items-center gap-2 lg:shrink-0 lg:ml-6 pl-7 lg:pl-0 self-end lg:self-auto">
                           <button
@@ -956,7 +956,7 @@ export function Careers() {
                     {isPreview && !isFullExpanded && (
                       <div className="border-t border-border">
                         <div className="px-5 sm:px-6 py-4">
-                          {/* Description — truncated to 2 lines */}
+                          {/* Description   truncated to 2 lines */}
                           <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2 mb-4">
                             {job.description}
                           </p>
@@ -1229,7 +1229,7 @@ export function Careers() {
             </div>
 
             {/* ═══════════════════════════════════════
-                PAGINATION — Reyes Holdings style
+                PAGINATION   Reyes Holdings style
                 ═══════════════════════════════════════ */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-3 mt-6 pt-4 border-t border-border">
               {/* Items per page */}

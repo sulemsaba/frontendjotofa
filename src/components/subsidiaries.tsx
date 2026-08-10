@@ -20,7 +20,7 @@ import { usePage, PageId } from "@/lib/page-context";
 import { storeProductsPageUrl } from "@/lib/store-config";
 
 /* ──────────────────────────────────────────────────────────────────────────
-   Accent color tokens — each subsidiary has its own brand accent used for
+   Accent color tokens   each subsidiary has its own brand accent used for
    sector badges, service check icons, and hover/border states.
    Static class strings so Tailwind can statically extract them.
    ────────────────────────────────────────────────────────────────────────── */
@@ -59,10 +59,10 @@ const accentClasses: Record<
 };
 
 /* ──────────────────────────────────────────────────────────────────────────
-   "Five Arms, One Vision" — Home page subsidiaries section.
+   "Five Arms, One Vision"   Home page subsidiaries section.
 
    Redesigned as SPLIT-SCREEN STACKED CARDS to match the businesses page:
-   • Full-width alternating split sections — one image LEFT, next image RIGHT
+   • Full-width alternating split sections   one image LEFT, next image RIGHT
      ("one image look right, the other look left"), repeating down the page.
    • Image side: full-bleed photograph with navy brand overlay, giant
      watermark index number (01–05), logo tile, tagline pill.
@@ -77,7 +77,7 @@ const accentClasses: Record<
 
 interface Subsidiary {
   id: PageId;
-  /** "01" – "05" — used as the big watermark number */
+  /** "01" – "05"   used as the big watermark number */
   index: string;
   name: string;
   /** Short sector tagline, e.g. "ICT & Telecommunications" */
@@ -91,7 +91,7 @@ interface Subsidiary {
   icon: React.ComponentType<{ className?: string }>;
   /** Full-bleed photograph for the split-section image side */
   image: string;
-  /** Real logo — if absent, falls back to a styled monogram mark */
+  /** Real logo   if absent, falls back to a styled monogram mark */
   logoSrc?: string;
   /** 2-letter monogram used when no real logo asset exists */
   logoMark: string;
@@ -133,7 +133,7 @@ const subsidiaries: Subsidiary[] = [
     tagline: "Professional Cleaning",
     sectors: ["Facilities", "Hygiene", "Maintenance"],
     description:
-      "Premium cleaning and housekeeping for commercial, residential, and industrial spaces — ensuring hygiene and pristine environments every time.",
+      "Premium cleaning and housekeeping for commercial, residential, and industrial spaces   ensuring hygiene and pristine environments every time.",
     services: [
       "Commercial Cleaning",
       "Residential Services",
@@ -154,7 +154,7 @@ const subsidiaries: Subsidiary[] = [
     tagline: "Comprehensive Security",
     sectors: ["Security", "Surveillance", "Risk"],
     description:
-      "Robust security services from manned guarding to electronic surveillance — protecting people, assets, and operations with integrity and vigilance.",
+      "Robust security services from manned guarding to electronic surveillance   protecting people, assets, and operations with integrity and vigilance.",
     services: [
       "Manned Guarding",
       "Electronic Surveillance",
@@ -175,7 +175,7 @@ const subsidiaries: Subsidiary[] = [
     tagline: "Workforce Solutions",
     sectors: ["Recruitment", "HR", "Workforce"],
     description:
-      "Connecting talent with opportunity — skilled and semi-skilled labour supply, recruitment, and workforce management for industries across Tanzania.",
+      "Connecting talent with opportunity   skilled and semi-skilled labour supply, recruitment, and workforce management for industries across Tanzania.",
     services: [
       "Recruitment Services",
       "Labour Outsourcing",
@@ -192,7 +192,7 @@ const subsidiaries: Subsidiary[] = [
 ];
 
 /* ──────────────────────────────────────────────────────────────────────────
-   UtecShowcase — image carousel + tabbed content card for UTEC.
+   UtecShowcase   image carousel + tabbed content card for UTEC.
    ────────────────────────────────────────────────────────────────────────── */
 
 const utecSlides = [
@@ -231,7 +231,7 @@ const utecSlides = [
     tab: "IT & ICT",
     heading: "Power Your Business with Modern Tech",
     description:
-      "Downtime costs money. We build reliable IT infrastructure that keeps your team productive and your data secure — from networking hardware to cloud migration.",
+      "Downtime costs money. We build reliable IT infrastructure that keeps your team productive and your data secure   from networking hardware to cloud migration.",
     benefits: [
       "Boost productivity with enterprise laptops, desktops, and peripherals built for heavy workloads",
       "Zero downtime networking with professional design, switches, and structured cabling",
@@ -262,7 +262,7 @@ const cleaningSlides = [
     tab: "Commercial",
     heading: "Spotless Commercial Spaces",
     description:
-      "We deliver consistent, detail-oriented cleaning for offices, retail spaces, and commercial facilities — creating healthy environments your team and customers notice.",
+      "We deliver consistent, detail-oriented cleaning for offices, retail spaces, and commercial facilities   creating healthy environments your team and customers notice.",
     benefits: [
       "Daily, weekly, or custom schedules tailored to your operations",
       "Trained cleaners using industrial-grade equipment and supplies",
@@ -276,7 +276,7 @@ const cleaningSlides = [
     tab: "Residential",
     heading: "Homes That Feel Brand New",
     description:
-      "From routine maintenance to deep cleaning, our residential teams treat every home with care — using safe products and proven checklists for consistent results.",
+      "From routine maintenance to deep cleaning, our residential teams treat every home with care   using safe products and proven checklists for consistent results.",
     benefits: [
       "Flexible scheduling including weekends and same-day service",
       "Eco-friendly cleaning products safe for families and pets",
@@ -321,7 +321,7 @@ const securitySlides = [
     tab: "Guarding",
     heading: "Professional Manned Guarding",
     description:
-      "Our security officers are trained, licensed, and deployed with clear protocols — providing visible deterrence and rapid response when it matters most.",
+      "Our security officers are trained, licensed, and deployed with clear protocols   providing visible deterrence and rapid response when it matters most.",
     benefits: [
       "Uniformed officers for corporate, residential, and event sites",
       "Access control, patrols, and incident reporting included",
@@ -335,7 +335,7 @@ const securitySlides = [
     tab: "Surveillance",
     heading: "Intelligent Surveillance Systems",
     description:
-      "From CCTV to smart alarms, we design systems that give you real-time visibility and recorded evidence — fully integrated with your existing infrastructure.",
+      "From CCTV to smart alarms, we design systems that give you real-time visibility and recorded evidence   fully integrated with your existing infrastructure.",
     benefits: [
       "Remote monitoring via mobile app and desktop dashboards",
       "AI-enhanced analytics for unusual activity detection",
@@ -348,11 +348,11 @@ const staffingSlides = [
   {
     src: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80",
     title: "Recruitment Services",
-    caption: "We find the right talent, fast — so you can focus on running your business.",
+    caption: "We find the right talent, fast   so you can focus on running your business.",
     tab: "Recruitment",
     heading: "Talent That Fits Your Team",
     description:
-      "We source, screen, and present candidates who match your skills requirements and culture — reducing bad hires and accelerating onboarding.",
+      "We source, screen, and present candidates who match your skills requirements and culture   reducing bad hires and accelerating onboarding.",
     benefits: [
       "Permanent, contract, and temporary placement options",
       "Industry-specific candidate pools and assessment tools",
@@ -390,7 +390,7 @@ const staffingSlides = [
 ];
 
 /* ──────────────────────────────────────────────────────────────────────────
-   SubsidiaryShowcase — reusable image carousel + tabbed content card
+   SubsidiaryShowcase   reusable image carousel + tabbed content card
    used for every subsidiary on the home page.
    ────────────────────────────────────────────────────────────────────────── */
 
@@ -596,7 +596,7 @@ function SubsidiaryShowcase({
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   SplitSection — one full-width alternating split section per subsidiary.
+   SplitSection   one full-width alternating split section per subsidiary.
 
    Alternation rule: even index (0,2,4) → image LEFT / content RIGHT.
                      odd  index (1,3)   → image RIGHT / content LEFT.
@@ -635,7 +635,7 @@ function SplitSection({
           sizes="(max-width: 1024px) 100vw, 50vw"
           className="object-cover transition-transform duration-[1.2s] ease-out group-hover/img:scale-105"
         />
-        {/* Navy brand overlay — keeps every section on-palette */}
+        {/* Navy brand overlay   keeps every section on-palette */}
         <div className="absolute inset-0 bg-gradient-to-br from-jotofa-navy-deep/92 via-jotofa-navy/80 to-jotofa-navy/65" />
         {/* Teal glow accent */}
         <div className="absolute -top-24 -right-24 w-72 h-72 bg-jotofa-accent/20 rounded-full blur-[100px] pointer-events-none" />
@@ -647,7 +647,7 @@ function SplitSection({
           </span>
         </div>
 
-        {/* Logo tile — top-left */}
+        {/* Logo tile   top-left */}
         <div className="absolute top-6 left-6 sm:top-8 sm:left-8 z-10">
           <div className="flex items-center justify-center h-24 w-24 rounded-xl bg-transparent border border-white/20 shadow-lg overflow-hidden">
             {subsidiary.logoSrc ? (
@@ -666,7 +666,7 @@ function SplitSection({
           </div>
         </div>
 
-        {/* Tagline pill — bottom-left */}
+        {/* Tagline pill   bottom-left */}
         <div className="absolute bottom-6 left-6 sm:bottom-8 sm:left-8 z-10">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md">
             <Icon className="w-3.5 h-3.5 text-jotofa-accent-light" />
@@ -683,7 +683,7 @@ function SplitSection({
           reversed ? "lg:order-1" : ""
         }`}
       >
-        {/* Faint watermark number — top right */}
+        {/* Faint watermark number   top right */}
         <span
           aria-hidden
           className="absolute top-4 right-6 sm:top-6 sm:right-10 text-[90px] sm:text-[130px] lg:text-[150px] font-black text-jotofa-navy/[0.04] dark:text-white/[0.04] leading-none select-none pointer-events-none"
@@ -692,7 +692,7 @@ function SplitSection({
         </span>
 
         <div className="relative z-10 max-w-xl mx-auto lg:mx-0 w-full">
-          {/* Sector badges — each pill uses the subsidiary's accent color */}
+          {/* Sector badges   each pill uses the subsidiary's accent color */}
           <div className="flex flex-wrap gap-1.5 mb-5">
             {subsidiary.sectors.map((sector) => {
               const a = accentClasses[subsidiary.accent];
@@ -717,7 +717,7 @@ function SplitSection({
             {subsidiary.description}
           </p>
 
-          {/* Services grid — 2 columns with accent-colored check icons */}
+          {/* Services grid   2 columns with accent-colored check icons */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-8">
             {subsidiary.services.map((service) => {
               const a = accentClasses[subsidiary.accent];
@@ -735,7 +735,7 @@ function SplitSection({
             })}
           </div>
 
-          {/* CTA row — primary "Explore" + optional subtle "Visit Website" text link */}
+          {/* CTA row   primary "Explore" + optional subtle "Visit Website" text link */}
           <div className="flex flex-wrap items-center gap-3">
             <button
               onClick={() => setActivePage(subsidiary.id)}
@@ -767,13 +767,13 @@ export function Subsidiaries() {
   const { setActivePage } = usePage();
 
   const cleaningHeaderTitle = "Premium Cleaning & Housekeeping Solutions";
-  const cleaningHeaderSubtitle = "From commercial offices to residential homes — we deliver hygiene, consistency, and peace of mind across Tanzania.";
+  const cleaningHeaderSubtitle = "From commercial offices to residential homes   we deliver hygiene, consistency, and peace of mind across Tanzania.";
 
   const securityHeaderTitle = "Professional Security & Surveillance Solutions";
   const securityHeaderSubtitle = "Protecting people, assets, and operations with manned guarding, CCTV, and integrated security systems.";
 
   const staffingHeaderTitle = "Skilled Workforce & HR Solutions";
-  const staffingHeaderSubtitle = "Recruitment, labour outsourcing, and HR consulting — connecting the right talent with the right opportunity.";
+  const staffingHeaderSubtitle = "Recruitment, labour outsourcing, and HR consulting   connecting the right talent with the right opportunity.";
 
   return (
     <section className="relative">
@@ -788,7 +788,7 @@ export function Subsidiaries() {
           Five Arms, <span className="text-jotofa-accent">One Vision</span>
         </h2>
         <p className="mx-auto max-w-2xl text-muted-foreground text-lg">
-          Each subsidiary is a pillar of our group — specialized, yet united
+          Each subsidiary is a pillar of our group   specialized, yet united
           by a commitment to quality, innovation, and impact.
         </p>
       </ScrollReveal>
@@ -816,7 +816,7 @@ export function Subsidiaries() {
 
           const headerSubtitle =
             subsidiary.id === "utec"
-              ? "From CCTV installations to solar power systems — we protect and power businesses across Tanzania."
+              ? "From CCTV installations to solar power systems   we protect and power businesses across Tanzania."
               : subsidiary.id === "cleaning"
                 ? cleaningHeaderSubtitle
                 : subsidiary.id === "security"

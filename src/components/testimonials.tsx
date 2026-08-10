@@ -5,9 +5,9 @@ import { ScrollReveal, StaggerContainer, StaggerItem } from "./scroll-reveal";
 import type { Testimonial } from "@/lib/testimonials-data";
 
 interface TestimonialsProps {
-  /** Section eyebrow / kicker — small label above the title */
+  /** Section eyebrow / kicker   small label above the title */
   eyebrow?: string;
-  /** Section title — supports a highlighted word via <span class="text-jotofa-accent"> */
+  /** Section title   supports a highlighted word via <span class="text-jotofa-accent"> */
   title: React.ReactNode;
   /** Optional subtitle paragraph below the title */
   subtitle?: string;

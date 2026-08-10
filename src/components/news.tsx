@@ -378,7 +378,7 @@ export function News() {
             </div>
           </ScrollReveal>
 
-          {/* News grid — 3 columns */}
+          {/* News grid   3 columns */}
           {filteredNewsItems.length === 0 ? (
             <div className="text-center py-16">
               <Newspaper className="w-12 h-12 text-muted-foreground/40 mx-auto mb-4" />
@@ -457,7 +457,7 @@ export function News() {
               </h2>
               <p className="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto">
                 Get the latest updates from JOTOFA GROUP delivered to your inbox.
-                From strategic milestones to community impact — never miss a story.
+                From strategic milestones to community impact   never miss a story.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <button

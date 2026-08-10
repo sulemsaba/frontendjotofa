@@ -57,7 +57,7 @@ export function SecurityPage() {
 
           <ScrollReveal delay={0.2}>
             <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-2xl mb-10">
-              Providing robust security services from manned guarding to electronic surveillance —
+              Providing robust security services from manned guarding to electronic surveillance  
               protecting people, assets, and operations with integrity and vigilance.
             </p>
           </ScrollReveal>

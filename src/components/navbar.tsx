@@ -220,7 +220,7 @@ export function Navbar() {
                     />
                   </button>
 
-                  {/* Subsidiaries Mega Dropdown — left-aligned to the "Subsidiaries" label */}
+                  {/* Subsidiaries Mega Dropdown   left-aligned to the "Subsidiaries" label */}
                   {item.hasDropdown === "subsidiaries" && openDropdown === "subsidiaries" && (
                     <AnimatePresence>
                       <motion.div initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} transition={{ duration: 0.2, ease: "easeOut" }}
@@ -251,7 +251,7 @@ export function Navbar() {
                                  </button>
                                ))}
                              </div>
-                             {/* Right panel — Next.js Image (not CSS background) */}
+                             {/* Right panel   Next.js Image (not CSS background) */}
                              <div className="relative min-h-[300px] overflow-hidden">
                                <AnimatePresence>
                                  <motion.div key={currentBiz.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="absolute inset-0">
@@ -334,7 +334,7 @@ export function Navbar() {
         </div>
       </motion.header>
 
-      {/* MOBILE MENU — focus-trapped dialog (WCAG 2.1.2) */}
+      {/* MOBILE MENU   focus-trapped dialog (WCAG 2.1.2) */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.25 }} className="fixed inset-0 z-40 lg:hidden" role="dialog" aria-modal="true" aria-label="Site navigation menu">

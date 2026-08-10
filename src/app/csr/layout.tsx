@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description:
     "JOTOFA GROUP's corporate social responsibility initiatives: education scholarships, community health programs, environmental conservation, and 2,000+ trees planted across Tanzania.",
   openGraph: {
-    title: "JOTOFA GROUP — CSR & Sustainability Initiatives",
+    title: "JOTOFA GROUP   CSR & Sustainability Initiatives",
     description:
       "We believe true success is measured not just in profits, but in the positive impact we create for our communities and environment.",
   },

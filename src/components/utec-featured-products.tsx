@@ -103,7 +103,7 @@ function ProductCard({ product, index }: { product: FeaturedProduct; index: numb
               </>
             ) : (
               <span className="text-base font-bold text-foreground">
-                {origin ?? "—"}
+                {origin ?? " "}
               </span>
             )}
           </div>
@@ -176,7 +176,7 @@ export function UtecFeaturedProducts() {
           <p className="text-muted-foreground max-w-2xl mx-auto">
             A selection of radios, networking gear, and ICT equipment available
             now in the UTEC Solutions online store. Prices update live from the
-            store — click any product to view full details and purchase.
+            store   click any product to view full details and purchase.
           </p>
         </ScrollReveal>
 

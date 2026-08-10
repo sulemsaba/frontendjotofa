@@ -14,29 +14,29 @@ import {
 import { usePage, PageId } from "@/lib/page-context";
 
 /* ──────────────────────────────────────────────────────────────────────────
-   About JOTOFA Group — clean, editorial, minimal.
+   About JOTOFA Group   clean, editorial, minimal.
 
    Layout (top → bottom):
-     1. Hero       — split grid (text 1.2fr / image 1fr). "Five Arms. One
+     1. Hero         split grid (text 1.2fr / image 1fr). "Five Arms. One
                      Unified Vision." + portrait photograph.
-     2. Story      — "Our Journey" header + 2-column milestone timeline
+     2. Story        "Our Journey" header + 2-column milestone timeline
                      (2015 → 2024) with year / title / description rows.
-     3. Purpose    — split grid: Mission & Vision (accent left-border) +
+     3. Purpose      split grid: Mission & Vision (accent left-border) +
                      square image; below, a 5-column values grid.
-     4. Ecosystem  — "Five Arms, One Vision" subsidiary list. Each row is a
+     4. Ecosystem    "Five Arms, One Vision" subsidiary list. Each row is a
                      clickable card that routes to the subsidiary page.
-     5. Stats      — 5-column minimal counters band.
-     6. CTA        — centered "Ready to Partner..." + Contact button.
+     5. Stats        5-column minimal counters band.
+     6. CTA          centered "Ready to Partner..." + Contact button.
 
    Brand palette ONLY (JOTOFA navy + teal). Theme-aware (light + dark).
-   Scroll fade-up animations via framer-motion whileInView — NO stagger
+   Scroll fade-up animations via framer-motion whileInView   NO stagger
    delays so content appears together rather than trickling in.
    Fully responsive: mobile-first grids, appropriate type scale, compact
    spacing on small screens.
    ────────────────────────────────────────────────────────────────────────── */
 
-/* Shared framer-motion variant — opacity 0 → 1, y 16 → 0. Short duration
-   (0.4s) so sections arrive quickly. NO stagger delays — every element in
+/* Shared framer-motion variant   opacity 0 → 1, y 16 → 0. Short duration
+   (0.4s) so sections arrive quickly. NO stagger delays   every element in
    a section animates together so content "shows up all at once" on load. */
 const fadeUp = {
   initial: { opacity: 0, y: 16 },
@@ -70,7 +70,7 @@ const timeline: Milestone[] = [
     year: "2019",
     title: "The Ecosystem Grows",
     description:
-      "Introduced Courier & Logistics, Cleaning & Maids, and JOTOFA Security — creating a comprehensive network under one trusted group.",
+      "Introduced Courier & Logistics, Cleaning & Maids, and JOTOFA Security   creating a comprehensive network under one trusted group.",
   },
   {
     year: "2021",
@@ -133,7 +133,7 @@ const ecosystem: EcoSubsidiary[] = [
   {
     number: "04",
     name: "Staffing & Labour",
-    description: "Connecting talent with opportunity — skilled and semi-skilled labour supply",
+    description: "Connecting talent with opportunity   skilled and semi-skilled labour supply",
     page: "staffing",
     logo: "/images/staffing-logo.png",
   },
@@ -171,7 +171,7 @@ function AboutHero() {
             </h1>
             <p className="lead max-w-[540px]">
               A diversified Tanzanian holding company driving excellence through
-              ICT, logistics, professional services, security, and staffing —
+              ICT, logistics, professional services, security, and staffing  
               empowering communities and industries across East Africa.
             </p>
           </motion.div>
@@ -332,7 +332,7 @@ function Ecosystem() {
             Five Arms, <span className="text-jotofa-accent">One Vision</span>
           </h2>
           <p className="lead">
-            Each subsidiary is a pillar of our group — specialized, yet united
+            Each subsidiary is a pillar of our group   specialized, yet united
             by a commitment to quality, innovation, and impact.
           </p>
         </motion.div>
@@ -413,7 +413,7 @@ function CTA() {
           </h2>
           <p className="lead mb-8 sm:mb-10 max-w-[600px] mx-auto">
             Whether you need ICT solutions, logistics support, facility
-            management, security services, or workforce solutions — JOTOFA Group
+            management, security services, or workforce solutions   JOTOFA Group
             delivers excellence under one trusted roof.
           </p>
           <button

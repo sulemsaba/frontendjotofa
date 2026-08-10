@@ -32,7 +32,7 @@ export function Breadcrumbs() {
     return { href, label, isLast: index === segments.length - 1 };
   });
 
-  // Skip for news article slugs (dynamic routes) — breadcrumbs shown in news detail
+  // Skip for news article slugs (dynamic routes)   breadcrumbs shown in news detail
   if (segments.length > 1) return null;
 
   return (

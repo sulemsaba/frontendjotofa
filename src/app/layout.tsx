@@ -32,7 +32,7 @@ const playfairDisplay = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://jotofagroup.co.tz"),
-  title: "JOTOFA GROUP — Delivering Excellence Across Industries",
+  title: "JOTOFA GROUP   Delivering Excellence Across Industries",
   description:
     "JOTOFA GROUP is a diversified Tanzanian holding company delivering excellence across industries through ICT, logistics, cleaning, security, and staffing solutions.",
   keywords: [
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     apple: "/favicon.ico",
   },
   openGraph: {
-    title: "JOTOFA GROUP — Delivering Excellence Across Industries",
+    title: "JOTOFA GROUP   Delivering Excellence Across Industries",
     description:
       "A diversified Tanzanian holding company delivering excellence across industries through ICT, logistics, cleaning, security, and staffing solutions.",
     type: "website",
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "JOTOFA GROUP — Delivering Excellence Across Industries",
+    title: "JOTOFA GROUP   Delivering Excellence Across Industries",
     description:
       "A diversified Tanzanian holding company delivering excellence across industries through ICT, logistics, cleaning, security, and staffing solutions.",
   },
@@ -88,7 +88,7 @@ export default function RootLayout({
       <body
         className={`${openSans.variable} ${geistMono.variable} ${playfairDisplay.variable} antialiased bg-background text-foreground`}
       >
-        {/* Skip-to-content link — first focusable element for keyboard users (WCAG 2.4.1) */}
+        {/* Skip-to-content link   first focusable element for keyboard users (WCAG 2.4.1) */}
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-jotofa-accent focus:text-white focus:shadow-lg focus:outline-none"
@@ -104,7 +104,7 @@ export default function RootLayout({
         >
           <PageProvider>
             <RouteProgress />
-            {/* JSON-LD structured data — Organization, WebSite, BreadcrumbList */}
+            {/* JSON-LD structured data   Organization, WebSite, BreadcrumbList */}
             <JsonLd />
             <Navbar />
             <main id="main-content" className="flex-1">

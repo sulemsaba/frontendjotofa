@@ -13,7 +13,7 @@ import {
 import { usePage, PageId } from "@/lib/page-context";
 
 /* ──────────────────────────────────────────────────────────────────────────
-   JOTOFA Group Footer — Coca-Cola-inspired visual treatment
+   JOTOFA Group Footer   Coca-Cola-inspired visual treatment
    (same content, restyled spacing / typography / decorative blobs)
 
    Content preserved:
@@ -85,7 +85,7 @@ const CORPORATE_ADDRESS =
 const CORPORATE_HOURS = "Mon – Fri, 8:00am – 6:00pm";
 
 /* ──────────────────────────────────────────────────────────────────────────
-   LinkColumn — heading + vertical list of footer links.
+   LinkColumn   heading + vertical list of footer links.
    Always visible (never expandable). Left-aligned on all viewports.
    ────────────────────────────────────────────────────────────────────────── */
 
@@ -140,7 +140,7 @@ function LinkColumn({
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   CareersColumn — Col 3.
+   CareersColumn   Col 3.
    Vertical list on desktop. Horizontal pipe-separated row on mobile
    ("Open Positions | Why Join Us | Send Your CV") to save vertical space.
    ────────────────────────────────────────────────────────────────────────── */
@@ -191,7 +191,7 @@ function CareersColumn() {
 export function Footer() {
   return (
     <footer className="relative overflow-hidden bg-background pt-24 pb-14">
-      {/* Decorative blobs — bottom, animated, fade at top edge */}
+      {/* Decorative blobs   bottom, animated, fade at top edge */}
       <div aria-hidden className="absolute inset-x-0 bottom-0 h-[320px] pointer-events-none overflow-hidden [mask-image:linear-gradient(to_top,black,transparent)]">
         <div className="absolute -bottom-32 left-8 h-[420px] w-[420px] rounded-full bg-jotofa-accent/25 blur-[100px] animate-float-blob" style={{ animationDuration: "12s", animationDelay: "0s" }} />
         <div className="absolute -bottom-28 left-[35%] h-[360px] w-[360px] rounded-full bg-jotofa-navy/25 dark:bg-white/10 blur-[100px] animate-float-blob" style={{ animationDuration: "14s", animationDelay: "-3s" }} />
@@ -314,7 +314,7 @@ export function Footer() {
               type="button"
               disabled
               aria-disabled="true"
-              title="Privacy Policy — coming soon"
+              title="Privacy Policy   coming soon"
               className="hover:text-foreground transition-colors cursor-not-allowed opacity-60"
             >
               Privacy Policy
@@ -324,7 +324,7 @@ export function Footer() {
               type="button"
               disabled
               aria-disabled="true"
-              title="Terms of Service — coming soon"
+              title="Terms of Service   coming soon"
               className="hover:text-foreground transition-colors cursor-not-allowed opacity-60"
             >
               Terms of Service
