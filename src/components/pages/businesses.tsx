@@ -129,7 +129,7 @@ const businesses: Business[] = [
       "Telecom Services",
     ],
     description:
-      "Cutting-edge ICT infrastructure, telecommunications, and digital transformation services for modern enterprises. We connect businesses and communities across Tanzania with reliable, scalable technology.",
+      "Cutting-edge ICT infrastructure, telecommunications, and digital transformation services connecting businesses and communities across Tanzania.",
     icon: Monitor,
     image: "/images/subsidiaries/utec.jpg",
     logoSrc: "/images/utec-logo.png",
@@ -178,27 +178,6 @@ const businesses: Business[] = [
     logoSrc: "/images/security-logo.png",
     logoMark: "JS",
     accent: "security-red",
-  },
-  {
-    id: "staffing",
-    index: "04",
-    name: "Staffing & Labour",
-    tagline: "Workforce Solutions",
-    sectors: ["Recruitment", "HR", "Workforce"],
-    services: [
-      "Recruitment Services",
-      "Labour Outsourcing",
-      "Payroll Management",
-      "Training & Development",
-      "HR Consulting",
-    ],
-    description:
-      "Connecting talent with opportunity across skilled and semi-skilled labour supply. We handle recruitment, payroll, and workforce management for industries nationwide.",
-    icon: Users,
-    image: "/images/subsidiaries/staffing.jpg",
-    logoSrc: "/images/staffing-logo.png",
-    logoMark: "JT",
-    accent: "staffing-purple",
   },
 ];
 
@@ -265,7 +244,7 @@ function BusinessesHero() {
 
           {/* Mission subtitle */}
           <p className="mx-auto max-w-2xl text-base sm:text-lg text-jotofa-text-secondary dark:text-white/75 leading-relaxed mb-10">
-            JOTOFA Group unites five specialized subsidiaries under one
+            JOTOFA Group unites four specialized subsidiaries under one
             corporate umbrella   each an independent leader in its sector, all
             bound by the same commitment to quality, integrity, and lasting
             impact across Tanzania and East Africa.
@@ -274,11 +253,11 @@ function BusinessesHero() {
           {/* Mini stats bar */}
           <div className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-muted/80 dark:bg-white/5 backdrop-blur border border-border text-sm">
             <span className="font-semibold text-foreground dark:text-white">
-              5 Subsidiaries
+              4 Subsidiaries
             </span>
             <span className="text-jotofa-accent" aria-hidden>·</span>
             <span className="font-semibold text-foreground dark:text-white">
-              5 Sectors
+              4 Sectors
             </span>
             <span className="text-jotofa-accent" aria-hidden>·</span>
             <span className="font-semibold text-foreground dark:text-white">
@@ -471,7 +450,7 @@ function SplitSections() {
           Our Subsidiaries
         </h2>
         <p className="mx-auto max-w-2xl text-muted-foreground text-lg">
-          Five independent entities. Five areas of expertise. One shared
+          Four independent entities. Four areas of expertise. One shared
           standard of excellence.
         </p>
       </ScrollReveal>
@@ -505,10 +484,10 @@ interface ImpactStat {
 const impactStats: ImpactStat[] = [
   {
     icon: Building2,
-    value: 5,
+    value: 4,
     suffix: "+",
     label: "Subsidiaries",
-    descriptor: "Across five specialized sectors",
+    descriptor: "Across four specialized sectors",
   },
   {
     icon: Users,
@@ -617,7 +596,7 @@ function ContactCTA() {
           <span className="text-jotofa-accent">Let&rsquo;s talk.</span>
         </h2>
         <p className="lead mb-8 max-w-xl mx-auto">
-          From ICT to security, logistics to staffing   JOTOFA Group delivers
+          From ICT to security and cleaning   JOTOFA Group delivers
           excellence under one trusted roof.
         </p>
         <button
