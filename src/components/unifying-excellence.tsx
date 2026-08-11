@@ -18,7 +18,7 @@ export function UnifyingExcellence() {
         }}
       />
 
-      <div className="relative z-10 mx-auto max-w-[1280px] px-[5%] sm:px-[6%] pt-16 sm:pt-20 pb-12 sm:pb-16">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-12 sm:pb-16">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
           {/* Left column */}
           <motion.div
