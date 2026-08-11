@@ -18,9 +18,9 @@ const newsItems = [
   },
   {
     category: "UTEC Solutions",
-    categoryColor: "text-utec-cyan",
-    categoryBg: "bg-utec-cyan/10",
-    categoryBorder: "border-utec-cyan/20",
+    categoryColor: "text-jotofa-accent",
+    categoryBg: "bg-jotofa-accent/10",
+    categoryBorder: "border-jotofa-accent/20",
     title: "UTEC Deploys Smart City Infrastructure in Dar es Salaam",
     excerpt:
       "A landmark project bringing IoT-enabled traffic management and digital services to Tanzania's commercial capital.",
@@ -29,9 +29,9 @@ const newsItems = [
   },
   {
     category: "CSR",
-    categoryColor: "text-cleaning-green",
-    categoryBg: "bg-cleaning-green/10",
-    categoryBorder: "border-cleaning-green/20",
+    categoryColor: "text-jotofa-accent",
+    categoryBg: "bg-jotofa-accent/10",
+    categoryBorder: "border-jotofa-accent/20",
     title: "2,000 Trees Planted: JOTOFA's Green Initiative Milestone",
     excerpt:
       "Our environmental stewardship program reaches a major milestone with reforestation projects across three regions.",

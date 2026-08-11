@@ -42,9 +42,9 @@ const newsItems = [
   {
     category: "UTEC Solutions",
     categoryKey: "utec",
-    categoryColor: "text-utec-cyan",
-    categoryBg: "bg-utec-cyan/10",
-    categoryBorder: "border-utec-cyan/20",
+    categoryColor: "text-jotofa-accent",
+    categoryBg: "bg-jotofa-accent/10",
+    categoryBorder: "border-jotofa-accent/20",
     title: "UTEC Deploys Smart City Infrastructure in Dar es Salaam",
     excerpt:
       "A landmark project bringing IoT-enabled traffic management, public Wi-Fi, and digital services to Tanzania's commercial capital.",
@@ -55,9 +55,9 @@ const newsItems = [
   {
     category: "CSR",
     categoryKey: "csr",
-    categoryColor: "text-cleaning-green",
-    categoryBg: "bg-cleaning-green/10",
-    categoryBorder: "border-cleaning-green/20",
+    categoryColor: "text-jotofa-accent",
+    categoryBg: "bg-jotofa-accent/10",
+    categoryBorder: "border-jotofa-accent/20",
     title: "2,000 Trees Planted: JOTOFA's Green Initiative Milestone",
     excerpt:
       "Our environmental stewardship program reaches a major milestone, with reforestation projects across three regions in Tanzania.",
@@ -68,9 +68,9 @@ const newsItems = [
   {
     category: "Innovation",
     categoryKey: "innovation",
-    categoryColor: "text-staffing-purple",
-    categoryBg: "bg-staffing-purple/10",
-    categoryBorder: "border-staffing-purple/20",
+    categoryColor: "text-jotofa-accent",
+    categoryBg: "bg-jotofa-accent/10",
+    categoryBorder: "border-jotofa-accent/20",
     title: "Digital Transformation Across All Subsidiaries",
     excerpt:
       "JOTOFA GROUP invests in end-to-end digital platforms, integrating operations from logistics tracking to HR management under one technology umbrella.",
@@ -94,9 +94,9 @@ const newsItems = [
   {
     category: "Group Update",
     categoryKey: "group",
-    categoryColor: "text-security-red",
-    categoryBg: "bg-security-red/10",
-    categoryBorder: "border-security-red/20",
+    categoryColor: "text-jotofa-accent",
+    categoryBg: "bg-jotofa-accent/10",
+    categoryBorder: "border-jotofa-accent/20",
     title: "JOTOFA GROUP Achieves ISO 9001 Certification",
     excerpt:
       "Our commitment to quality management systems is recognized with international certification, reinforcing our promise of operational excellence.",
@@ -107,9 +107,9 @@ const newsItems = [
   {
     category: "UTEC Solutions",
     categoryKey: "utec",
-    categoryColor: "text-utec-cyan",
-    categoryBg: "bg-utec-cyan/10",
-    categoryBorder: "border-utec-cyan/20",
+    categoryColor: "text-jotofa-accent",
+    categoryBg: "bg-jotofa-accent/10",
+    categoryBorder: "border-jotofa-accent/20",
     title: "UTEC Partners with Tanzania Telecom Authority for 5G Rollout",
     excerpt:
       "A strategic partnership to accelerate next-generation connectivity infrastructure in major urban centers across Tanzania.",

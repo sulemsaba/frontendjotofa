@@ -17,10 +17,10 @@ const csrPillars = [
       "Partnerships with local schools and universities",
       "Vocational training and skill development",
     ],
-    accent: "text-utec-cyan",
-    bg: "bg-utec-cyan/10",
-    border: "border-utec-cyan/20",
-    glow: "from-utec-cyan/10",
+    accent: "text-jotofa-accent",
+    bg: "bg-jotofa-accent/10",
+    border: "border-jotofa-accent/20",
+    glow: "from-jotofa-accent/10",
     stat: { value: "500+", label: "Students Supported" },
   },
   {
@@ -34,10 +34,10 @@ const csrPillars = [
       "Employee wellness initiatives",
       "Health awareness campaigns",
     ],
-    accent: "text-security-red",
-    bg: "bg-security-red/10",
-    border: "border-security-red/20",
-    glow: "from-security-red/10",
+    accent: "text-jotofa-accent",
+    bg: "bg-jotofa-accent/10",
+    border: "border-jotofa-accent/20",
+    glow: "from-jotofa-accent/10",
     stat: { value: "12", label: "Communities Reached" },
   },
   {
@@ -51,10 +51,10 @@ const csrPillars = [
       "Green office and operations initiatives",
       "Environmental awareness education",
     ],
-    accent: "text-cleaning-green",
-    bg: "bg-cleaning-green/10",
-    border: "border-cleaning-green/20",
-    glow: "from-cleaning-green/10",
+    accent: "text-jotofa-accent",
+    bg: "bg-jotofa-accent/10",
+    border: "border-jotofa-accent/20",
+    glow: "from-jotofa-accent/10",
     stat: { value: "2,000+", label: "Trees Planted" },
   },
 ];
@@ -67,8 +67,8 @@ export function CSR() {
       <div className="absolute inset-0 bg-background" />
 
       {/* Decorative elements */}
-      <div className="absolute top-1/4 left-0 w-96 h-96 bg-cleaning-green/5 rounded-full blur-[120px]" />
-      <div className="absolute bottom-1/4 right-0 w-80 h-80 bg-utec-cyan/5 rounded-full blur-[100px]" />
+      <div className="absolute top-1/4 left-0 w-96 h-96 bg-jotofa-accent/5 rounded-full blur-[120px]" />
+      <div className="absolute bottom-1/4 right-0 w-80 h-80 bg-jotofa-accent/5 rounded-full blur-[100px]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section header */}
@@ -174,9 +174,9 @@ export function CSR() {
       eyebrow="Community Voices"
       title={<>What Our <span className="text-jotofa-accent">Community Partners Say</span></>}
       subtitle="Real impact, told by the schools, health partners, and communities we serve."
-      accent="text-cleaning-green"
-      accentBg="bg-cleaning-green/10"
-      accentBorder="border-cleaning-green/20"
+      accent="text-jotofa-accent"
+      accentBg="bg-jotofa-accent/10"
+      accentBorder="border-jotofa-accent/20"
       testimonials={csrTestimonials}
     />
     </>

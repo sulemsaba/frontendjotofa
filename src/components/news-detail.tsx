@@ -86,7 +86,7 @@ function SocialIconButtons() {
           aria-label={social.label}
         >
           {social.href === "#copy" && copied ? (
-            <Check className="w-4 h-4 text-cleaning-green" />
+            <Check className="w-4 h-4 text-jotofa-accent" />
           ) : (
             <social.icon className="w-4 h-4" />
           )}
@@ -465,10 +465,10 @@ export function NewsDetail({ article, relatedArticles, onBack, onArticleClick }:
               </span>
               <button
                 onClick={() => setLiked(!liked)}
-                className="ml-auto text-muted-foreground hover:text-security-red transition-colors"
+                className="ml-auto text-muted-foreground hover:text-jotofa-accent transition-colors"
                 aria-label="Like article"
               >
-                <Heart className={`w-4 h-4 ${liked ? "fill-security-red text-security-red" : ""}`} />
+                <Heart className={`w-4 h-4 ${liked ? "fill-jotofa-accent text-jotofa-accent" : ""}`} />
               </button>
             </div>
 
@@ -626,7 +626,7 @@ export function NewsDetail({ article, relatedArticles, onBack, onArticleClick }:
                 Get expert insights on business strategy, growth frameworks, and performance delivered to your inbox.
               </p>
               {subscribed ? (
-                <div className="flex items-center gap-2 text-cleaning-green text-sm font-medium p-3 rounded-lg bg-cleaning-green/10">
+                <div className="flex items-center gap-2 text-jotofa-accent text-sm font-medium p-3 rounded-lg bg-jotofa-accent/10">
                   <Check className="w-4 h-4" />
                   You&apos;re subscribed!
                 </div>

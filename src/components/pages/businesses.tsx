@@ -26,29 +26,15 @@ import { SubsidiaryShowcase, Slide } from "../subsidiaries";
    Static class strings so Tailwind can statically extract them.
    ────────────────────────────────────────────────────────────────────────── */
 const accentClasses: Record<
-  "utec-cyan" | "cleaning-green" | "staffing-purple",
+  string,
   { bg: string; text: string; border: string; hoverBorder: string; hoverBg: string }
 > = {
-  "utec-cyan": {
-    bg: "bg-utec-cyan/10",
-    text: "text-utec-cyan",
-    border: "border-utec-cyan/20",
-    hoverBorder: "hover:border-utec-cyan/40",
-    hoverBg: "hover:bg-utec-cyan/[0.06]",
-  },
-  "cleaning-green": {
-    bg: "bg-cleaning-green/10",
-    text: "text-cleaning-green",
-    border: "border-cleaning-green/20",
-    hoverBorder: "hover:border-cleaning-green/40",
-    hoverBg: "hover:bg-cleaning-green/[0.06]",
-  },
-  "staffing-purple": {
-    bg: "bg-staffing-purple/10",
-    text: "text-staffing-purple",
-    border: "border-staffing-purple/20",
-    hoverBorder: "hover:border-staffing-purple/40",
-    hoverBg: "hover:bg-staffing-purple/[0.06]",
+  jotofa: {
+    bg: "bg-jotofa-accent/10",
+    text: "text-jotofa-accent",
+    border: "border-jotofa-accent/20",
+    hoverBorder: "hover:border-jotofa-accent/40",
+    hoverBg: "hover:bg-jotofa-accent/[0.06]",
   },
 };
 
@@ -99,7 +85,7 @@ interface Business {
   /** Outbound link (UTEC store). If absent, only the internal CTA shows */
   website?: { label: string; url: string };
   /** Per-subsidiary accent color used for badges, checks, and hover states */
-  accent: "utec-cyan" | "cleaning-green" | "staffing-purple";
+  accent: "jotofa";
 }
 
 const businesses: Business[] = [
@@ -123,7 +109,7 @@ const businesses: Business[] = [
     logoSrc: "/images/utec-logo.png",
     logoMark: "UT",
     website: { label: "Visit Website", url: storeProductsPageUrl() },
-    accent: "utec-cyan",
+    accent: "jotofa",
   },
   {
     id: "cleaning",
@@ -144,7 +130,7 @@ const businesses: Business[] = [
     image: "/images/subsidiaries/cleaning.jpg",
     logoSrc: "/images/cleaning-logo.png",
     logoMark: "JM",
-    accent: "cleaning-green",
+    accent: "jotofa",
   },
   {
     id: "staffing",
@@ -165,7 +151,7 @@ const businesses: Business[] = [
     image: "/images/subsidiaries/staffing.jpg",
     logoSrc: "/images/staffing-logo.png",
     logoMark: "JT",
-    accent: "staffing-purple",
+    accent: "jotofa",
   },
 ];
 

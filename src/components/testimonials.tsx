@@ -11,11 +11,11 @@ interface TestimonialsProps {
   title: React.ReactNode;
   /** Optional subtitle paragraph below the title */
   subtitle?: string;
-  /** Tailwind accent color token class, e.g. "text-utec-cyan" or "text-jotofa-accent" */
+  /** Tailwind accent color token class, e.g. "text-jotofa-accent" or "text-jotofa-accent" */
   accent?: string;
-  /** Tailwind bg tint class for icon/avatars, e.g. "bg-utec-cyan/10" */
+  /** Tailwind bg tint class for icon/avatars, e.g. "bg-jotofa-accent/10" */
   accentBg?: string;
-  /** Tailwind border tint class for cards, e.g. "border-utec-cyan/20" */
+  /** Tailwind border tint class for cards, e.g. "border-jotofa-accent/20" */
   accentBorder?: string;
   /** Array of testimonials to render */
   testimonials: Testimonial[];

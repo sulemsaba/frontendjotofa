@@ -26,16 +26,16 @@ const objectives = [
     title: "Innovation & Growth",
     description:
       "Drive continuous innovation across all subsidiaries, adopting emerging technologies and expanding into new markets and service verticals.",
-    accent: "text-utec-cyan",
-    bg: "bg-utec-cyan/10",
+    accent: "text-jotofa-accent",
+    bg: "bg-jotofa-accent/10",
   },
   {
     icon: Lightbulb,
     title: "Operational Excellence",
     description:
       "Maintain the highest standards of quality, efficiency, and reliability in every service we deliver, setting benchmarks for the industry.",
-    accent: "text-cleaning-green",
-    bg: "bg-cleaning-green/10",
+    accent: "text-jotofa-accent",
+    bg: "bg-jotofa-accent/10",
   },
   {
     icon: Handshake,
@@ -50,16 +50,16 @@ const objectives = [
     title: "Sustainable Profitability",
     description:
       "Ensure long-term financial sustainability through prudent management, diversified revenue streams, and strategic capital allocation.",
-    accent: "text-staffing-purple",
-    bg: "bg-staffing-purple/10",
+    accent: "text-jotofa-accent",
+    bg: "bg-jotofa-accent/10",
   },
   {
     icon: Globe,
     title: "Regional Expansion",
     description:
       "Extend our footprint beyond Tanzania into East and Central Africa, bringing our integrated service model to new markets and communities.",
-    accent: "text-security-red",
-    bg: "bg-security-red/10",
+    accent: "text-jotofa-accent",
+    bg: "bg-jotofa-accent/10",
   },
 ];
 
