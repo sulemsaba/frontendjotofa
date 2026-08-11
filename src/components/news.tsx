@@ -184,22 +184,22 @@ export function News() {
             >
               <div className="grid md:grid-cols-2">
                 {/* Image */}
-                <div className="relative min-h-[300px] md:min-h-[420px] overflow-hidden">
-                  <Image
-                    src={featuredArticle.image}
-                    alt=""
-                    fill
-                    priority
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-r dark:from-jotofa-navy-deep/80 dark:to-jotofa-navy-deep/40 from-background/80 to-background/40 md:bg-gradient-to-r md:dark:from-transparent md:dark:to-transparent md:from-transparent md:to-transparent" />
-                  <div className="absolute inset-0 md:bg-gradient-to-l md:from-transparent md:to-jotofa-navy-deep/60 hidden md:block" />
-                  {/* Mobile overlay text indicator */}
-                  <div className="absolute bottom-4 left-4 md:hidden">
-                    <span className="text-xs text-white/60 font-medium">Featured</span>
+                   <div className="relative min-h-[300px] md:min-h-[420px] overflow-hidden">
+                    <Image
+                      src={featuredArticle.image}
+                      alt=""
+                      fill
+                      priority
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r dark:from-jotofa-navy-deep/80 dark:to-jotofa-navy-deep/40 from-background/80 to-background/40 md:bg-gradient-to-r md:dark:from-transparent md:dark:to-transparent md:from-transparent md:to-transparent" />
+                    <div className="absolute inset-0 md:bg-gradient-to-l md:from-transparent md:to-jotofa-navy-deep/60 hidden md:block" />
+                    {/* Mobile overlay text indicator */}
+                    <div className="absolute bottom-4 left-4 md:hidden">
+                      <span className="text-xs text-white/60 font-medium">Featured</span>
+                    </div>
                   </div>
-                </div>
 
                 {/* Content */}
                 <div className="p-8 sm:p-10 flex flex-col justify-center">
@@ -295,15 +295,28 @@ export function News() {
           >
             {filteredNewsItems.map((item) => (
               <StaggerItem key={item.title}>
-                <a
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleArticleClick(item);
-                  }}
-                  className="group h-full flex flex-col p-6 sm:p-7 rounded-2xl bg-card border border-border hover:border-jotofa-accent/25 transition-all duration-300 hover:bg-secondary cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background block"
-                  aria-label={`Read article: ${item.title}`}
-                >
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleArticleClick(item);
+                }}
+                className="group h-full flex flex-col rounded-2xl bg-card border border-border overflow-hidden hover:border-jotofa-accent/25 transition-all duration-300 hover:bg-secondary cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background block"
+                aria-label={`Read article: ${item.title}`}
+              >
+                {/* Image */}
+                <div className="relative h-48 sm:h-52 overflow-hidden">
+                  <Image
+                    src={item.image}
+                    alt=""
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
+
+                <div className="p-6 sm:p-7 flex flex-col flex-1">
                   {/* Category badge */}
                   <div
                     className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full ${item.categoryBg} ${item.categoryBorder} border mb-4 self-start`}
@@ -337,7 +350,8 @@ export function News() {
                     </div>
                     <ArrowUpRight className="w-4 h-4 text-muted-foreground/30 group-hover:text-jotofa-accent transition-colors" />
                   </div>
-                  </a>
+                </div>
+              </a>
                 </StaggerItem>
             ))}
           </StaggerContainer>
