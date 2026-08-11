@@ -59,7 +59,7 @@ export function Contact() {
   };
 
   return (
-    <section className="contact-section">
+    <section className="contact-section pt-20 sm:pt-24">
       <div className="container-page">
         <div className="contact-grid">
           {/* Left: Contact Info */}
