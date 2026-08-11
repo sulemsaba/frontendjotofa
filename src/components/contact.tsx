@@ -2,36 +2,11 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, MapPin, Phone, Mail, Clock, CheckCircle2 } from "lucide-react";
+import { Send, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "./scroll-reveal";
 import { usePage } from "@/lib/page-context";
 import { submitContact } from "@/lib/api";
-
-const contactInfo = [
-  {
-    icon: MapPin,
-    label: "Head Office",
-    value: "HT House, 2nd Floor, Ubungo, Simu 2000 Road, P.O. Box 75075, Dar es Salaam",
-  },
-  {
-    icon: Phone,
-    label: "Phone",
-    value: "0773 383 800",
-    href: "tel:+255773383800",
-  },
-  {
-    icon: Mail,
-    label: "Email",
-    value: "info@jotofagroup.co.tz",
-    href: "mailto:info@jotofagroup.co.tz",
-  },
-  {
-    icon: Clock,
-    label: "Business Hours",
-    value: "Monday to Friday, 8:00am – 6:00pm",
-  },
-];
 
 export function Contact() {
   const { setActivePage } = usePage();
@@ -98,45 +73,22 @@ export function Contact() {
             <h2>Let Us Know How We<br />Can Help</h2>
             <p>JOTOFA GROUP maintains a focused and selective approach to communication. Our team reviews all submissions and responds where appropriate.</p>
 
-            <div className="contact-card">
-              <div className="contact-card-row">
-                <div className="contact-card-icon">
-                  <MapPin className="w-4 h-4" />
-                </div>
-                <div>
-                  <div className="contact-card-label">Head Office</div>
-                  <div className="contact-card-value">HT House, 2nd Floor, Ubungo, Simu 2000 Road, P.O. Box 75075, Dar es Salaam</div>
-                </div>
+            <div className="space-y-5">
+              <div>
+                <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-1">Head Office</div>
+                <div className="text-sm text-foreground leading-relaxed">HT House, 2nd Floor, Ubungo, Simu 2000 Road, P.O. Box 75075, Dar es Salaam</div>
               </div>
-              <div className="contact-card-divider" />
-              <div className="contact-card-row">
-                <div className="contact-card-icon">
-                  <Phone className="w-4 h-4" />
-                </div>
-                <div>
-                  <div className="contact-card-label">Phone</div>
-                  <a href="tel:+255773383800" className="contact-card-value">0773 383 800</a>
-                </div>
+              <div>
+                <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-1">Phone</div>
+                <a href="tel:+255773383800" className="text-sm text-foreground hover:text-jotofa-accent transition-colors">0773 383 800</a>
               </div>
-              <div className="contact-card-divider" />
-              <div className="contact-card-row">
-                <div className="contact-card-icon">
-                  <Mail className="w-4 h-4" />
-                </div>
-                <div>
-                  <div className="contact-card-label">Email</div>
-                  <a href="mailto:info@jotofagroup.co.tz" className="contact-card-value">info@jotofagroup.co.tz</a>
-                </div>
+              <div>
+                <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-1">Email</div>
+                <a href="mailto:info@jotofagroup.co.tz" className="text-sm text-foreground hover:text-jotofa-accent transition-colors">info@jotofagroup.co.tz</a>
               </div>
-              <div className="contact-card-divider" />
-              <div className="contact-card-row">
-                <div className="contact-card-icon">
-                  <Clock className="w-4 h-4" />
-                </div>
-                <div>
-                  <div className="contact-card-label">Business Hours</div>
-                  <div className="contact-card-value">Monday to Friday, 8:00am - 6:00pm</div>
-                </div>
+              <div>
+                <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-1">Business Hours</div>
+                <div className="text-sm text-foreground">Monday to Friday, 8:00am - 6:00pm</div>
               </div>
             </div>
           </div>
