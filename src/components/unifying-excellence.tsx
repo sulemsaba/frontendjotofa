@@ -18,15 +18,15 @@ export function UnifyingExcellence() {
         }}
       />
 
-      <div className="relative z-10 mx-auto max-w-[1280px] px-[5%] sm:px-[6%] pt-[140px] sm:pt-[120px] pb-20 sm:pb-24">
-        <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start">
+      <div className="relative z-10 mx-auto max-w-[1280px] px-[5%] sm:px-[6%] pt-16 sm:pt-20 pb-12 sm:pb-16">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
           {/* Left column */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full lg:w-[40%] flex-shrink-0"
+            className="w-full lg:w-[36%] flex-shrink-0"
           >
             <div className="flex items-center gap-4 text-xs font-semibold tracking-[0.25em] uppercase text-white/70 mb-6">
               <span className="inline-block w-10 h-px bg-jotofa-accent" />
