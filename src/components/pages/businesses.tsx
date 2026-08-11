@@ -262,21 +262,13 @@ function BusinessesHero() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   2. SPLIT-SCREEN STACKED SECTIONS   one full-width section per subsidiary.
-      Each section alternates image left / right (even = image left, odd = right)
-      and gives every subsidiary its own immersive "moment" with a full-bleed
-      photograph, giant watermark index, logo tile, services grid, and CTA.
-   ────────────────────────────────────────────────────────────────────────── */
-function SplitSection({
-  business,
-  index,
-}: {
-  business: Business;
-  index: number;
-}) {
-  const router = useRouter();
-  const Icon = business.icon;
-  const reversed = index % 2 === 1;
+   2. BUSINESS CARDS   same visual treatment as the home-page subsidiaries
+      section. Each business is rendered as a contained card with an image
+      on the left and a content panel on the right, keeping the layout
+      consistent across the site.
+    ────────────────────────────────────────────────────────────────────────── */
+function BusinessCard({ business }: { business: Business }) {
+  const { setActivePage } = usePage();
 
   return (
     <motion.section
@@ -284,136 +276,101 @@ function SplitSection({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      className="relative flex flex-col lg:flex-row min-h-[60vh] lg:min-h-[78vh] border-b border-border"
+      className="w-full border-b border-border last:border-b-0"
     >
-      {/* ─── Image / Visual Side ─── */}
-      <div
-        className={`group/img relative flex-1 min-h-[42vh] lg:min-h-full overflow-hidden ${
-          reversed ? "lg:order-2" : ""
-        }`}
-      >
-        <Image
-          src={business.image}
-          alt={business.name}
-          fill
-          sizes="(max-width: 1024px) 100vw, 50vw"
-          className="object-cover transition-transform duration-[1.2s] ease-out group-hover/img:scale-105"
-        />
-        {/* Navy brand overlay   keeps every section on-palette */}
-        <div className="absolute inset-0 bg-gradient-to-br from-jotofa-navy-deep/92 via-jotofa-navy/80 to-jotofa-navy/65" />
-        {/* Teal glow accent */}
-        <div className="absolute -top-24 -right-24 w-72 h-72 bg-jotofa-accent/20 rounded-full blur-[100px] pointer-events-none" />
+      <div className="flex flex-col lg:flex-row">
+        {/* LEFT: Image */}
+        <div className="w-full lg:w-[48%] relative min-h-[42vh] lg:min-h-[520px] overflow-hidden">
+          <Image
+            src={business.image}
+            alt={business.name}
+            fill
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            className="object-cover transition-transform duration-[1.2s] ease-out"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-jotofa-navy-deep/92 via-jotofa-navy/80 to-jotofa-navy/65" />
+          <div className="absolute -top-24 -right-24 w-72 h-72 bg-jotofa-accent/20 rounded-full blur-[100px] pointer-events-none" />
 
-        {/* Giant watermark index number */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <span className="text-[160px] sm:text-[220px] lg:text-[260px] font-black text-white/[0.09] leading-none select-none">
-            {business.index}
-          </span>
-        </div>
-
-        {/* Logo tile   top-left */}
-        <div className="absolute top-6 left-6 sm:top-8 sm:left-8 z-10">
-          <div className="flex items-center justify-center h-14 w-14 rounded-xl bg-white border border-white/20 shadow-lg overflow-hidden">
-            {business.logoSrc ? (
-              <Image
-                src={business.logoSrc}
-                alt={`${business.name} logo`}
-                width={48}
-                height={48}
-                className="h-9 w-9 object-contain"
-              />
-            ) : (
-              <span className="text-lg font-black text-jotofa-navy">
-                {business.logoMark}
-              </span>
-            )}
-          </div>
-        </div>
-
-        {/* Tagline pill   bottom-left */}
-        <div className="absolute bottom-6 left-6 sm:bottom-8 sm:left-8 z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md">
-            <Icon className="w-3.5 h-3.5 text-jotofa-accent-light" />
-            <span className="text-xs font-semibold uppercase tracking-wider text-white/95">
-              {business.tagline}
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* ─── Content Side ─── */}
-      <div
-        className={`relative flex-1 flex flex-col justify-center px-6 py-14 sm:px-10 sm:py-16 lg:px-16 lg:py-20 xl:px-20 bg-background ${
-          reversed ? "lg:order-1" : ""
-        }`}
-      >
-        {/* Faint watermark number   top right */}
-        <span
-          aria-hidden
-          className="absolute top-4 right-6 sm:top-6 sm:right-10 text-[100px] sm:text-[140px] lg:text-[160px] font-black text-jotofa-navy/[0.04] dark:text-white/[0.04] leading-none select-none pointer-events-none"
-        >
-          {business.index}
-        </span>
-
-        <div className="relative z-10 max-w-xl mx-auto lg:mx-0 w-full">
-          {/* Sector badges   each pill uses the subsidiary's accent color */}
-          <div className="flex flex-wrap gap-1.5 mb-5">
-            {business.sectors.map((sector) => {
-              const a = accentClasses[business.accent];
-              return (
-                <span
-                  key={sector}
-                  className={`inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-semibold uppercase tracking-wide ${a.bg} ${a.text} ${a.border} border`}
-                >
-                  {sector}
+          {/* Logo tile   top-left */}
+          <div className="absolute top-6 left-6 sm:top-8 sm:left-8 z-10">
+            <div className="flex items-center justify-center h-14 w-14 rounded-xl bg-white border border-white/20 shadow-lg overflow-hidden">
+              {business.logoSrc ? (
+                <Image
+                  src={business.logoSrc}
+                  alt={`${business.name} logo`}
+                  width={48}
+                  height={48}
+                  className="h-9 w-9 object-contain"
+                />
+              ) : (
+                <span className="text-lg font-black text-jotofa-navy">
+                  {business.logoMark}
                 </span>
-              );
-            })}
+              )}
+            </div>
           </div>
 
-          {/* Name */}
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4 leading-[1.1]">
-            {business.name}
-          </h2>
+          {/* Tagline pill   bottom-left */}
+          <div className="absolute bottom-6 left-6 sm:bottom-8 sm:left-8 z-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md">
+              <business.icon className="w-3.5 h-3.5 text-jotofa-accent-light" />
+              <span className="text-xs font-semibold uppercase tracking-wider text-white/95">
+                {business.tagline}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* RIGHT: Content */}
+        <div className="w-full lg:w-[48%] bg-[#f4f4f2] dark:bg-white/[0.03] p-6 sm:p-8 lg:p-10 flex flex-col">
+          {/* Unified header */}
+          <div className="flex items-center gap-4 mb-6">
+            <Image
+              src={business.logoSrc ?? ""}
+              alt={business.name}
+              width={120}
+              height={48}
+              className="h-10 sm:h-12 w-auto object-contain"
+            />
+            <div>
+              <h2 className="text-lg sm:text-xl font-bold text-foreground leading-tight">{business.name}</h2>
+            </div>
+          </div>
 
           {/* Value proposition */}
-          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-8">
+          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-6">
             {business.description}
           </p>
 
-          {/* Services grid   2 columns with accent-colored check icons */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-9">
+          {/* Services list */}
+          <ul className="space-y-3 mb-8 flex-1">
             {business.services.map((service) => {
               const a = accentClasses[business.accent];
               return (
-                <div
-                  key={service}
-                  className={`flex items-center gap-2.5 px-4 py-2.5 rounded-lg bg-jotofa-navy/[0.03] dark:bg-white/[0.04] border border-border ${a.hoverBorder} ${a.hoverBg} transition-all duration-200`}
-                >
-                  <Check className={`w-3.5 h-3.5 flex-shrink-0 ${a.text}`} />
-                  <span className="text-sm font-medium text-foreground/80">
-                    {service}
-                  </span>
-                </div>
+                <li key={service} className="flex items-start gap-3 text-sm text-foreground">
+                  <Check className={`w-5 h-5 ${a.text} flex-shrink-0 mt-0.5`} />
+                  <span>{service}</span>
+                </li>
               );
             })}
-          </div>
+          </ul>
 
-          {/* CTA row   primary "Explore Entity" + optional secondary "Visit Website" link */}
-          <div className="flex flex-wrap items-center gap-3">
+          {/* CTA */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
             <button
-              onClick={() => router.push(`/${business.id}`)}
-              className="group/btn inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-jotofa-navy dark:bg-jotofa-accent text-white text-sm font-semibold transition-all hover:bg-jotofa-navy-deep dark:hover:bg-jotofa-accent-dark shadow-[0_6px_18px_-8px_rgba(0,59,100,0.4)] dark:shadow-[0_6px_18px_-8px_rgba(0,169,183,0.5)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              type="button"
+              onClick={() => setActivePage(business.id)}
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#1a1a1a] dark:bg-[#d60b0b] text-white rounded-full font-semibold text-sm transition-all hover:shadow-lg"
             >
-              Explore Entity
-              <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5" />
+              Get a Quote
+              <ArrowRight className="w-4 h-4" />
             </button>
             {business.website && (
               <a
                 href={business.website.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-jotofa-navy dark:text-white/85 hover:text-jotofa-accent dark:hover:text-jotofa-accent-light transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-jotofa-navy dark:text-white/85 hover:text-jotofa-accent dark:hover:text-jotofa-accent-light transition-colors"
               >
                 {business.website.label}
                 <ExternalLink className="w-3.5 h-3.5" />
@@ -440,15 +397,10 @@ function SplitSections() {
         </p>
       </ScrollReveal>
 
-      {/* Split-screen stacked sections   each subsidiary gets a full-width
-          immersive split section. */}
-      <div className="border-t border-border">
-        {businesses.map((business, index) => (
-          <SplitSection
-            key={business.id}
-            business={business}
-            index={index}
-          />
+      {/* Cards   same treatment as home page */}
+      <div>
+        {businesses.map((business) => (
+          <BusinessCard key={business.id} business={business} />
         ))}
       </div>
     </section>
