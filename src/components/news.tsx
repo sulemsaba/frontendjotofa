@@ -5,11 +5,7 @@ import {
   Calendar,
   Clock,
   Newspaper,
-  TrendingUp,
   Lightbulb,
-  Users,
-  Globe,
-  ChevronDown,
   Filter,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -125,13 +121,6 @@ const newsItems = [
 
 const allArticles = [featuredArticle, ...newsItems];
 
-const statsHighlights = [
-  { icon: Newspaper, value: "50+", label: "Press Releases", accent: "text-jotofa-accent", bg: "bg-jotofa-accent/10" },
-  { icon: TrendingUp, value: "3", label: "Countries Covered", accent: "text-utec-cyan", bg: "bg-utec-cyan/10" },
-  { icon: Users, value: "5", label: "Subsidiary Updates", accent: "text-cleaning-green", bg: "bg-cleaning-green/10" },
-  { icon: Globe, value: "24/7", label: "Industry Coverage", accent: "text-courier-orange", bg: "bg-courier-orange/10" },
-];
-
 export function News() {
   const { setActivePage } = usePage();
   const [selectedArticle, setSelectedArticle] = useState<typeof featuredArticle | null>(null);
@@ -177,91 +166,6 @@ export function News() {
 
   return (
     <div className="bg-background">
-      {/* ── Opening Hero ── */}
-      <section className="relative min-h-[85vh] flex flex-col items-center justify-center py-28 sm:py-36 overflow-hidden">
-        {/* Background layers */}
-        <div className="absolute inset-0 bg-background" />
-        <div className="absolute inset-0  opacity-40" />
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-jotofa-accent/5 rounded-full blur-[140px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-utec-cyan/5 rounded-full blur-[120px]" />
-
-        {/* Decorative corner accents */}
-        <div className="absolute top-12 left-8 w-20 h-20 border border-jotofa-accent/10 rounded-tl-lg hidden lg:block" />
-        <div className="absolute top-12 right-8 w-20 h-20 border border-jotofa-accent/10 rounded-tr-lg hidden lg:block" />
-        <div className="absolute bottom-24 left-8 w-20 h-20 border border-jotofa-accent/10 rounded-bl-lg hidden lg:block" />
-        <div className="absolute bottom-24 right-8 w-20 h-20 border border-jotofa-accent/10 rounded-br-lg hidden lg:block" />
-
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center flex-1 flex flex-col items-center justify-center">
-          {/* Badge */}
-          <ScrollReveal>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-jotofa-accent/20 bg-jotofa-accent/5 mb-8">
-              <Newspaper className="w-4 h-4 text-jotofa-accent" />
-              <span className="text-jotofa-accent text-sm font-medium">Newsroom</span>
-            </div>
-          </ScrollReveal>
-
-          {/* Heading */}
-          <ScrollReveal delay={0.1}>
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-foreground mb-6">
-              News &{" "}
-              <span className="text-jotofa-accent">Insights</span>
-            </h1>
-          </ScrollReveal>
-
-          {/* Description */}
-          <ScrollReveal delay={0.2}>
-            <p className="mx-auto max-w-3xl text-lg sm:text-xl text-muted-foreground leading-relaxed mb-10">
-              Stay informed about our group&apos;s latest developments,
-              innovations, and community impact across Tanzania and East Africa.
-            </p>
-          </ScrollReveal>
-
-          {/* Stats row */}
-          <ScrollReveal delay={0.3}>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 max-w-3xl mx-auto w-full">
-              {statsHighlights.map((item, i) => (
-                <motion.div
-                  key={item.label}
-                  initial={{ opacity: 0, y: 30, scale: 0.95 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{
-                    duration: 0.5,
-                    delay: 0.4 + i * 0.1,
-                    ease: [0.25, 0.4, 0.25, 1],
-                  }}
-                  className="flex flex-col items-center gap-2 p-5 sm:p-6 rounded-2xl bg-card border border-border hover:border-jotofa-accent/25 transition-all duration-300 hover:bg-secondary"
-                >
-                  <div className={`inline-flex items-center justify-center w-10 h-10 rounded-xl ${item.bg}`}>
-                    <item.icon className={`w-5 h-5 ${item.accent}`} />
-                  </div>
-                  <span className="text-2xl sm:text-3xl font-bold text-foreground">
-                    {item.value}
-                  </span>
-                  <span className="text-sm text-muted-foreground">{item.label}</span>
-                </motion.div>
-              ))}
-            </div>
-          </ScrollReveal>
-        </div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          className="relative z-10 flex flex-col items-center gap-2 mt-4 mb-4"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 0.8 }}
-        >
-          <span className="text-xs text-muted-foreground tracking-widest uppercase">Latest Stories</span>
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <ChevronDown className="w-5 h-5 text-jotofa-accent/60" />
-          </motion.div>
-        </motion.div>
-      </section>
-
       {/* ── Featured Article ── */}
       <section className="relative py-16 sm:py-20">
         <div className="absolute inset-0 bg-background" />
