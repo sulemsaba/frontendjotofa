@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, CheckCircle2 } from "lucide-react";
+import { Send, CheckCircle2, MapPin, Phone, Mail, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "./scroll-reveal";
 import { usePage } from "@/lib/page-context";
@@ -73,22 +73,42 @@ export function Contact() {
             <h2>Let Us Know How We<br />Can Help</h2>
             <p>JOTOFA GROUP maintains a focused and selective approach to communication. Our team reviews all submissions and responds where appropriate.</p>
 
-            <div className="space-y-5">
-              <div>
-                <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-1">Head Office</div>
-                <div className="text-sm text-foreground leading-relaxed">HT House, 2nd Floor, Ubungo, Simu 2000 Road, P.O. Box 75075, Dar es Salaam</div>
+            <div className="space-y-6">
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-border text-foreground/80">
+                  <MapPin className="h-4 w-4" />
+                </div>
+                <div>
+                  <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Head Office</div>
+                  <div className="mt-1 text-sm leading-relaxed text-foreground">HT House, 2nd Floor, Ubungo, Simu 2000 Road, P.O. Box 75075, Dar es Salaam</div>
+                </div>
               </div>
-              <div>
-                <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-1">Phone</div>
-                <a href="tel:+255773383800" className="text-sm text-foreground hover:text-jotofa-accent transition-colors">0773 383 800</a>
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-border text-foreground/80">
+                  <Phone className="h-4 w-4" />
+                </div>
+                <div>
+                  <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Phone</div>
+                  <a href="tel:+255773383800" className="mt-1 block text-sm text-foreground hover:text-jotofa-accent transition-colors">0773 383 800</a>
+                </div>
               </div>
-              <div>
-                <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-1">Email</div>
-                <a href="mailto:info@jotofagroup.co.tz" className="text-sm text-foreground hover:text-jotofa-accent transition-colors">info@jotofagroup.co.tz</a>
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-border text-foreground/80">
+                  <Mail className="h-4 w-4" />
+                </div>
+                <div>
+                  <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Email</div>
+                  <a href="mailto:info@jotofagroup.co.tz" className="mt-1 block text-sm text-foreground hover:text-jotofa-accent transition-colors">info@jotofagroup.co.tz</a>
+                </div>
               </div>
-              <div>
-                <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-1">Business Hours</div>
-                <div className="text-sm text-foreground">Monday to Friday, 8:00am - 6:00pm</div>
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-border text-foreground/80">
+                  <Clock className="h-4 w-4" />
+                </div>
+                <div>
+                  <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Business Hours</div>
+                  <div className="mt-1 text-sm text-foreground">Monday to Friday, 8:00am - 6:00pm</div>
+                </div>
               </div>
             </div>
           </div>
