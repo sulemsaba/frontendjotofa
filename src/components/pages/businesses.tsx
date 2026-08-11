@@ -1,21 +1,15 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { motion, useInView, animate } from "framer-motion";
 import {
-  ArrowRight,
-  ExternalLink,
   Building2,
   Users,
   Globe2,
   Award,
   Monitor,
-  Truck,
   Sparkles,
-  ShieldCheck,
-  Check,
+  ArrowRight,
 } from "lucide-react";
 import {
   ScrollReveal,
@@ -24,6 +18,7 @@ import {
 } from "@/components/scroll-reveal";
 import { PageId, usePage } from "@/lib/page-context";
 import { storeProductsPageUrl } from "@/lib/store-config";
+import { SubsidiaryShowcase, Slide } from "../subsidiaries";
 
 /* ──────────────────────────────────────────────────────────────────────────
    Accent color tokens   each subsidiary has its own brand accent used for
@@ -262,128 +257,12 @@ function BusinessesHero() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   2. BUSINESS CARDS   same visual treatment as the home-page subsidiaries
-      section. Each business is rendered as a contained card with an image
-      on the left and a content panel on the right, keeping the layout
-      consistent across the site.
+   2. BUSINESS CARDS   reuse the same SubsidiaryShowcase component as the
+      home page so every subsidiary card looks identical across the site.
     ────────────────────────────────────────────────────────────────────────── */
-function BusinessCard({ business }: { business: Business }) {
+function SplitSections() {
   const { setActivePage } = usePage();
 
-  return (
-    <motion.section
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      className="w-full border-b border-border last:border-b-0"
-    >
-      <div className="flex flex-col lg:flex-row">
-        {/* LEFT: Image */}
-        <div className="w-full lg:w-[48%] relative min-h-[42vh] lg:min-h-[520px] overflow-hidden">
-          <Image
-            src={business.image}
-            alt={business.name}
-            fill
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-cover transition-transform duration-[1.2s] ease-out"
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-jotofa-navy-deep/92 via-jotofa-navy/80 to-jotofa-navy/65" />
-          <div className="absolute -top-24 -right-24 w-72 h-72 bg-jotofa-accent/20 rounded-full blur-[100px] pointer-events-none" />
-
-          {/* Logo tile   top-left */}
-          <div className="absolute top-6 left-6 sm:top-8 sm:left-8 z-10">
-            <div className="flex items-center justify-center h-14 w-14 rounded-xl bg-white border border-white/20 shadow-lg overflow-hidden">
-              {business.logoSrc ? (
-                <Image
-                  src={business.logoSrc}
-                  alt={`${business.name} logo`}
-                  width={48}
-                  height={48}
-                  className="h-9 w-9 object-contain"
-                />
-              ) : (
-                <span className="text-lg font-black text-jotofa-navy">
-                  {business.logoMark}
-                </span>
-              )}
-            </div>
-          </div>
-
-          {/* Tagline pill   bottom-left */}
-          <div className="absolute bottom-6 left-6 sm:bottom-8 sm:left-8 z-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md">
-              <business.icon className="w-3.5 h-3.5 text-jotofa-accent-light" />
-              <span className="text-xs font-semibold uppercase tracking-wider text-white/95">
-                {business.tagline}
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* RIGHT: Content */}
-        <div className="w-full lg:w-[48%] bg-[#f4f4f2] dark:bg-white/[0.03] p-6 sm:p-8 lg:p-10 flex flex-col">
-          {/* Unified header */}
-          <div className="flex items-center gap-4 mb-6">
-            <Image
-              src={business.logoSrc ?? ""}
-              alt={business.name}
-              width={120}
-              height={48}
-              className="h-10 sm:h-12 w-auto object-contain"
-            />
-            <div>
-              <h2 className="text-lg sm:text-xl font-bold text-foreground leading-tight">{business.name}</h2>
-            </div>
-          </div>
-
-          {/* Value proposition */}
-          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-6">
-            {business.description}
-          </p>
-
-          {/* Services list */}
-          <ul className="space-y-3 mb-8 flex-1">
-            {business.services.map((service) => {
-              const a = accentClasses[business.accent];
-              return (
-                <li key={service} className="flex items-start gap-3 text-sm text-foreground">
-                  <Check className={`w-5 h-5 ${a.text} flex-shrink-0 mt-0.5`} />
-                  <span>{service}</span>
-                </li>
-              );
-            })}
-          </ul>
-
-          {/* CTA */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-            <button
-              type="button"
-              onClick={() => setActivePage(business.id)}
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#1a1a1a] dark:bg-[#d60b0b] text-white rounded-full font-semibold text-sm transition-all hover:shadow-lg"
-            >
-              Get a Quote
-              <ArrowRight className="w-4 h-4" />
-            </button>
-            {business.website && (
-              <a
-                href={business.website.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-jotofa-navy dark:text-white/85 hover:text-jotofa-accent dark:hover:text-jotofa-accent-light transition-colors"
-              >
-                {business.website.label}
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
-            )}
-          </div>
-        </div>
-      </div>
-    </motion.section>
-  );
-}
-
-function SplitSections() {
   return (
     <section className="relative">
       {/* Section header */}
@@ -397,19 +276,38 @@ function SplitSections() {
         </p>
       </ScrollReveal>
 
-      {/* Cards   same treatment as home page */}
       <div>
-        {businesses.map((business) => (
-          <BusinessCard key={business.id} business={business} />
-        ))}
+        {businesses.map((business) => {
+          const slides: Slide[] = business.services.map((service) => ({
+            src: business.image,
+            title: service,
+            caption: "",
+            tab: business.tagline,
+            heading: service,
+            description: business.description,
+            benefits: [],
+          }));
+
+          return (
+            <SubsidiaryShowcase
+              key={business.id}
+              logo={business.logoSrc ?? ""}
+              logoAlt={business.name}
+              headerTitle={business.name}
+              headerSubtitle={business.description}
+              slides={slides}
+              onExplore={() => setActivePage(business.id)}
+            />
+          );
+        })}
       </div>
     </section>
   );
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   3. GROUP IMPACT   massive aggregate data counters band
-   ────────────────────────────────────────────────────────────────────────── */
+    3. GROUP IMPACT   massive aggregate data counters band
+    ────────────────────────────────────────────────────────────────────────── */
 interface ImpactStat {
   icon: React.ComponentType<{ className?: string }>;
   value: number;

@@ -321,7 +321,7 @@ const staffingSlides = [
    used for every subsidiary on the home page.
    ────────────────────────────────────────────────────────────────────────── */
 
-interface Slide {
+export interface Slide {
   src: string;
   title: string;
   caption: string;
@@ -331,7 +331,7 @@ interface Slide {
   benefits: string[];
 }
 
-interface ShowcaseProps {
+export interface ShowcaseProps {
   logo: string;
   logoAlt: string;
   headerTitle: string;
@@ -340,7 +340,7 @@ interface ShowcaseProps {
   onExplore: () => void;
 }
 
-function SubsidiaryShowcase({
+export function SubsidiaryShowcase({
   logo,
   logoAlt,
   headerTitle,
