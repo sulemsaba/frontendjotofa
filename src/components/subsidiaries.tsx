@@ -779,11 +779,6 @@ export function Subsidiaries() {
     <section className="relative">
       {/* Section header */}
       <ScrollReveal className="text-center py-20 sm:py-24">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-jotofa-accent/20 bg-jotofa-accent/5 mb-6">
-          <span className="text-xs font-semibold uppercase tracking-widest text-jotofa-accent">
-            Our Portfolio
-          </span>
-        </div>
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4">
           Five Arms, <span className="text-jotofa-accent">One Vision</span>
         </h2>

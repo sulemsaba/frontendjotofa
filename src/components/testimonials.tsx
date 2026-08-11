@@ -44,10 +44,6 @@ export function Testimonials({
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <ScrollReveal className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-jotofa-accent/20 bg-jotofa-accent/5 mb-6">
-            <Quote className={`w-4 h-4 ${accent}`} />
-            <span className="text-jotofa-accent text-sm font-medium">{eyebrow}</span>
-          </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-foreground mb-4">
             {title}
           </h2>

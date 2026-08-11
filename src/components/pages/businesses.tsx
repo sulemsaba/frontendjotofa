@@ -227,14 +227,6 @@ function BusinessesHero() {
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <ScrollReveal className="text-center max-w-4xl mx-auto">
-          {/* Eyebrow pill */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-jotofa-accent/30 bg-jotofa-accent/10 backdrop-blur-sm mb-6">
-            <Building2 className="w-3.5 h-3.5 text-jotofa-accent" />
-            <span className="text-xs font-semibold uppercase tracking-widest text-jotofa-accent">
-              Our Businesses
-            </span>
-          </div>
-
           {/* Bold headline   "Diversified Expertise. Shared Values." */}
           <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight text-jotofa-navy dark:text-white leading-[1.05] mb-6">
             Diversified Expertise.
@@ -529,12 +521,6 @@ function GroupImpact() {
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <ScrollReveal className="text-center mb-14 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-jotofa-accent/30 bg-jotofa-accent/10 mb-6">
-            <Award className="w-3.5 h-3.5 text-jotofa-accent" />
-            <span className="text-xs font-semibold uppercase tracking-widest text-jotofa-accent">
-              Group Impact
-            </span>
-          </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white mb-4">
             The Scale of{" "}
             <span className="text-jotofa-accent">JOTOFA Group</span>

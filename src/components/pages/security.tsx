@@ -42,13 +42,6 @@ export function SecurityPage() {
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-security-red/20 bg-security-red/5 mb-6">
-              <ShieldCheck className="w-4 h-4 text-security-red" />
-              <span className="text-security-red text-sm font-medium">JOTOFA Security</span>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal delay={0.1}>
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-foreground mb-6">
               Comprehensive{" "}
               <span className="text-jotofa-accent">Security Solutions</span>

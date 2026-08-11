@@ -42,13 +42,6 @@ export function CleaningPage() {
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cleaning-green/20 bg-cleaning-green/5 mb-6">
-              <Sparkles className="w-4 h-4 text-cleaning-green" />
-              <span className="text-cleaning-green text-sm font-medium">Cleaning & Maids</span>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal delay={0.1}>
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-foreground mb-6">
               Professional{" "}
               <span className="text-jotofa-accent">Cleaning Services</span>

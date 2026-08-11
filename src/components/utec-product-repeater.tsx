@@ -201,10 +201,6 @@ export function UtecProductRepeater() {
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <ScrollReveal className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-utec-cyan/20 bg-utec-cyan/5 mb-5">
-            <Radio className="w-4 h-4 text-utec-cyan" />
-            <span className="text-utec-cyan text-sm font-medium">Full Catalog</span>
-          </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-foreground mb-3">
             Explore the <span className="text-utec-cyan">Catalog</span>
           </h2>

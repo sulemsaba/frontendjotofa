@@ -42,13 +42,6 @@ export function StaffingPage() {
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-staffing-purple/20 bg-staffing-purple/5 mb-6">
-              <Users className="w-4 h-4 text-staffing-purple" />
-              <span className="text-staffing-purple text-sm font-medium">Staffing & Labour</span>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal delay={0.1}>
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-foreground mb-6">
               Workforce{" "}
               <span className="text-jotofa-accent">Solutions Partner</span>

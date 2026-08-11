@@ -209,12 +209,6 @@ export function UtecServices() {
         {/* Header */}
         <ScrollReveal className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12 sm:mb-14">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#d60b0b]/30 bg-[#d60b0b]/10 mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#d60b0b]" />
-              <span className="text-[#d60b0b] text-xs font-semibold tracking-wide uppercase">
-                What we do
-              </span>
-            </div>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white mb-3">
               Our <span className="text-[#d60b0b]">Services</span>
             </h2>

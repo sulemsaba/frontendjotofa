@@ -73,11 +73,6 @@ export function CSR() {
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <ScrollReveal className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-jotofa-accent/20 bg-jotofa-accent/5 mb-6">
-            <span className="text-jotofa-accent text-sm font-medium">
-              Social Impact
-            </span>
-          </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4">
             Corporate Social{" "}
             <span className="text-jotofa-accent">Responsibility</span>
