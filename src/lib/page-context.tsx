@@ -14,7 +14,6 @@ export type PageId =
   | "contact"
   | "utec"
   | "cleaning"
-  | "security"
   | "staffing"
   | "faq";
 
@@ -55,7 +54,6 @@ function pathnameToPageId(pathname: string | null): PageId {
     "contact",
     "utec",
     "cleaning",
-    "security",
     "staffing",
     "faq",
   ];
@@ -113,7 +111,7 @@ export function PageProvider({ children }: { children: ReactNode }) {
     const allPages: PageId[] = [
       "about", "businesses", "strategy", "csr", "news",
       "careers", "contact", "utec", "cleaning",
-      "security", "staffing", "faq",
+      "staffing", "faq",
     ];
     const schedule = (cb: () => void) =>
       "requestIdleCallback" in window

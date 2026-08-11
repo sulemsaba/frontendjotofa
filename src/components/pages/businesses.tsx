@@ -31,7 +31,7 @@ import { storeProductsPageUrl } from "@/lib/store-config";
    Static class strings so Tailwind can statically extract them.
    ────────────────────────────────────────────────────────────────────────── */
 const accentClasses: Record<
-  "utec-cyan" | "cleaning-green" | "security-red" | "staffing-purple",
+  "utec-cyan" | "cleaning-green" | "staffing-purple",
   { bg: string; text: string; border: string; hoverBorder: string; hoverBg: string }
 > = {
   "utec-cyan": {
@@ -47,13 +47,6 @@ const accentClasses: Record<
     border: "border-cleaning-green/20",
     hoverBorder: "hover:border-cleaning-green/40",
     hoverBg: "hover:bg-cleaning-green/[0.06]",
-  },
-  "security-red": {
-    bg: "bg-security-red/10",
-    text: "text-security-red",
-    border: "border-security-red/20",
-    hoverBorder: "hover:border-security-red/40",
-    hoverBg: "hover:bg-security-red/[0.06]",
   },
   "staffing-purple": {
     bg: "bg-staffing-purple/10",
@@ -111,7 +104,7 @@ interface Business {
   /** Outbound link (UTEC store). If absent, only the internal CTA shows */
   website?: { label: string; url: string };
   /** Per-subsidiary accent color used for badges, checks, and hover states */
-  accent: "utec-cyan" | "cleaning-green" | "security-red" | "staffing-purple";
+  accent: "utec-cyan" | "cleaning-green" | "staffing-purple";
 }
 
 const businesses: Business[] = [
@@ -159,25 +152,25 @@ const businesses: Business[] = [
     accent: "cleaning-green",
   },
   {
-    id: "security",
+    id: "staffing",
     index: "03",
-    name: "JOTOFA Security",
-    tagline: "Comprehensive Security",
-    sectors: ["Security", "Surveillance", "Risk"],
+    name: "Staffing & Labour",
+    tagline: "Workforce Solutions",
+    sectors: ["Recruitment", "HR", "Workforce"],
     services: [
-      "Manned Guarding",
-      "Electronic Surveillance",
-      "Event Security",
-      "Risk Assessment",
-      "Security Consulting",
+      "Recruitment Services",
+      "Labour Outsourcing",
+      "Payroll Management",
+      "Training & Development",
+      "HR Consulting",
     ],
     description:
-      "Robust security services from manned guarding to electronic surveillance. We protect people, assets, and operations with integrity and round-the-clock vigilance.",
-    icon: ShieldCheck,
-    image: "/images/subsidiaries/security.jpg",
-    logoSrc: "/images/security-logo.png",
-    logoMark: "JS",
-    accent: "security-red",
+      "Connecting talent with opportunity   skilled and semi-skilled labour supply, recruitment, and workforce management for industries across Tanzania.",
+    icon: Users,
+    image: "/images/subsidiaries/staffing.jpg",
+    logoSrc: "/images/staffing-logo.png",
+    logoMark: "JT",
+    accent: "staffing-purple",
   },
 ];
 
@@ -526,7 +519,7 @@ function GroupImpact() {
             <span className="text-jotofa-accent">JOTOFA Group</span>
           </h2>
           <p className="mx-auto max-w-2xl text-white/70 text-lg">
-            Five subsidiaries working as one   the aggregate reach of our
+            Four subsidiaries working as one   the aggregate reach of our
             combined operations across Tanzania and East Africa.
           </p>
         </ScrollReveal>

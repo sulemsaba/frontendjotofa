@@ -112,15 +112,7 @@ export const FALLBACK_ARTICLES: RawArticle[] = [
     content: "", author: "Courier & Logistics", date: "DEC 12, 2025", readTime: "3 MIN READ", image: "/images/courier.webp",
   },
   {
-    id: "f-5", slug: "security-iso-certification",
-    category: "Group Update", categoryKey: "group",
-    categoryColor: "text-jotofa-accent", categoryBg: "bg-jotofa-accent/10", categoryBorder: "border-jotofa-accent/20",
-    title: "JOTOFA Security Achieves ISO 18788:2015 Certification",
-    excerpt: "Our security division becomes one of the first private security firms in Tanzania to earn this international standard, reinforcing our commitment to operational excellence.",
-    content: "", author: "JOTOFA Group", date: "NOV 8, 2025", readTime: "2 MIN READ", image: "/images/security.webp",
-  },
-  {
-    id: "f-6", slug: "staffing-youth-program",
+    id: "f-5", slug: "staffing-youth-program",
     category: "Innovation", categoryKey: "innovation",
     categoryColor: "text-staffing-purple", categoryBg: "bg-staffing-purple/10", categoryBorder: "border-staffing-purple/20",
     title: "Staffing & Labour Launches Youth Employment Initiative Across Five Regions",
@@ -128,7 +120,7 @@ export const FALLBACK_ARTICLES: RawArticle[] = [
     content: "", author: "Staffing & Labour", date: "OCT 25, 2025", readTime: "4 MIN READ", image: "/images/staffing.webp",
   },
   {
-    id: "f-7", slug: "utec-cloud-partnership",
+    id: "f-6", slug: "utec-cloud-partnership",
     category: "UTEC Solutions", categoryKey: "utec",
     categoryColor: "text-utec-cyan", categoryBg: "bg-utec-cyan/10", categoryBorder: "border-utec-cyan/20",
     title: "UTEC Partners with Global Cloud Provider to Launch Tanzania's First Sovereign Cloud",
@@ -136,7 +128,7 @@ export const FALLBACK_ARTICLES: RawArticle[] = [
     content: "", author: "UTEC Solutions", date: "SEP 14, 2025", readTime: "5 MIN READ", image: "/images/utec.webp",
   },
   {
-    id: "f-8", slug: "cleaning-hospital-contracts",
+    id: "f-7", slug: "cleaning-hospital-contracts",
     category: "Group Update", categoryKey: "group",
     categoryColor: "text-jotofa-accent", categoryBg: "bg-jotofa-accent/10", categoryBorder: "border-jotofa-accent/20",
     title: "Cleaning & Maids Wins Three Major Hospital Sanitization Contracts",
@@ -144,7 +136,7 @@ export const FALLBACK_ARTICLES: RawArticle[] = [
     content: "", author: "JOTOFA Group", date: "AUG 3, 2025", readTime: "3 MIN READ", image: "/images/cleaning.webp",
   },
   {
-    id: "f-9", slug: "logistics-cross-border",
+    id: "f-8", slug: "logistics-cross-border",
     category: "Logistics", categoryKey: "logistics",
     categoryColor: "text-courier-orange", categoryBg: "bg-courier-orange/10", categoryBorder: "border-courier-orange/20",
     title: "Cross-Border Logistics Corridor Opens Between Dar es Salaam and Lusaka",
@@ -152,7 +144,7 @@ export const FALLBACK_ARTICLES: RawArticle[] = [
     content: "", author: "Courier & Logistics", date: "JUL 19, 2025", readTime: "3 MIN READ", image: "/images/courier.webp",
   },
   {
-    id: "f-10", slug: "csr-digital-literacy",
+    id: "f-9", slug: "csr-digital-literacy",
     category: "CSR", categoryKey: "csr",
     categoryColor: "text-cleaning-green", categoryBg: "bg-cleaning-green/10", categoryBorder: "border-cleaning-green/20",
     title: "JOTOFA Digital Literacy Program Reaches 10,000 Rural Students",
@@ -160,7 +152,7 @@ export const FALLBACK_ARTICLES: RawArticle[] = [
     content: "", author: "JOTOFA Group", date: "JUN 5, 2025", readTime: "4 MIN READ", image: "/images/jotofa-hero-3.webp",
   },
   {
-    id: "f-11", slug: "staffing-construction-boom",
+    id: "f-10", slug: "staffing-construction-boom",
     category: "Innovation", categoryKey: "innovation",
     categoryColor: "text-staffing-purple", categoryBg: "bg-staffing-purple/10", categoryBorder: "border-staffing-purple/20",
     title: "Staffing Division Supplies 800+ Workers for Tanzania's Infrastructure Boom",
@@ -168,28 +160,28 @@ export const FALLBACK_ARTICLES: RawArticle[] = [
     content: "", author: "Staffing & Labour", date: "MAY 22, 2025", readTime: "2 MIN READ", image: "/images/staffing.webp",
   },
   {
-    id: "f-12", slug: "security-tech-upgrade",
-    category: "UTEC Solutions", categoryKey: "utec",
-    categoryColor: "text-utec-cyan", categoryBg: "bg-utec-cyan/10", categoryBorder: "border-utec-cyan/20",
-    title: "JOTOFA Security Deploys AI-Powered Surveillance Across 40 Client Sites",
-    excerpt: "Integrating computer vision and real-time threat detection with UTEC's cloud platform, reducing false alarms by 70% and improving response times.",
-    content: "", author: "JOTOFA Group", date: "APR 10, 2025", readTime: "3 MIN READ", image: "/images/security.webp",
-  },
-  {
-    id: "f-13", slug: "group-annual-report-2025",
+    id: "f-11", slug: "group-annual-report-2025",
     category: "Group Update", categoryKey: "group",
     categoryColor: "text-jotofa-accent", categoryBg: "bg-jotofa-accent/10", categoryBorder: "border-jotofa-accent/20",
     title: "JOTOFA GROUP Reports 35% Revenue Growth in 2025 Annual Results",
-    excerpt: "The group's diversified portfolio drives record performance with ICT and logistics divisions leading growth, while cleaning and security expand market share across Tanzania.",
+    excerpt: "The group's diversified portfolio drives record performance with ICT and logistics divisions leading growth, while cleaning expands market share across Tanzania.",
     content: "", author: "JOTOFA Group", date: "MAR 1, 2025", readTime: "5 MIN READ", image: "/images/jotofa-hero-1.webp",
   },
   {
-    id: "f-14", slug: "courier-same-day-delivery",
+    id: "f-12", slug: "courier-same-day-delivery",
     category: "Logistics", categoryKey: "logistics",
     categoryColor: "text-courier-orange", categoryBg: "bg-courier-orange/10", categoryBorder: "border-courier-orange/20",
     title: "Same-Day Delivery Service Expands to All Major Tanzanian Cities",
     excerpt: "Courier & Logistics now offers guaranteed same-day parcel delivery in Dar es Salaam, Arusha, Mwanza, Dodoma, and Mbeya — powered by a new automated sorting hub.",
     content: "", author: "Courier & Logistics", date: "FEB 14, 2025", readTime: "2 MIN READ", image: "/images/courier.webp",
+  },
+  {
+    id: "f-13", slug: "group-annual-report-2024",
+    category: "Group Update", categoryKey: "group",
+    categoryColor: "text-jotofa-accent", categoryBg: "bg-jotofa-accent/10", categoryBorder: "border-jotofa-accent/20",
+    title: "JOTOFA GROUP Reports Strong Performance in 2024 Annual Results",
+    excerpt: "The group's diversified portfolio continues to deliver strong results across all four subsidiaries, with significant growth in ICT and logistics segments.",
+    content: "", author: "JOTOFA Group", date: "JAN 15, 2025", readTime: "5 MIN READ", image: "/images/jotofa-hero-1.webp",
   },
 ];
 

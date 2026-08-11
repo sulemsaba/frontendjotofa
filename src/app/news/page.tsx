@@ -4,7 +4,7 @@ import { News } from "@/components/news";
 export const metadata: Metadata = {
   title: "News & Insights",
   description:
-    "Stay updated with the latest news, insights, and press releases from JOTOFA GROUP and our subsidiaries   covering ICT, logistics, security, cleaning, and staffing in East Africa.",
+    "Stay updated with the latest news, insights, and press releases from JOTOFA GROUP and our subsidiaries   covering ICT, logistics, cleaning, and staffing in East Africa.",
   openGraph: {
     title: "News & Insights   JOTOFA GROUP",
     description:

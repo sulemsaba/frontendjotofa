@@ -20,7 +20,7 @@ function CareersSkeleton() {
 export const metadata: Metadata = {
   title: "Careers",
   description:
-    "Join JOTOFA GROUP   explore career opportunities across our five subsidiaries in ICT, logistics, cleaning, security, and staffing. Build your future with Tanzania's premier diversified holding company.",
+    "Join JOTOFA GROUP   explore career opportunities across our four subsidiaries in ICT, logistics, cleaning, and staffing. Build your future with Tanzania's premier diversified holding company.",
   openGraph: {
     title: "Careers   JOTOFA GROUP",
     description:

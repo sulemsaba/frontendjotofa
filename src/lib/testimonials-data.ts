@@ -90,7 +90,7 @@ export const strategyTestimonials: Testimonial[] = [
   },
   {
     quote:
-      "Their decision to verticalize across ICT, logistics, security, and staffing creates real moats. Each subsidiary feeds the others — and that integrated model is hard to replicate.",
+      "Their decision to verticalize across ICT, logistics, and staffing creates real moats. Each subsidiary feeds the others — and that integrated model is hard to replicate.",
     name: "Asha Mwakyusa",
     role: "Senior Analyst",
     company: "Twiga Equity Research",

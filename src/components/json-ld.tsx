@@ -14,7 +14,7 @@ export function JsonLd() {
     url: siteUrl,
     logo: `${siteUrl}/logo.svg`,
     description:
-      "A diversified Tanzanian holding company delivering excellence across industries through ICT, logistics, cleaning, security, and staffing solutions across East Africa.",
+      "A diversified Tanzanian holding company delivering excellence across industries through ICT, logistics, cleaning, and staffing solutions across East Africa.",
     address: {
       "@type": "PostalAddress",
       streetAddress: "HT House, 2nd Floor, Ubungo, Simu 2000 Road, P.O. Box 75075",
@@ -53,7 +53,7 @@ export function JsonLd() {
     name: "JOTOFA GROUP",
     url: siteUrl,
     description:
-      "Delivering excellence across industries through ICT, logistics, professional services, security, and staffing across Tanzania.",
+      "Delivering excellence across industries through ICT, logistics, professional services, and staffing across Tanzania.",
   };
 
   const breadcrumbSchema = {

@@ -25,7 +25,7 @@ import { storeProductsPageUrl } from "@/lib/store-config";
    Static class strings so Tailwind can statically extract them.
    ────────────────────────────────────────────────────────────────────────── */
 const accentClasses: Record<
-  "utec-cyan" | "cleaning-green" | "security-red" | "staffing-purple",
+  "utec-cyan" | "cleaning-green" | "staffing-purple",
   { bg: string; text: string; border: string; hoverBorder: string; hoverBg: string }
 > = {
   "utec-cyan": {
@@ -41,13 +41,6 @@ const accentClasses: Record<
     border: "border-cleaning-green/20",
     hoverBorder: "hover:border-cleaning-green/40",
     hoverBg: "hover:bg-cleaning-green/[0.06]",
-  },
-  "security-red": {
-    bg: "bg-security-red/10",
-    text: "text-security-red",
-    border: "border-security-red/20",
-    hoverBorder: "hover:border-security-red/40",
-    hoverBg: "hover:bg-security-red/[0.06]",
   },
   "staffing-purple": {
     bg: "bg-staffing-purple/10",
@@ -99,7 +92,7 @@ interface Subsidiary {
   storeUrl?: string;
   storeLabel?: string;
   /** Per-subsidiary accent color used for badges, checks, and hover states */
-  accent: "utec-cyan" | "cleaning-green" | "security-red" | "staffing-purple";
+  accent: "utec-cyan" | "cleaning-green" | "staffing-purple";
 }
 
 const subsidiaries: Subsidiary[] = [
@@ -148,29 +141,8 @@ const subsidiaries: Subsidiary[] = [
     accent: "cleaning-green",
   },
   {
-    id: "security",
-    index: "03",
-    name: "JOTOFA Security",
-    tagline: "Comprehensive Security",
-    sectors: ["Security", "Surveillance", "Risk"],
-    description:
-      "Robust security services from manned guarding to electronic surveillance   protecting people, assets, and operations with integrity and vigilance.",
-    services: [
-      "Manned Guarding",
-      "Electronic Surveillance",
-      "Event Security",
-      "Risk Assessment",
-      "Security Consulting",
-    ],
-    icon: ShieldCheck,
-    image: "/images/subsidiaries/security.jpg",
-    logoSrc: "/images/security-logo.png",
-    logoMark: "JS",
-    accent: "security-red",
-  },
-  {
     id: "staffing",
-    index: "04",
+    index: "03",
     name: "Staffing & Labour",
     tagline: "Workforce Solutions",
     sectors: ["Recruitment", "HR", "Workforce"],
@@ -295,51 +267,6 @@ const cleaningSlides = [
       "High-reach and machinery-safe cleaning methods",
       "Hazardous material handling and disposal compliance",
       "After-hours and weekend availability to avoid downtime",
-    ],
-  },
-];
-
-const securitySlides = [
-  {
-    src: "https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=1200&q=80",
-    title: "Security System Installations",
-    caption: "24/7 surveillance and access control tailored to protect your assets and monitor your premises.",
-    tab: "Installations",
-    heading: "Monitor & Control Your Premises",
-    description:
-      "Sleep better knowing every corner of your property is watched. We design and install integrated security systems that deter threats and provide evidence when you need it.",
-    benefits: [
-      "Never miss a thing with HD/UHD CCTV surveillance and remote mobile viewing",
-      "Control who enters with biometric access control and automated gate motors",
-      "Instant threat alerts from intruder alarms, fire detection, and vehicle screening systems",
-    ],
-  },
-  {
-    src: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=80",
-    title: "Manned Guarding",
-    caption: "Professional, licensed security officers who protect your people, assets, and reputation.",
-    tab: "Guarding",
-    heading: "Professional Manned Guarding",
-    description:
-      "Our security officers are trained, licensed, and deployed with clear protocols   providing visible deterrence and rapid response when it matters most.",
-    benefits: [
-      "Uniformed officers for corporate, residential, and event sites",
-      "Access control, patrols, and incident reporting included",
-      "24/7 supervision and backup coverage",
-    ],
-  },
-  {
-    src: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80",
-    title: "Electronic Surveillance",
-    caption: "Advanced surveillance and alarm systems designed to detect, deter, and document threats.",
-    tab: "Surveillance",
-    heading: "Intelligent Surveillance Systems",
-    description:
-      "From CCTV to smart alarms, we design systems that give you real-time visibility and recorded evidence   fully integrated with your existing infrastructure.",
-    benefits: [
-      "Remote monitoring via mobile app and desktop dashboards",
-      "AI-enhanced analytics for unusual activity detection",
-      "Maintenance plans and firmware updates included",
     ],
   },
 ];
@@ -769,9 +696,6 @@ export function Subsidiaries() {
   const cleaningHeaderTitle = "Premium Cleaning & Housekeeping Solutions";
   const cleaningHeaderSubtitle = "From commercial offices to residential homes   we deliver hygiene, consistency, and peace of mind across Tanzania.";
 
-  const securityHeaderTitle = "Professional Security & Surveillance Solutions";
-  const securityHeaderSubtitle = "Protecting people, assets, and operations with manned guarding, CCTV, and integrated security systems.";
-
   const staffingHeaderTitle = "Skilled Workforce & HR Solutions";
   const staffingHeaderSubtitle = "Recruitment, labour outsourcing, and HR consulting   connecting the right talent with the right opportunity.";
 
@@ -780,7 +704,7 @@ export function Subsidiaries() {
       {/* Section header */}
       <ScrollReveal className="text-center py-20 sm:py-24">
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4">
-          Five Arms, <span className="text-jotofa-accent">One Vision</span>
+          Four Arms, <span className="text-jotofa-accent">One Vision</span>
         </h2>
         <p className="mx-auto max-w-2xl text-muted-foreground text-lg">
           Each subsidiary is a pillar of our group   specialized, yet united
@@ -796,27 +720,17 @@ export function Subsidiaries() {
           const slides =
             subsidiary.id === "utec"
               ? utecSlides
-              : subsidiary.id === "cleaning"
-                ? cleaningSlides
-                : securitySlides;
+              : cleaningSlides;
 
           const headerTitle =
             subsidiary.id === "utec"
               ? "Complete Safety, Security & Technology Solutions"
-              : subsidiary.id === "cleaning"
-                ? cleaningHeaderTitle
-                : subsidiary.id === "security"
-                  ? securityHeaderTitle
-                  : staffingHeaderTitle;
+              : cleaningHeaderTitle;
 
           const headerSubtitle =
             subsidiary.id === "utec"
               ? "From CCTV installations to solar power systems   we protect and power businesses across Tanzania."
-              : subsidiary.id === "cleaning"
-                ? cleaningHeaderSubtitle
-                : subsidiary.id === "security"
-                  ? securityHeaderSubtitle
-                  : staffingHeaderSubtitle;
+              : cleaningHeaderSubtitle;
 
           return (
             <SubsidiaryShowcase

@@ -67,7 +67,6 @@ const defaultSubsidiaryTabs: SubsidiaryTab[] = [
   { key: "utec", label: "UTEC Solutions" },
   { key: "courier", label: "Courier & Logistics" },
   { key: "cleaning", label: "Cleaning & Maids" },
-  { key: "security", label: "Security" },
   { key: "staffing", label: "Staffing & Labour" },
   { key: "all", label: "All Jobs" },
 ];
@@ -86,16 +85,16 @@ const subsidiaryHeroData: Record<
   jotofa: {
     name: "JOTOFA Group",
     tagline:
-      "Delivering excellence across industries through ICT, logistics, professional services, security, and staffing",
+      "Delivering excellence across industries through ICT, logistics, professional services, and staffing",
     logo: "/images/jotofa-logo-dark.png",
     heroImage: "/images/jotofa-hero-1.jpeg",
-    stats: [
-      { label: "Employees", value: "1,200+" },
-      { label: "Subsidiaries", value: "5" },
-      { label: "Country", value: "Tanzania" },
-    ],
-  },
-  utec: {
+      stats: [
+        { label: "Employees", value: "1,200+" },
+        { label: "Subsidiaries", value: "4" },
+        { label: "Country", value: "Tanzania" },
+      ],
+    },
+    utec: {
     name: "UTEC Solutions",
     tagline:
       "Driving digital transformation through innovative technology solutions",
@@ -131,18 +130,6 @@ const subsidiaryHeroData: Record<
       { label: "Country", value: "Tanzania" },
     ],
   },
-  security: {
-    name: "JOTOFA Security",
-    tagline:
-      "Protecting businesses, assets, and people with trusted security solutions",
-    logo: "/images/security.png",
-    heroImage: "/images/jotofa-hero-2.jpeg",
-    stats: [
-      { label: "Employees", value: "350+" },
-      { label: "Focus", value: "Security" },
-      { label: "Country", value: "Tanzania" },
-    ],
-  },
   staffing: {
     name: "Staffing & Labour",
     tagline:
@@ -162,7 +149,7 @@ const subsidiaryHeroData: Record<
     heroImage: "/images/jotofa-hero-1.jpeg",
     stats: [
       { label: "Employees", value: "1,200+" },
-      { label: "Subsidiaries", value: "5" },
+      { label: "Subsidiaries", value: "4" },
       { label: "Country", value: "Tanzania" },
     ],
   },
@@ -183,7 +170,6 @@ const companies = [
   "UTEC Solutions",
   "Courier & Logistics",
   "Cleaning & Maids",
-  "JOTOFA Security",
   "Staffing & Labour",
 ];
 
@@ -192,7 +178,6 @@ const fallbackCompanyToSubKey: Record<string, string> = {
   "UTEC Solutions": "utec",
   "Courier & Logistics": "courier",
   "Cleaning & Maids": "cleaning",
-  "JOTOFA Security": "security",
   "Staffing & Labour": "staffing",
 };
 

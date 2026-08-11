@@ -21,7 +21,6 @@ import {
 const businessItems = [
   { id: "utec", label: "UTEC Solutions", description: "ICT & Telecommunications", page: "utec" as PageId, image: "/images/utec.png", logo: "/images/utec-logo.png" },
   { id: "cleaning", label: "Cleaning & Maids", description: "Professional Cleaning Services", page: "cleaning" as PageId, image: "/images/cleaning.png", logo: "/images/cleaning-logo.png" },
-  { id: "security", label: "Security", description: "Comprehensive Security Solutions", page: "security" as PageId, image: "/images/security.png", logo: "/images/security-logo.png" },
   { id: "staffing", label: "Staffing & Labour", description: "Workforce Solutions Partner", page: "staffing" as PageId, image: "/images/staffing.png", logo: "/images/staffing-logo.png" },
 ];
 
@@ -39,7 +38,7 @@ const navItems: NavItem[] = [
   { id: "contact", label: "Contact" },
 ];
 
-const subsidiariesPages: PageId[] = ["businesses", "utec", "cleaning", "security", "staffing"];
+const subsidiariesPages: PageId[] = ["businesses", "utec", "cleaning", "staffing"];
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -275,7 +274,7 @@ export function Navbar() {
                             <button onClick={() => handleNavClick("businesses")} className="text-[12px] text-jotofa-navy dark:text-white/70 hover:text-jotofa-navy/70 dark:hover:text-white transition-colors flex items-center gap-1.5 group/viewall font-medium cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm">
                               View All Subsidiaries <ArrowRight className="w-3 h-3 group-hover/viewall:translate-x-0.5 transition-transform" />
                             </button>
-                            <div className="text-[11px] text-jotofa-navy/50 dark:text-white/50">5 subsidiaries across Tanzania</div>
+                             <div className="text-[11px] text-jotofa-navy/50 dark:text-white/50">4 subsidiaries across Tanzania</div>
                           </div>
                         </div>
                       </motion.div>

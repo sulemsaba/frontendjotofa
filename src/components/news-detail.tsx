@@ -199,9 +199,9 @@ function generateArticleContent(article: NewsArticle): {
       ],
     },
     "Digital Transformation Across All Subsidiaries": {
-      lead: "JOTOFA GROUP has embarked on a comprehensive digital transformation journey, investing in end-to-end platforms that integrate operations across all five subsidiaries under a unified technology architecture.",
+      lead: "JOTOFA GROUP has embarked on a comprehensive digital transformation journey, investing in end-to-end platforms that integrate operations across all four subsidiaries under a unified technology architecture.",
       paragraphs: [
-        "The multi-year initiative, budgeted at approximately $15 million, encompasses cloud migration, enterprise resource planning, real-time analytics, and customer-facing digital platforms. The transformation touches every aspect of the group's operations   from GPS-enabled fleet tracking at JOTOFA Courier to automated scheduling systems at JOTOFA Cleaning, and from biometric access control at JOTOFA Security to digital recruitment pipelines at JOTOFA Staffing.",
+        "The multi-year initiative, budgeted at approximately $15 million, encompasses cloud migration, enterprise resource planning, real-time analytics, and customer-facing digital platforms. The transformation touches every aspect of the group's operations   from GPS-enabled fleet tracking at JOTOFA Courier to automated scheduling systems at JOTOFA Cleaning, and from advanced security systems to digital recruitment pipelines at JOTOFA Staffing.",
         "Central to the transformation is the JOTOFA Digital Core   a shared services platform built on modern cloud infrastructure that provides common capabilities including identity management, financial reporting, HR administration, and data analytics. By consolidating these functions, the group expects to reduce operational costs by 18% while improving data-driven decision-making across all business units.",
         "The transformation also includes a significant upskilling component, with over 300 employees enrolled in digital literacy and specialized technology training programs. Partnerships with global technology providers ensure access to cutting-edge tools, while local tech talent is being cultivated through internship programs and university collaborations, creating a sustainable pipeline of digital skills within the organization.",
       ],
@@ -310,8 +310,8 @@ function generateArticleContent(article: NewsArticle): {
   // Fallback generic content
   return {
     lead: `JOTOFA GROUP continues to strengthen its position as a leading diversified conglomerate in East Africa, with the latest development marking another significant milestone in the group's growth trajectory and strategic vision for the region.`,
-    paragraphs: [
-      "The announcement reflects JOTOFA GROUP's unwavering commitment to operational excellence and sustainable growth across all its business verticals. With five subsidiaries spanning ICT, logistics, facility management, security, and staffing, the group's integrated approach continues to set industry benchmarks in Tanzania and beyond.",
+      paragraphs: [
+        "The announcement reflects JOTOFA GROUP's unwavering commitment to operational excellence and sustainable growth across all its business verticals. With four subsidiaries spanning ICT, logistics, facility management, and staffing, the group's integrated approach continues to set industry benchmarks in Tanzania and beyond.",
       "The development is expected to create new employment opportunities and strengthen JOTOFA's market position across multiple sectors. Industry observers note that the group's diversified portfolio provides natural resilience against sector-specific economic fluctuations, while its continued investment in technology and human capital positions it for sustained long-term growth.",
       "Looking ahead, JOTOFA GROUP remains focused on its strategic priorities of geographic expansion, digital transformation, and community impact. The group's five-year strategic plan, unveiled last year, targets significant revenue growth driven by new market entry, service innovation, and operational efficiency improvements across all subsidiaries.",
     ],

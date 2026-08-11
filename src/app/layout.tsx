@@ -34,14 +34,13 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://jotofagroup.co.tz"),
   title: "JOTOFA GROUP   Delivering Excellence Across Industries",
   description:
-    "JOTOFA GROUP is a diversified Tanzanian holding company delivering excellence across industries through ICT, logistics, cleaning, security, and staffing solutions.",
+    "JOTOFA GROUP is a diversified Tanzanian holding company delivering excellence across industries through ICT, logistics, cleaning, and staffing solutions.",
   keywords: [
     "JOTOFA",
     "holding company",
     "Tanzania",
     "ICT",
     "logistics",
-    "security",
     "cleaning",
     "staffing",
     "East Africa",
@@ -55,7 +54,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "JOTOFA GROUP   Delivering Excellence Across Industries",
     description:
-      "A diversified Tanzanian holding company delivering excellence across industries through ICT, logistics, cleaning, security, and staffing solutions.",
+      "A diversified Tanzanian holding company delivering excellence across industries through ICT, logistics, cleaning, and staffing solutions.",
     type: "website",
     siteName: "JOTOFA GROUP",
   },
@@ -63,7 +62,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "JOTOFA GROUP   Delivering Excellence Across Industries",
     description:
-      "A diversified Tanzanian holding company delivering excellence across industries through ICT, logistics, cleaning, security, and staffing solutions.",
+      "A diversified Tanzanian holding company delivering excellence across industries through ICT, logistics, cleaning, and staffing solutions.",
   },
 };
 

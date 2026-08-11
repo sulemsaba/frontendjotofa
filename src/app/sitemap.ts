@@ -15,7 +15,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${siteUrl}/utec`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.9 },
     { url: `${siteUrl}/courier`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.9 },
     { url: `${siteUrl}/cleaning`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.9 },
-    { url: `${siteUrl}/security`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.9 },
     { url: `${siteUrl}/staffing`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.9 },
   ];
 

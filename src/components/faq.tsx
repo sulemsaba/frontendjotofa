@@ -8,7 +8,7 @@ const faqs = [
   {
     question: "What industries does JOTOFA GROUP operate in?",
     answer:
-      "JOTOFA GROUP operates across five key sectors: ICT & Telecommunications through UTEC Solutions, Courier & Logistics, Professional Cleaning & Maids services, Comprehensive Security solutions, and Staffing & Labour workforce services.",
+      "JOTOFA GROUP operates across four key sectors: ICT & Telecommunications through UTEC Solutions, Courier & Logistics, Professional Cleaning & Maids services, and Staffing & Labour workforce services.",
   },
   {
     question: "Where are JOTOFA GROUP's services available?",

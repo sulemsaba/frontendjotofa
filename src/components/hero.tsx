@@ -60,7 +60,6 @@ const newsSlides = [
   { title: "JOTOFA Group: Delivering Excellence Across Industries", image: "/images/jotofa-hero-2.jpeg" },
   { title: "Empowering Women in the Workplace", image: "/images/jotofa-hero-3.jpeg" },
   { title: "UTEC Deploys Smart City Infrastructure", image: "/images/jotofa-hero-1.jpeg" },
-  { title: "Security Division Awarded Top Certification", image: "/images/jotofa-hero-2.jpeg" },
 ];
 
 // ─── Ticker sub-component (pure CSS animation, no JS) ───────────────────
@@ -183,7 +182,7 @@ export function Hero() {
 
             <p className="mb-8 lead text-jotofa-text-secondary dark:text-white/80 max-w-[450px] animate-fade-up-delay-2">
               A diversified Tanzanian holding company driving excellence through
-              ICT, logistics, professional services, security, and staffing  
+              ICT, logistics, professional services, and staffing  
               empowering communities and industries alike.
             </p>
 

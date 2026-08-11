@@ -16,7 +16,6 @@ const pathLabels: Record<string, string> = {
   utec: "UTEC Solutions",
   courier: "Courier & Logistics",
   cleaning: "Cleaning & Maids",
-  security: "Security Services",
   staffing: "Staffing & Labour",
 };
 

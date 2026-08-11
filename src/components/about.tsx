@@ -70,13 +70,13 @@ const timeline: Milestone[] = [
     year: "2019",
     title: "The Ecosystem Grows",
     description:
-      "Introduced Courier & Logistics, Cleaning & Maids, and JOTOFA Security   creating a comprehensive network under one trusted group.",
+      "Introduced Courier & Logistics and Cleaning & Maids, creating a comprehensive network under one trusted group.",
   },
   {
     year: "2021",
     title: "Staffing & Labour",
     description:
-      "Completed our five-pillar ecosystem by connecting skilled talent with opportunity across Tanzania.",
+      "Completed our four-pillar ecosystem by connecting skilled talent with opportunity across Tanzania.",
   },
   {
     year: "2024",
@@ -96,7 +96,7 @@ const values: Value[] = [
   { icon: Handshake, title: "Integrity", description: "Honesty and transparency in every interaction" },
   { icon: Lightbulb, title: "Innovation", description: "Cutting-edge technology solving real problems" },
   { icon: Star, title: "Excellence", description: "Highest standards in everything we do" },
-  { icon: Link2, title: "Unity", description: "Five arms, one unified vision" },
+  { icon: Link2, title: "Unity", description: "Four arms, one unified vision" },
   { icon: Globe, title: "Impact", description: "Empowering communities across East Africa" },
 ];
 
@@ -125,13 +125,6 @@ const ecosystem: EcoSubsidiary[] = [
   },
   {
     number: "03",
-    name: "JOTOFA Security",
-    description: "Robust security from manned guarding to electronic surveillance",
-    page: "security",
-    logo: "/images/security-logo.png",
-  },
-  {
-    number: "04",
     name: "Staffing & Labour",
     description: "Connecting talent with opportunity   skilled and semi-skilled labour supply",
     page: "staffing",
@@ -145,7 +138,7 @@ interface Stat {
 }
 
 const stats: Stat[] = [
-  { number: "5", label: "Specialized Sectors" },
+  { number: "4", label: "Specialized Sectors" },
   { number: "500+", label: "Dedicated Employees" },
   { number: "10k+", label: "Clients Served" },
   { number: "24/7", label: "Operational Support" },
@@ -164,14 +157,14 @@ function AboutHero() {
               About JOTOFA Group
             </div>
             <h1 className="h1 text-foreground mb-6 sm:mb-8">
-              Five Arms.
+              Four Arms.
               <br />
               One Unified{" "}
               <span className="text-jotofa-accent">Vision.</span>
             </h1>
             <p className="lead max-w-[540px]">
               A diversified Tanzanian holding company driving excellence through
-              ICT, logistics, professional services, security, and staffing  
+              ICT, logistics, professional services, and staffing  
               empowering communities and industries across East Africa.
             </p>
           </motion.div>
@@ -208,7 +201,7 @@ function Story() {
           </h2>
           <p className="lead">
             What began as a vision to deliver integrated business solutions in
-            Tanzania has evolved into a regional powerhouse through five
+            Tanzania has evolved into a regional powerhouse through four
             specialized subsidiaries.
           </p>
         </motion.div>
@@ -257,9 +250,9 @@ function Purpose() {
                 Our Mission
               </h3>
               <p className="body-sm">
-                To empower businesses and communities across East Africa by
-                delivering specialized, high-quality solutions in technology,
-                logistics, facility management, security, and human capital.
+                 To empower businesses and communities across East Africa by
+                 delivering specialized, high-quality solutions in technology,
+                 logistics, facility management, and human capital.
               </p>
             </div>
 
@@ -269,7 +262,7 @@ function Purpose() {
               </h3>
               <p className="body-sm">
                 To be East Africa&apos;s most trusted and integrated holding
-                company, recognized for uniting five specialized arms under one
+                company, recognized for uniting four specialized arms under one
                 commitment to quality, innovation, and impact.
               </p>
             </div>
@@ -329,7 +322,7 @@ function Ecosystem() {
             Our Companies
           </div>
           <h2 className="h2 text-foreground mb-5 sm:mb-6">
-            Five Arms, <span className="text-jotofa-accent">One Vision</span>
+            Four Arms, <span className="text-jotofa-accent">One Vision</span>
           </h2>
           <p className="lead">
             Each subsidiary is a pillar of our group   specialized, yet united
@@ -413,7 +406,7 @@ function CTA() {
           </h2>
           <p className="lead mb-8 sm:mb-10 max-w-[600px] mx-auto">
             Whether you need ICT solutions, logistics support, facility
-            management, security services, or workforce solutions   JOTOFA Group
+            management, or workforce solutions   JOTOFA Group
             delivers excellence under one trusted roof.
           </p>
           <button
