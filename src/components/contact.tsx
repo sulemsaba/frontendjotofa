@@ -73,7 +73,7 @@ export function Contact() {
             <h2>Let Us Know How We<br />Can Help</h2>
             <p>JOTOFA GROUP maintains a focused and selective approach to communication. Our team reviews all submissions and responds where appropriate.</p>
 
-            <div className="space-y-6">
+            <div className="space-y-6 mt-10">
               <div className="flex items-start gap-3">
                 <div className="mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-border text-foreground/80">
                   <MapPin className="h-4 w-4" />
