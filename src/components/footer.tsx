@@ -54,8 +54,8 @@ const businessLinks: FooterLink[] = [
     iconAlt: "UTEC logo",
     iconType: "wordmark",
   },
-  { label: "Cleaning & Maids", page: "cleaning", iconSrc: "/images/cleaning-logo.png", iconAlt: "Cleaning & Maids logo", iconType: "icon" },
-  { label: "Staffing & Labour", page: "staffing", iconSrc: "/images/staffing-logo.png", iconAlt: "Staffing & Labour logo", iconType: "icon" },
+  { label: "Cleaning & Maids", page: "cleaning" },
+  { label: "Staffing & Labour", page: "staffing" },
 ];
 
 const socialLinks = [

@@ -20,8 +20,8 @@ import {
 
 const businessItems = [
   { id: "utec", label: "UTEC Solutions", description: "ICT & Telecommunications", page: "utec" as PageId, image: "/images/utec.png", logo: "/images/utec-logo.png" },
-  { id: "cleaning", label: "Cleaning & Maids", description: "Professional Cleaning Services", page: "cleaning" as PageId, image: "/images/cleaning.png", logo: "/images/cleaning-logo.png" },
-  { id: "staffing", label: "Staffing & Labour", description: "Workforce Solutions Partner", page: "staffing" as PageId, image: "/images/staffing.png", logo: "/images/staffing-logo.png" },
+  { id: "cleaning", label: "Cleaning & Maids", description: "Professional Cleaning Services", page: "cleaning" as PageId, image: "/images/cleaning.png" },
+  { id: "staffing", label: "Staffing & Labour", description: "Workforce Solutions Partner", page: "staffing" as PageId, image: "/images/staffing.png" },
 ];
 
 const PHONE_NUMBER = "0794 974 996";
@@ -233,15 +233,17 @@ export function Navbar() {
                                {businessItems.map((biz, idx) => (
                                  <button key={biz.id} onMouseEnter={() => { setHoveredBizIndex(idx); prefetchPage(biz.page); }} onClick={() => handleNavClick(biz.page)}
                                    className={`flex items-center gap-3 w-full text-left px-3 py-2 rounded-lg transition-all duration-200 group/biz cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent ${hoveredBizIndex === idx ? "bg-jotofa-navy/[0.04] dark:bg-white/[0.06]" : "hover:bg-jotofa-navy/[0.02] dark:hover:bg-white/[0.03]"}`}>
-                                   <div className="flex-shrink-0 w-9 h-9 rounded-lg overflow-hidden flex items-center justify-center bg-gray-50 border border-black/5 dark:bg-white/10 dark:border-white/20 shadow-sm">
-                                     <Image
-                                       src={biz.logo}
-                                       alt={`${biz.label} logo`}
-                                       width={28}
-                                       height={28}
-                                       className="w-7 h-7 object-contain"
-                                     />
-                                   </div>
+                                    <div className="flex-shrink-0 w-9 h-9 rounded-lg overflow-hidden flex items-center justify-center bg-gray-50 border border-black/5 dark:bg-white/10 dark:border-white/20 shadow-sm">
+                                      {biz.logo && (
+                                        <Image
+                                          src={biz.logo}
+                                          alt={`${biz.label} logo`}
+                                          width={28}
+                                          height={28}
+                                          className="w-7 h-7 object-contain"
+                                        />
+                                      )}
+                                    </div>
                                    <div className="min-w-0 flex-1">
                                      <div className={`text-xs font-medium ${hoveredBizIndex === idx ? "text-jotofa-navy dark:text-white font-semibold" : "text-jotofa-navy/70 dark:text-white/70 group-hover/biz:text-jotofa-navy dark:group-hover/biz:text-white/90"}`}>{biz.label}</div>
                                      <div className="text-[10px] text-jotofa-navy/50 dark:text-white/50 truncate mt-0.5">{biz.description}</div>
@@ -376,7 +378,9 @@ export function Navbar() {
                         {businessItems.map(biz => (
                           <button key={biz.id} onClick={() => handleNavClick(biz.page)} className="flex items-center gap-3 w-full text-left px-4 py-2 text-jotofa-navy/70 dark:text-white/70 hover:text-jotofa-navy dark:hover:text-white hover:bg-jotofa-navy/[0.03] dark:hover:bg-white/[0.04] rounded-lg">
                             <div className="w-6 h-6 rounded-md overflow-hidden flex items-center justify-center bg-white border border-black/5 dark:border-white/10 flex-shrink-0">
-                              <Image src={biz.logo} alt={`${biz.label} logo`} width={20} height={20} className="w-5 h-5 object-contain" />
+                              {biz.logo && (
+                                <Image src={biz.logo} alt={`${biz.label} logo`} width={20} height={20} className="w-5 h-5 object-contain" />
+                              )}
                             </div>
                             <span className="text-sm">{biz.label}</span>
                           </button>

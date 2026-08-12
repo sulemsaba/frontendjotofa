@@ -105,7 +105,7 @@ interface EcoSubsidiary {
   name: string;
   description: string;
   page: PageId;
-  logo: string;
+  logo?: string;
 }
 
 const ecosystem: EcoSubsidiary[] = [
@@ -121,14 +121,12 @@ const ecosystem: EcoSubsidiary[] = [
     name: "Cleaning & Maids",
     description: "Premium cleaning for commercial, residential, and industrial spaces",
     page: "cleaning",
-    logo: "/images/cleaning-logo.png",
   },
   {
     number: "03",
     name: "Staffing & Labour",
     description: "Connecting talent with opportunity   skilled and semi-skilled labour supply",
     page: "staffing",
-    logo: "/images/staffing-logo.png",
   },
 ];
 
@@ -343,13 +341,15 @@ function Ecosystem() {
               </span>
               <div className="flex items-center gap-3 sm:gap-4 min-w-0">
                 <div className="hidden sm:flex flex-shrink-0 w-11 h-11 rounded-lg overflow-hidden items-center justify-center bg-white border border-black/5 dark:border-white/10 shadow-sm">
-                  <Image
-                    src={item.logo}
-                    alt={`${item.name} logo`}
-                    width={32}
-                    height={32}
-                    className="w-8 h-8 object-contain"
-                  />
+                  {item.logo && (
+                    <Image
+                      src={item.logo}
+                      alt={`${item.name} logo`}
+                      width={32}
+                      height={32}
+                      className="w-8 h-8 object-contain"
+                    />
+                  )}
                 </div>
                 <div className="min-w-0">
                   <h3 className="h3 text-foreground mb-0.5 sm:mb-1">
