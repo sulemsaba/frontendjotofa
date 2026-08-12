@@ -268,7 +268,7 @@ function SplitSections() {
             src: business.image,
             title: service,
             caption: "",
-            tab: business.tagline,
+            tab: service,
             heading: service,
             description: business.description,
             benefits: [],
