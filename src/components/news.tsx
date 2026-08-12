@@ -81,9 +81,9 @@ const newsItems = [
   {
     category: "Logistics",
     categoryKey: "logistics",
-    categoryColor: "text-courier-orange",
-    categoryBg: "bg-courier-orange/10",
-    categoryBorder: "border-courier-orange/20",
+    categoryColor: "text-jotofa-accent",
+    categoryBg: "bg-jotofa-accent/10",
+    categoryBorder: "border-jotofa-accent/20",
     title: "JOTOFA Courier Launches Same-Day Delivery in Dar es Salaam",
     excerpt:
       "Our logistics subsidiary introduces express delivery services, reducing turnaround times for businesses and individuals across the metropolitan area.",

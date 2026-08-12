@@ -13,11 +13,11 @@ export const CATEGORY_MAP: Record<string, {
 }> = {
   "Company News":      { key: "group",       color: "text-jotofa-accent",     bg: "bg-jotofa-accent/10",   border: "border-jotofa-accent/20",   label: "Group Update" },
   "Group Update":       { key: "group",       color: "text-jotofa-accent",     bg: "bg-jotofa-accent/10",   border: "border-jotofa-accent/20",   label: "Group Update" },
-  "UTEC Solutions":     { key: "utec",        color: "text-utec-cyan",      bg: "bg-utec-cyan/10",       border: "border-utec-cyan/20",       label: "UTEC Solutions" },
-  "Technology":         { key: "utec",        color: "text-utec-cyan",      bg: "bg-utec-cyan/10",       border: "border-utec-cyan/20",       label: "UTEC Solutions" },
-  "CSR":                { key: "csr",         color: "text-cleaning-green", bg: "bg-cleaning-green/10",  border: "border-cleaning-green/20",  label: "CSR" },
-  "Innovation":         { key: "innovation",  color: "text-staffing-purple", bg: "bg-staffing-purple/10", border: "border-staffing-purple/20",  label: "Innovation" },
-  "Logistics":          { key: "logistics",   color: "text-courier-orange", bg: "bg-courier-orange/10",  border: "border-courier-orange/20",  label: "Logistics" },
+  "UTEC Solutions":     { key: "utec",        color: "text-jotofa-accent",      bg: "bg-jotofa-accent/10",       border: "border-jotofa-accent/20",       label: "UTEC Solutions" },
+  "Technology":         { key: "utec",        color: "text-jotofa-accent",      bg: "bg-jotofa-accent/10",       border: "border-jotofa-accent/20",       label: "UTEC Solutions" },
+  "CSR":                { key: "csr",         color: "text-jotofa-accent", bg: "bg-jotofa-accent/10",  border: "border-jotofa-accent/20",  label: "CSR" },
+  "Innovation":         { key: "innovation",  color: "text-jotofa-accent", bg: "bg-jotofa-accent/10", border: "border-jotofa-accent/20",  label: "Innovation" },
+  "Logistics":          { key: "logistics",   color: "text-jotofa-accent", bg: "bg-jotofa-accent/10",  border: "border-jotofa-accent/20",  label: "Logistics" },
   "Partnerships":       { key: "group",       color: "text-jotofa-accent",     bg: "bg-jotofa-accent/10",   border: "border-jotofa-accent/20",   label: "Partnerships" },
 };
 
@@ -90,7 +90,7 @@ export const FALLBACK_ARTICLES: RawArticle[] = [
   {
     id: "f-2", slug: "utec-5g-rollout-dar",
     category: "UTEC Solutions", categoryKey: "utec",
-    categoryColor: "text-utec-cyan", categoryBg: "bg-utec-cyan/10", categoryBorder: "border-utec-cyan/20",
+    categoryColor: "text-jotofa-accent", categoryBg: "bg-jotofa-accent/10", categoryBorder: "border-jotofa-accent/20",
     title: "UTEC Solutions Begins 5G Infrastructure Rollout in Dar es Salaam",
     excerpt: "A landmark telecommunications project bringing next-generation connectivity to Tanzania's commercial capital, starting with the Kariakoo and CBD districts.",
     content: "", author: "UTEC Solutions", date: "FEB 28, 2026", readTime: "3 MIN READ", image: "/images/utec.webp",
@@ -98,7 +98,7 @@ export const FALLBACK_ARTICLES: RawArticle[] = [
   {
     id: "f-3", slug: "csr-tree-planting-2026",
     category: "CSR", categoryKey: "csr",
-    categoryColor: "text-cleaning-green", categoryBg: "bg-cleaning-green/10", categoryBorder: "border-cleaning-green/20",
+    categoryColor: "text-jotofa-accent", categoryBg: "bg-jotofa-accent/10", categoryBorder: "border-jotofa-accent/20",
     title: "5,000 Trees Planted: JOTOFA's Green Tanzania Initiative Doubles Impact",
     excerpt: "Our environmental stewardship program reaches a new milestone with reforestation projects across Morogoro, Iringa, and Mbeya regions — doubling last year's target.",
     content: "", author: "JOTOFA Group", date: "JAN 20, 2026", readTime: "2 MIN READ", image: "/images/jotofa-hero-2.webp",
@@ -106,7 +106,7 @@ export const FALLBACK_ARTICLES: RawArticle[] = [
   {
     id: "f-4", slug: "courier-fleet-electrification",
     category: "Logistics", categoryKey: "logistics",
-    categoryColor: "text-courier-orange", categoryBg: "bg-courier-orange/10", categoryBorder: "border-courier-orange/20",
+    categoryColor: "text-jotofa-accent", categoryBg: "bg-jotofa-accent/10", categoryBorder: "border-jotofa-accent/20",
     title: "Courier & Logistics Launches Electric Vehicle Fleet for Last-Mile Delivery",
     excerpt: "Ten new electric delivery vans hit the streets of Dar es Salaam, reducing carbon emissions by an estimated 40% while improving delivery speed in urban zones.",
     content: "", author: "Courier & Logistics", date: "DEC 12, 2025", readTime: "3 MIN READ", image: "/images/courier.webp",
@@ -114,7 +114,7 @@ export const FALLBACK_ARTICLES: RawArticle[] = [
   {
     id: "f-5", slug: "staffing-youth-program",
     category: "Innovation", categoryKey: "innovation",
-    categoryColor: "text-staffing-purple", categoryBg: "bg-staffing-purple/10", categoryBorder: "border-staffing-purple/20",
+    categoryColor: "text-jotofa-accent", categoryBg: "bg-jotofa-accent/10", categoryBorder: "border-jotofa-accent/20",
     title: "Staffing & Labour Launches Youth Employment Initiative Across Five Regions",
     excerpt: "A new program connecting 500 young Tanzanians with vocational training and job placements in hospitality, manufacturing, and agriculture over the next 18 months.",
     content: "", author: "Staffing & Labour", date: "OCT 25, 2025", readTime: "4 MIN READ", image: "/images/staffing.webp",
@@ -122,7 +122,7 @@ export const FALLBACK_ARTICLES: RawArticle[] = [
   {
     id: "f-6", slug: "utec-cloud-partnership",
     category: "UTEC Solutions", categoryKey: "utec",
-    categoryColor: "text-utec-cyan", categoryBg: "bg-utec-cyan/10", categoryBorder: "border-utec-cyan/20",
+    categoryColor: "text-jotofa-accent", categoryBg: "bg-jotofa-accent/10", categoryBorder: "border-jotofa-accent/20",
     title: "UTEC Partners with Global Cloud Provider to Launch Tanzania's First Sovereign Cloud",
     excerpt: "A strategic partnership bringing localized cloud infrastructure to Tanzanian businesses and government agencies, ensuring data sovereignty and regulatory compliance.",
     content: "", author: "UTEC Solutions", date: "SEP 14, 2025", readTime: "5 MIN READ", image: "/images/utec.webp",
@@ -138,7 +138,7 @@ export const FALLBACK_ARTICLES: RawArticle[] = [
   {
     id: "f-8", slug: "logistics-cross-border",
     category: "Logistics", categoryKey: "logistics",
-    categoryColor: "text-courier-orange", categoryBg: "bg-courier-orange/10", categoryBorder: "border-courier-orange/20",
+    categoryColor: "text-jotofa-accent", categoryBg: "bg-jotofa-accent/10", categoryBorder: "border-jotofa-accent/20",
     title: "Cross-Border Logistics Corridor Opens Between Dar es Salaam and Lusaka",
     excerpt: "A new streamlined customs clearance process reduces transit time from 5 days to 48 hours for goods moving between Tanzania and Zambia along the TAZARA corridor.",
     content: "", author: "Courier & Logistics", date: "JUL 19, 2025", readTime: "3 MIN READ", image: "/images/courier.webp",
@@ -146,7 +146,7 @@ export const FALLBACK_ARTICLES: RawArticle[] = [
   {
     id: "f-9", slug: "csr-digital-literacy",
     category: "CSR", categoryKey: "csr",
-    categoryColor: "text-cleaning-green", categoryBg: "bg-cleaning-green/10", categoryBorder: "border-cleaning-green/20",
+    categoryColor: "text-jotofa-accent", categoryBg: "bg-jotofa-accent/10", categoryBorder: "border-jotofa-accent/20",
     title: "JOTOFA Digital Literacy Program Reaches 10,000 Rural Students",
     excerpt: "Our flagship education initiative expands to 50 schools across rural Tanzania, providing tablets, internet access, and teacher training in digital skills.",
     content: "", author: "JOTOFA Group", date: "JUN 5, 2025", readTime: "4 MIN READ", image: "/images/jotofa-hero-3.webp",
@@ -154,7 +154,7 @@ export const FALLBACK_ARTICLES: RawArticle[] = [
   {
     id: "f-10", slug: "staffing-construction-boom",
     category: "Innovation", categoryKey: "innovation",
-    categoryColor: "text-staffing-purple", categoryBg: "bg-staffing-purple/10", categoryBorder: "border-staffing-purple/20",
+    categoryColor: "text-jotofa-accent", categoryBg: "bg-jotofa-accent/10", categoryBorder: "border-jotofa-accent/20",
     title: "Staffing Division Supplies 800+ Workers for Tanzania's Infrastructure Boom",
     excerpt: "Supporting major construction projects including the Standard Gauge Railway and Julius Nyerere Hydropower Station with skilled and semi-skilled labour.",
     content: "", author: "Staffing & Labour", date: "MAY 22, 2025", readTime: "2 MIN READ", image: "/images/staffing.webp",
@@ -170,7 +170,7 @@ export const FALLBACK_ARTICLES: RawArticle[] = [
   {
     id: "f-12", slug: "courier-same-day-delivery",
     category: "Logistics", categoryKey: "logistics",
-    categoryColor: "text-courier-orange", categoryBg: "bg-courier-orange/10", categoryBorder: "border-courier-orange/20",
+    categoryColor: "text-jotofa-accent", categoryBg: "bg-jotofa-accent/10", categoryBorder: "border-jotofa-accent/20",
     title: "Same-Day Delivery Service Expands to All Major Tanzanian Cities",
     excerpt: "Courier & Logistics now offers guaranteed same-day parcel delivery in Dar es Salaam, Arusha, Mwanza, Dodoma, and Mbeya — powered by a new automated sorting hub.",
     content: "", author: "Courier & Logistics", date: "FEB 14, 2025", readTime: "2 MIN READ", image: "/images/courier.webp",

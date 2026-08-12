@@ -59,40 +59,22 @@
        • Pink         #FF4D7D  (RGB 255, 77, 125)
      ════════════════════════════════════════════════════════════ */
 
-  /* Primary — JOTOFA Blue (buttons, headings, strong elements) */
-  --color-jotofa-navy: #003B64;
-  --color-jotofa-navy-deep: #002A4A;
-  --color-jotofa-navy-mid: #00355A;
-  --color-jotofa-navy-card: #0A4A75;
-  --color-jotofa-navy-sidebar: #00253F;
+   /* Primary — JOTOFA Blue (text, brand, strong elements) */
+   --color-jotofa-navy: #003B64;
+   --color-jotofa-navy-deep: #002A4A;
+   --color-jotofa-navy-mid: #00355A;
+   --color-jotofa-navy-card: #0A4A75;
+   --color-jotofa-navy-sidebar: #00253F;
 
-  /* Accent — Teal (highlights, CTAs, links, badges) */
-  --color-jotofa-accent: #00A9B7;
-  --color-jotofa-accent-light: #33BAC6;
-  --color-jotofa-accent-dark: #008799;
-  --color-jotofa-hover-accent: #00BCA8;
+   /* Accent — Teal (design accent, CTAs, links, highlights) */
+   --color-jotofa-accent: #00A9B7;
+   --color-jotofa-accent-light: #33BAC6;
+   --color-jotofa-accent-dark: #008799;
+   --color-jotofa-hover-accent: #00BCA8;
 
-  /* Text hierarchy */
-  --color-jotofa-text-secondary: #5E6A75;
-  --color-jotofa-text-muted: #999DA0;
-
-  /* Subsidiary colours — official complementary palette */
-  --color-utec-cyan: #68CCD1;        /* UTEC brand teal */
-  --color-utec-red: #d60b0b;         /* UTEC brand red */
-  --color-courier-orange: #FF4D7D;   /* Pink (no orange in guide) */
-  --color-cleaning-green: #8ED644;   /* Lime Green */
-  --color-security-red: #E73323;     /* Red */
-  --color-staffing-purple: #8B1B5E;  /* Burgundy */
-
-  /* Full complementary palette — for future use */
-  --color-jotofa-teal: #00A9B7;
-  --color-jotofa-lavender: #D9B3CE;
-  --color-jotofa-lime: #8ED644;
-  --color-jotofa-red: #E73323;
-  --color-jotofa-burgundy: #8B1B5E;
-  --color-jotofa-light-blue: #6ED2EC;
-  --color-jotofa-gray: #CCD1D1;
-  --color-jotofa-pink: #FF4D7D;
+   /* Text hierarchy */
+   --color-jotofa-text-secondary: #5E6A75;
+   --color-jotofa-text-muted: #999DA0;
 
   /* ─── Social brand colors (used in footer, contact, etc.) ─── */
   --color-social-linkedin: #0A66C2;
@@ -142,10 +124,10 @@
 
   /* Charts */
   --chart-1: #00A9B7;
-  --chart-2: #FF4D7D;
-  --chart-3: #8ED644;
-  --chart-4: #E73323;
-  --chart-5: #8B1B5E;
+  --chart-2: #00A9B7;
+  --chart-3: #00A9B7;
+  --chart-4: #00A9B7;
+  --chart-5: #00A9B7;
 
   /* Sidebar */
   --sidebar: #003B64;
@@ -197,10 +179,10 @@
 
   /* Charts */
   --chart-1: #00A9B7;
-  --chart-2: #FF4D7D;
-  --chart-3: #8ED644;
-  --chart-4: #E73323;
-  --chart-5: #8B1B5E;
+  --chart-2: #00A9B7;
+  --chart-3: #00A9B7;
+  --chart-4: #00A9B7;
+  --chart-5: #00A9B7;
 
   /* Sidebar */
   --sidebar: #00253F;

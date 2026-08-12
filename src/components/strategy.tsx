@@ -42,8 +42,8 @@ const objectives = [
     title: "Strategic Partnerships",
     description:
       "Build enduring partnerships with local and international organizations, fostering mutual growth and expanding our reach and capabilities.",
-    accent: "text-courier-orange",
-    bg: "bg-courier-orange/10",
+    accent: "text-jotofa-accent",
+    bg: "bg-jotofa-accent/10",
   },
   {
     icon: BarChart3,
