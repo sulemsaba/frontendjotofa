@@ -454,7 +454,7 @@ export function SubsidiaryShowcase({
             <div className="flex gap-6 border-b border-black/10 dark:border-white/10 mb-6 overflow-x-auto" role="tablist">
               {slides.map((item, i) => (
                 <button
-                  key={item.tab}
+                  key={i}
                   type="button"
                   role="tab"
                   aria-selected={i === current}
