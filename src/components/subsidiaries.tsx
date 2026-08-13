@@ -376,12 +376,13 @@ export function SubsidiaryShowcase({
                   i === current ? "opacity-100 z-[2]" : "opacity-0 z-[1]"
                 }`}
               >
-                <img
-                  src={item.src}
-                  alt={item.title}
-                  loading={i === 0 ? "eager" : "lazy"}
-                  className="w-full h-full object-cover"
-                />
+                 <Image
+                   src={item.src}
+                   alt={item.title}
+                   fill
+                   loading={i === 0 ? "eager" : "lazy"}
+                   className="object-cover"
+                 />
                 <div
                   className="absolute inset-0 pointer-events-none"
                   style={{
@@ -454,9 +455,16 @@ export function SubsidiaryShowcase({
                 <button
                   key={i}
                   type="button"
+                  id={`tab-${i}`}
                   role="tab"
                   aria-selected={i === current}
+                  aria-controls={`tabpanel-${i}`}
+                  tabIndex={i === current ? 0 : -1}
                   onClick={() => activate(i)}
+                  onKeyDown={(e) => {
+                    if (e.key === "ArrowRight") activate(current + 1);
+                    if (e.key === "ArrowLeft") activate(current - 1);
+                  }}
                   className={`px-1 py-2.5 text-sm font-medium whitespace-nowrap transition-colors relative ${
                     i === current
                       ? "text-foreground font-semibold"
@@ -472,7 +480,7 @@ export function SubsidiaryShowcase({
             </div>
 
             {/* Panel */}
-            <div className="flex-1">
+            <div id={`tabpanel-${current}`} role="tabpanel" aria-labelledby={`tab-${current}`} tabIndex={0} className="flex-1">
               <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-3">{slide.heading}</h3>
               <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-6">{slide.description}</p>
               <ul className="space-y-3 mb-8">

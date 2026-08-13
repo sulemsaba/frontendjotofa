@@ -70,11 +70,16 @@ export function UTECPage() {
     };
   }, [isModalOpen]);
 
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert("Quote request sent. We'll reply within 1 hour.");
-    setIsModalOpen(false);
-    e.currentTarget.reset();
+    setIsSubmitted(true);
+    setTimeout(() => {
+      setIsModalOpen(false);
+      setIsSubmitted(false);
+      e.currentTarget.reset();
+    }, 2000);
   };
 
   return (
@@ -294,18 +299,24 @@ export function UTECPage() {
               &times;
             </button>
             <h3 className="text-xl font-bold text-gray-900 mb-6">Free Quote</h3>
-            <form onSubmit={handleSubmit}>
-              <label className="block mb-1.5 text-sm font-semibold text-gray-700">Full Name</label>
-              <input type="text" placeholder="e.g. John Doe" required className="w-full mb-4 px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-[#d60b0b]/40 focus:border-[#d60b0b]" />
+            {isSubmitted ? (
+              <div className="flex items-center gap-2 rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-800">
+                <CheckCircle2 className="h-4 w-4" />
+                Quote request sent. We'll reply within 1 hour.
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit}>
+              <label htmlFor="utec-name" className="block mb-1.5 text-sm font-semibold text-gray-700">Full Name</label>
+              <input id="utec-name" type="text" placeholder="e.g. John Doe" required autoComplete="name" className="w-full mb-4 px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-[#d60b0b]/40 focus:border-[#d60b0b]" />
 
-              <label className="block mb-1.5 text-sm font-semibold text-gray-700">Email Address</label>
-              <input type="email" placeholder="john@domain.com" required className="w-full mb-4 px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-[#d60b0b]/40 focus:border-[#d60b0b]" />
+              <label htmlFor="utec-email" className="block mb-1.5 text-sm font-semibold text-gray-700">Email Address</label>
+              <input id="utec-email" type="email" placeholder="john@domain.com" required autoComplete="email" className="w-full mb-4 px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-[#d60b0b]/40 focus:border-[#d60b0b]" />
 
-              <label className="block mb-1.5 text-sm font-semibold text-gray-700">Phone Number</label>
-              <input type="tel" placeholder="+255 700 000 000" required className="w-full mb-4 px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-[#d60b0b]/40 focus:border-[#d60b0b]" />
+              <label htmlFor="utec-phone" className="block mb-1.5 text-sm font-semibold text-gray-700">Phone Number</label>
+              <input id="utec-phone" type="tel" placeholder="+255 700 000 000" required autoComplete="tel" className="w-full mb-4 px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-[#d60b0b]/40 focus:border-[#d60b0b]" />
 
-              <label className="block mb-1.5 text-sm font-semibold text-gray-700">Message</label>
-              <textarea placeholder="Tell us about your telecom needs..." rows={4} className="w-full mb-5 px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-[#d60b0b]/40 focus:border-[#d60b0b] resize-vertical" />
+              <label htmlFor="utec-message" className="block mb-1.5 text-sm font-semibold text-gray-700">Message</label>
+              <textarea id="utec-message" placeholder="Tell us about your telecom needs..." rows={4} className="w-full mb-5 px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-[#d60b0b]/40 focus:border-[#d60b0b] resize-vertical"></textarea>
 
               <button type="submit" className="w-full py-3 bg-[#d60b0b] hover:bg-[#b00909] text-white font-semibold rounded transition-colors">
                 Send Request

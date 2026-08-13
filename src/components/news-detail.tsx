@@ -429,7 +429,7 @@ export function NewsDetail({ article, relatedArticles, onBack, onArticleClick }:
             transition={{ duration: 0.5, delay: 0.1 }}
           >
             {/* Breadcrumbs */}
-            <nav className="text-xs text-muted-foreground mb-4 flex items-center gap-1.5 flex-wrap">
+            <nav className="text-xs text-muted-foreground mb-4 flex items-center gap-1.5 flex-wrap" aria-label="Breadcrumb">
               <button onClick={() => setActivePage("home")} className="hover:text-jotofa-accent transition-colors">
                 Home
               </button>
@@ -438,7 +438,7 @@ export function NewsDetail({ article, relatedArticles, onBack, onArticleClick }:
                 News & Insights
               </button>
               <span>&bull;</span>
-              <span className="font-semibold text-foreground">{article.category}</span>
+              <span className="font-semibold text-foreground" aria-current="page">{article.category}</span>
             </nav>
 
             {/* Article Title */}
@@ -586,18 +586,30 @@ export function NewsDetail({ article, relatedArticles, onBack, onArticleClick }:
                 {relatedArticles.map((related) => {
                   const relImage = getRelatedImage(related.categoryKey);
                   return (
-                    <div
-                      key={related.title}
-                      onClick={() => {
-                        if (onArticleClick) {
-                          onArticleClick(related);
-                          window.scrollTo({ top: 0, behavior: "smooth" });
-                        } else {
-                          onBack();
-                        }
-                      }}
-                      className="flex gap-3 group cursor-pointer"
-                    >
+                     <button
+                       type="button"
+                       key={related.title}
+                       onClick={() => {
+                         if (onArticleClick) {
+                           onArticleClick(related);
+                           window.scrollTo({ top: 0, behavior: "smooth" });
+                         } else {
+                           onBack();
+                         }
+                       }}
+                       onKeyDown={(e) => {
+                         if (e.key === "Enter" || e.key === " ") {
+                           e.preventDefault();
+                           if (onArticleClick) {
+                             onArticleClick(related);
+                             window.scrollTo({ top: 0, behavior: "smooth" });
+                           } else {
+                             onBack();
+                           }
+                         }
+                       }}
+                       className="flex gap-3 group cursor-pointer text-left w-full"
+                     >
                       <div
                         className="w-[70px] h-[60px] rounded-lg bg-cover bg-center shrink-0 border border-border"
                         style={{ backgroundImage: `url('${relImage}')` }}
@@ -610,10 +622,10 @@ export function NewsDetail({ article, relatedArticles, onBack, onArticleClick }:
                           <Calendar className="w-3 h-3" />
                           {related.date}
                         </span>
-                      </div>
-                    </div>
-                  );
-                })}
+                       </div>
+                     </button>
+                   );
+                 })}
               </div>
             </section>
 
@@ -665,9 +677,12 @@ export function NewsDetail({ article, relatedArticles, onBack, onArticleClick }:
           className="relative rounded-3xl overflow-hidden min-h-[260px] sm:min-h-[300px] flex items-center"
         >
           {/* Background image */}
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: "url('/images/jotofa-hero-3.jpeg')" }}
+          <Image
+            src="/images/jotofa-hero-3.jpeg"
+            alt=""
+            fill
+            className="object-cover"
+            sizes="100vw"
           />
           {/* Gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-r from-jotofa-navy/90 via-jotofa-navy/70 to-jotofa-navy/30" />

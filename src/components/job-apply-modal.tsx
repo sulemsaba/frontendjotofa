@@ -166,7 +166,7 @@ function FileUploadField({
             </div>
           ))}
           {allowMultiple && (
-            <label tabIndex={0} className="flex items-center gap-2 p-2.5 rounded-lg border-2 border-dashed border-input cursor-pointer hover:bg-secondary/50 transition-colors">
+            <label tabIndex={0} className="flex items-center gap-2 p-2.5 rounded-lg border-2 border-dashed border-input cursor-pointer hover:bg-secondary/50 transition-colors" onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); (e.target as HTMLElement).click(); } }}>
               <Plus className="w-4 h-4 text-muted-foreground shrink-0" />
               <span className="text-xs text-muted-foreground">Add another file</span>
               <input
@@ -187,6 +187,7 @@ function FileUploadField({
           className={`flex items-center gap-3 p-4 rounded-lg border-2 border-dashed cursor-pointer hover:bg-secondary/50 transition-colors ${
             error ? "border-red-500" : "border-input"
           }`}
+          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); (e.target as HTMLElement).click(); } }}
         >
           <Upload className="w-5 h-5 text-muted-foreground shrink-0" />
           <span className="text-sm text-muted-foreground">{helperText}</span>
@@ -716,7 +717,7 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                                 </button>
                               </div>
                             ))}
-                            <label tabIndex={0} className="flex items-center gap-2 p-2.5 rounded-lg border-2 border-dashed border-input cursor-pointer hover:bg-secondary/50 transition-colors">
+                            <label tabIndex={0} className="flex items-center gap-2 p-2.5 rounded-lg border-2 border-dashed border-input cursor-pointer hover:bg-secondary/50 transition-colors" onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); (e.target as HTMLElement).click(); } }}>
                               <Plus className="w-4 h-4 text-muted-foreground shrink-0" />
                               <span className="text-xs text-muted-foreground">Add another certificate</span>
                               <input
@@ -731,10 +732,11 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                             </label>
                           </div>
                         ) : (
-                          <label
-                            tabIndex={0}
-                            className="flex items-center gap-3 p-4 rounded-lg border-2 border-dashed border-input cursor-pointer hover:bg-secondary/50 transition-colors"
-                          >
+                           <label
+                             tabIndex={0}
+                             className="flex items-center gap-3 p-4 rounded-lg border-2 border-dashed border-input cursor-pointer hover:bg-secondary/50 transition-colors"
+                             onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); (e.target as HTMLElement).click(); } }}
+                           >
                             <Upload className="w-5 h-5 text-muted-foreground shrink-0" />
                             <span className="text-sm text-muted-foreground">
                               Upload academic certificates (PDF, DOC, DOCX, JPG, PNG, max 5MB each)
@@ -971,10 +973,11 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                             </label>
                           </div>
                         ) : (
-                          <label
-                            tabIndex={0}
-                            className="flex items-center gap-2 p-3 rounded-lg border-2 border-dashed border-input cursor-pointer hover:bg-secondary/50 transition-colors"
-                          >
+                           <label
+                             tabIndex={0}
+                             className="flex items-center gap-2 p-3 rounded-lg border-2 border-dashed border-input cursor-pointer hover:bg-secondary/50 transition-colors"
+                             onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); (e.target as HTMLElement).click(); } }}
+                           >
                             <Upload className="w-4 h-4 text-muted-foreground shrink-0" />
                             <span className="text-xs text-muted-foreground">
                               Upload certificates (PDF, DOCX, JPG, PNG)

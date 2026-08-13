@@ -59,7 +59,6 @@ export function JsonLd() {
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    name: pathname === "/" ? "Home" : `Breadcrumb - ${pathname}`,
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
       ...(pathname !== "/"

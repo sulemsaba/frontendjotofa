@@ -217,7 +217,7 @@ export function UtecServices() {
               enterprise - engineered, deployed, and supported locally.
             </p>
           </div>
-          <p className="text-sm text-white/50 sm:text-right max-w-xs">
+           <p className="text-sm text-white/80 sm:text-right max-w-xs">
             Five core expertise areas, one accountable delivery team.
           </p>
         </ScrollReveal>

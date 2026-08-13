@@ -95,10 +95,10 @@ export function Strategy() {
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <ScrollReveal className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4">
             Strategic{" "}
             <span className="text-jotofa-accent">Objectives</span>
-          </h2>
+          </h1>
           <p className="mx-auto max-w-2xl text-muted-foreground text-lg">
             Our roadmap for growth, impact, and sustainable value creation  
             guiding every decision and investment across the group.

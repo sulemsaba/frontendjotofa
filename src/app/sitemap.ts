@@ -10,10 +10,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${siteUrl}/strategy`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.8 },
     { url: `${siteUrl}/csr`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.8 },
     { url: `${siteUrl}/news`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.9 },
+    { url: `${siteUrl}/faq`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.8 },
     { url: `${siteUrl}/careers`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.8 },
     { url: `${siteUrl}/contact`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.7 },
     { url: `${siteUrl}/utec`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.9 },
-    { url: `${siteUrl}/courier`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.9 },
     { url: `${siteUrl}/cleaning`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.9 },
     { url: `${siteUrl}/staffing`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.9 },
   ];

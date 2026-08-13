@@ -70,7 +70,7 @@ export function Contact() {
               </svg>
               Get in Touch
             </div>
-            <h2>Let Us Know How We<br />Can Help</h2>
+            <h1>Let Us Know How We<br />Can Help</h1>
             <p>JOTOFA GROUP maintains a focused and selective approach to communication. Our team reviews all submissions and responds where appropriate.</p>
 
             <div className="space-y-6 mt-10">
@@ -136,28 +136,34 @@ export function Contact() {
                 )}
                 <div className="form-row">
                   <div className="form-group">
-                    <input type="text" name="firstName" placeholder="First Name*" required value={formState.firstName} onChange={handleChange} />
+                    <label htmlFor="firstName">First Name <span aria-label="required">*</span></label>
+                    <input type="text" id="firstName" name="firstName" placeholder="First Name" required autoComplete="given-name" value={formState.firstName} onChange={handleChange} aria-required="true" />
                   </div>
                   <div className="form-group">
-                    <input type="text" name="lastName" placeholder="Last Name*" required value={formState.lastName} onChange={handleChange} />
+                    <label htmlFor="lastName">Last Name <span aria-label="required">*</span></label>
+                    <input type="text" id="lastName" name="lastName" placeholder="Last Name" required autoComplete="family-name" value={formState.lastName} onChange={handleChange} aria-required="true" />
                   </div>
                 </div>
 
                 <div className="form-row">
                   <div className="form-group">
-                    <input type="email" name="email" placeholder="Email Address*" required value={formState.email} onChange={handleChange} />
+                    <label htmlFor="email">Email Address <span aria-label="required">*</span></label>
+                    <input type="email" id="email" name="email" placeholder="Email Address" required autoComplete="email" value={formState.email} onChange={handleChange} aria-required="true" />
                   </div>
                   <div className="form-group">
-                    <input type="text" name="company" placeholder="Company (optional)" value={formState.company} onChange={handleChange} />
+                    <label htmlFor="company">Company</label>
+                    <input type="text" id="company" name="company" placeholder="Company" autoComplete="organization" value={formState.company} onChange={handleChange} />
                   </div>
                 </div>
 
                 <div className="form-group full-width">
-                  <input type="tel" name="phone" placeholder="Phone Number*" required value={formState.phone} onChange={handleChange} />
+                  <label htmlFor="phone">Phone Number <span aria-label="required">*</span></label>
+                  <input type="tel" id="phone" name="phone" placeholder="Phone Number" required autoComplete="tel" value={formState.phone} onChange={handleChange} aria-required="true" />
                 </div>
 
                 <div className="form-group full-width">
-                  <select name="service" value={formState.service} onChange={handleChange} required>
+                  <label htmlFor="service">Service Interested In <span aria-label="required">*</span></label>
+                  <select id="service" name="service" value={formState.service} onChange={handleChange} required aria-required="true">
                     <option value="" disabled>What services are you interested in?</option>
                     <option value="consulting">Business Consulting</option>
                     <option value="investment">Investment Services</option>
@@ -168,12 +174,13 @@ export function Contact() {
                 </div>
 
                 <div className="form-group full-width">
-                  <textarea name="message" placeholder="Describe your inquiry..." required rows={5} value={formState.message} onChange={handleChange} />
+                  <label htmlFor="message">Message <span aria-label="required">*</span></label>
+                  <textarea id="message" name="message" placeholder="Describe your inquiry..." required rows={5} value={formState.message} onChange={handleChange} aria-required="true"></textarea>
                 </div>
 
                 <div className="checkbox-group">
                   <input type="checkbox" id="consent" name="consent" checked={formState.consent} onChange={handleChange} required />
-                  <label htmlFor="consent">By clicking submit, I agree to the <a href="#">processing of personal data</a>.</label>
+                  <label htmlFor="consent">By clicking submit, I agree to the <a href="/privacy">processing of personal data</a>.</label>
                 </div>
 
                 <button type="submit" className="submit-btn" disabled={isSubmitting}>

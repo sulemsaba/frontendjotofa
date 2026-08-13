@@ -463,6 +463,11 @@ export function Careers() {
     <section
       className="relative min-h-screen bg-background"
       onClick={closeAllDropdowns}
+      onKeyDown={(e) => {
+        if (e.key === "Escape") {
+          closeAllDropdowns();
+        }
+      }}
     >
       {/* ═══════════════════════════════════════
           1. HERO BANNER (max-w-6xl   wider than job list)
@@ -545,9 +550,9 @@ export function Careers() {
                   className={`
                     relative flex items-center gap-2 px-3 sm:px-4 py-3 text-[13px] sm:text-sm font-medium whitespace-nowrap transition-colors shrink-0
                     ${
-                      isActive
-                        ? "text-jotofa-navy dark:text-white"
-                        : "text-jotofa-navy/40 dark:text-white/40 hover:text-jotofa-navy dark:hover:text-white/70"
+                       isActive
+                         ? "text-jotofa-navy dark:text-white"
+                         : "text-jotofa-navy/70 dark:text-white/70 hover:text-jotofa-navy dark:hover:text-white/90"
                     }
                   `}
                 >

@@ -166,6 +166,16 @@ export function News() {
 
   return (
     <div className="bg-background">
+      {/* Page header */}
+      <section className="relative py-12 sm:py-16">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <ScrollReveal>
+            <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-2">News &amp; Insights</h1>
+            <p className="text-muted-foreground text-lg max-w-2xl">Latest updates, industry insights, and stories from JOTOFA GROUP.</p>
+          </ScrollReveal>
+        </div>
+      </section>
+
       {/* ── Featured Article ── */}
       <section className="relative py-16 sm:py-20">
         <div className="absolute inset-0 bg-background" />

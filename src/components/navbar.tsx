@@ -229,7 +229,7 @@ export function Navbar() {
                         <div className="w-[640px] max-w-[calc(100vw-2rem)] bg-white dark:bg-jotofa-navy-card backdrop-blur-[20px] border border-jotofa-navy/8 dark:border-white/10 rounded-lg shadow-[0_12px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_24px_60px_rgba(0,0,0,0.5)] overflow-hidden">
                            <div className="grid grid-cols-[45%_55%] min-h-[300px]">
                              <div className="border-r border-jotofa-navy/6 dark:border-white/6 p-2">
-                               <div className="px-3 py-1.5 mb-1"><span className="text-[10px] font-semibold uppercase tracking-widest text-jotofa-navy/60 dark:text-white/50">Subsidiaries</span></div>
+                                <div className="px-3 py-1.5 mb-1"><span className="text-[10px] font-semibold uppercase tracking-widest text-jotofa-navy/70 dark:text-white/70">Subsidiaries</span></div>
                                {businessItems.map((biz, idx) => (
                                  <button key={biz.id} onMouseEnter={() => { setHoveredBizIndex(idx); prefetchPage(biz.page); }} onClick={() => handleNavClick(biz.page)}
                                    className={`flex items-center gap-3 w-full text-left px-3 py-2 rounded-lg transition-all duration-200 group/biz cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent ${hoveredBizIndex === idx ? "bg-jotofa-navy/[0.04] dark:bg-white/[0.06]" : "hover:bg-jotofa-navy/[0.02] dark:hover:bg-white/[0.03]"}`}>
@@ -246,7 +246,7 @@ export function Navbar() {
                                     )}
                                    <div className="min-w-0 flex-1">
                                      <div className={`text-xs font-medium ${hoveredBizIndex === idx ? "text-jotofa-navy dark:text-white font-semibold" : "text-jotofa-navy/70 dark:text-white/70 group-hover/biz:text-jotofa-navy dark:group-hover/biz:text-white/90"}`}>{biz.label}</div>
-                                     <div className="text-[10px] text-jotofa-navy/50 dark:text-white/50 truncate mt-0.5">{biz.description}</div>
+                                      <div className="text-[10px] text-jotofa-navy/70 dark:text-white/70 truncate mt-0.5">{biz.description}</div>
                                    </div>
                                    <ArrowRight className={`w-3 h-3 flex-shrink-0 ml-2 transition-all duration-200 text-jotofa-accent ${hoveredBizIndex === idx ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-1"}`} />
                                  </button>
@@ -276,7 +276,7 @@ export function Navbar() {
                             <button onClick={() => handleNavClick("businesses")} className="text-[12px] text-jotofa-navy dark:text-white/70 hover:text-jotofa-navy/70 dark:hover:text-white transition-colors flex items-center gap-1.5 group/viewall font-medium cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm">
                               View All Subsidiaries <ArrowRight className="w-3 h-3 group-hover/viewall:translate-x-0.5 transition-transform" />
                             </button>
-                             <div className="text-[11px] text-jotofa-navy/50 dark:text-white/50">4 subsidiaries across Tanzania</div>
+                             <div className="text-[11px] text-jotofa-navy/70 dark:text-white/70">4 subsidiaries across Tanzania</div>
                           </div>
                         </div>
                       </motion.div>
@@ -339,7 +339,7 @@ export function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.25 }} className="fixed inset-0 z-40 lg:hidden" role="dialog" aria-modal="true" aria-label="Site navigation menu">
-            <div className="absolute inset-0 bg-black/20 dark:bg-black/50 backdrop-blur-sm" onClick={() => setMobileOpen(false)} />
+             <div className="absolute inset-0 bg-black/20 dark:bg-black/50 backdrop-blur-sm" onClick={() => setMobileOpen(false)} onKeyDown={(e) => { if (e.key === "Escape") setMobileOpen(false); }} role="button" tabIndex={0} aria-label="Close navigation menu" />
             <motion.div ref={mobileDrawerRef} initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }} transition={{ duration: 0.3, ease: "easeOut" }}
               className="absolute right-0 top-0 bottom-0 w-[300px] max-w-[85vw] bg-white dark:bg-jotofa-navy-card backdrop-blur-xl border-l border-jotofa-navy/8 dark:border-white/8">
                <div className="flex items-center justify-between p-4 border-b border-jotofa-navy/6 dark:border-white/6">

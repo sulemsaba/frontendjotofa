@@ -20,7 +20,7 @@ import { homeTestimonials } from "@/lib/testimonials-data";
 
 export default function Home() {
   return (
-    <main id="main-content" className="flex-1">
+    <main className="flex-1">
       <Hero />
       <UnifyingExcellence />
       <Subsidiaries />

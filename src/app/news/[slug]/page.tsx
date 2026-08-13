@@ -49,7 +49,7 @@ export default async function NewsDetailPage({ params }: Props) {
   const relatedArticles = allArticles.filter((a) => a.slug !== slug).slice(0, 3);
 
   return (
-    <main id="main-content" className="flex-1 pt-14 sm:pt-16">
+    <main className="flex-1 pt-14 sm:pt-16">
       <NewsDetailClient article={article} relatedArticles={relatedArticles} />
     </main>
   );

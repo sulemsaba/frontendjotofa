@@ -32,7 +32,7 @@ const playfairDisplay = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://jotofagroup.co.tz"),
-  title: "JOTOFA GROUP   Delivering Excellence Across Industries",
+  title: "JOTOFA GROUP | Delivering Excellence Across Industries",
   description:
     "JOTOFA GROUP is a diversified Tanzanian holding company delivering excellence across industries through ICT, logistics, cleaning, and staffing solutions.",
   keywords: [
@@ -51,18 +51,44 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
     apple: "/favicon.ico",
   },
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "JOTOFA GROUP   Delivering Excellence Across Industries",
+    title: "JOTOFA GROUP | Delivering Excellence Across Industries",
     description:
       "A diversified Tanzanian holding company delivering excellence across industries through ICT, logistics, cleaning, and staffing solutions.",
     type: "website",
     siteName: "JOTOFA GROUP",
+    url: "https://jotofagroup.co.tz",
+    images: [
+      {
+        url: "https://jotofagroup.co.tz/images/jotofa-hero-2.webp",
+        width: 1200,
+        height: 630,
+        alt: "JOTOFA GROUP Businesses",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "JOTOFA GROUP   Delivering Excellence Across Industries",
+    title: "JOTOFA GROUP | Delivering Excellence Across Industries",
     description:
       "A diversified Tanzanian holding company delivering excellence across industries through ICT, logistics, cleaning, and staffing solutions.",
+    images: [
+      "https://jotofagroup.co.tz/images/jotofa-hero-2.webp",
+    ],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 

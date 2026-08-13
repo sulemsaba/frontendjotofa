@@ -2,6 +2,22 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  reactStrictMode: true,
+  compress: true,
+  experimental: {
+    optimizePackageImports: ["lucide-react", "framer-motion"],
+    typedEnv: true,
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "/**",
+      },
+    ],
+    formats: ["image/avif", "image/webp"],
+  },
   allowedDevOrigins: [
     ".space-z.ai",
     "preview-chat-1dd5fb44-60a7-4ba0-81e1-3032129ca33f.space-z.ai",

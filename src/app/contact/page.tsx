@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <main id="main-content" className="flex-1 pt-14 sm:pt-16 bg-background">
+    <main className="flex-1 pt-14 sm:pt-16 bg-background">
       <Contact />
     </main>
   );

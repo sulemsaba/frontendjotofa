@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <main id="main-content" className="flex-1 pt-14 sm:pt-16">
+    <main className="flex-1 pt-14 sm:pt-16">
       <About />
     </main>
   );
