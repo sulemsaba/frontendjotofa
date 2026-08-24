@@ -83,13 +83,13 @@ function SocialIconButtons() {
         <button
           key={social.label}
           onClick={() => handleClick(social.href)}
-          className="w-9 h-9 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:bg-secondary hover:border-jotofa-accent/30 hover:text-jotofa-accent transition-all duration-200"
+          className="w-11 h-11 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:bg-secondary hover:border-jotofa-accent/30 hover:text-jotofa-accent transition-all duration-200"
           aria-label={social.label}
         >
           {social.href === "#copy" && copied ? (
-            <Check className="w-4 h-4 text-jotofa-accent" />
+            <Check className="w-5 h-5 text-jotofa-accent" />
           ) : (
-            <social.icon className="w-4 h-4" />
+            <social.icon className="w-5 h-5" />
           )}
         </button>
       ))}

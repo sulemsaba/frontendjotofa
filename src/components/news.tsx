@@ -278,7 +278,7 @@ export function News() {
                     key={cat.id}
                     onClick={() => setActiveCategory(cat.id)}
                     aria-pressed={activeCategory === cat.id}
-                    className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent ${
+                    className={`px-4 py-2.5 rounded-full text-sm font-medium border transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent min-h-[44px] ${
                       activeCategory === cat.id
                         ? "bg-jotofa-accent/10 border-jotofa-accent/20 text-foreground"
                         : "border-border text-muted-foreground hover:border-jotofa-accent/20 hover:text-foreground"

@@ -472,10 +472,10 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                 </div>
                 <button
                   onClick={handleClose}
-                  className="w-8 h-8 rounded-full flex items-center justify-center text-muted-foreground hover:bg-secondary transition-colors"
+                  className="w-11 h-11 rounded-full flex items-center justify-center text-muted-foreground hover:bg-secondary transition-colors"
                   aria-label="Close"
                 >
-                  <X className="w-4 h-4" />
+                  <X className="w-5 h-5" />
                 </button>
               </div>
 

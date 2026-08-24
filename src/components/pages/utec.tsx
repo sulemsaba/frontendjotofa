@@ -293,7 +293,7 @@ export function UTECPage() {
             <button
               ref={closeBtnRef}
               onClick={() => setIsModalOpen(false)}
-              className="absolute top-4 right-5 text-2xl text-gray-400 hover:text-jotofa-accent transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent"
+              className="absolute top-4 right-5 min-w-[44px] min-h-[44px] flex items-center justify-center text-2xl text-gray-400 hover:text-jotofa-accent transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent"
               aria-label="Close modal"
             >
               &times;
