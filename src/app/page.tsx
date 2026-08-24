@@ -6,7 +6,7 @@ import { EcosystemShowcase } from "@/components/ecosystem-showcase";
 import { NewsSection } from "@/components/news-section";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { BackToTopButton } from "@/components/back-to-top-button";
-import { Testimonials } from "@/components/testimonials";
+import { TestimonialSlider } from "@/components/testimonial-slider";
 import { homeTestimonials } from "@/lib/testimonials-data";
 
 /* ──────────────────────────────────────────────────────────────────────────
@@ -24,13 +24,10 @@ export default function Home() {
       <Hero />
       <UnifyingExcellence />
       <EcosystemShowcase />
-      <Testimonials
+      <TestimonialSlider
         eyebrow="Client Voices"
         title={<>Trusted by <span className="text-jotofa-accent">Businesses Across Tanzania</span></>}
         subtitle="Organizations from Dar es Salaam to Kigali rely on JOTOFA Group for diversified, dependable, professional services."
-        accent="text-jotofa-accent"
-        accentBg="bg-jotofa-accent/10"
-        accentBorder="border-jotofa-accent/20"
         testimonials={homeTestimonials}
       />
       <NewsSection />
