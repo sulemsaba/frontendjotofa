@@ -690,12 +690,15 @@ function SplitSection({
 }
 
 export function Subsidiaries() {
+  const [activeSubsidiary, setActiveSubsidiary] = useState(visibleSubsidiaries[0]?.id ?? "utec");
 
   const cleaningHeaderTitle = "Premium Cleaning & Housekeeping Solutions";
   const cleaningHeaderSubtitle = "From commercial offices to residential homes - we deliver hygiene, consistency, and peace of mind across Tanzania.";
 
   const staffingHeaderTitle = "Skilled Workforce & HR Solutions";
   const staffingHeaderSubtitle = "Recruitment, labour outsourcing, and HR consulting - connecting the right talent with the right opportunity.";
+
+  const visibleSubsidiaries = subsidiaries.filter((s) => s.id !== "staffing");
 
   return (
     <section className="relative">
@@ -710,11 +713,53 @@ export function Subsidiaries() {
         </p>
       </ScrollReveal>
 
+      {/* Mobile tab switcher */}
+      <div className="lg:hidden px-4 mb-6">
+        <div className="flex items-center gap-2 overflow-x-auto" role="tablist">
+          {visibleSubsidiaries.map((subsidiary) => (
+            <button
+              key={subsidiary.id}
+              type="button"
+              role="tab"
+              aria-selected={activeSubsidiary === subsidiary.id}
+              onClick={() => setActiveSubsidiary(subsidiary.id)}
+              className={`shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-colors border ${
+                activeSubsidiary === subsidiary.id
+                  ? "bg-jotofa-navy text-white border-jotofa-navy"
+                  : "bg-background text-foreground border-border"
+              }`}
+            >
+              {subsidiary.name}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Mobile tab switcher */}
+      <div className="lg:hidden px-4 mb-6">
+        <div className="flex items-center gap-2 overflow-x-auto" role="tablist">
+          {visibleSubsidiaries.map((subsidiary) => (
+            <button
+              key={subsidiary.id}
+              type="button"
+              role="tab"
+              aria-selected={activeSubsidiary === subsidiary.id}
+              onClick={() => setActiveSubsidiary(subsidiary.id)}
+              className={`shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-colors border ${
+                activeSubsidiary === subsidiary.id
+                  ? "bg-jotofa-navy text-white border-jotofa-navy"
+                  : "bg-background text-foreground border-border"
+              }`}
+            >
+              {subsidiary.name}
+            </button>
+          ))}
+        </div>
+      </div>
+
       {/* Card showcase for all subsidiaries */}
       <div className="space-y-10 sm:space-y-12">
-        {subsidiaries.map((subsidiary) => {
-          if (subsidiary.id === "staffing") return null;
-
+        {visibleSubsidiaries.map((subsidiary) => {
           const slides =
             subsidiary.id === "utec"
               ? utecSlides
@@ -731,15 +776,16 @@ export function Subsidiaries() {
               : cleaningHeaderSubtitle;
 
           return (
-            <SubsidiaryShowcase
-              key={subsidiary.id}
-              logo={subsidiary.logoSrc ?? ""}
-              logoAlt={subsidiary.name}
-              headerTitle={headerTitle}
-              headerSubtitle={headerSubtitle}
-              slides={slides}
-              explorePage={subsidiary.id}
-            />
+            <div key={subsidiary.id} className={activeSubsidiary === subsidiary.id ? "" : "hidden lg:block"}>
+              <SubsidiaryShowcase
+                logo={subsidiary.logoSrc ?? ""}
+                logoAlt={subsidiary.name}
+                headerTitle={headerTitle}
+                headerSubtitle={headerSubtitle}
+                slides={slides}
+                explorePage={subsidiary.id}
+              />
+            </div>
           );
         })}
       </div>
