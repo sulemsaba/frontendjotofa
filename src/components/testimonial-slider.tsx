@@ -75,8 +75,8 @@ export function TestimonialSlider({
               const transform = isCenter
                 ? "translate(-50%, -50%)"
                 : offset < 0
-                  ? `translate(-50%, -50%) translateX(-115%) scale(0.92)`
-                  : `translate(-50%, -50%) translateX(115%) scale(0.92)`;
+                  ? "translate(-50%, -50%) translateX(-100%) scale(0.92)"
+                  : "translate(-50%, -50%) translateX(100%) scale(0.92)";
 
               const zIndex = isCenter ? 100 : 90;
               const opacity = isCenter ? 1 : absOffset === 1 ? 0.5 : 0;
