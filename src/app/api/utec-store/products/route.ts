@@ -11,7 +11,7 @@ import { UTEC_STORE_API_BASE, productDetailUrl } from "@/lib/store-config";
  * - Returns a clean, minimal shape the frontend can render directly.
  */
 
-export const revalidate = 600; // seconds — cache for 10 min
+export const revalidate = 600; // seconds - cache for 10 min
 
 // ── Raw shapes from the upstream store API ──
 interface StorePrice {

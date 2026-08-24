@@ -5,12 +5,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUp } from "lucide-react";
 
 /* ──────────────────────────────────────────────────────────────────────────
-   BackToTopButton   floating FAB, fixed bottom-right.
+   BackToTopButton - floating FAB, fixed bottom-right.
    Decoupled from footer entirely (per Fitts's Law / NN/g guidance).
 
    Behaviour:
      • Appears only after the user has scrolled past the first viewport
-       (window.innerHeight)   keeps initial view uncluttered.
+       (window.innerHeight) - keeps initial view uncluttered.
      • Glassmorphic styling (blur + translucent bg) so it doesn't obstruct
        content underneath.
      • Positioned to the LEFT of the WhatsApp floating button so they don't

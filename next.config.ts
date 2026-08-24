@@ -19,6 +19,7 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
   },
   allowedDevOrigins: [
+    "192.168.1.121",
     ".space-z.ai",
     "preview-chat-1dd5fb44-60a7-4ba0-81e1-3032129ca33f.space-z.ai",
     "*.space-z.ai",

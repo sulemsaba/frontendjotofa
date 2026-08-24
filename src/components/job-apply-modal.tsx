@@ -76,7 +76,7 @@ function DeadlineBadge({ deadline }: { deadline: string }) {
           ? "bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800"
           : isSoon
           ? "bg-amber-50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-800"
-          : "bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 border border-green-200 dark:border-green-800"
+          : "bg-jotofa-accent/10 dark:bg-jotofa-accent/15 text-jotofa-accent-dark dark:text-jotofa-accent-light border border-jotofa-accent/25 dark:border-jotofa-accent/30"
       }`}
     >
       {isPassed || isSoon ? (
@@ -139,9 +139,9 @@ function FileUploadField({
           {displayFiles.map((f, i) => (
             <div
               key={`file-${i}-${f.name}`}
-              className="flex items-center gap-3 p-3 rounded-lg border-2 border-green-500/50 bg-green-50/50 dark:bg-green-900/10"
+              className="flex items-center gap-3 p-3 rounded-lg border-2 border-jotofa-accent/40 bg-jotofa-accent/10 dark:bg-jotofa-accent/15"
             >
-              <FileText className="w-4 h-4 text-green-600 dark:text-green-400 shrink-0" />
+              <FileText className="w-4 h-4 text-jotofa-accent-dark dark:text-jotofa-accent-light shrink-0" />
               <div className="min-w-0 flex-1">
                 <span className="text-sm font-medium text-foreground truncate block">
                   {f.name}
@@ -232,7 +232,7 @@ function JobSummarySidebar({ job }: { job: Job }) {
               <p className="text-sm font-medium text-foreground">
                 {job.location}, Tanzania
                 {job.remote && (
-                  <span className="ml-1.5 text-xs text-green-600 dark:text-green-400 font-medium">
+                  <span className="ml-1.5 text-xs text-jotofa-accent-dark dark:text-jotofa-accent-light font-medium">
                     (Remote)
                   </span>
                 )}
@@ -483,8 +483,8 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
               {submitted ? (
                 /* ═══ SUCCESS STATE ═══ */
                 <div className="p-8 sm:p-12 text-center">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-50 dark:bg-green-900/20 mb-5">
-                    <Check className="w-8 h-8 text-green-600 dark:text-green-400" />
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-jotofa-accent/10 dark:bg-jotofa-accent/15 mb-5">
+                    <Check className="w-8 h-8 text-jotofa-accent-dark dark:text-jotofa-accent-light" />
                   </div>
                   <h3 className="text-xl font-bold text-foreground mb-2">
                     Thank you for applying!
@@ -697,9 +697,9 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                             {certificateFiles.map((f, i) => (
                               <div
                                 key={`cert-${i}-${f.name}`}
-                                className="flex items-center gap-3 p-2.5 rounded-lg border border-green-200 dark:border-green-800 bg-green-50/30 dark:bg-green-900/5"
+                                className="flex items-center gap-3 p-2.5 rounded-lg border border-jotofa-accent/25 dark:border-jotofa-accent/30 bg-jotofa-accent/10 dark:bg-jotofa-accent/10"
                               >
-                                <FileText className="w-4 h-4 text-green-600 dark:text-green-400 shrink-0" />
+                                <FileText className="w-4 h-4 text-jotofa-accent-dark dark:text-jotofa-accent-light shrink-0" />
                                 <div className="min-w-0 flex-1">
                                   <span className="text-sm font-medium text-foreground truncate block">
                                     {f.name}
@@ -941,9 +941,9 @@ export function JobApplyModal({ job, isOpen, onClose }: JobApplyModalProps) {
                             {certificateFiles.map((f, i) => (
                               <div
                                 key={`cert-m-${i}-${f.name}`}
-                                className="flex items-center gap-2 p-2 rounded-lg border border-green-200 dark:border-green-800 bg-green-50/30 dark:bg-green-900/5"
+                                className="flex items-center gap-2 p-2 rounded-lg border border-jotofa-accent/25 dark:border-jotofa-accent/30 bg-jotofa-accent/10 dark:bg-jotofa-accent/10"
                               >
-                                <FileText className="w-4 h-4 text-green-600 dark:text-green-400 shrink-0" />
+                                <FileText className="w-4 h-4 text-jotofa-accent-dark dark:text-jotofa-accent-light shrink-0" />
                                 <div className="min-w-0 flex-1">
                                   <span className="text-xs font-medium text-foreground truncate block">
                                     {f.name}

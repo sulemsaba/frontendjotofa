@@ -2,12 +2,12 @@
 
 import { ArrowUpRight, Calendar, Clock } from "lucide-react";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "./scroll-reveal";
-import { usePage } from "@/lib/page-context";
+import { PageLink } from "@/lib/page-context";
 
 const newsItems = [
   {
     category: "Group Update",
-    categoryColor: "text-jotofa-accent",
+    categoryColor: "text-foreground",
     categoryBg: "bg-jotofa-accent/10",
     categoryBorder: "border-jotofa-accent/20",
     title: "JOTOFA GROUP Expands into East African Markets",
@@ -18,7 +18,7 @@ const newsItems = [
   },
   {
     category: "UTEC Solutions",
-    categoryColor: "text-jotofa-accent",
+    categoryColor: "text-foreground",
     categoryBg: "bg-jotofa-accent/10",
     categoryBorder: "border-jotofa-accent/20",
     title: "UTEC Deploys Smart City Infrastructure in Dar es Salaam",
@@ -29,7 +29,7 @@ const newsItems = [
   },
   {
     category: "CSR",
-    categoryColor: "text-jotofa-accent",
+    categoryColor: "text-foreground",
     categoryBg: "bg-jotofa-accent/10",
     categoryBorder: "border-jotofa-accent/20",
     title: "2,000 Trees Planted: JOTOFA's Green Initiative Milestone",
@@ -41,8 +41,6 @@ const newsItems = [
 ];
 
 export function NewsSection() {
-  const { setActivePage } = usePage();
-
   return (
     <section className="relative py-20 sm:py-28">
       {/* Background */}
@@ -55,7 +53,7 @@ export function NewsSection() {
         <ScrollReveal className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4">
             News &{" "}
-            <span className="text-jotofa-accent">Insights</span>
+            Insights
           </h2>
           <p className="mx-auto max-w-2xl text-muted-foreground text-lg">
             Stay informed about our group&apos;s latest developments and community impact.
@@ -69,12 +67,8 @@ export function NewsSection() {
         >
           {newsItems.map((item) => (
             <StaggerItem key={item.title}>
-              <a
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setActivePage("news");
-                }}
+              <PageLink
+                page="news"
                 className="group h-full p-6 rounded-2xl bg-card border border-border hover:border-jotofa-accent/25 transition-all duration-300 hover:bg-secondary cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background block"
                 aria-label="View all news and insights"
               >
@@ -113,20 +107,20 @@ export function NewsSection() {
                   </div>
                   <ArrowUpRight className="w-4 h-4 text-muted-foreground/30 group-hover:text-jotofa-accent transition-colors" />
                 </div>
-                  </a>
+                  </PageLink>
                 </StaggerItem>
           ))}
         </StaggerContainer>
 
         {/* View all link */}
         <ScrollReveal className="mt-10 text-center">
-          <button
-            onClick={() => setActivePage("news")}
+          <PageLink
+            page="news"
             className="inline-flex items-center gap-2 text-jotofa-accent hover:text-jotofa-accent-light font-medium transition-colors group"
           >
             View All News & Insights
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </button>
+          </PageLink>
         </ScrollReveal>
       </div>
     </section>

@@ -29,7 +29,7 @@ export async function GET() {
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>JOTOFA GROUP — News &amp; Insights</title>
+    <title>JOTOFA GROUP - News &amp; Insights</title>
     <link>${siteUrl}/news</link>
     <description>Latest news, announcements, and insights from JOTOFA GROUP and its subsidiaries across Tanzania and East Africa.</description>
     <language>en-tz</language>
@@ -49,7 +49,7 @@ ${items}
     });
   } catch {
     return new Response(
-      `<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>JOTOFA GROUP — News</title><link>${siteUrl}/news</link><description>Temporarily unavailable</description></channel></rss>`,
+      `<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>JOTOFA GROUP - News</title><link>${siteUrl}/news</link><description>Temporarily unavailable</description></channel></rss>`,
       {
         status: 503,
         headers: { "Content-Type": "application/rss+xml; charset=utf-8" },

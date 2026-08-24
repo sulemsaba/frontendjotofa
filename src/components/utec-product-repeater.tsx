@@ -39,18 +39,18 @@ const rowMeta: Record<
 > = {
   repeaters: {
     icon: RadioTower,
-    accent: "text-utec-cyan",
-    soft: "bg-utec-cyan/10",
+    accent: "text-jotofa-accent",
+    soft: "bg-jotofa-accent/10",
   },
   mobile: {
     icon: Truck,
-    accent: "text-amber-600 dark:text-amber-400",
-    soft: "bg-amber-500/10",
+    accent: "text-jotofa-accent",
+    soft: "bg-jotofa-accent/10",
   },
   portables: {
     icon: Radio,
-    accent: "text-emerald-600 dark:text-emerald-400",
-    soft: "bg-emerald-500/10",
+    accent: "text-jotofa-accent",
+    soft: "bg-jotofa-accent/10",
   },
 };
 
@@ -88,7 +88,7 @@ function CatalogCard({
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.05 * index, duration: 0.4 }}
         whileHover={{ y: -4 }}
-        className="group flex flex-col h-full rounded-2xl border border-border bg-card overflow-hidden hover:border-utec-cyan/40 hover:shadow-lg transition-all duration-300"
+        className="group flex flex-col h-full rounded-2xl border border-border bg-card overflow-hidden hover:border-jotofa-accent/40 hover:shadow-lg transition-all duration-300"
       >
         {/* Image */}
         <div className="relative aspect-square bg-gradient-to-b from-secondary/40 to-secondary/10 overflow-hidden">
@@ -108,14 +108,14 @@ function CatalogCard({
 
           {/* Discount badge */}
           {product.hasDiscount && product.originPrice && product.discountPrice && (
-            <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-utec-cyan text-white shadow">
+            <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-jotofa-accent text-white shadow">
               -{Math.round((1 - product.discountPrice / product.originPrice) * 100)}%
             </span>
           )}
 
           {/* External link affordance */}
           <span className="absolute top-3 right-3 w-8 h-8 rounded-full bg-background/80 backdrop-blur flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-            <ExternalLink className="w-4 h-4 text-utec-cyan" />
+            <ExternalLink className="w-4 h-4 text-jotofa-accent" />
           </span>
         </div>
 
@@ -131,7 +131,7 @@ function CatalogCard({
           <div className="mt-auto flex items-baseline gap-2 flex-wrap">
             {product.hasDiscount ? (
               <>
-                <span className="text-base font-bold text-utec-cyan">{discount}</span>
+                <span className="text-base font-bold text-foreground">{discount}</span>
                 <span className="text-xs text-muted-foreground line-through">{origin}</span>
               </>
             ) : (
@@ -196,17 +196,17 @@ export function UtecProductRepeater() {
   return (
     <section className="relative py-20 sm:py-24">
       <div className="absolute inset-0 bg-background" />
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-utec-cyan/15 to-transparent" />
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-jotofa-accent/15 to-transparent" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <ScrollReveal className="text-center mb-14">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-foreground mb-3">
-            Explore the <span className="text-utec-cyan">Catalog</span>
+            Explore the Catalog
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Real products, live prices, straight from the UTEC Solutions store.
-            Browse by category   each item links to its store page for full specs
+            Browse by category - each item links to its store page for full specs
             and purchase.
           </p>
         </ScrollReveal>
@@ -251,7 +251,7 @@ export function UtecProductRepeater() {
                       href={storeProductsPageUrl()}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hidden sm:inline-flex items-center gap-1.5 text-sm font-medium text-utec-cyan hover:text-utec-cyan/80 transition-colors whitespace-nowrap"
+                      className="hidden sm:inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap"
                     >
                       View all <ArrowRight className="w-3.5 h-3.5" />
                     </a>
@@ -273,8 +273,8 @@ export function UtecProductRepeater() {
 
         {status === "error" && (
           <div className="max-w-xl mx-auto p-8 rounded-2xl border border-border bg-card text-center">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-utec-cyan/10 mb-4">
-              <AlertCircle className="w-6 h-6 text-utec-cyan" />
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-jotofa-accent/10 mb-4">
+              <AlertCircle className="w-6 h-6 text-jotofa-accent" />
             </div>
             <h3 className="text-lg font-semibold text-foreground mb-2">
               Catalog preview unavailable
@@ -287,7 +287,7 @@ export function UtecProductRepeater() {
               href={storeProductsPageUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-2.5 bg-utec-cyan/10 border border-utec-cyan/25 text-utec-cyan hover:bg-utec-cyan/20 rounded-full text-sm font-medium transition-all"
+              className="inline-flex items-center gap-2 px-6 py-2.5 bg-secondary border border-border text-foreground hover:bg-jotofa-navy hover:text-white rounded-full text-sm font-medium transition-all"
             >
               Visit Store <ExternalLink className="w-4 h-4" />
             </a>
@@ -301,7 +301,7 @@ export function UtecProductRepeater() {
               href={storeProductsPageUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-7 py-3 bg-utec-cyan hover:bg-utec-cyan/90 text-white font-semibold rounded-full transition-all hover:shadow-lg hover:shadow-utec-cyan/25"
+              className="inline-flex items-center gap-2 px-7 py-3 bg-jotofa-accent hover:bg-jotofa-accent/90 text-white font-semibold rounded-full transition-all "
             >
               Browse All Products <ArrowRight className="w-4 h-4" />
             </a>

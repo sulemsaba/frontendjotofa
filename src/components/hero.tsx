@@ -10,15 +10,15 @@ import {
   Play,
   Pause,
 } from "lucide-react";
-import { usePage } from "@/lib/page-context";
+import { PageLink } from "@/lib/page-context";
 
 /* ──────────────────────────────────────────────────────────────────────────
-   Hero   home page landing section.
+   Hero - home page landing section.
 
    PERFORMANCE NOTES:
    • Entry animations use CSS (.animate-fade-up) instead of framer-motion
-     initial/animate. CSS animations run on first paint   no JS hydration
-     wait   so the hero text is visible almost instantly.
+     initial/animate. CSS animations run on first paint - no JS hydration
+     wait - so the hero text is visible almost instantly.
    • framer-motion is kept ONLY for the slideshow crossfade (AnimatePresence),
      which is below the fold and non-critical for first paint.
    • All colors use design tokens (no raw hex). Typography uses the .h-display
@@ -126,7 +126,6 @@ function TickerPauseButton({ paused, onToggle }: { paused: boolean; onToggle: ()
 
 // ─── Main Hero ──────────────────────────────────────────────────────────
 export function Hero() {
-  const { setActivePage } = usePage();
   const prefersReducedMotion = useReducedMotion();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPlaying, setIsPlaying] = useState(!prefersReducedMotion);
@@ -168,8 +167,8 @@ export function Hero() {
         {/* ════════════ LEFT COLUMN   Text + News Slider ════════════ */}
         <div className="w-full lg:w-[45%] flex flex-col justify-between relative z-[2]">
           <div className="flex flex-col justify-center flex-1 px-8 sm:px-10 lg:px-[60px] pt-24 pb-6 lg:pt-[140px] lg:pb-0">
-            {/* Accent line   CSS animation, visible on first paint */}
-            <div className="h-[3px] w-20 bg-jotofa-accent mb-6 rounded-full animate-fade-up" style={{ boxShadow: "0 0 12px rgba(0, 169, 183, 0.4)" }} />
+            {/* Accent line - CSS animation, visible on first paint */}
+            <div className="h-[3px] w-20 bg-jotofa-accent mb-6 rounded-full animate-fade-up" />
 
             <h1 className="mb-6 h-display animate-fade-up-delay-1">
               <span className="block text-jotofa-navy dark:text-white drop-shadow-sm">
@@ -182,18 +181,18 @@ export function Hero() {
 
             <p className="mb-8 lead text-jotofa-text-secondary dark:text-white/80 max-w-[450px] animate-fade-up-delay-2">
               A diversified Tanzanian holding company driving excellence through
-              ICT, logistics, professional services, and staffing  
+              ICT, logistics, professional services, and staffing -
               empowering communities and industries alike.
             </p>
 
             <div className="animate-fade-up-delay-3">
-              <button
-                onClick={() => setActivePage("about")}
-                className="group inline-flex items-center gap-2 font-semibold transition-all duration-300 px-10 py-3.5 rounded-full bg-jotofa-navy text-white hover:bg-jotofa-navy-deep cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background dark:border-[1.5px] dark:border-white dark:bg-transparent dark:text-white dark:hover:bg-white dark:hover:text-jotofa-navy-mid shadow-[0_8px_24px_-8px_rgba(0,59,100,0.35)]"
+              <PageLink
+                page="about"
+                className="group inline-flex items-center gap-2 font-semibold transition-all duration-300 px-10 py-3.5 rounded-full bg-jotofa-navy text-white hover:bg-jotofa-navy-deep cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background dark:border-[1.5px] dark:border-white dark:bg-transparent dark:text-white dark:hover:bg-white dark:hover:text-jotofa-navy-mid"
               >
                 Our Company
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-              </button>
+              </PageLink>
             </div>
           </div>
 
@@ -211,9 +210,7 @@ export function Hero() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -30 }}
                   transition={{ duration: 0.35, ease: "easeInOut" }}
-                  className="flex gap-4 items-start cursor-pointer group"
-                  onClick={() => setActivePage("news")}
-                >
+                ><PageLink page="news" className="flex gap-4 items-start cursor-pointer group">
                   <div className="flex-shrink-0 w-[130px] sm:w-[160px] h-[85px] sm:h-[100px] rounded-lg overflow-hidden relative">
                     <Image
                       src={newsSlides[currentSlide].image}
@@ -229,7 +226,7 @@ export function Hero() {
                       {newsSlides[currentSlide].title}
                     </h3>
                   </div>
-                </motion.div>
+                </PageLink></motion.div>
               </AnimatePresence>
             </div>
 
@@ -238,12 +235,12 @@ export function Hero() {
                 <span className="text-jotofa-navy/60 dark:text-white/60 text-sm font-medium tabular-nums">
                   {currentSlide + 1}/{newsSlides.length}
                 </span>
-                <button
-                  onClick={() => setActivePage("businesses")}
+                <PageLink
+                  page="businesses"
                   className="text-jotofa-navy/60 hover:text-jotofa-navy dark:text-white/60 dark:hover:text-white text-sm transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent rounded-sm"
                 >
                   Family of Businesses
-                </button>
+                </PageLink>
               </div>
               <div className="flex items-center gap-2">
                 <button

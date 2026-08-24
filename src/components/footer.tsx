@@ -10,10 +10,10 @@ import {
   MapPin,
   Clock,
 } from "lucide-react";
-import { usePage, PageId } from "@/lib/page-context";
+import { PageLink, PageId } from "@/lib/page-context";
 
 /* ──────────────────────────────────────────────────────────────────────────
-   JOTOFA Group Footer   Coca-Cola-inspired visual treatment
+   JOTOFA Group Footer - Coca-Cola-inspired visual treatment
    (same content, restyled spacing / typography / decorative blobs)
 
    Content preserved:
@@ -81,10 +81,10 @@ const CORPORATE_PHONE_TEL = "+255773383800";
 const CORPORATE_EMAIL = "info@jotofagroup.co.tz";
 const CORPORATE_ADDRESS =
   "HT House, 2nd Floor, Ubungo, Simu 2000 Road, P.O. Box 75075, Dar es Salaam";
-const CORPORATE_HOURS = "Mon – Fri, 8:00am – 6:00pm";
+const CORPORATE_HOURS = "Mon - Fri, 8:00am - 6:00pm";
 
 /* ──────────────────────────────────────────────────────────────────────────
-   LinkColumn   heading + vertical list of footer links.
+   LinkColumn - heading + vertical list of footer links.
    Always visible (never expandable). Left-aligned on all viewports.
    ────────────────────────────────────────────────────────────────────────── */
 
@@ -95,8 +95,6 @@ function LinkColumn({
   title: string;
   links: FooterLink[];
 }) {
-  const { setActivePage } = usePage();
-
   return (
     <div>
       <h4 className="text-sm font-normal text-muted-foreground uppercase tracking-widest mb-5 text-left">
@@ -105,8 +103,8 @@ function LinkColumn({
       <ul className="space-y-3">
         {links.map((link) => (
           <li key={link.label} className="flex items-center justify-start">
-            <button
-              onClick={() => setActivePage(link.page)}
+            <PageLink
+              page={link.page}
               className="text-[15px] font-semibold text-foreground hover:text-jotofa-accent transition-colors cursor-pointer rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-1 focus-visible:ring-offset-background text-left"
             >
               {link.iconSrc && link.iconType === "wordmark" && (
@@ -130,7 +128,7 @@ function LinkColumn({
                 </span>
               )}
               <span>{link.label}</span>
-            </button>
+            </PageLink>
           </li>
         ))}
       </ul>
@@ -139,14 +137,12 @@ function LinkColumn({
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   CareersColumn   Col 3.
+   CareersColumn - Col 3.
    Vertical list on desktop. Horizontal pipe-separated row on mobile
    ("Open Positions | Why Join Us | Send Your CV") to save vertical space.
    ────────────────────────────────────────────────────────────────────────── */
 
 function CareersColumn() {
-  const { setActivePage } = usePage();
-
   return (
     <div>
       <h4 className="text-sm font-normal text-muted-foreground uppercase tracking-widest mb-5 text-center sm:text-left">
@@ -155,24 +151,24 @@ function CareersColumn() {
       <ul className="hidden sm:block space-y-3">
         {careerLinks.map((link) => (
           <li key={link.label} className="flex items-center justify-start">
-            <button
-              onClick={() => setActivePage(link.page)}
+            <PageLink
+              page={link.page}
               className="text-[15px] font-semibold text-foreground hover:text-jotofa-accent transition-colors cursor-pointer rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-1 focus-visible:ring-offset-background text-left"
             >
               {link.label}
-            </button>
+            </PageLink>
           </li>
         ))}
       </ul>
       <ul className="sm:hidden flex flex-row flex-wrap items-center justify-center gap-x-2 gap-y-1">
         {careerLinks.map((link, i) => (
           <li key={link.label} className="flex items-center justify-center">
-            <button
-              onClick={() => setActivePage(link.page)}
+            <PageLink
+              page={link.page}
               className="text-[15px] font-semibold text-foreground hover:text-jotofa-accent transition-colors cursor-pointer rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-1 focus-visible:ring-offset-background"
             >
               {link.label}
-            </button>
+            </PageLink>
             {i < careerLinks.length - 1 && (
               <span aria-hidden className="mx-1.5 text-muted-foreground/40 select-none">|</span>
             )}
@@ -189,14 +185,7 @@ function CareersColumn() {
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-background pt-24 pb-14">
-      {/* Decorative blobs   bottom, animated, fade at top edge */}
-      <div aria-hidden className="absolute inset-x-0 bottom-0 h-[320px] pointer-events-none overflow-hidden [mask-image:linear-gradient(to_top,black,transparent)]">
-        <div className="absolute -bottom-32 left-8 h-[420px] w-[420px] rounded-full bg-jotofa-accent/25 blur-[100px] animate-float-blob" style={{ animationDuration: "12s", animationDelay: "0s" }} />
-        <div className="absolute -bottom-28 left-[35%] h-[360px] w-[360px] rounded-full bg-jotofa-navy/25 dark:bg-white/10 blur-[100px] animate-float-blob" style={{ animationDuration: "14s", animationDelay: "-3s" }} />
-        <div className="absolute -bottom-24 right-8 h-[400px] w-[400px] rounded-full bg-jotofa-accent/20 blur-[100px] animate-float-blob" style={{ animationDuration: "13s", animationDelay: "-6s" }} />
-      </div>
-
+    <footer className="relative overflow-hidden bg-background border-t border-border pt-20 pb-14">
       <div className="relative z-10 max-w-7xl mx-auto px-10">
         {/* Brand */}
         <div className="flex flex-col items-center mb-16">
@@ -293,41 +282,23 @@ export function Footer() {
             &copy; {new Date().getFullYear()} JOTOFA GROUP LIMITED
           </div>
 
-          <button
-            type="button"
-            className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-[13px] font-semibold text-foreground transition-colors hover:border-foreground"
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
+          <div className="inline-flex items-center gap-2 text-[13px] font-semibold text-muted-foreground">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5" aria-hidden>
               <circle cx="12" cy="12" r="10" />
               <line x1="2" y1="12" x2="22" y2="12" />
               <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10 15.3 15.3 0 0 1 4-10z" />
             </svg>
             <span>English (Tanzania)</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3 ml-0.5">
-              <polyline points="6 9 12 15 18 9" />
-            </svg>
-          </button>
+          </div>
 
           <div className="flex items-center gap-5 text-[13px] font-semibold text-muted-foreground">
-            <button
-              type="button"
-              disabled
-              aria-disabled="true"
-              title="Privacy Policy   coming soon"
-              className="hover:text-foreground transition-colors cursor-not-allowed opacity-60"
-            >
+            <span title="Privacy Policy - coming soon" className="opacity-60 cursor-default">
               Privacy Policy
-            </button>
+            </span>
             <span className="text-muted-foreground/40" aria-hidden>·</span>
-            <button
-              type="button"
-              disabled
-              aria-disabled="true"
-              title="Terms of Service   coming soon"
-              className="hover:text-foreground transition-colors cursor-not-allowed opacity-60"
-            >
+            <span title="Terms of Service - coming soon" className="opacity-60 cursor-default">
               Terms of Service
-            </button>
+            </span>
           </div>
         </div>
       </div>

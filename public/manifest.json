@@ -1,26 +1,35 @@
 {
-  "name": "JOTOFA GROUP — Powering Progress Across Tanzania",
+  "name": "JOTOFA GROUP - Powering Progress Across Tanzania",
   "short_name": "JOTOFA GROUP",
   "description": "A diversified Tanzanian holding company driving innovation through ICT, logistics, cleaning, security, and staffing solutions across East Africa.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#002040",
-  "theme_color": "#002040",
+  "background_color": "#003B64",
+  "theme_color": "#003B64",
   "icons": [
     {
-      "src": "/logo.svg",
+      "src": "/icon-192.png",
       "sizes": "192x192",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
-      "src": "/logo.svg",
+      "src": "/icon-512.png",
       "sizes": "512x512",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
-  "categories": ["business", "services"],
+  "categories": [
+    "business",
+    "services"
+  ],
   "lang": "en-TZ",
   "orientation": "portrait-primary"
 }

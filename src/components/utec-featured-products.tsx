@@ -45,7 +45,7 @@ function ProductCard({ product, index }: { product: FeaturedProduct; index: numb
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.05 * index, duration: 0.4 }}
         whileHover={{ y: -4 }}
-        className="group flex flex-col h-full rounded-2xl border border-border bg-card overflow-hidden hover:border-utec-cyan/40 hover:shadow-lg transition-all duration-300"
+        className="group flex flex-col h-full rounded-2xl border border-border bg-card overflow-hidden hover:border-jotofa-accent/40 hover:shadow-lg transition-all duration-300"
       >
         {/* Image */}
         <div className="relative aspect-square bg-secondary/40 overflow-hidden">
@@ -67,7 +67,7 @@ function ProductCard({ product, index }: { product: FeaturedProduct; index: numb
 
           {/* Discount badge */}
           {product.hasDiscount && product.originPrice && product.discountPrice && (
-            <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-utec-cyan text-white shadow">
+            <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-jotofa-accent text-white shadow">
               -
               {Math.round(
                 (1 - product.discountPrice / product.originPrice) * 100
@@ -78,7 +78,7 @@ function ProductCard({ product, index }: { product: FeaturedProduct; index: numb
 
           {/* External link affordance */}
           <span className="absolute top-3 right-3 w-8 h-8 rounded-full bg-background/80 backdrop-blur flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-            <ExternalLink className="w-4 h-4 text-utec-cyan" />
+            <ExternalLink className="w-4 h-4 text-jotofa-accent" />
           </span>
         </div>
 
@@ -94,7 +94,7 @@ function ProductCard({ product, index }: { product: FeaturedProduct; index: numb
           <div className="mt-auto flex items-baseline gap-2 flex-wrap">
             {product.hasDiscount ? (
               <>
-                <span className="text-base font-bold text-utec-cyan">
+                <span className="text-base font-bold text-foreground">
                   {discount}
                 </span>
                 <span className="text-xs text-muted-foreground line-through">
@@ -159,18 +159,18 @@ export function UtecFeaturedProducts() {
   return (
     <section className="relative py-20 sm:py-24">
       <div className="absolute inset-0 bg-background" />
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-utec-cyan/15 to-transparent" />
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-jotofa-accent/15 to-transparent" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <ScrollReveal className="text-center mb-12">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-foreground mb-3">
-            Featured <span className="text-utec-cyan">Products</span>
+            Featured Products
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             A selection of radios, networking gear, and ICT equipment available
             now in the UTEC Solutions online store. Prices update live from the
-            store   click any product to view full details and purchase.
+            store - click any product to view full details and purchase.
           </p>
         </ScrollReveal>
 
@@ -196,8 +196,8 @@ export function UtecFeaturedProducts() {
 
         {status === "error" && (
           <div className="max-w-xl mx-auto p-8 rounded-2xl border border-border bg-card text-center">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-utec-cyan/10 mb-4">
-              <AlertCircle className="w-6 h-6 text-utec-cyan" />
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-jotofa-accent/10 mb-4">
+              <AlertCircle className="w-6 h-6 text-jotofa-accent" />
             </div>
             <h3 className="text-lg font-semibold text-foreground mb-2">
               Store preview unavailable
@@ -210,7 +210,7 @@ export function UtecFeaturedProducts() {
               href={storeProductsPageUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-2.5 bg-utec-cyan/10 border border-utec-cyan/25 text-utec-cyan hover:bg-utec-cyan/20 rounded-full text-sm font-medium transition-all"
+              className="inline-flex items-center gap-2 px-6 py-2.5 bg-secondary border border-border text-foreground hover:bg-jotofa-navy hover:text-white rounded-full text-sm font-medium transition-all"
             >
               Visit Store <ExternalLink className="w-4 h-4" />
             </a>
@@ -224,7 +224,7 @@ export function UtecFeaturedProducts() {
               href={storeProductsPageUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-7 py-3 bg-utec-cyan hover:bg-utec-cyan/90 text-white font-semibold rounded-full transition-all"
+              className="inline-flex items-center gap-2 px-7 py-3 bg-jotofa-accent hover:bg-jotofa-accent/90 text-white font-semibold rounded-full transition-all"
             >
               Browse All Products <ArrowRight className="w-4 h-4" />
             </a>

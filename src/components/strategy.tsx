@@ -97,10 +97,10 @@ export function Strategy() {
         <ScrollReveal className="text-center mb-16">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4">
             Strategic{" "}
-            <span className="text-jotofa-accent">Objectives</span>
+            Objectives
           </h1>
           <p className="mx-auto max-w-2xl text-muted-foreground text-lg">
-            Our roadmap for growth, impact, and sustainable value creation  
+            Our roadmap for growth, impact, and sustainable value creation -
             guiding every decision and investment across the group.
           </p>
         </ScrollReveal>
@@ -138,7 +138,7 @@ export function Strategy() {
                   Our Core Values
                 </h3>
                 <p className="text-muted-foreground max-w-xl mx-auto">
-                  The principles that define who we are and how we operate  
+                  The principles that define who we are and how we operate -
                   non-negotiable foundations of the JOTOFA culture.
                 </p>
               </div>
@@ -147,7 +147,7 @@ export function Strategy() {
                 {values.map((value, i) => (
                   <div key={value.title} className="text-center">
                     <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-jotofa-accent/10 border border-jotofa-accent/20 mb-4">
-                      <span className="text-jotofa-accent font-bold text-sm">
+                      <span className="text-foreground font-bold text-sm">
                         {String(i + 1).padStart(2, "0")}
                       </span>
                     </div>
@@ -169,7 +169,7 @@ export function Strategy() {
     {/* Testimonials */}
     <Testimonials
       eyebrow="Investor & Partner Voices"
-      title={<>What Investors & <span className="text-jotofa-accent">Partners Say</span></>}
+      title={<>What Investors & Partners Say</>}
       subtitle="Why strategic partners and investors back JOTOFA Group's regional growth strategy."
       accent="text-jotofa-accent"
       accentBg="bg-jotofa-accent/10"

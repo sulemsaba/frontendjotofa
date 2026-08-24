@@ -27,7 +27,7 @@ import {
   Home,
   Info,
 } from "lucide-react";
-import { usePage } from "@/lib/page-context";
+import { PageLink } from "@/lib/page-context";
 import { JobApplyModal } from "@/components/job-apply-modal";
 import { getJobs, getSubsidiaries, type PublicJob, type PublicSubsidiary } from "@/lib/api";
 import Image from "next/image";
@@ -109,7 +109,7 @@ const subsidiaryHeroData: Record<
   courier: {
     name: "Courier & Logistics",
     tagline:
-      "Delivering reliability   connecting businesses across Tanzania every day",
+      "Delivering reliability - connecting businesses across Tanzania every day",
     logo: "/images/courier.png",
     heroImage: "/images/jotofa-hero-3.jpeg",
     stats: [
@@ -133,7 +133,7 @@ const subsidiaryHeroData: Record<
   staffing: {
     name: "Staffing & Labour",
     tagline:
-      "Connecting talent with opportunity   powering Tanzania's workforce",
+      "Connecting talent with opportunity - powering Tanzania's workforce",
     logo: "/images/staffing.png",
     heroImage: "/images/jotofa-hero-3.jpeg",
     stats: [
@@ -218,7 +218,6 @@ function mapPublicJob(job: PublicJob): Job {
    ───────────────────────────────────────────── */
 
 export function Careers() {
-  const { setActivePage } = usePage();
 
   /* ── State ── */
   const [activeTab, setActiveTab] = useState("jotofa");
@@ -470,7 +469,7 @@ export function Careers() {
       }}
     >
       {/* ═══════════════════════════════════════
-          1. HERO BANNER (max-w-6xl   wider than job list)
+          1. HERO BANNER (max-w-6xl - wider than job list)
           ═══════════════════════════════════════ */}
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-4">
         <div className="relative w-full h-[180px] sm:h-[220px] rounded-2xl overflow-hidden">
@@ -521,12 +520,12 @@ export function Careers() {
             </div>
 
             <div className="ml-auto hidden md:block">
-              <button
-                onClick={() => setActivePage("about")}
+              <PageLink
+                page="about"
                 className="px-5 py-2 text-sm font-medium rounded-full border border-white/30 text-white hover:bg-white/10 transition-colors"
               >
                 About {heroData.name}
-              </button>
+              </PageLink>
             </div>
           </div>
         </div>
@@ -565,7 +564,7 @@ export function Careers() {
             })}
           </div>
         </div>
-        {/* Scroll hint gradient on right edge   mobile only */}
+        {/* Scroll hint gradient on right edge - mobile only */}
         <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white dark:from-jotofa-navy-deep to-transparent pointer-events-none sm:hidden" />
       </div>
 
@@ -910,7 +909,7 @@ export function Careers() {
                         </div>
                       </div>
 
-                      {/* Mobile: Labeled info   icon-based rows */}
+                      {/* Mobile: Labeled info - icon-based rows */}
                       <div className="lg:hidden flex flex-wrap items-center gap-x-4 gap-y-1 pl-7">
                         <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
                           <MapPin className="w-3 h-3 shrink-0" />
@@ -926,7 +925,7 @@ export function Careers() {
                         </span>
                       </div>
 
-                      {/* Right: Apply Now button   hidden when expanded (shown in expanded section instead) */}
+                      {/* Right: Apply Now button - hidden when expanded (shown in expanded section instead) */}
                       {!isExpanded && (
                         <div className="flex items-center gap-2 lg:shrink-0 lg:ml-6 pl-7 lg:pl-0 self-end lg:self-auto">
                           <button
@@ -946,7 +945,7 @@ export function Careers() {
                     {isPreview && !isFullExpanded && (
                       <div className="border-t border-border">
                         <div className="px-5 sm:px-6 py-4">
-                          {/* Description   truncated to 2 lines */}
+                          {/* Description - truncated to 2 lines */}
                           <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2 mb-4">
                             {job.description}
                           </p>
@@ -976,7 +975,7 @@ export function Careers() {
                                     ? "bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400"
                                     : deadlineInfo.status === "urgent"
                                       ? "bg-amber-50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400"
-                                      : "bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400"
+                                      : "bg-jotofa-accent/10 dark:bg-jotofa-accent/15 text-jotofa-accent-dark dark:text-jotofa-accent-light"
                                 }`}
                               >
                                 {deadlineInfo.status === "closed" ? (
@@ -1121,7 +1120,7 @@ export function Careers() {
                                     key={i}
                                     className="flex items-start gap-2 text-sm text-muted-foreground"
                                   >
-                                    <Check className="w-3.5 h-3.5 text-green-600 dark:text-green-400 mt-0.5 shrink-0" />
+                                    <Check className="w-3.5 h-3.5 text-jotofa-accent-dark dark:text-jotofa-accent-light mt-0.5 shrink-0" />
                                     <span>{b}</span>
                                   </li>
                                 ))}
@@ -1145,7 +1144,7 @@ export function Careers() {
                                     {deadlineInfo.daysLeft !== 1 ? "s" : ""}
                                   </span>
                                 ) : (
-                                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-full bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 border border-green-200 dark:border-green-800">
+                                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-full bg-jotofa-accent/10 dark:bg-jotofa-accent/15 text-jotofa-accent-dark dark:text-jotofa-accent-light border border-jotofa-accent/25 dark:border-jotofa-accent/30">
                                     <Calendar className="w-3.5 h-3.5" />
                                     Closes {deadlineInfo.label}
                                   </span>
@@ -1219,7 +1218,7 @@ export function Careers() {
             </div>
 
             {/* ═══════════════════════════════════════
-                PAGINATION   Reyes Holdings style
+                PAGINATION - Reyes Holdings style
                 ═══════════════════════════════════════ */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-3 mt-6 pt-4 border-t border-border">
               {/* Items per page */}
@@ -1242,7 +1241,7 @@ export function Careers() {
 
               {/* Range text */}
               <span className="text-sm text-muted-foreground">
-                {(currentPage - 1) * pageSize + 1}–
+                {(currentPage - 1) * pageSize + 1}-
                 {Math.min(currentPage * pageSize, filteredJobs.length)} of{" "}
                 {filteredJobs.length}
               </span>
@@ -1333,13 +1332,13 @@ export function Careers() {
                 you&apos;re an experienced professional or just starting your
                 career, we want to hear from you.
               </p>
-              <button
-                onClick={() => setActivePage("contact")}
+              <PageLink
+                page="contact"
                 className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold rounded-full bg-white text-jotofa-navy hover:bg-white/90 transition-colors"
               >
                 Join Now
                 <ArrowRight className="w-4 h-4" />
-              </button>
+              </PageLink>
             </div>
 
             <div className="relative rounded-2xl overflow-hidden aspect-[4/3]">

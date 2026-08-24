@@ -75,7 +75,7 @@ export function CSR() {
         <ScrollReveal className="text-center mb-16">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4">
             Corporate Social{" "}
-            <span className="text-jotofa-accent">Responsibility</span>
+            Responsibility
           </h1>
           <p className="mx-auto max-w-2xl text-muted-foreground text-lg">
             We believe that true success is measured not just in profits, but in
@@ -104,7 +104,7 @@ export function CSR() {
                       <pillar.icon className={`w-7 h-7 ${pillar.accent}`} />
                     </div>
                     <div className="text-right">
-                      <div className={`text-2xl font-bold ${pillar.accent}`}>
+                      <div className={"text-2xl font-bold text-foreground"}>
                         {pillar.stat.value}
                       </div>
                       <div className="text-xs text-muted-foreground">
@@ -147,13 +147,13 @@ export function CSR() {
           <div className="text-center p-8 sm:p-12 rounded-2xl border border-jotofa-accent/10 bg-jotofa-accent/[0.02]">
             <p className="text-lg sm:text-xl text-foreground/80 font-medium max-w-3xl mx-auto leading-relaxed">
               &ldquo;At JOTOFA GROUP, we don&apos;t just do business in
-              Tanzania   we invest in its people, its health, and its
+              Tanzania - we invest in its people, its health, and its
               environment. Our growth is intertwined with the prosperity of
               the communities we serve.&rdquo;
             </p>
             <div className="mt-6 flex items-center justify-center gap-3">
               <div className="w-10 h-10 rounded-full bg-jotofa-accent/20 flex items-center justify-center">
-                <span className="text-jotofa-accent font-bold text-sm">JG</span>
+                <span className="text-foreground font-bold text-sm">JG</span>
               </div>
               <div className="text-left">
                 <div className="text-sm font-semibold text-foreground">
@@ -172,7 +172,7 @@ export function CSR() {
     {/* Testimonials */}
     <Testimonials
       eyebrow="Community Voices"
-      title={<>What Our <span className="text-jotofa-accent">Community Partners Say</span></>}
+      title={<>What Our Community Partners Say</>}
       subtitle="Real impact, told by the schools, health partners, and communities we serve."
       accent="text-jotofa-accent"
       accentBg="bg-jotofa-accent/10"

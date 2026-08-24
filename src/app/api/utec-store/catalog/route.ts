@@ -6,7 +6,7 @@ import { UTEC_STORE_API_BASE, productDetailUrl } from "@/lib/store-config";
  *
  * Returns the UTEC store catalog grouped into three product families so the
  * UTEC page can render a 3-row "repeater" showcase (Repeaters / Mobile Radios /
- * Portables) — each row pulling REAL products from the live store with REAL
+ * Portables) - each row pulling REAL products from the live store with REAL
  * prices, images, and deep-links to each product's detail page.
  *
  * - Server-side proxy (keeps the raw store API URL out of the client bundle).
@@ -18,7 +18,7 @@ import { UTEC_STORE_API_BASE, productDetailUrl } from "@/lib/store-config";
  *   timeout so a hung upstream can't wedge the route.
  */
 
-export const revalidate = 0; // always dynamic — the store API is slow/flaky
+export const revalidate = 0; // always dynamic - the store API is slow/flaky
 export const dynamic = "force-dynamic";
 
 // ── Raw shapes from the upstream store API ──
@@ -162,7 +162,7 @@ export async function GET() {
         key: "portables",
         label: "Portable Radios",
         blurb:
-          "Handhelds for teams on the move — rugged, voice-clear, and field-ready.",
+          "Handhelds for teams on the move - rugged, voice-clear, and field-ready.",
         products: buckets.portables,
       },
     ];

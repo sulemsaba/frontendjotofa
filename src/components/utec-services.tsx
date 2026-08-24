@@ -99,8 +99,8 @@ function ServiceCell({ service, index }: { service: Service; index: number }) {
         transition={{ delay: 0.08 * index, duration: 0.5, ease: "easeOut" }}
         className={`group relative w-full h-full text-left overflow-hidden rounded-3xl border transition-all duration-300 ${
           featured
-            ? "min-h-[340px] sm:min-h-[420px] lg:min-h-[520px] border-[#d60b0b]/40 hover:border-[#d60b0b]/70 hover:shadow-[0_28px_70px_-22px_rgba(214,11,11,0.45)]"
-            : "min-h-[260px] sm:min-h-[300px] border-white/10 hover:border-[#d60b0b]/40 hover:-translate-y-0.5 hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)]"
+            ? "min-h-[340px] sm:min-h-[420px] lg:min-h-[520px] border-jotofa-accent/40 hover:border-jotofa-accent/70 hover:shadow-[0_28px_70px_-22px_rgba(214,11,11,0.45)]"
+            : "min-h-[260px] sm:min-h-[300px] border-white/10 hover:border-jotofa-accent/40 hover:-translate-y-0.5 hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)]"
         }`}
       >
         {/* ── Background image (fills the card, zooms on hover) ── */}
@@ -121,7 +121,7 @@ function ServiceCell({ service, index }: { service: Service; index: number }) {
          {/* Subtle red tint that strengthens on hover - ties to UTEC brand */}
         <div
           aria-hidden
-          className="absolute inset-0 bg-[#d60b0b]/0 group-hover:bg-[#d60b0b]/15 transition-colors duration-500"
+          className="absolute inset-0 bg-jotofa-accent/0 group-hover:bg-jotofa-accent/15 transition-colors duration-500"
         />
 
         {/* ── Content ── */}
@@ -133,7 +133,7 @@ function ServiceCell({ service, index }: { service: Service; index: number }) {
                 featured ? "w-14 h-14" : "w-11 h-11"
               }`}
             >
-              <Icon className={`${featured ? "w-7 h-7" : "w-5 h-5"} text-[#d60b0b]`} />
+              <Icon className={`${featured ? "w-7 h-7" : "w-5 h-5"} text-jotofa-accent`} />
             </span>
             <span className="text-[11px] font-mono font-semibold text-white/60 tracking-widest">
               {num}
@@ -143,8 +143,8 @@ function ServiceCell({ service, index }: { service: Service; index: number }) {
           {/* Bottom-anchored content */}
           <div className="mt-auto">
             {featured && (
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#d60b0b]/25 border border-[#d60b0b]/40 backdrop-blur-sm mb-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#d60b0b] animate-pulse" />
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-jotofa-accent/25 border border-jotofa-accent/40 backdrop-blur-sm mb-3">
+                <span className="w-1.5 h-1.5 rounded-full bg-jotofa-accent animate-pulse" />
                 <span className="text-[11px] font-semibold text-red-100 uppercase tracking-wide">
                   Core Capability
                 </span>
@@ -173,7 +173,7 @@ function ServiceCell({ service, index }: { service: Service; index: number }) {
                     key={h}
                     className="flex items-center gap-2.5 text-sm text-white/90"
                   >
-                    <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#d60b0b]/30 ring-1 ring-[#d60b0b]/40">
+                    <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-jotofa-accent/30 ring-1 ring-jotofa-accent/40">
                       <span className="w-1.5 h-1.5 rounded-full bg-red-200" />
                     </span>
                     {h}
@@ -183,7 +183,7 @@ function ServiceCell({ service, index }: { service: Service; index: number }) {
             )}
 
             <span
-              className={`inline-flex items-center gap-1.5 font-semibold text-cyan-200 transition-all duration-300 ${
+              className={`inline-flex items-center gap-1.5 font-semibold text-white transition-all duration-300 ${
                 featured
                   ? "text-sm"
                   : "text-xs opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0"
@@ -201,16 +201,16 @@ function ServiceCell({ service, index }: { service: Service; index: number }) {
 
 export function UtecServices() {
   return (
-    <section className="relative py-20 sm:py-28 bg-[#0a0a0a]">
-      <div className="absolute inset-0 bg-[#0a0a0a]" />
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#d60b0b]/30 to-transparent" />
+    <section className="relative py-20 sm:py-28 bg-jotofa-navy-deep">
+      <div className="absolute inset-0 bg-jotofa-navy-deep" />
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-jotofa-accent/30 to-transparent" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <ScrollReveal className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12 sm:mb-14">
           <div className="max-w-2xl">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white mb-3">
-              Our <span className="text-[#d60b0b]">Services</span>
+              Our Services
             </h2>
             <p className="text-white/70">
               Comprehensive ICT and telecom solutions designed for the modern

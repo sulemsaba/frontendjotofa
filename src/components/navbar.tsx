@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "next-themes";
-import { usePage, PageId } from "@/lib/page-context";
+import { usePage, PageLink, PageId } from "@/lib/page-context";
 import {
   Menu,
   X,
@@ -46,7 +46,6 @@ export function Navbar() {
   const [openDropdown, setOpenDropdown] = useState<"subsidiaries" | "about" | null>(null);
   const [hoveredBizIndex, setHoveredBizIndex] = useState(0);
   const [mobileExpanded, setMobileExpanded] = useState<"subsidiaries" | "about" | null>(null);
-  const [lang, setLang] = useState<"EN" | "SW">("EN");
   const { setTheme, resolvedTheme } = useTheme();
   const { activePage, setActivePage, prefetchPage } = usePage();
   const dropdownContainerRef = useRef<HTMLDivElement>(null);
@@ -115,7 +114,8 @@ export function Navbar() {
     };
   }, [mobileOpen]);
 
-  const handleNavClick = (pageId: PageId) => { setActivePage(pageId); setMobileOpen(false); setOpenDropdown(null); setMobileExpanded(null); };
+  const closeMenus = () => { setMobileOpen(false); setOpenDropdown(null); setMobileExpanded(null); };
+  const handleNavClick = (pageId: PageId) => { setActivePage(pageId); closeMenus(); };
   const toggleTheme = () => setTheme(resolvedTheme === "dark" ? "light" : "dark");
   const isDropdownActive = (t: "subsidiaries") => {
     if (t === "subsidiaries") return subsidiariesPages.includes(activePage);
@@ -159,7 +159,7 @@ export function Navbar() {
 
            {/* ───────── LEFT: Logo Block ───────── */}
            <div className="flex-shrink-0 flex justify-start items-center">
-             <button onClick={() => handleNavClick("home")} className="flex items-center group" aria-label="JOTOFA Group home">
+             <PageLink page="home" onClick={closeMenus} className="flex items-center group" aria-label="JOTOFA Group home">
 <div className="relative w-[110px] h-9 sm:w-[130px] sm:h-10">
                   <Image
                     src="/images/jotofa-logo-light.png"
@@ -178,7 +178,7 @@ export function Navbar() {
                     className="absolute inset-0 w-full h-full object-contain transition-all duration-300 group-hover:opacity-80 cursor-pointer hidden dark:block"
                   />
                 </div>
-             </button>
+             </PageLink>
            </div>
 
           {/* ───────── CENTER: Navigation Links (desktop lg+) ──── */}
@@ -193,8 +193,9 @@ export function Navbar() {
                   onMouseEnter={() => { prefetchPage(item.id); if (item.hasDropdown) openMenu(item.hasDropdown); }}
                   onMouseLeave={item.hasDropdown ? scheduleCloseMenu : undefined}
                 >
-                  <button
-                    onClick={() => handleNavClick(item.id)}
+                  <PageLink
+                    page={item.id}
+                    onClick={closeMenus}
                     onKeyDown={(e) => handleDropdownKeyDown(e, item)}
                     aria-expanded={item.hasDropdown ? openDropdown === item.hasDropdown : undefined}
                     aria-haspopup={item.hasDropdown ? "true" : undefined}
@@ -217,9 +218,9 @@ export function Navbar() {
                           : "scale-x-0 group-hover/nav:scale-x-100 group-hover/nav:opacity-50"
                       }`}
                     />
-                  </button>
+                  </PageLink>
 
-                  {/* Subsidiaries Mega Dropdown   left-aligned to the "Subsidiaries" label */}
+                  {/* Subsidiaries Mega Dropdown - left-aligned to the "Subsidiaries" label */}
                   {item.hasDropdown === "subsidiaries" && openDropdown === "subsidiaries" && (
                     <AnimatePresence>
                       <motion.div initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} transition={{ duration: 0.2, ease: "easeOut" }}
@@ -231,7 +232,7 @@ export function Navbar() {
                              <div className="border-r border-jotofa-navy/6 dark:border-white/6 p-2">
                                 <div className="px-3 py-1.5 mb-1"><span className="text-[10px] font-semibold uppercase tracking-widest text-jotofa-navy/70 dark:text-white/70">Subsidiaries</span></div>
                                {businessItems.map((biz, idx) => (
-                                 <button key={biz.id} onMouseEnter={() => { setHoveredBizIndex(idx); prefetchPage(biz.page); }} onClick={() => handleNavClick(biz.page)}
+                                 <PageLink key={biz.id} page={biz.page} onMouseEnter={() => { setHoveredBizIndex(idx); prefetchPage(biz.page); }} onClick={closeMenus}
                                    className={`flex items-center gap-3 w-full text-left px-3 py-2 rounded-lg transition-all duration-200 group/biz cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent ${hoveredBizIndex === idx ? "bg-jotofa-navy/[0.04] dark:bg-white/[0.06]" : "hover:bg-jotofa-navy/[0.02] dark:hover:bg-white/[0.03]"}`}>
                                     {biz.logo && (
                                       <div className="flex-shrink-0 w-9 h-9 rounded-lg overflow-hidden flex items-center justify-center bg-gray-50 border border-black/5 dark:bg-white/10 dark:border-white/20 shadow-sm">
@@ -249,7 +250,7 @@ export function Navbar() {
                                       <div className="text-[10px] text-jotofa-navy/70 dark:text-white/70 truncate mt-0.5">{biz.description}</div>
                                    </div>
                                    <ArrowRight className={`w-3 h-3 flex-shrink-0 ml-2 transition-all duration-200 text-jotofa-accent ${hoveredBizIndex === idx ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-1"}`} />
-                                 </button>
+                                 </PageLink>
                                ))}
                              </div>
                              {/* Right panel   Next.js Image (not CSS background) */}
@@ -273,9 +274,9 @@ export function Navbar() {
                              </div>
                            </div>
                           <div className="border-t border-jotofa-navy/6 dark:border-white/6 px-5 py-2.5 flex items-center justify-between">
-                            <button onClick={() => handleNavClick("businesses")} className="text-[12px] text-jotofa-navy dark:text-white/70 hover:text-jotofa-navy/70 dark:hover:text-white transition-colors flex items-center gap-1.5 group/viewall font-medium cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm">
+                            <PageLink page="businesses" onClick={closeMenus} className="text-[12px] text-jotofa-navy dark:text-white/70 hover:text-jotofa-navy/70 dark:hover:text-white transition-colors flex items-center gap-1.5 group/viewall font-medium cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm">
                               View All Subsidiaries <ArrowRight className="w-3 h-3 group-hover/viewall:translate-x-0.5 transition-transform" />
-                            </button>
+                            </PageLink>
                              <div className="text-[11px] text-jotofa-navy/70 dark:text-white/70">4 subsidiaries across Tanzania</div>
                           </div>
                         </div>
@@ -291,21 +292,6 @@ export function Navbar() {
 
           {/* ───────── RIGHT: Language + Phone + Theme toggle + Mobile menu ───────── */}
           <div className="ml-auto flex justify-end items-center gap-2 sm:gap-3">
-            <button
-              onClick={() => setLang(lang === "EN" ? "SW" : "EN")}
-              className="flex items-center p-1 rounded-sm hover:bg-jotofa-navy/[0.05] dark:hover:bg-white/[0.08] transition-colors"
-              aria-label={`Switch language (current: ${lang})`}
-            >
-<div className="relative inline-block overflow-hidden rounded-sm" style={{ position: "relative", height: "16px", width: "24px" }}>
-                <Image
-                  src={lang === "EN" ? "/images/flags/gb.png" : "/images/flags/tz.png"}
-                  alt={lang === "EN" ? "English" : "Swahili"}
-                  fill
-                  sizes="24px"
-                  className="object-cover"
-                />
-              </div>
-            </button>
             <a
               href={`tel:${PHONE_TEL}`}
               className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-jotofa-navy/[0.04] dark:bg-white/[0.06] text-xs font-medium text-jotofa-navy/80 dark:text-white/80 hover:bg-jotofa-navy/[0.08] dark:hover:bg-white/[0.1] transition-colors"
@@ -335,7 +321,7 @@ export function Navbar() {
         </div>
       </motion.header>
 
-      {/* MOBILE MENU   focus-trapped dialog (WCAG 2.1.2) */}
+      {/* MOBILE MENU - focus-trapped dialog (WCAG 2.1.2) */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.25 }} className="fixed inset-0 z-40 lg:hidden" role="dialog" aria-modal="true" aria-label="Site navigation menu">
@@ -362,51 +348,46 @@ export function Navbar() {
                  <button ref={mobileCloseBtnRef} onClick={() => setMobileOpen(false)} className="p-2 text-jotofa-navy/60 dark:text-white/60 hover:text-jotofa-navy dark:hover:text-white transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent rounded-md" aria-label="Close menu"><X size={20} /></button>
                </div>
               <div className="py-3 px-2 space-y-0.5 max-h-[calc(100vh-120px)] overflow-y-auto">
-                {navItems.map((item) => (
+                {navItems.map((item) => {
+                  const itemClasses = `flex items-center justify-between w-full text-left px-4 py-2.5 text-sm tracking-wide transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent ${activePage === item.id || (item.hasDropdown && isDropdownActive(item.hasDropdown)) ? "text-jotofa-navy dark:text-white font-semibold" : "text-jotofa-navy/70 dark:text-white/70 hover:text-jotofa-navy dark:hover:text-white"}`;
+                  return (
                   <div key={item.id}>
-                    <button onClick={() => { if (item.hasDropdown && mobileExpanded !== item.hasDropdown) setMobileExpanded(item.hasDropdown); else if (item.hasDropdown && mobileExpanded === item.hasDropdown) handleNavClick(item.id); else handleNavClick(item.id); }}
-                      aria-expanded={item.hasDropdown ? mobileExpanded === item.hasDropdown : undefined}
-                      className={`flex items-center justify-between w-full text-left px-4 py-2.5 text-sm tracking-wide transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent ${activePage === item.id || (item.hasDropdown && isDropdownActive(item.hasDropdown)) ? "text-jotofa-navy dark:text-white font-semibold" : "text-jotofa-navy/70 dark:text-white/70 hover:text-jotofa-navy dark:hover:text-white"}`}>
-                      <span className="text-sm">{item.label}</span>
-                      {item.hasDropdown && <ChevronDown className={`w-4 h-4 transition-transform ${mobileExpanded === item.hasDropdown ? "rotate-180" : ""}`} />}
-                    </button>
+                    {item.hasDropdown ? (
+                      <button
+                        onClick={() => { if (mobileExpanded !== item.hasDropdown) setMobileExpanded(item.hasDropdown!); else handleNavClick(item.id); }}
+                        aria-expanded={mobileExpanded === item.hasDropdown}
+                        className={itemClasses}
+                      >
+                        <span className="text-sm">{item.label}</span>
+                        <ChevronDown className={`w-4 h-4 transition-transform ${mobileExpanded === item.hasDropdown ? "rotate-180" : ""}`} />
+                      </button>
+                    ) : (
+                      <PageLink page={item.id} onClick={closeMenus} className={itemClasses}>
+                        <span className="text-sm">{item.label}</span>
+                      </PageLink>
+                    )}
                        {item.hasDropdown === "subsidiaries" && mobileExpanded === "subsidiaries" && (
                       <div className="pl-4 space-y-0.5 pb-1">
-                        <button onClick={() => handleNavClick("businesses")} className="flex items-center gap-3 w-full text-left px-4 py-2 text-jotofa-navy dark:text-white font-medium hover:bg-jotofa-navy/[0.03] dark:hover:bg-white/[0.04] rounded-lg">
+                        <PageLink page="businesses" onClick={closeMenus} className="flex items-center gap-3 w-full text-left px-4 py-2 text-jotofa-navy dark:text-white font-medium hover:bg-jotofa-navy/[0.03] dark:hover:bg-white/[0.04] rounded-lg">
                           <Building2 className="w-3.5 h-3.5" /><span className="text-sm">View All Subsidiaries</span>
-                        </button>
+                        </PageLink>
                         {businessItems.map(biz => (
-                          <button key={biz.id} onClick={() => handleNavClick(biz.page)} className="flex items-center gap-3 w-full text-left px-4 py-2 text-jotofa-navy/70 dark:text-white/70 hover:text-jotofa-navy dark:hover:text-white hover:bg-jotofa-navy/[0.03] dark:hover:bg-white/[0.04] rounded-lg">
+                          <PageLink key={biz.id} page={biz.page} onClick={closeMenus} className="flex items-center gap-3 w-full text-left px-4 py-2 text-jotofa-navy/70 dark:text-white/70 hover:text-jotofa-navy dark:hover:text-white hover:bg-jotofa-navy/[0.03] dark:hover:bg-white/[0.04] rounded-lg">
                             {biz.logo && (
                               <div className="w-6 h-6 rounded-md overflow-hidden flex items-center justify-center bg-white border border-black/5 dark:border-white/10 flex-shrink-0">
                                 <Image src={biz.logo} alt={`${biz.label} logo`} width={20} height={20} className="w-5 h-5 object-contain" />
                               </div>
                             )}
                             <span className="text-sm">{biz.label}</span>
-                          </button>
+                          </PageLink>
                         ))}
                       </div>
                     )}
 
                   </div>
-                ))}
+                );
+                })}
                 <div className="pt-4 mt-2 border-t border-jotofa-navy/6 dark:border-white/6 space-y-1">
-                  <button
-                    onClick={() => setLang(lang === "EN" ? "SW" : "EN")}
-                    className="flex items-center gap-2 px-4 py-2 rounded-xl text-jotofa-navy/70 dark:text-white/70 text-sm hover:bg-jotofa-navy/[0.03] dark:hover:bg-white/[0.04] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent"
-                    aria-label={`Switch language (current: ${lang})`}
-                  >
-<div className="relative inline-block overflow-hidden rounded-sm" style={{ position: "relative", height: "16px", width: "24px" }}>
-                      <Image
-                        src={lang === "EN" ? "/images/flags/gb.png" : "/images/flags/tz.png"}
-                        alt={lang === "EN" ? "English" : "Swahili"}
-                        fill
-                        sizes="24px"
-                        className="object-cover"
-/>
-                    </div>
-                    <span>{lang === "EN" ? "English" : "Swahili"}</span>
-                  </button>
                   <a href={`tel:${PHONE_TEL}`} className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-jotofa-navy/70 dark:text-white/70 text-sm hover:bg-jotofa-navy/[0.03] dark:hover:bg-white/[0.04] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent"><Phone className="w-4 h-4" /><span>{PHONE_NUMBER}</span></a>
                 </div>
               </div>

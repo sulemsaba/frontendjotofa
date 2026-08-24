@@ -1,24 +1,15 @@
 "use client";
 
-import { usePage } from "@/lib/page-context";
+import { PageLink } from "@/lib/page-context";
 import { motion } from "framer-motion";
 
 export function UnifyingExcellence() {
-  const { setActivePage } = usePage();
-
   return (
-    <section className="relative w-full bg-jotofa-navy text-white overflow-hidden -mt-[60px]">
-      {/* Architectural curve — cream ceiling into blue group world */}
-      <div
-        aria-hidden
-        className="absolute top-0 left-0 w-full bg-background pointer-events-none"
-        style={{
-          height: "140px",
-          borderRadius: "0 0 50% 50% / 0 0 100px 100px",
-        }}
-      />
+    <section className="relative w-full bg-jotofa-navy text-white overflow-hidden">
+      {/* Inward corner: the page background curves down into the navy section */}
+      <div aria-hidden className="h-8 w-full bg-background rounded-b-3xl" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 pb-16 sm:pb-24">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 sm:pt-24 pb-16 sm:pb-24">
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start">
           {/* Left column */}
           <motion.div
@@ -34,11 +25,8 @@ export function UnifyingExcellence() {
             </div>
 
             <h1
-              className="font-bold leading-[0.95] tracking-tight text-white mb-8"
-              style={{
-                fontFamily: "var(--font-playfair-display), 'Playfair Display', serif",
-                fontSize: "clamp(2.6rem, 6.5vw, 5rem)",
-              }}
+              className="font-semibold leading-[1.05] tracking-tight text-white mb-8"
+              style={{ fontSize: "clamp(2.4rem, 5.5vw, 4.25rem)" }}
             >
               Unifying Excellence.
               <br />
@@ -49,18 +37,18 @@ export function UnifyingExcellence() {
               Four specialized sectors. One shared commitment to quality, integrity, and lasting impact across Tanzania and East Africa.
             </p>
 
-            <button
-              onClick={() => setActivePage("about")}
+            <PageLink
+              page="about"
               className="inline-flex items-center gap-3 text-base sm:text-lg font-medium text-white transition-all duration-200 hover:gap-4 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 group"
             >
               <span className="inline-flex items-center justify-center w-10 h-10 rounded-full border border-white/30 transition-all duration-200 group-hover:bg-white group-hover:text-jotofa-navy">
                 <span className="text-lg leading-none">&rarr;</span>
               </span>
               Explore the Group
-            </button>
+            </PageLink>
           </motion.div>
 
-          {/* Right column — starts lower on desktop */}
+          {/* Right column - starts lower on desktop */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -76,21 +64,18 @@ export function UnifyingExcellence() {
             </div>
 
             <h2
-              className="font-normal leading-snug text-white mb-10"
-              style={{
-                fontFamily: "var(--font-playfair-display), 'Playfair Display', serif",
-                fontSize: "clamp(1.5rem, 3vw, 2.6rem)",
-              }}
+              className="font-light leading-snug text-white mb-10"
+              style={{ fontSize: "clamp(1.4rem, 2.6vw, 2.25rem)" }}
             >
-              ICT, logistics, cleaning, and staffing — four subsidiaries united under one group.
+              ICT, logistics, cleaning, and staffing - four subsidiaries united under one group.
             </h2>
 
             <div className="space-y-6 text-white/80 leading-[1.8] max-w-2xl">
               <p className="text-base sm:text-lg">
-                We empower businesses and communities by uniting four specialized subsidiaries under one trusted roof. From telecommunications infrastructure to reliable courier services and professional cleaning, to skilled staffing — every service is built to drive real impact.
+                We empower businesses and communities by uniting four specialized subsidiaries under one trusted roof. From telecommunications infrastructure to reliable courier services and professional cleaning, to skilled staffing - every service is built to drive real impact.
               </p>
               <p className="text-base sm:text-lg text-white/70">
-                The JOTOFA Group is committed to integrity, innovation, and excellence — building a stronger East Africa through collaboration and forward-thinking solutions.
+                The JOTOFA Group is committed to integrity, innovation, and excellence - building a stronger East Africa through collaboration and forward-thinking solutions.
               </p>
             </div>
           </motion.div>

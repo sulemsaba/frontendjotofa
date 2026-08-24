@@ -7,8 +7,9 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-footer-bg: var(--footer-bg);
-  --font-sans: var(--font-open-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-inter-tight), var(--font-inter), sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -44,7 +45,7 @@
   --radius-xl: calc(var(--radius) + 4px);
 
   /* ════════════════════════════════════════════════════════════
-     JOTOFA BRAND TOKENS  —  per JOTOFA Visual Identity Guidelines
+     JOTOFA BRAND TOKENS  -  per JOTOFA Visual Identity Guidelines
      Main colours (guide p.23):
        • JOTOFA Blue  #003B64  (RGB 0, 59, 100)
        • Jet Black    #000000
@@ -59,28 +60,23 @@
        • Pink         #FF4D7D  (RGB 255, 77, 125)
      ════════════════════════════════════════════════════════════ */
 
-   /* Primary — JOTOFA Blue (text, brand, strong elements) */
+   /* Primary - JOTOFA Blue (text, brand, strong elements) */
    --color-jotofa-navy: #003B64;
    --color-jotofa-navy-deep: #002A4A;
    --color-jotofa-navy-mid: #00355A;
    --color-jotofa-navy-card: #0A4A75;
    --color-jotofa-navy-sidebar: #00253F;
 
-   /* Accent — Teal (design accent, CTAs, links, highlights) */
+   /* Accent - Teal (design accent, CTAs, links, highlights).
+      Three-color rule: navy (primary) + teal (accent) + neutrals.
+      -light/-dark are shades of the same teal, not extra colors. */
    --color-jotofa-accent: #00A9B7;
    --color-jotofa-accent-light: #33BAC6;
    --color-jotofa-accent-dark: #008799;
-   --color-jotofa-hover-accent: #00BCA8;
 
-   /* Text hierarchy */
+   /* Text hierarchy (neutrals) */
    --color-jotofa-text-secondary: #5E6A75;
    --color-jotofa-text-muted: #999DA0;
-
-  /* ─── Social brand colors (used in footer, contact, etc.) ─── */
-  --color-social-linkedin: #0A66C2;
-  --color-social-twitter: #1DA1F2;
-  --color-social-facebook: #1877F2;
-  --color-social-whatsapp: #25D366;
 }
 
 /* ═══════════════════════════════════════════
@@ -208,26 +204,39 @@
   html {
     scroll-behavior: smooth;
   }
+  /* Display voice: headlines run Inter Tight with tight tracking.
+     Body, labels, and navigation stay on Inter (the default sans). */
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
 }
 
 /* ═══════════════════════════════════════════
-   SCROLLBAR
+   SCROLLBAR - follows the active theme
    ═══════════════════════════════════════════ */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
-/* Dark mode scrollbar (default) */
 ::-webkit-scrollbar-track {
-  background: #00253F;
+  background: var(--background);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #0A4A75;
+  background: rgba(0, 59, 100, 0.25);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 59, 100, 0.4);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #0A4A75;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
   background: #0E558A;
 }
 
@@ -236,18 +245,10 @@
    ═══════════════════════════════════════════ */
 
 
-/* Glass morphism — dark mode default */
-.glass {
-  background: rgba(10, 74, 117, 0.5);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-/* Custom selection color — teal */
+/* Custom selection color - teal tint, readable in both themes */
 ::selection {
-  background: rgba(0, 169, 183, 0.3);
-  color: #ffffff;
+  background: rgba(0, 169, 183, 0.25);
+  color: inherit;
 }
 
 /* ═══════════════════════════════════════════
@@ -261,22 +262,6 @@
    100% {
      transform: translateY(-50%);
    }
- }
-
- @keyframes floatBlob {
-   0%, 100% {
-     transform: translate(0, 0) scale(1);
-   }
-   33% {
-     transform: translate(24px, -18px) scale(1.07);
-   }
-   66% {
-     transform: translate(-18px, 12px) scale(0.94);
-   }
- }
-
- .animate-float-blob {
-   animation: floatBlob ease-in-out infinite;
  }
 
  /* ═══════════════════════════════════════════
@@ -308,7 +293,7 @@
   gap: 8px;
   font-size: 13px;
   font-weight: 500;
-  color: #5c5c8a;
+  color: var(--color-jotofa-text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 20px;
@@ -328,13 +313,13 @@
   font-size: 36px;
   font-weight: 600;
   line-height: 1.2;
-  color: #1a237e;
+  color: var(--color-jotofa-navy);
   margin-bottom: 32px;
 }
 
 .contact-left p {
   font-size: 15px;
-  color: #5c5c8a;
+  color: var(--color-jotofa-text-secondary);
   line-height: 1.7;
   max-width: 320px;
 }
@@ -346,7 +331,7 @@
 
 .contact-card {
   background: #ffffff;
-  border: 1px solid rgba(26, 35, 126, 0.08);
+  border: 1px solid rgba(0, 59, 100, 0.08);
   border-radius: 12px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   overflow: hidden;
@@ -361,14 +346,14 @@
 }
 
 .contact-card-row:hover {
-  background-color: rgba(26, 35, 126, 0.02);
+  background-color: rgba(0, 59, 100, 0.02);
 }
 
 .contact-card-icon {
   width: 40px;
   height: 40px;
   border-radius: 10px;
-  background: #1a237e;
+  background: var(--color-jotofa-navy);
   color: #ffffff;
   display: flex;
   align-items: center;
@@ -379,7 +364,7 @@
 .contact-card-label {
   font-size: 11px;
   font-weight: 700;
-  color: #5c5c8a;
+  color: var(--color-jotofa-text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.6px;
   margin-bottom: 5px;
@@ -387,19 +372,19 @@
 
 .contact-card-value {
   font-size: 14px;
-  color: #1a237e;
+  color: var(--color-jotofa-navy);
   line-height: 1.55;
   text-decoration: none;
   font-weight: 500;
 }
 
 .contact-card-value:hover {
-  color: #0d1464;
+  color: var(--color-jotofa-navy-deep);
 }
 
 .contact-card-divider {
   height: 1px;
-  background: rgba(26, 35, 126, 0.06);
+  background: rgba(0, 59, 100, 0.06);
   margin: 0 20px;
 }
 
@@ -420,7 +405,7 @@
   display: block;
   font-size: 13px;
   font-weight: 500;
-  color: #5c5c8a;
+  color: var(--color-jotofa-text-secondary);
   margin-bottom: 6px;
 }
 .form-group.full-width {
@@ -434,11 +419,11 @@
   width: 100%;
   padding: 12px 0;
   border: none;
-  border-bottom: 1px solid #b8b5ad;
+  border-bottom: 1px solid rgba(0, 59, 100, 0.2);
   background: transparent;
   font-family: inherit;
   font-size: 15px;
-  color: #1a237e;
+  color: var(--color-jotofa-navy);
   outline: none;
   transition: border-color 0.3s ease;
   border-radius: 0;
@@ -447,13 +432,13 @@
 .form-group input::placeholder,
 .form-group textarea::placeholder,
 .form-group select:invalid {
-  color: #9997a8;
+  color: var(--color-jotofa-text-muted);
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-  border-bottom-color: #1a237e;
+  border-bottom-color: var(--color-jotofa-navy);
 }
 
 .form-group select {
@@ -466,7 +451,7 @@
   padding-right: 20px;
 }
 
-.form-group select option { color: #1a237e; }
+.form-group select option { color: var(--color-jotofa-navy); }
 
 .form-group textarea {
   resize: vertical;
@@ -483,7 +468,7 @@
 .checkbox-group input[type="checkbox"] {
   width: 18px;
   height: 18px;
-  accent-color: #1a237e;
+  accent-color: var(--color-jotofa-navy);
   margin-top: 2px;
   cursor: pointer;
   flex-shrink: 0;
@@ -491,12 +476,12 @@
 
 .checkbox-group label {
   font-size: 14px;
-  color: #5c5c8a;
+  color: var(--color-jotofa-text-secondary);
   line-height: 1.5;
 }
 
 .checkbox-group a {
-  color: #1a237e;
+  color: var(--color-jotofa-navy);
   text-decoration: underline;
   font-weight: 500;
 }
@@ -507,7 +492,7 @@
   align-items: center;
   gap: 8px;
   padding: 14px 28px;
-  background: #1a237e;
+  background: var(--color-jotofa-navy);
   color: #ffffff;
   border: none;
   border-radius: 4px;
@@ -519,7 +504,7 @@
 }
 
 .submit-btn:hover {
-  background: #0d1442;
+  background: var(--color-jotofa-navy-deep);
   transform: translateY(-1px);
 }
 
@@ -543,7 +528,7 @@
   font-size: 32px;
   font-weight: 600;
   margin-bottom: 40px;
-  color: #1a237e;
+  color: var(--color-jotofa-navy);
 }
 
 .map-wrapper {
@@ -552,7 +537,7 @@
   height: 480px;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 8px 32px rgba(26, 35, 126, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 59, 100, 0.08);
 }
 
 .map-wrapper iframe {
@@ -578,19 +563,19 @@
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 14px;
-  color: #1a237e;
+  color: var(--color-jotofa-navy);
 }
 
 .map-overlay p,
 .map-overlay a {
   font-size: 14px;
-  color: #5c5c8a;
+  color: var(--color-jotofa-text-secondary);
   line-height: 1.7;
   text-decoration: none;
   display: block;
 }
 
-.map-overlay a:hover { color: #1a237e; }
+.map-overlay a:hover { color: var(--color-jotofa-navy); }
 
 .info-row {
   display: flex;
@@ -604,7 +589,7 @@
   height: 16px;
   margin-top: 3px;
   flex-shrink: 0;
-  stroke: #1a237e;
+  stroke: var(--color-jotofa-navy);
   fill: none;
   stroke-width: 2;
   stroke-linecap: round;
@@ -625,7 +610,7 @@
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 20px;
-  color: #1a237e;
+  color: var(--color-jotofa-navy);
 }
 
 .contact-info-section .info-row { margin-bottom: 14px; }
@@ -708,23 +693,24 @@
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: #5c5c8a;
+  color: var(--color-jotofa-text-secondary);
   margin-bottom: 12px;
 }
 
 .lead {
   font-size: 18px;
   line-height: 1.7;
-  color: #5c5c8a;
+  color: var(--color-jotofa-text-secondary);
 }
 
 .body-sm {
   font-size: 15px;
   line-height: 1.6;
-  color: #5c5c8a;
+  color: var(--color-jotofa-text-secondary);
 }
 
 .h-display {
+  font-family: var(--font-display);
   font-size: clamp(40px, 6vw, 72px);
   font-weight: 600;
   line-height: 1.1;
@@ -732,6 +718,7 @@
 }
 
 .h1 {
+  font-family: var(--font-display);
   font-size: clamp(36px, 5vw, 56px);
   font-weight: 600;
   line-height: 1.2;
@@ -739,6 +726,7 @@
 }
 
 .h2 {
+  font-family: var(--font-display);
   font-size: clamp(28px, 4vw, 40px);
   font-weight: 600;
   line-height: 1.25;
@@ -746,6 +734,7 @@
 }
 
 .h3 {
+  font-family: var(--font-display);
   font-size: clamp(22px, 3vw, 28px);
   font-weight: 600;
   line-height: 1.3;
@@ -760,22 +749,34 @@
 }
 
 /* Animations */
-@keyframes fadeUpDelay1 {
-  from { opacity: 0; transform: translateY(20px); }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes fadeUpDelay2 {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+.animate-fade-up {
+  animation: fadeUp 0.6s ease-out both;
 }
 
 .animate-fade-up-delay-1 {
-  animation: fadeUpDelay1 0.8s ease-out 0.1s both;
+  animation: fadeUp 0.6s ease-out 0.1s both;
 }
 
 .animate-fade-up-delay-2 {
-  animation: fadeUpDelay2 0.8s ease-out 0.2s both;
+  animation: fadeUp 0.6s ease-out 0.2s both;
+}
+
+.animate-fade-up-delay-3 {
+  animation: fadeUp 0.6s ease-out 0.3s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-fade-up-delay-1,
+  .animate-fade-up-delay-2,
+  .animate-fade-up-delay-3 {
+    animation: none;
+  }
 }
 
 /* Contact page dark mode */

@@ -7,7 +7,7 @@ import type { Config } from "tailwindcss";
  * through `@theme` blocks in `src/app/globals.css`. This file is kept for
  * backward compatibility with shadcn/ui tooling and any legacy content
  * scanning. Animation utilities are provided by `tw-animate-css` (imported
- * in globals.css) — NOT `tailwindcss-animate`, which is not installed.
+ * in globals.css) - NOT `tailwindcss-animate`, which is not installed.
  */
 const config: Config = {
   darkMode: "class",

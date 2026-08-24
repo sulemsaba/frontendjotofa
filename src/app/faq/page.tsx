@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     "Find answers to frequently asked questions about JOTOFA GROUP, our subsidiaries, and our services across Tanzania.",
   openGraph: {
-    title: "FAQ   JOTOFA GROUP",
+    title: "FAQ - JOTOFA GROUP",
     description:
       "Find answers to frequently asked questions about JOTOFA GROUP and our five subsidiaries.",
     images: [{ url: "/images/jotofa-hero-1.webp", width: 1200, height: 630, alt: "JOTOFA GROUP FAQ" }],

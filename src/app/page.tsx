@@ -10,7 +10,7 @@ import { Testimonials } from "@/components/testimonials";
 import { homeTestimonials } from "@/lib/testimonials-data";
 
 /* ──────────────────────────────────────────────────────────────────────────
-   Home route (`/`)   focused landing page.
+   Home route (`/`) - focused landing page.
 
    Navigation between pages is now URL-based (router.push in page-context),
    so every other page has its own route file (e.g. /about, /businesses).

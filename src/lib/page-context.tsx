@@ -1,7 +1,8 @@
 "use client";
 
-import { createContext, useContext, useState, useCallback, useEffect, ReactNode } from "react";
+import { createContext, useContext, useState, useCallback, useEffect, ReactNode, ComponentProps } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import Link from "next/link";
 
 export type PageId =
   | "home"
@@ -24,6 +25,8 @@ interface PageContextType {
   prefetchPage: (page: PageId) => void;
   /** True while a client-side navigation is in flight (for the top progress bar). */
   navigating: boolean;
+  /** Mark a navigation as started (used by PageLink to drive the progress bar). */
+  setNavigating: (v: boolean) => void;
 }
 
 const PageContext = createContext<PageContextType>({
@@ -31,6 +34,7 @@ const PageContext = createContext<PageContextType>({
   setActivePage: () => {},
   prefetchPage: () => {},
   navigating: false,
+  setNavigating: () => {},
 });
 
 /**
@@ -102,7 +106,7 @@ export function PageProvider({ children }: { children: ReactNode }) {
 
   // ─── Idle-time prefetching of ALL routes ───────────────────────────
   // On first load, once the browser is idle, prefetch every route so that
-  // the FIRST click to any nav item is instant (no 700–1700ms dev compile
+  // the FIRST click to any nav item is instant (no 700-1700ms dev compile
   // wait). Uses requestIdleCallback with a fallback to setTimeout. Runs
   // only once per page mount. In production these are already pre-built,
   // so this is mostly a dev-mode win   but it also warms the RSC cache.
@@ -126,7 +130,7 @@ export function PageProvider({ children }: { children: ReactNode }) {
   }, [router]);
 
   return (
-    <PageContext.Provider value={{ activePage, setActivePage, prefetchPage, navigating }}>
+    <PageContext.Provider value={{ activePage, setActivePage, prefetchPage, navigating, setNavigating }}>
       {children}
     </PageContext.Provider>
   );
@@ -134,4 +138,39 @@ export function PageProvider({ children }: { children: ReactNode }) {
 
 export function usePage() {
   return useContext(PageContext);
+}
+
+/** Resolve a PageId to its URL. */
+export function pageHref(page: PageId): string {
+  return page === "home" ? "/" : `/${page}`;
+}
+
+/**
+ * Crawlable navigation link between site pages.
+ *
+ * Renders a real <a href> (SEO + middle-click + copy-link all work) while
+ * still driving the top progress bar: clicking marks `navigating` before
+ * Next.js Link performs the client-side transition.
+ */
+export function PageLink({
+  page,
+  children,
+  onClick,
+  ...rest
+}: { page: PageId } & Omit<ComponentProps<typeof Link>, "href">) {
+  const { activePage, setNavigating } = usePage();
+  return (
+    <Link
+      href={pageHref(page)}
+      onClick={(e) => {
+        // Only show the progress bar for real page changes (same-page clicks
+        // never change the pathname, which is what clears the flag).
+        if (activePage !== page) setNavigating(true);
+        onClick?.(e);
+      }}
+      {...rest}
+    >
+      {children}
+    </Link>
+  );
 }

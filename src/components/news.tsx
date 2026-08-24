@@ -11,7 +11,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "./scroll-reveal";
-import { usePage } from "@/lib/page-context";
+import { PageLink } from "@/lib/page-context";
 import { NewsDetail } from "./news-detail";
 import { useState, useCallback } from "react";
 
@@ -27,7 +27,7 @@ const categories = [
 const featuredArticle = {
   category: "Group Update",
   categoryKey: "group",
-  categoryColor: "text-jotofa-accent",
+  categoryColor: "text-foreground",
   categoryBg: "bg-jotofa-accent/10",
   categoryBorder: "border-jotofa-accent/20",
   title: "JOTOFA GROUP Expands into East African Markets",
@@ -42,7 +42,7 @@ const newsItems = [
   {
     category: "UTEC Solutions",
     categoryKey: "utec",
-    categoryColor: "text-jotofa-accent",
+    categoryColor: "text-foreground",
     categoryBg: "bg-jotofa-accent/10",
     categoryBorder: "border-jotofa-accent/20",
     title: "UTEC Deploys Smart City Infrastructure in Dar es Salaam",
@@ -55,7 +55,7 @@ const newsItems = [
   {
     category: "CSR",
     categoryKey: "csr",
-    categoryColor: "text-jotofa-accent",
+    categoryColor: "text-foreground",
     categoryBg: "bg-jotofa-accent/10",
     categoryBorder: "border-jotofa-accent/20",
     title: "2,000 Trees Planted: JOTOFA's Green Initiative Milestone",
@@ -68,7 +68,7 @@ const newsItems = [
   {
     category: "Innovation",
     categoryKey: "innovation",
-    categoryColor: "text-jotofa-accent",
+    categoryColor: "text-foreground",
     categoryBg: "bg-jotofa-accent/10",
     categoryBorder: "border-jotofa-accent/20",
     title: "Digital Transformation Across All Subsidiaries",
@@ -81,7 +81,7 @@ const newsItems = [
   {
     category: "Logistics",
     categoryKey: "logistics",
-    categoryColor: "text-jotofa-accent",
+    categoryColor: "text-foreground",
     categoryBg: "bg-jotofa-accent/10",
     categoryBorder: "border-jotofa-accent/20",
     title: "JOTOFA Courier Launches Same-Day Delivery in Dar es Salaam",
@@ -94,7 +94,7 @@ const newsItems = [
   {
     category: "Group Update",
     categoryKey: "group",
-    categoryColor: "text-jotofa-accent",
+    categoryColor: "text-foreground",
     categoryBg: "bg-jotofa-accent/10",
     categoryBorder: "border-jotofa-accent/20",
     title: "JOTOFA GROUP Achieves ISO 9001 Certification",
@@ -107,7 +107,7 @@ const newsItems = [
   {
     category: "UTEC Solutions",
     categoryKey: "utec",
-    categoryColor: "text-jotofa-accent",
+    categoryColor: "text-foreground",
     categoryBg: "bg-jotofa-accent/10",
     categoryBorder: "border-jotofa-accent/20",
     title: "UTEC Partners with Tanzania Telecom Authority for 5G Rollout",
@@ -122,7 +122,6 @@ const newsItems = [
 const allArticles = [featuredArticle, ...newsItems];
 
 export function News() {
-  const { setActivePage } = usePage();
   const [selectedArticle, setSelectedArticle] = useState<typeof featuredArticle | null>(null);
   const [activeCategory, setActiveCategory] = useState<string>("all");
 
@@ -214,7 +213,7 @@ export function News() {
                 {/* Content */}
                 <div className="p-8 sm:p-10 flex flex-col justify-center">
                   <div className="flex items-center gap-3 mb-4">
-                    <span className="text-xs font-semibold uppercase tracking-widest text-jotofa-accent">
+                    <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
                       Featured
                     </span>
                     <div
@@ -265,7 +264,7 @@ export function News() {
           <ScrollReveal className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-12">
             <div>
               <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
-                Latest <span className="text-jotofa-accent">Stories</span>
+                Latest Stories
               </h2>
               <p className="text-muted-foreground">
                 Updates from across our subsidiaries and group operations
@@ -281,7 +280,7 @@ export function News() {
                     aria-pressed={activeCategory === cat.id}
                     className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent ${
                       activeCategory === cat.id
-                        ? "bg-jotofa-accent/10 border-jotofa-accent/20 text-jotofa-accent"
+                        ? "bg-jotofa-accent/10 border-jotofa-accent/20 text-foreground"
                         : "border-border text-muted-foreground hover:border-jotofa-accent/20 hover:text-foreground"
                     }`}
                   >
@@ -381,25 +380,25 @@ export function News() {
                 <Lightbulb className="w-7 h-7 text-jotofa-accent" />
               </div>
               <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
-                Stay <span className="text-jotofa-accent">Informed</span>
+                Stay Informed
               </h2>
               <p className="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto">
                 Get the latest updates from JOTOFA GROUP delivered to your inbox.
-                From strategic milestones to community impact   never miss a story.
+                From strategic milestones to community impact - never miss a story.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <button
-                  onClick={() => setActivePage("contact")}
-                  className="px-8 py-3.5 bg-jotofa-accent hover:bg-jotofa-accent-dark text-white font-semibold rounded-full transition-all hover:shadow-lg hover:shadow-jotofa-accent/25"
+                <PageLink
+                  page="contact"
+                  className="px-8 py-3.5 bg-jotofa-accent hover:bg-jotofa-accent-dark text-white font-semibold rounded-full transition-all"
                 >
                   Subscribe to Updates
-                </button>
-                <button
-                  onClick={() => setActivePage("contact")}
+                </PageLink>
+                <PageLink
+                  page="contact"
                   className="px-8 py-3.5 border dark:border-white/20 border-black/20 hover:border-jotofa-accent/40 text-foreground font-medium rounded-full transition-all dark:hover:bg-white/5 hover:bg-black/[0.04]"
                 >
                   Contact Our Team
-                </button>
+                </PageLink>
               </div>
             </div>
           </ScrollReveal>

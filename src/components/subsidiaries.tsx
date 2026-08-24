@@ -16,7 +16,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { ScrollReveal } from "./scroll-reveal";
-import { usePage, PageId } from "@/lib/page-context";
+import { PageLink, PageId } from "@/lib/page-context";
 import { storeProductsPageUrl } from "@/lib/store-config";
 
 /* ──────────────────────────────────────────────────────────────────────────
@@ -27,7 +27,7 @@ import { storeProductsPageUrl } from "@/lib/store-config";
 const accentClasses: Record<string, { bg: string; text: string; border: string; hoverBorder: string; hoverBg: string }> = {
   jotofa: {
     bg: "bg-jotofa-accent/10",
-    text: "text-jotofa-accent",
+    text: "text-foreground",
     border: "border-jotofa-accent/20",
     hoverBorder: "hover:border-jotofa-accent/40",
     hoverBg: "hover:bg-jotofa-accent/[0.06]",
@@ -35,13 +35,13 @@ const accentClasses: Record<string, { bg: string; text: string; border: string; 
 };
 
 /* ──────────────────────────────────────────────────────────────────────────
-   "Five Arms, One Vision"   Home page subsidiaries section.
+   "Five Arms, One Vision" - Home page subsidiaries section.
 
    Redesigned as SPLIT-SCREEN STACKED CARDS to match the businesses page:
-   • Full-width alternating split sections   one image LEFT, next image RIGHT
+   • Full-width alternating split sections - one image LEFT, next image RIGHT
      ("one image look right, the other look left"), repeating down the page.
    • Image side: full-bleed photograph with navy brand overlay, giant
-     watermark index number (01–05), logo tile, tagline pill.
+     watermark index number (01-05), logo tile, tagline pill.
    • Content side: sector badges, company name (h2), value proposition,
      2-column services grid, "Explore" CTA (navigates to the subsidiary
      detail page) + optional UTEC store link.
@@ -53,7 +53,7 @@ const accentClasses: Record<string, { bg: string; text: string; border: string; 
 
 interface Subsidiary {
   id: PageId;
-  /** "01" – "05"   used as the big watermark number */
+  /** "01" - "05"   used as the big watermark number */
   index: string;
   name: string;
   /** Short sector tagline, e.g. "ICT & Telecommunications" */
@@ -109,7 +109,7 @@ const subsidiaries: Subsidiary[] = [
     tagline: "Professional Cleaning",
     sectors: ["Facilities", "Hygiene", "Maintenance"],
     description:
-      "Premium cleaning and housekeeping for commercial, residential, and industrial spaces   ensuring hygiene and pristine environments every time.",
+      "Premium cleaning and housekeeping for commercial, residential, and industrial spaces - ensuring hygiene and pristine environments every time.",
     services: [
       "Commercial Cleaning",
       "Residential Services",
@@ -129,7 +129,7 @@ const subsidiaries: Subsidiary[] = [
     tagline: "Workforce Solutions",
     sectors: ["Recruitment", "HR", "Workforce"],
     description:
-      "Connecting talent with opportunity   skilled and semi-skilled labour supply, recruitment, and workforce management for industries across Tanzania.",
+      "Connecting talent with opportunity - skilled and semi-skilled labour supply, recruitment, and workforce management for industries across Tanzania.",
     services: [
       "Recruitment Services",
       "Labour Outsourcing",
@@ -145,12 +145,12 @@ const subsidiaries: Subsidiary[] = [
 ];
 
 /* ──────────────────────────────────────────────────────────────────────────
-   UtecShowcase   image carousel + tabbed content card for UTEC.
+   UtecShowcase - image carousel + tabbed content card for UTEC.
    ────────────────────────────────────────────────────────────────────────── */
 
 const utecSlides = [
   {
-    src: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80",
+    src: "/images/showcase/utec-safety.jpg",
     title: "Safety & Security Sales",
     caption: "Reduce workplace incidents with certified protective gear and advanced threat detection technology.",
     tab: "Radio Call Solution",
@@ -164,7 +164,7 @@ const utecSlides = [
     ],
   },
   {
-    src: "https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=1200&q=80",
+    src: "/images/showcase/utec-installations.jpg",
     title: "Security System Installations",
     caption: "24/7 surveillance and access control tailored to protect your assets and monitor your premises.",
     tab: "Installations",
@@ -178,13 +178,13 @@ const utecSlides = [
     ],
   },
   {
-    src: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1200&q=80",
+    src: "/images/showcase/utec-it-ict.jpg",
     title: "IT & ICT Solutions",
     caption: "Enterprise-grade hardware and cloud infrastructure that keeps your business connected and competitive.",
     tab: "IT & ICT",
     heading: "Power Your Business with Modern Tech",
     description:
-      "Downtime costs money. We build reliable IT infrastructure that keeps your team productive and your data secure   from networking hardware to cloud migration.",
+      "Downtime costs money. We build reliable IT infrastructure that keeps your team productive and your data secure - from networking hardware to cloud migration.",
     benefits: [
       "Boost productivity with enterprise laptops, desktops, and peripherals built for heavy workloads",
       "Zero downtime networking with professional design, switches, and structured cabling",
@@ -192,7 +192,7 @@ const utecSlides = [
     ],
   },
   {
-    src: "https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1200&q=80",
+    src: "/images/showcase/utec-solar.jpg",
     title: "Renewable Solar Solutions",
     caption: "Cut energy costs by up to 70% with our high-efficiency solar systems for homes and businesses.",
     tab: "Solar",
@@ -209,13 +209,13 @@ const utecSlides = [
 
 const cleaningSlides = [
   {
-    src: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1200&q=80",
+    src: "/images/showcase/cleaning-commercial.jpg",
     title: "Commercial Cleaning",
     caption: "Professional office and commercial space cleaning that maintains hygiene and impresses clients.",
     tab: "Commercial",
     heading: "Spotless Commercial Spaces",
     description:
-      "We deliver consistent, detail-oriented cleaning for offices, retail spaces, and commercial facilities   creating healthy environments your team and customers notice.",
+      "We deliver consistent, detail-oriented cleaning for offices, retail spaces, and commercial facilities - creating healthy environments your team and customers notice.",
     benefits: [
       "Daily, weekly, or custom schedules tailored to your operations",
       "Trained cleaners using industrial-grade equipment and supplies",
@@ -223,13 +223,13 @@ const cleaningSlides = [
     ],
   },
   {
-    src: "https://images.unsplash.com/photo-1527515545081-5db817c4b62f?auto=format&fit=crop&w=1200&q=80",
+    src: "/images/showcase/cleaning-residential.jpg",
     title: "Residential Cleaning",
     caption: "Reliable home cleaning services that give you more time for what matters most.",
     tab: "Residential",
     heading: "Homes That Feel Brand New",
     description:
-      "From routine maintenance to deep cleaning, our residential teams treat every home with care   using safe products and proven checklists for consistent results.",
+      "From routine maintenance to deep cleaning, our residential teams treat every home with care - using safe products and proven checklists for consistent results.",
     benefits: [
       "Flexible scheduling including weekends and same-day service",
       "Eco-friendly cleaning products safe for families and pets",
@@ -237,7 +237,7 @@ const cleaningSlides = [
     ],
   },
   {
-    src: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1200&q=80",
+    src: "/images/showcase/cleaning-industrial.jpg",
     title: "Industrial Cleaning",
     caption: "Specialized industrial and warehouse cleaning that meets safety and compliance standards.",
     tab: "Industrial",
@@ -254,13 +254,13 @@ const cleaningSlides = [
 
 const staffingSlides = [
   {
-    src: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80",
+    src: "/images/showcase/staffing-recruitment.jpg",
     title: "Recruitment Services",
-    caption: "We find the right talent, fast   so you can focus on running your business.",
+    caption: "We find the right talent, fast - so you can focus on running your business.",
     tab: "Recruitment",
     heading: "Talent That Fits Your Team",
     description:
-      "We source, screen, and present candidates who match your skills requirements and culture   reducing bad hires and accelerating onboarding.",
+      "We source, screen, and present candidates who match your skills requirements and culture - reducing bad hires and accelerating onboarding.",
     benefits: [
       "Permanent, contract, and temporary placement options",
       "Industry-specific candidate pools and assessment tools",
@@ -268,7 +268,7 @@ const staffingSlides = [
     ],
   },
   {
-    src: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80",
+    src: "/images/showcase/staffing-outsourcing.jpg",
     title: "Labour Outsourcing",
     caption: "Flexible workforce solutions that scale up or down with your business needs.",
     tab: "Outsourcing",
@@ -282,7 +282,7 @@ const staffingSlides = [
     ],
   },
   {
-    src: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1200&q=80",
+    src: "/images/showcase/staffing-hr.jpg",
     title: "HR Consulting",
     caption: "Strategic HR support that improves performance, retention, and workplace culture.",
     tab: "HR Consulting",
@@ -298,7 +298,7 @@ const staffingSlides = [
 ];
 
 /* ──────────────────────────────────────────────────────────────────────────
-   SubsidiaryShowcase   reusable image carousel + tabbed content card
+   SubsidiaryShowcase - reusable image carousel + tabbed content card
    used for every subsidiary on the home page.
    ────────────────────────────────────────────────────────────────────────── */
 
@@ -318,7 +318,8 @@ export interface ShowcaseProps {
   headerTitle: string;
   headerSubtitle: string;
   slides: Slide[];
-  onExplore: () => void;
+  /** Subsidiary page the CTA links to */
+  explorePage: PageId;
 }
 
 export function SubsidiaryShowcase({
@@ -327,7 +328,7 @@ export function SubsidiaryShowcase({
   headerTitle,
   headerSubtitle,
   slides,
-  onExplore,
+  explorePage,
 }: ShowcaseProps) {
   const [current, setCurrent] = useState(0);
   const [autoInterval, setAutoInterval] = useState<NodeJS.Timeout | null>(null);
@@ -359,16 +360,16 @@ export function SubsidiaryShowcase({
   const slide = slides[current];
 
   return (
-    <section className="py-16 sm:py-20 bg-background">
-      <div className="mx-auto w-full max-w-none px-2 sm:px-4 lg:px-6">
+    <section className="py-10 sm:py-12 bg-background">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div
           ref={cardRef}
-          className="flex flex-col lg:flex-row w-full bg-white dark:bg-white/[0.03] rounded-2xl border border-border overflow-hidden shadow-[0_24px_60px_rgba(0,0,0,0.12)] min-h-[720px] lg:min-h-[680px]"
+          className="flex flex-col lg:flex-row w-full bg-card rounded-2xl border border-border overflow-hidden"
           onMouseEnter={stopAuto}
           onMouseLeave={startAuto}
         >
           {/* LEFT: Image Slider */}
-          <div className="relative w-full lg:w-[52%] min-h-[340px] sm:min-h-[460px] lg:min-h-[680px] bg-[#1a1a1a] overflow-hidden">
+          <div className="relative w-full lg:w-[52%] min-h-[300px] sm:min-h-[400px] lg:min-h-[560px] bg-jotofa-navy-deep overflow-hidden">
             {slides.map((item, i) => (
               <div
                 key={i}
@@ -390,11 +391,13 @@ export function SubsidiaryShowcase({
                       "linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.05) 35%, rgba(0,0,0,0.6) 100%)",
                   }}
                 />
-                <div className="absolute inset-0 p-6 sm:p-10 flex flex-col justify-end z-[3]">
-                  <p className="text-white/95 text-sm sm:text-base max-w-md bg-black/30 backdrop-blur-md border border-white/10 rounded-lg p-3 sm:p-4">
-                    {item.caption}
-                  </p>
-                </div>
+                {item.caption && (
+                  <div className="absolute inset-0 p-6 sm:p-8 pb-12 sm:pb-14 flex flex-col justify-end z-[3] pointer-events-none">
+                    <p className="text-white/95 text-sm sm:text-base max-w-md bg-black/35 backdrop-blur-md border border-white/10 rounded-lg p-3 sm:p-4">
+                      {item.caption}
+                    </p>
+                  </div>
+                )}
               </div>
             ))}
 
@@ -402,7 +405,7 @@ export function SubsidiaryShowcase({
             <button
               type="button"
               onClick={() => { stopAuto(); activate(current - 1); }}
-              className="absolute top-1/2 left-4 z-[4] -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 border border-white/15 text-white flex items-center justify-center opacity-0 lg:opacity-100 transition-opacity"
+              className="absolute top-1/2 left-4 z-[4] -translate-y-1/2 w-11 h-11 rounded-full bg-black/30 hover:bg-black/50 border border-white/15 text-white flex items-center justify-center transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent"
               aria-label="Previous slide"
             >
               <ChevronLeft className="w-5 h-5" />
@@ -410,47 +413,54 @@ export function SubsidiaryShowcase({
             <button
               type="button"
               onClick={() => { stopAuto(); activate(current + 1); }}
-              className="absolute top-1/2 right-4 z-[4] -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 border border-white/15 text-white flex items-center justify-center opacity-0 lg:opacity-100 transition-opacity"
+              className="absolute top-1/2 right-4 z-[4] -translate-y-1/2 w-11 h-11 rounded-full bg-black/30 hover:bg-black/50 border border-white/15 text-white flex items-center justify-center transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent"
               aria-label="Next slide"
             >
               <ChevronRight className="w-5 h-5" />
             </button>
 
             {/* Dots */}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-[4] flex gap-2">
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-[4] flex gap-1">
               {slides.map((_, i) => (
                 <button
                   key={i}
                   type="button"
                   onClick={() => { stopAuto(); activate(i); }}
-                  className={`w-2.5 h-2.5 rounded-full transition-all ${
-                    i === current ? "bg-white scale-125" : "bg-white/40 hover:bg-white/70"
-                  }`}
+                  className="p-1.5 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent rounded-full"
                   aria-label={`Go to slide ${i + 1}`}
-                />
+                >
+                  <span
+                    className={`block w-2.5 h-2.5 rounded-full transition-all ${
+                      i === current ? "bg-white scale-125" : "bg-white/40 hover:bg-white/70"
+                    }`}
+                  />
+                </button>
               ))}
             </div>
           </div>
 
           {/* RIGHT: Content */}
-          <div className="w-full lg:w-[48%] bg-[#f4f4f2] dark:bg-white/[0.03] p-6 sm:p-8 lg:p-10 flex flex-col">
+          <div className="w-full lg:w-[48%] bg-card p-6 sm:p-8 lg:p-10 flex flex-col">
 
-            {/* Unified header */}
-            <div className="flex items-center gap-4 mb-6">
-              <Image
-                src={logo}
-                alt={logoAlt}
-                width={120}
-                height={48}
-                className="h-10 sm:h-12 w-auto object-contain"
-              />
-              <div>
-                <h2 className="text-lg sm:text-xl font-bold text-foreground leading-tight">{headerTitle}</h2>
-              </div>
+            {/* Unified header - logo only when the subsidiary has one */}
+            <div className="flex items-center gap-4 mb-2">
+              {logo && (
+                <Image
+                  src={logo}
+                  alt={logoAlt}
+                  width={120}
+                  height={48}
+                  className="h-9 sm:h-10 w-auto object-contain"
+                />
+              )}
+              <h2 className="text-lg sm:text-xl font-bold text-foreground leading-tight">{headerTitle}</h2>
             </div>
+            {headerSubtitle && (
+              <p className="text-sm text-muted-foreground leading-relaxed mb-6">{headerSubtitle}</p>
+            )}
 
             {/* Tabs */}
-            <div className="flex gap-6 border-b border-black/10 dark:border-white/10 mb-6 overflow-x-auto" role="tablist">
+            <div className="flex gap-6 border-b border-border mb-6 overflow-x-auto" role="tablist">
               {slides.map((item, i) => (
                 <button
                   key={i}
@@ -473,36 +483,37 @@ export function SubsidiaryShowcase({
                 >
                   {item.tab}
                   {i === current && (
-                    <span className="absolute bottom-0 left-0 right-0 h-[3px] bg-[#1a1a1a] rounded-full" />
+                    <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-jotofa-accent rounded-full" />
                   )}
                 </button>
               ))}
             </div>
 
             {/* Panel */}
-            <div id={`tabpanel-${current}`} role="tabpanel" aria-labelledby={`tab-${current}`} tabIndex={0} className="flex-1">
+            <div id={`tabpanel-${current}`} role="tabpanel" aria-labelledby={`tab-${current}`} tabIndex={0}>
               <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-3">{slide.heading}</h3>
               <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-6">{slide.description}</p>
-              <ul className="space-y-3 mb-8">
-                {slide.benefits.map((benefit) => (
-                  <li key={benefit} className="flex items-start gap-3 text-sm text-foreground">
-                    <Check className="w-5 h-5 text-[#c62828] flex-shrink-0 mt-0.5" />
-                    <span>{benefit}</span>
-                  </li>
-                ))}
-              </ul>
+              {slide.benefits.length > 0 && (
+                <ul className="space-y-3 mb-8">
+                  {slide.benefits.map((benefit) => (
+                    <li key={benefit} className="flex items-start gap-3 text-sm text-foreground">
+                      <Check className="w-5 h-5 text-jotofa-accent flex-shrink-0 mt-0.5" />
+                      <span>{benefit}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
 
-            {/* CTA */}
+            {/* CTA - follows the content instead of hanging at the card bottom */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-              <button
-                type="button"
-                onClick={onExplore}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#1a1a1a] dark:bg-[#d60b0b] text-white rounded-full font-semibold text-sm transition-all hover:shadow-lg"
+              <PageLink
+                page={explorePage}
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-jotofa-navy hover:bg-jotofa-navy-deep dark:bg-jotofa-accent dark:hover:bg-jotofa-accent-dark text-white rounded-full font-semibold text-sm transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-card"
               >
                 Get a Quote
                 <ArrowRight className="w-4 h-4" />
-              </button>
+              </PageLink>
             </div>
           </div>
         </div>
@@ -512,10 +523,10 @@ export function SubsidiaryShowcase({
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   SplitSection   one full-width alternating split section per subsidiary.
+   SplitSection - one full-width alternating split section per subsidiary.
 
    Alternation rule: even index (0,2,4) → image LEFT / content RIGHT.
-                     odd  index (1,3)   → image RIGHT / content LEFT.
+                     odd - index (1,3)   → image RIGHT / content LEFT.
    This produces the "one image look right, the other look left" rhythm
    the user asked for.
    ────────────────────────────────────────────────────────────────────────── */
@@ -526,7 +537,6 @@ function SplitSection({
   subsidiary: Subsidiary;
   index: number;
 }) {
-  const { setActivePage } = usePage();
   const Icon = subsidiary.icon;
   const reversed = index % 2 === 1;
 
@@ -551,19 +561,19 @@ function SplitSection({
           sizes="(max-width: 1024px) 100vw, 50vw"
           className="object-cover transition-transform duration-[1.2s] ease-out group-hover/img:scale-105"
         />
-        {/* Navy brand overlay   keeps every section on-palette */}
+        {/* Navy brand overlay - keeps every section on-palette */}
         <div className="absolute inset-0 bg-gradient-to-br from-jotofa-navy-deep/92 via-jotofa-navy/80 to-jotofa-navy/65" />
         {/* Teal glow accent */}
         <div className="absolute -top-24 -right-24 w-72 h-72 bg-jotofa-accent/20 rounded-full blur-[100px] pointer-events-none" />
 
         {/* Giant watermark index number */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <span className="text-[150px] sm:text-[210px] lg:text-[250px] font-black text-white/[0.09] leading-none select-none">
+          <span className="text-[150px] sm:text-[210px] lg:text-[250px] font-bold text-white/[0.09] leading-none select-none">
             {subsidiary.index}
           </span>
         </div>
 
-        {/* Logo tile   top-left */}
+        {/* Logo tile - top-left */}
         <div className="absolute top-6 left-6 sm:top-8 sm:left-8 z-10">
           <div className="flex items-center justify-center h-24 w-24 rounded-xl bg-transparent border border-white/20 shadow-lg overflow-hidden">
             {subsidiary.logoSrc ? (
@@ -575,14 +585,14 @@ function SplitSection({
                 className="h-[88px] w-[88px] object-contain"
               />
             ) : (
-              <span className="text-lg font-black text-jotofa-navy">
+              <span className="text-lg font-bold text-jotofa-navy">
                 {subsidiary.logoMark}
               </span>
             )}
           </div>
         </div>
 
-        {/* Tagline pill   bottom-left */}
+        {/* Tagline pill - bottom-left */}
         <div className="absolute bottom-6 left-6 sm:bottom-8 sm:left-8 z-10">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md">
             <Icon className="w-3.5 h-3.5 text-jotofa-accent-light" />
@@ -599,16 +609,16 @@ function SplitSection({
           reversed ? "lg:order-1" : ""
         }`}
       >
-        {/* Faint watermark number   top right */}
+        {/* Faint watermark number - top right */}
         <span
           aria-hidden
-          className="absolute top-4 right-6 sm:top-6 sm:right-10 text-[90px] sm:text-[130px] lg:text-[150px] font-black text-jotofa-navy/[0.04] dark:text-white/[0.04] leading-none select-none pointer-events-none"
+          className="absolute top-4 right-6 sm:top-6 sm:right-10 text-[90px] sm:text-[130px] lg:text-[150px] font-bold text-jotofa-navy/[0.04] dark:text-white/[0.04] leading-none select-none pointer-events-none"
         >
           {subsidiary.index}
         </span>
 
         <div className="relative z-10 max-w-xl mx-auto lg:mx-0 w-full">
-          {/* Sector badges   each pill uses the subsidiary's accent color */}
+          {/* Sector badges - each pill uses the subsidiary's accent color */}
           <div className="flex flex-wrap gap-1.5 mb-5">
             {subsidiary.sectors.map((sector) => {
               const a = accentClasses[subsidiary.accent];
@@ -642,7 +652,7 @@ function SplitSection({
                   key={service}
                   className={`flex items-center gap-2.5 px-4 py-2.5 rounded-lg bg-jotofa-navy/[0.03] dark:bg-white/[0.04] border border-border ${a.hoverBorder} ${a.hoverBg} transition-all duration-200`}
                 >
-                  <Check className={`w-3.5 h-3.5 flex-shrink-0 ${a.text}`} />
+                  <Check className="w-3.5 h-3.5 flex-shrink-0 text-jotofa-accent" />
                   <span className="text-sm font-medium text-foreground/80">
                     {service}
                   </span>
@@ -651,15 +661,15 @@ function SplitSection({
             })}
           </div>
 
-          {/* CTA row   primary "Explore" + optional subtle "Visit Website" text link */}
+          {/* CTA row - primary "Explore" + optional subtle "Visit Website" text link */}
           <div className="flex flex-wrap items-center gap-3">
-            <button
-              onClick={() => setActivePage(subsidiary.id)}
-              className="group/btn inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-jotofa-navy dark:bg-jotofa-accent text-white text-sm font-semibold transition-all hover:bg-jotofa-navy-deep dark:hover:bg-jotofa-accent-dark shadow-[0_6px_18px_-8px_rgba(0,59,100,0.4)] dark:shadow-[0_6px_18px_-8px_rgba(0,169,183,0.5)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            <PageLink
+              page={subsidiary.id}
+              className="group/btn inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-jotofa-navy dark:bg-jotofa-accent text-white text-sm font-semibold transition-all hover:bg-jotofa-navy-deep dark:hover:bg-jotofa-accent-dark cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               Explore Entity
               <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5" />
-            </button>
+            </PageLink>
 
             {subsidiary.storeUrl && (
               <a
@@ -680,23 +690,22 @@ function SplitSection({
 }
 
 export function Subsidiaries() {
-  const { setActivePage } = usePage();
 
   const cleaningHeaderTitle = "Premium Cleaning & Housekeeping Solutions";
-  const cleaningHeaderSubtitle = "From commercial offices to residential homes   we deliver hygiene, consistency, and peace of mind across Tanzania.";
+  const cleaningHeaderSubtitle = "From commercial offices to residential homes - we deliver hygiene, consistency, and peace of mind across Tanzania.";
 
   const staffingHeaderTitle = "Skilled Workforce & HR Solutions";
-  const staffingHeaderSubtitle = "Recruitment, labour outsourcing, and HR consulting   connecting the right talent with the right opportunity.";
+  const staffingHeaderSubtitle = "Recruitment, labour outsourcing, and HR consulting - connecting the right talent with the right opportunity.";
 
   return (
     <section className="relative">
       {/* Section header */}
       <ScrollReveal className="text-center py-20 sm:py-24">
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4">
-          Four Arms, <span className="text-jotofa-accent">One Vision</span>
+          Four Arms, One Vision
         </h2>
         <p className="mx-auto max-w-2xl text-muted-foreground text-lg">
-          Each subsidiary is a pillar of our group   specialized, yet united
+          Each subsidiary is a pillar of our group - specialized, yet united
           by a commitment to quality, innovation, and impact.
         </p>
       </ScrollReveal>
@@ -718,7 +727,7 @@ export function Subsidiaries() {
 
           const headerSubtitle =
             subsidiary.id === "utec"
-              ? "From CCTV installations to solar power systems   we protect and power businesses across Tanzania."
+              ? "From CCTV installations to solar power systems - we protect and power businesses across Tanzania."
               : cleaningHeaderSubtitle;
 
           return (
@@ -729,7 +738,7 @@ export function Subsidiaries() {
               headerTitle={headerTitle}
               headerSubtitle={headerSubtitle}
               slides={slides}
-              onExplore={() => setActivePage(subsidiary.id)}
+              explorePage={subsidiary.id}
             />
           );
         })}

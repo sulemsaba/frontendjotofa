@@ -1,6 +1,6 @@
 "use client";
 
-import { Quote, Star } from "lucide-react";
+import { Quote } from "lucide-react";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "./scroll-reveal";
 import type { Testimonial } from "@/lib/testimonials-data";
 
@@ -70,20 +70,6 @@ export function Testimonials({
                   strokeWidth={1.5}
                 />
 
-                {/* Star rating */}
-                <div className="flex items-center gap-0.5 mb-4">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`w-4 h-4 ${
-                        i < t.rating
-                          ? "fill-jotofa-accent text-jotofa-accent"
-                          : "text-muted-foreground/30"
-                      }`}
-                    />
-                  ))}
-                </div>
-
                 {/* Quote */}
                 <blockquote className="flex-1 text-sm sm:text-[15px] text-foreground/85 leading-relaxed mb-6">
                   &ldquo;{t.quote}&rdquo;
@@ -94,7 +80,7 @@ export function Testimonials({
                   <div
                     className={`flex-shrink-0 w-11 h-11 rounded-full ${accentBg} flex items-center justify-center`}
                   >
-                    <span className={`font-bold text-sm ${accent}`}>{t.initials}</span>
+                    <span className="font-bold text-sm text-foreground">{t.initials}</span>
                   </div>
                   <div className="min-w-0">
                     <div className="text-sm font-semibold text-foreground truncate">

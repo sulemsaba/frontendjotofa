@@ -1,5 +1,5 @@
 /**
- * UTEC Solutions — online store configuration.
+ * UTEC Solutions - online store configuration.
  *
  * The UTEC subsidiary runs its own eCommerce storefront (laptops, radios,
  * accessories, networking gear, etc.). This module is the SINGLE source of
@@ -8,16 +8,16 @@
  * only need to change the values here (or set the env vars).
  *
  * Env vars (optional overrides):
- *   NEXT_PUBLIC_UTEC_STORE_FRONTEND_URL  – the storefront base URL (public, used for links)
- *   UTEC_STORE_API_URL                   – the product API base URL (server-only)
+ *   NEXT_PUBLIC_UTEC_STORE_FRONTEND_URL  - the storefront base URL (public, used for links)
+ *   UTEC_STORE_API_URL                   - the product API base URL (server-only)
  */
 
-// Storefront base URL — public (exposed to the client so we can build links).
+// Storefront base URL - public (exposed to the client so we can build links).
 export const UTEC_STORE_FRONTEND_URL = (
   process.env.NEXT_PUBLIC_UTEC_STORE_FRONTEND_URL || "https://13.140.149.214:3005"
 ).replace(/\/$/, "");
 
-// Product API base URL — server-only (never prefix with NEXT_PUBLIC_).
+// Product API base URL - server-only (never prefix with NEXT_PUBLIC_).
 const UTEC_STORE_API_URL = (
   process.env.UTEC_STORE_API_URL || "https://13.140.149.214:8001"
 ).replace(/\/$/, "");

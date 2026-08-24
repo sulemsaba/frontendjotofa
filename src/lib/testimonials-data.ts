@@ -4,15 +4,15 @@ export interface Testimonial {
   role: string;
   company: string;
   location: string;
-  rating: number; // 1–5
-  initials: string; // 1–2 letters shown in the avatar
+  rating: number; // 1-5
+  initials: string; // 1-2 letters shown in the avatar
 }
 
-/* Group-level testimonials — used on the home page */
+/* Group-level testimonials - used on the home page */
 export const homeTestimonials: Testimonial[] = [
   {
     quote:
-      "JOTOFA Group has been a trusted partner for over six years. Their diversified expertise means we can rely on a single group for ICT, security, and facility services — saving us time, cost, and coordination overhead.",
+      "JOTOFA Group has been a trusted partner for over six years. Their diversified expertise means we can rely on a single group for ICT, security, and facility services - saving us time, cost, and coordination overhead.",
     name: "Amir Saidi",
     role: "Chief Operations Officer",
     company: "Mzuzu Holdings Ltd",
@@ -42,11 +42,11 @@ export const homeTestimonials: Testimonial[] = [
   },
 ];
 
-/* About page — long-term partners and senior stakeholders */
+/* About page - long-term partners and senior stakeholders */
 export const aboutTestimonials: Testimonial[] = [
   {
     quote:
-      "I have watched JOTOFA grow from a small Dar es Salaam operation into a multi-sector group. Their discipline, governance, and commitment to local talent development have not wavered — that is rare.",
+      "I have watched JOTOFA grow from a small Dar es Salaam operation into a multi-sector group. Their discipline, governance, and commitment to local talent development have not wavered - that is rare.",
     name: "Dr. Rehema Kimaro",
     role: "Board Advisor",
     company: "East Africa Business Council",
@@ -56,7 +56,7 @@ export const aboutTestimonials: Testimonial[] = [
   },
   {
     quote:
-      "Over eight years of partnership, JOTOFA has delivered every promise. Their leadership team is accessible, accountable, and refreshingly straightforward — exactly what you want in a long-term partner.",
+      "Over eight years of partnership, JOTOFA has delivered every promise. Their leadership team is accessible, accountable, and refreshingly straightforward - exactly what you want in a long-term partner.",
     name: "Hassan Kileo",
     role: "Chief Executive Officer",
     company: "Ubungo Industrial Group",
@@ -76,7 +76,7 @@ export const aboutTestimonials: Testimonial[] = [
   },
 ];
 
-/* Strategy page — investors and strategic partners */
+/* Strategy page - investors and strategic partners */
 export const strategyTestimonials: Testimonial[] = [
   {
     quote:
@@ -90,7 +90,7 @@ export const strategyTestimonials: Testimonial[] = [
   },
   {
     quote:
-      "Their decision to verticalize across ICT, logistics, and staffing creates real moats. Each subsidiary feeds the others — and that integrated model is hard to replicate.",
+      "Their decision to verticalize across ICT, logistics, and staffing creates real moats. Each subsidiary feeds the others - and that integrated model is hard to replicate.",
     name: "Asha Mwakyusa",
     role: "Senior Analyst",
     company: "Twiga Equity Research",
@@ -100,7 +100,7 @@ export const strategyTestimonials: Testimonial[] = [
   },
   {
     quote:
-      "We partnered with JOTOFA on a regional expansion initiative. Their governance, reporting cadence, and risk discipline are at the level of much larger groups — impressive for their size.",
+      "We partnered with JOTOFA on a regional expansion initiative. Their governance, reporting cadence, and risk discipline are at the level of much larger groups - impressive for their size.",
     name: "Markus Berghoff",
     role: "Regional Director",
     company: "Hanseatic Frontier Fund",
@@ -110,11 +110,11 @@ export const strategyTestimonials: Testimonial[] = [
   },
 ];
 
-/* CSR page — community partners and beneficiaries */
+/* CSR page - community partners and beneficiaries */
 export const csrTestimonials: Testimonial[] = [
   {
     quote:
-      "JOTOFA's scholarship program put three of our top students through university. They did not just write a cheque — they mentored the students and offered internships. That is real social investment.",
+      "JOTOFA's scholarship program put three of our top students through university. They did not just write a cheque - they mentored the students and offered internships. That is real social investment.",
     name: "Headmaster Joseph Lyimo",
     role: "Head Teacher",
     company: "Mbezi Beach Secondary School",
@@ -134,7 +134,7 @@ export const csrTestimonials: Testimonial[] = [
   },
   {
     quote:
-      "The tree-planting drive JOTOFA ran in our ward changed how young people here think about the environment. Two years later, the trees are growing — and so is a generation of environmental stewards.",
+      "The tree-planting drive JOTOFA ran in our ward changed how young people here think about the environment. Two years later, the trees are growing - and so is a generation of environmental stewards.",
     name: "Ezekiel Mbwana",
     role: "Ward Executive Officer",
     company: "Mkuranga Ward",
@@ -144,11 +144,11 @@ export const csrTestimonials: Testimonial[] = [
   },
 ];
 
-/* UTEC — ICT & Telecom clients */
+/* UTEC - ICT & Telecom clients */
 export const utecTestimonials: Testimonial[] = [
   {
     quote:
-      "UTEC redesigned our entire campus network — fiber backbone, Wi-Fi coverage, and a unified VoIP system. Downtime has dropped from weekly outages to zero in eight months. Truly transformational.",
+      "UTEC redesigned our entire campus network - fiber backbone, Wi-Fi coverage, and a unified VoIP system. Downtime has dropped from weekly outages to zero in eight months. Truly transformational.",
     name: "Eng. Peter Mushi",
     role: "IT Manager",
     company: "Dodoma University College",
@@ -178,7 +178,7 @@ export const utecTestimonials: Testimonial[] = [
   },
 ];
 
-/* Courier & Logistics — clients */
+/* Courier & Logistics - clients */
 export const courierTestimonials: Testimonial[] = [
   {
     quote:
@@ -192,7 +192,7 @@ export const courierTestimonials: Testimonial[] = [
   },
   {
     quote:
-      "Cross-border freight to Rwanda used to take 9 days with two other providers. JOTOFA does it in 5 — including customs. They handle the paperwork so we can focus on sales.",
+      "Cross-border freight to Rwanda used to take 9 days with two other providers. JOTOFA does it in 5 - including customs. They handle the paperwork so we can focus on sales.",
     name: "Immaculate Uwase",
     role: "Supply Chain Lead",
     company: "Great Lakes Imports",
@@ -212,7 +212,7 @@ export const courierTestimonials: Testimonial[] = [
   },
 ];
 
-/* Cleaning & Maids — commercial and residential clients */
+/* Cleaning & Maids - commercial and residential clients */
 export const cleaningTestimonials: Testimonial[] = [
   {
     quote:
@@ -236,7 +236,7 @@ export const cleaningTestimonials: Testimonial[] = [
   },
   {
     quote:
-      "JOTOFA's housekeeping team runs our 42-room lodge year-round. Linen, rooms, common areas, and kitchen — all spotless, every day, every season. Our guest reviews have never been better.",
+      "JOTOFA's housekeeping team runs our 42-room lodge year-round. Linen, rooms, common areas, and kitchen - all spotless, every day, every season. Our guest reviews have never been better.",
     name: "Anna Shirima",
     role: "General Manager",
     company: "Lake Manyara Lodge",
@@ -246,11 +246,11 @@ export const cleaningTestimonials: Testimonial[] = [
   },
 ];
 
-/* Security — corporate and event clients */
+/* Security - corporate and event clients */
 export const securityTestimonials: Testimonial[] = [
   {
     quote:
-      "JOTOFA guards our headquarters and three branch sites. Their officers are vetted, trained, supervised, and rotated regularly. Incident reports are detailed and on time — exactly what audit requires.",
+      "JOTOFA guards our headquarters and three branch sites. Their officers are vetted, trained, supervised, and rotated regularly. Incident reports are detailed and on time - exactly what audit requires.",
     name: "Josephat Komba",
     role: "Head of Security",
     company: "National Insurance Corporation",
@@ -260,7 +260,7 @@ export const securityTestimonials: Testimonial[] = [
   },
   {
     quote:
-      "We hosted a 4,000-person conference and contracted JOTEFA for the full security plan — access control, perimeter, VIP protection, and CCTV monitoring. Zero incidents across three days.",
+      "We hosted a 4,000-person conference and contracted JOTEFA for the full security plan - access control, perimeter, VIP protection, and CCTV monitoring. Zero incidents across three days.",
     name: "Lilian Massawe",
     role: "Event Director",
     company: "East Africa Trade Expo",
@@ -280,11 +280,11 @@ export const securityTestimonials: Testimonial[] = [
   },
 ];
 
-/* Staffing & Labour Supply — corporate clients */
+/* Staffing & Labour Supply - corporate clients */
 export const staffingTestimonials: Testimonial[] = [
   {
     quote:
-      "We needed 80 trained warehouse workers in 10 days for a seasonal peak. JOTOFA delivered 84 — vetted, inducted, and ready. Their payroll and compliance handling saved us weeks of admin.",
+      "We needed 80 trained warehouse workers in 10 days for a seasonal peak. JOTOFA delivered 84 - vetted, inducted, and ready. Their payroll and compliance handling saved us weeks of admin.",
     name: "Emanuel Kessy",
     role: "Human Resources Director",
     company: "Tanga Cement PLC",
@@ -294,7 +294,7 @@ export const staffingTestimonials: Testimonial[] = [
   },
   {
     quote:
-      "JOTOFA handled our entire payroll for 240 contracted staff across 6 sites for two years. Tax, NSSF, allowances, payslips — all accurate, all on time, zero complaints from staff.",
+      "JOTOFA handled our entire payroll for 240 contracted staff across 6 sites for two years. Tax, NSSF, allowances, payslips - all accurate, all on time, zero complaints from staff.",
     name: "Penina Mwakagenda",
     role: "Finance Manager",
     company: "Southern Highlands Tea Company",

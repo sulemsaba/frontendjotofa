@@ -11,10 +11,10 @@ import {
   Globe,
   type LucideIcon,
 } from "lucide-react";
-import { usePage, PageId } from "@/lib/page-context";
+import { PageLink, PageId } from "@/lib/page-context";
 
 /* ──────────────────────────────────────────────────────────────────────────
-   About JOTOFA Group   clean, editorial, minimal.
+   About JOTOFA Group - clean, editorial, minimal.
 
    Layout (top → bottom):
      1. Hero         split grid (text 1.2fr / image 1fr). "Five Arms. One
@@ -29,14 +29,14 @@ import { usePage, PageId } from "@/lib/page-context";
      6. CTA          centered "Ready to Partner..." + Contact button.
 
    Brand palette ONLY (JOTOFA navy + teal). Theme-aware (light + dark).
-   Scroll fade-up animations via framer-motion whileInView   NO stagger
+   Scroll fade-up animations via framer-motion whileInView - NO stagger
    delays so content appears together rather than trickling in.
    Fully responsive: mobile-first grids, appropriate type scale, compact
    spacing on small screens.
    ────────────────────────────────────────────────────────────────────────── */
 
 /* Shared framer-motion variant   opacity 0 → 1, y 16 → 0. Short duration
-   (0.4s) so sections arrive quickly. NO stagger delays   every element in
+   (0.4s) so sections arrive quickly. NO stagger delays - every element in
    a section animates together so content "shows up all at once" on load. */
 const fadeUp = {
   initial: { opacity: 0, y: 16 },
@@ -125,7 +125,7 @@ const ecosystem: EcoSubsidiary[] = [
   {
     number: "03",
     name: "Staffing & Labour",
-    description: "Connecting talent with opportunity   skilled and semi-skilled labour supply",
+    description: "Connecting talent with opportunity - skilled and semi-skilled labour supply",
     page: "staffing",
   },
 ];
@@ -158,11 +158,11 @@ function AboutHero() {
               Four Arms.
               <br />
               One Unified{" "}
-              <span className="text-jotofa-accent">Vision.</span>
+              Vision.
             </h1>
             <p className="lead max-w-[540px]">
               A diversified Tanzanian holding company driving excellence through
-              ICT, logistics, professional services, and staffing  
+              ICT, logistics, professional services, and staffing -
               empowering communities and industries across East Africa.
             </p>
           </motion.div>
@@ -211,7 +211,7 @@ function Story() {
               {...fadeUp}
               className="grid grid-cols-[56px_1fr] sm:grid-cols-[80px_1fr] gap-4 sm:gap-8 py-6 sm:py-8 border-t border-border last:border-b"
             >
-              <div className="text-sm font-bold text-jotofa-accent pt-1 tabular-nums">
+              <div className="text-sm font-bold text-foreground pt-1 tabular-nums">
                 {item.year}
               </div>
               <div>
@@ -310,8 +310,6 @@ function Purpose() {
 }
 
 function Ecosystem() {
-  const { setActivePage } = usePage();
-
   return (
     <section className="border-b border-border section-py">
       <div className="container-wide">
@@ -320,23 +318,22 @@ function Ecosystem() {
             Our Companies
           </div>
           <h2 className="h2 text-foreground mb-5 sm:mb-6">
-            Four Arms, <span className="text-jotofa-accent">One Vision</span>
+            Four Arms, One Vision
           </h2>
           <p className="lead">
-            Each subsidiary is a pillar of our group   specialized, yet united
+            Each subsidiary is a pillar of our group - specialized, yet united
             by a commitment to quality, innovation, and impact.
           </p>
         </motion.div>
 
         <div className="grid gap-3 sm:gap-4">
           {ecosystem.map((item) => (
-            <motion.button
-              key={item.number}
-              {...fadeUp}
-              onClick={() => setActivePage(item.page)}
-              className="group grid grid-cols-[44px_1fr_auto] sm:grid-cols-[60px_1fr_auto] items-center gap-3 sm:gap-8 p-4 sm:p-6 lg:p-8 bg-muted/40 dark:bg-white/[0.03] rounded-xl text-left transition-all duration-300 hover:bg-background hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:translate-x-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            <motion.div key={item.number} {...fadeUp}>
+            <PageLink
+              page={item.page}
+              className="group grid grid-cols-[44px_1fr_auto] sm:grid-cols-[60px_1fr_auto] items-center gap-3 sm:gap-8 p-4 sm:p-6 lg:p-8 bg-muted/40 dark:bg-white/[0.03] rounded-xl text-left transition-all duration-300 hover:bg-background hover:translate-x-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
-              <span className="text-xl sm:text-2xl font-extrabold text-jotofa-accent tabular-nums">
+              <span className="text-xl sm:text-2xl font-bold text-foreground tabular-nums">
                 {item.number}
               </span>
               <div className="flex items-center gap-3 sm:gap-4 min-w-0">
@@ -361,7 +358,8 @@ function Ecosystem() {
                 </div>
               </div>
               <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-muted-foreground/60 transition-all duration-300 group-hover:text-jotofa-accent group-hover:translate-x-1 flex-shrink-0" />
-            </motion.button>
+            </PageLink>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -379,7 +377,7 @@ function Stats() {
         >
           {stats.map((stat) => (
             <div key={stat.label} className="text-center">
-              <div className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-jotofa-accent leading-none mb-2 tracking-tight tabular-nums">
+              <div className="text-3xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-none mb-2 tracking-tight tabular-nums">
                 {stat.number}
               </div>
               <div className="body-sm text-xs sm:text-base font-medium">
@@ -394,7 +392,6 @@ function Stats() {
 }
 
 function CTA() {
-  const { setActivePage } = usePage();
 
   return (
     <section className="section-py text-center">
@@ -402,20 +399,20 @@ function CTA() {
         <motion.div {...fadeUp}>
           <h2 className="h2 text-foreground mb-5 sm:mb-6 max-w-[800px] mx-auto">
             Ready to Partner with East Africa&apos;s{" "}
-            <span className="text-jotofa-accent">Unified Powerhouse?</span>
+            Unified Powerhouse?
           </h2>
           <p className="lead mb-8 sm:mb-10 max-w-[600px] mx-auto">
             Whether you need ICT solutions, logistics support, facility
-            management, or workforce solutions   JOTOFA Group
+            management, or workforce solutions - JOTOFA Group
             delivers excellence under one trusted roof.
           </p>
-          <button
-            onClick={() => setActivePage("contact")}
-            className="inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-3.5 sm:py-4 rounded-lg bg-jotofa-navy dark:bg-jotofa-accent text-white text-sm sm:text-base font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(0,59,100,0.3)] dark:hover:shadow-[0_12px_40px_rgba(0,169,183,0.4)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          <PageLink
+            page="contact"
+            className="inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-3.5 sm:py-4 rounded-lg bg-jotofa-navy dark:bg-jotofa-accent text-white text-sm sm:text-base font-semibold transition-all duration-300 hover:-translate-y-0.5 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             Contact JOTOFA Group
             <ArrowRight className="w-4 h-4" />
-          </button>
+          </PageLink>
         </motion.div>
       </div>
     </section>

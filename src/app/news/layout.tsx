@@ -5,9 +5,9 @@ export const metadata: Metadata = {
   description:
     "Stay informed about JOTOFA GROUP's latest developments, subsidiary updates, CSR milestones, and industry insights from across Tanzania and East Africa.",
   openGraph: {
-    title: "JOTOFA GROUP   News & Insights",
+    title: "JOTOFA GROUP - News & Insights",
     description:
-      "Latest updates from JOTOFA GROUP and its subsidiaries   group announcements, project milestones, and community impact stories.",
+      "Latest updates from JOTOFA GROUP and its subsidiaries - group announcements, project milestones, and community impact stories.",
   },
   alternates: {
     canonical: "/news",
