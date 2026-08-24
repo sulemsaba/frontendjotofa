@@ -62,9 +62,9 @@ export function TestimonialSlider({
         </ScrollReveal>
 
         {/* Slider viewport */}
-        <div className="relative mx-auto" style={{ maxWidth: 420 }}>
+        <div className="relative mx-auto flex justify-center items-center" style={{ maxWidth: 420 }}>
           {/* Slides */}
-          <div className="relative" style={{ height: 240 }}>
+          <div className="relative flex justify-center items-center" style={{ height: 240 }}>
             {testimonials.map((t, i) => {
               const offset = i - current;
               const isCenter = offset === 0;
@@ -83,27 +83,27 @@ export function TestimonialSlider({
               const pointerEvents = isCenter ? "auto" : "none";
 
               return (
-                <div
-                  key={`${t.name}-${t.company}-${i}`}
-                  className="absolute left-1/2 top-1/2 rounded-2xl overflow-hidden cursor-pointer"
-                  style={{
-                    width: 368,
-                    height: 207,
-                    transform,
-                    zIndex,
-                    opacity,
-                    pointerEvents,
-                    transition: "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease, z-index 0s",
-                    willChange: "transform, opacity",
-                  }}
-                  onClick={() => goTo(i)}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") goTo(i);
-                  }}
-                  aria-label={`${t.name}, ${t.company}`}
-                >
+                  <div
+                    key={`${t.name}-${t.company}-${i}`}
+                    className="absolute left-1/2 top-1/2 rounded-[20px] overflow-hidden cursor-pointer"
+                    style={{
+                      width: 368,
+                      height: 207,
+                      transform,
+                      zIndex,
+                      opacity,
+                      pointerEvents,
+                      transition: "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease, z-index 0s",
+                      willChange: "transform, opacity",
+                    }}
+                    onClick={() => goTo(i)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") goTo(i);
+                    }}
+                    aria-label={`${t.name}, ${t.company}`}
+                  >
                   {/* Background image */}
                   <div className="absolute inset-0 bg-jotofa-navy-deep">
                     <Image
@@ -114,6 +114,9 @@ export function TestimonialSlider({
                       className="object-cover opacity-80"
                     />
                   </div>
+
+                  {/* Fallback gradient when image is missing */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-jotofa-navy via-jotofa-navy-deep to-jotofa-navy opacity-100 md:hidden" />
 
                   {/* Gradient overlay - exact from reference */}
                   <div
