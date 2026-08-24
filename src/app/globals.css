@@ -846,3 +846,23 @@
 .dark .submit-btn:hover {
   background-color: #008799;
 }
+
+.dark .section-label,
+.dark .contact-left p,
+.dark .form-group label,
+.dark .checkbox-group label {
+  color: #C7D1DA;
+}
+
+.dark .contact-left h2,
+.dark .map-section h2 {
+  color: #FFFFFF;
+}
+
+.dark .checkbox-group a {
+  color: #00A9B7;
+}
+
+.dark .checkbox-group input[type="checkbox"] {
+  accent-color: #00A9B7;
+}

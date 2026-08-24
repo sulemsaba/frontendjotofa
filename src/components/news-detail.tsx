@@ -506,7 +506,7 @@ export function NewsDetail({ article, relatedArticles, onBack, onArticleClick }:
               </ul>
 
               {/* Pull Quote */}
-              <blockquote className="my-8 p-5 sm:p-6 rounded-xl bg-jotofa-accent/[0.04] border border-jotofa-accent/15 relative overflow-hidden">
+              <blockquote className="my-8 p-5 sm:p-6 rounded-2xl bg-jotofa-accent/[0.04] border border-jotofa-accent/15 relative overflow-hidden">
                 <Quote className="absolute top-3 left-3 w-6 h-6 text-jotofa-accent/15" />
                 <p className="text-sm sm:text-base text-foreground leading-relaxed italic mb-3 pl-6">
                   &ldquo;{content.pullQuote}&rdquo;
@@ -674,7 +674,7 @@ export function NewsDetail({ article, relatedArticles, onBack, onArticleClick }:
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6 }}
-          className="relative rounded-3xl overflow-hidden min-h-[260px] sm:min-h-[300px] flex items-center"
+           className="relative rounded-2xl overflow-hidden min-h-[260px] sm:min-h-[300px] flex items-center"
         >
           {/* Background image */}
           <Image

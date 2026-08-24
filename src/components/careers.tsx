@@ -534,7 +534,7 @@ export function Careers() {
       {/* ═══════════════════════════════════════
           2. SUB NAVIGATION BAR
           ═══════════════════════════════════════ */}
-      <div className="bg-white dark:bg-jotofa-navy-deep border-b border-border mt-6 relative">
+      <div className="bg-card border-b border-border mt-6 relative">
         <div className="mx-auto max-w-5xl px-2 sm:px-6 lg:px-8">
           <div className="flex items-center overflow-x-auto scrollbar-hide -mx-1 py-0">
             {subsidiaryTabs.map((sub) => {
@@ -565,14 +565,14 @@ export function Careers() {
           </div>
         </div>
         {/* Scroll hint gradient on right edge - mobile only */}
-        <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white dark:from-jotofa-navy-deep to-transparent pointer-events-none sm:hidden" />
+        <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-card to-transparent pointer-events-none sm:hidden" />
       </div>
 
       {/* ═══════════════════════════════════════
           3. SEARCH CARD
           ═══════════════════════════════════════ */}
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 mt-6">
-        <div className="bg-white dark:bg-jotofa-navy-deep rounded-xl shadow-sm p-5 sm:p-6 border border-border">
+        <div className="bg-card rounded-2xl p-6 sm:p-8 border border-border">
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <div className="flex-1 relative">
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
@@ -604,7 +604,7 @@ export function Careers() {
                 <ChevronDown className="w-4 h-4 text-muted-foreground shrink-0" />
               </button>
               {showSearchCategory && (
-                <div className="absolute top-full left-0 right-0 mt-1 bg-white dark:bg-jotofa-navy-deep rounded-lg shadow-lg border border-border z-50 max-h-60 overflow-y-auto">
+                <div className="absolute top-full left-0 right-0 mt-1 bg-card rounded-2xl border border-border z-50 max-h-60 overflow-y-auto">
                   {categories.map((cat) => (
                     <button
                       key={cat}
@@ -667,7 +667,7 @@ export function Careers() {
               <ChevronDown className="w-3.5 h-3.5 text-muted-foreground" />
             </button>
             {showCategoryDropdown && (
-              <div className="absolute top-full left-0 mt-1 w-56 bg-white dark:bg-jotofa-navy-deep rounded-lg shadow-lg border border-border z-50 max-h-60 overflow-y-auto">
+              <div className="absolute top-full left-0 mt-1 w-56 bg-card rounded-2xl border border-border z-50 max-h-60 overflow-y-auto">
                 {categories.map((cat) => (
                   <button
                     key={cat}
@@ -708,7 +708,7 @@ export function Careers() {
               <ChevronDown className="w-3.5 h-3.5 text-muted-foreground" />
             </button>
             {showCompanyDropdown && (
-              <div className="absolute top-full left-0 mt-1 w-56 bg-white dark:bg-jotofa-navy-deep rounded-lg shadow-lg border border-border z-50 max-h-60 overflow-y-auto">
+              <div className="absolute top-full left-0 mt-1 w-56 bg-card rounded-2xl border border-border z-50 max-h-60 overflow-y-auto">
                 {companies.map((comp) => (
                   <button
                     key={comp}
@@ -754,8 +754,8 @@ export function Careers() {
           ═══════════════════════════════════════ */}
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 mt-6 mb-20 sm:mb-12">
         {isLoading ? (
-          <div className="bg-white dark:bg-jotofa-navy-deep rounded-2xl border border-border shadow-sm p-10 sm:p-16 text-center">
-            <div className="mx-auto mb-5 h-10 w-10 rounded-full border-4 border-jotofa-navy/20 border-t-jotofa-navy animate-spin" />
+           <div className="bg-card rounded-2xl border border-border p-10 sm:p-16 text-center">
+             <div className="mx-auto mb-5 h-10 w-10 rounded-full border-4 border-jotofa-navy/20 border-t-jotofa-navy animate-spin" />
             <h3 className="text-xl font-bold text-foreground mb-2">
               Loading open positions
             </h3>
@@ -764,7 +764,7 @@ export function Careers() {
             </p>
           </div>
         ) : loadError ? (
-          <div className="bg-white dark:bg-jotofa-navy-deep rounded-2xl border border-red-200 dark:border-red-900/50 shadow-sm p-10 sm:p-16 text-center">
+           <div className="bg-card rounded-2xl border border-red-200 dark:border-red-900/50 p-10 sm:p-16 text-center">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-50 dark:bg-red-900/20 mb-5">
               <AlertTriangle className="w-8 h-8 text-red-600 dark:text-red-400" />
             </div>
@@ -788,7 +788,7 @@ export function Careers() {
             </div>
 
             {/* Job list   ONE container */}
-            <div className="bg-white dark:bg-jotofa-navy-deep rounded-lg border border-border shadow-sm overflow-hidden">
+            <div className="bg-card rounded-2xl border border-border overflow-hidden">
               {paginatedJobs.map((job, jobIdx) => {
                 const isPreview = expandedJob === job.id;
                 const isFullExpanded = expandedFullJob === job.id;
@@ -1290,9 +1290,9 @@ export function Careers() {
           /* ═══════════════════════════════════════
              EMPTY STATE
              ═══════════════════════════════════════ */
-          <div className="bg-white dark:bg-jotofa-navy-deep rounded-2xl border border-border shadow-sm p-10 sm:p-16 text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-secondary dark:bg-jotofa-navy mb-5">
-              <Briefcase className="w-8 h-8 text-muted-foreground" />
+          <div className="bg-card rounded-2xl border border-border p-10 sm:p-16 text-center">
+             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-secondary dark:bg-jotofa-navy mb-5">
+               <Briefcase className="w-8 h-8 text-muted-foreground" />
             </div>
             <h3 className="text-xl font-bold text-foreground mb-2">
               No positions found

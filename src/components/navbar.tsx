@@ -50,7 +50,6 @@ export function Navbar() {
   const { activePage, setActivePage, prefetchPage } = usePage();
   const dropdownContainerRef = useRef<HTMLDivElement>(null);
   const mobileDrawerRef = useRef<HTMLDivElement>(null);
-  const mobileCloseBtnRef = useRef<HTMLButtonElement>(null);
   const hamburgerBtnRef = useRef<HTMLButtonElement>(null);
   const scrollYRef = useRef(0);
 
@@ -88,7 +87,9 @@ export function Navbar() {
     const drawer = mobileDrawerRef.current;
     if (!drawer) return;
     const previouslyFocused = document.activeElement as HTMLElement | null;
-    const t = setTimeout(() => mobileCloseBtnRef.current?.focus(), 50);
+    const t = setTimeout(() => {
+      drawer.querySelector<HTMLElement>('a[href], button:not([disabled])')?.focus();
+    }, 50);
     const trap = (e: KeyboardEvent) => {
       if (e.key !== "Tab") return;
       const focusable = drawer.querySelectorAll<HTMLElement>(
@@ -238,7 +239,7 @@ export function Navbar() {
                          className="absolute top-full left-2 lg:left-4 pt-2"
                          onMouseEnter={() => openMenu("subsidiaries")}
                          onMouseLeave={scheduleCloseMenu}>
-                         <div className="w-[640px] max-w-[calc(100vw-2rem)] bg-white dark:bg-jotofa-navy-card backdrop-blur-[20px] border border-jotofa-navy/8 dark:border-white/10 rounded-lg shadow-[0_12px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_24px_60px_rgba(0,0,0,0.5)] overflow-hidden">
+                          <div className="w-[640px] max-w-[calc(100vw-2rem)] bg-white dark:bg-jotofa-navy-card backdrop-blur-[20px] border border-jotofa-navy/8 dark:border-white/10 rounded-2xl overflow-hidden">
                             <div className="grid grid-cols-[45%_55%] min-h-[300px]">
                               <div className="border-r border-jotofa-navy/6 dark:border-white/6 p-2">
                                  <div className="px-3 py-1.5 mb-1"><span className="text-[10px] font-semibold uppercase tracking-widest text-jotofa-navy/70 dark:text-white/70">Subsidiaries</span></div>
@@ -312,7 +313,7 @@ export function Navbar() {
              </a>
              <button
                onClick={toggleTheme}
-               className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-sm text-jotofa-navy/70 dark:text-white/70 hover:text-jotofa-navy dark:hover:text-white hover:bg-jotofa-navy/[0.05] dark:hover:bg-white/[0.08] transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+               className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-md text-jotofa-navy/70 dark:text-white/70 hover:text-jotofa-navy dark:hover:text-white hover:bg-jotofa-navy/[0.05] dark:hover:bg-white/[0.08] transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                aria-label="Toggle theme"
              >
                <Sun className="w-5 h-5 hidden dark:block" />
@@ -322,7 +323,7 @@ export function Navbar() {
                ref={hamburgerBtnRef}
                onClick={() => setMobileOpen(!mobileOpen)}
                className="lg:hidden min-w-[44px] min-h-[44px] flex items-center justify-center text-jotofa-navy dark:text-white hover:text-jotofa-navy/70 dark:hover:text-white/70 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-md"
-               aria-label="Toggle menu"
+               aria-label={mobileOpen ? "Close menu" : "Open menu"}
                aria-expanded={mobileOpen}
                aria-haspopup="dialog"
              >
@@ -338,27 +339,8 @@ export function Navbar() {
           <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.25 }} className="fixed inset-0 z-40 lg:hidden" role="dialog" aria-modal="true" aria-label="Site navigation menu">
              <div className="absolute inset-0 bg-black/20 dark:bg-black/50 backdrop-blur-sm" onClick={() => setMobileOpen(false)} onKeyDown={(e) => { if (e.key === "Escape") setMobileOpen(false); }} aria-label="Close navigation menu" />
             <motion.div ref={mobileDrawerRef} initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }} transition={{ duration: 0.3, ease: "easeOut" }}
-              className="absolute right-0 top-0 bottom-0 w-[300px] max-w-[85vw] bg-white dark:bg-jotofa-navy-card backdrop-blur-xl border-l border-jotofa-navy/8 dark:border-white/8 overscroll-contain">
-               <div className="flex items-center justify-between p-4 border-b border-jotofa-navy/6 dark:border-white/6">
-                <div className="relative w-[88px] h-8">
-                  <Image
-                    src="/images/jotofa-logo-light.png"
-                    alt="JOTOFA Group Logo"
-                    width={222}
-                    height={73}
-                    className="absolute inset-0 w-full h-full object-contain dark:hidden"
-                  />
-                  <Image
-                    src="/images/jotofa-logo-dark.png"
-                    alt="JOTOFA Group Logo"
-                    width={222}
-                    height={73}
-                    className="absolute inset-0 w-full h-full object-contain hidden dark:block"
-                  />
-                </div>
-                 <button ref={mobileCloseBtnRef} onClick={() => setMobileOpen(false)} className="min-w-[44px] min-h-[44px] flex items-center justify-center text-jotofa-navy/60 dark:text-white/60 hover:text-jotofa-navy dark:hover:text-white transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent rounded-md" aria-label="Close menu"><X size={24} /></button>
-              </div>
-              <div className="py-3 px-2 space-y-0.5 max-h-[calc(100vh-120px)] overflow-y-auto overscroll-contain">
+              className="absolute right-0 top-14 sm:top-16 bottom-0 w-[300px] max-w-[85vw] flex flex-col bg-white dark:bg-jotofa-navy-card backdrop-blur-xl border-l border-t border-jotofa-navy/8 dark:border-white/8 shadow-[0_16px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_24px_60px_rgba(0,0,0,0.5)] overscroll-contain">
+              <div className="flex-1 py-3 px-2 space-y-0.5 overflow-y-auto overscroll-contain">
                 {navItems.map((item) => {
                   const itemClasses = `flex items-center justify-between w-full text-left px-4 py-3 text-base tracking-wide transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent min-h-[44px] ${activePage === item.id || (item.hasDropdown && isDropdownActive(item.hasDropdown)) ? "text-jotofa-navy dark:text-white font-semibold" : "text-jotofa-navy/70 dark:text-white/70 hover:text-jotofa-navy dark:hover:text-white"}`;
                   return (

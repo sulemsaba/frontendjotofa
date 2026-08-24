@@ -220,7 +220,7 @@ function FileUploadField({
 function JobSummarySidebar({ job }: { job: Job }) {
   return (
     <div className="space-y-4">
-      <div className="p-4 rounded-xl bg-secondary/50 dark:bg-jotofa-navy/30 border border-border">
+      <div className="p-4 rounded-2xl bg-secondary/50 dark:bg-jotofa-navy/30 border border-border">
         <h4 className="text-xs uppercase tracking-wider text-muted-foreground font-semibold mb-3">
           Position Summary
         </h4>
@@ -283,7 +283,7 @@ function JobSummarySidebar({ job }: { job: Job }) {
 function MobileJobSummary({ job }: { job: Job }) {
   return (
     <div className="space-y-3 mb-5">
-      <div className="flex items-center gap-3 p-3 rounded-xl bg-secondary/50 dark:bg-jotofa-navy/30 border border-border">
+      <div className="flex items-center gap-3 p-3 rounded-2xl bg-secondary/50 dark:bg-jotofa-navy/30 border border-border">
         <div className="flex-1 min-w-0">
           <h4 className="text-sm font-semibold text-foreground truncate">
             {job.title}

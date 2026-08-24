@@ -147,15 +147,15 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative w-full min-h-screen lg:h-screen lg:overflow-hidden bg-background dark:bg-jotofa-navy-mid">
+    <section className="relative w-full lg:h-screen lg:overflow-hidden bg-background dark:bg-jotofa-navy-mid">
       {/* Decorative top accent bar */}
       <div aria-hidden className="absolute top-0 left-0 right-0 z-[1] h-[3px] bg-gradient-to-r from-transparent via-jotofa-accent/70 to-transparent" />
 
-      <div className="flex flex-col lg:flex-row w-full min-h-full lg:h-full">
+      <div className="flex flex-col lg:flex-row w-full lg:h-full">
 
          {/* ════════════ MOBILE: Animated Ticker (TOP) ════════════ */}
          <div aria-hidden className="lg:hidden relative">
-           <div className="flex w-full" style={{ height: "38vh", gap: "8px", padding: "8px", paddingTop: "72px" }}>
+           <div className="flex w-full" style={{ height: "52vh", gap: "8px", padding: "8px", paddingTop: "72px" }}>
              <TickerColumn images={tickerImagesCol1} paused={tickerPaused} reducedMotion={!!prefersReducedMotion} />
              <TickerColumn images={tickerImagesCol2} reverse paused={tickerPaused} reducedMotion={!!prefersReducedMotion} />
            </div>
@@ -166,7 +166,7 @@ export function Hero() {
 
         {/* ════════════ LEFT COLUMN   Text + News Slider ════════════ */}
         <div className="w-full lg:w-[45%] flex flex-col justify-between relative z-[2]">
-          <div className="flex flex-col justify-center flex-1 px-8 sm:px-10 lg:px-[60px] pt-24 pb-6 lg:pt-[140px] lg:pb-0">
+          <div className="flex flex-col justify-center flex-1 px-8 sm:px-10 lg:px-[60px] pt-10 pb-6 lg:pt-[140px] lg:pb-0">
             {/* Accent line - CSS animation, visible on first paint */}
             <div className="h-[3px] w-20 bg-jotofa-accent mb-6 rounded-full animate-fade-up" />
 

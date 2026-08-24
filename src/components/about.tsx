@@ -169,7 +169,7 @@ function AboutHero() {
 
           <motion.div
             {...fadeUp}
-            className="relative rounded-2xl overflow-hidden aspect-[4/5] shadow-[0_20px_60px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
+            className="relative rounded-2xl overflow-hidden aspect-[4/5]"
           >
             <Image
               src="/images/jotofa-hero-1.jpeg"
@@ -268,7 +268,7 @@ function Purpose() {
 
           <motion.div
             {...fadeUp}
-            className="relative rounded-2xl overflow-hidden aspect-[4/3] sm:aspect-square shadow-[0_20px_60px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
+            className="relative rounded-2xl overflow-hidden aspect-[4/3] sm:aspect-square"
           >
             <Image
               src="/images/jotofa-hero-3.jpeg"
@@ -289,7 +289,7 @@ function Purpose() {
             return (
             <div
               key={value.title}
-              className="p-5 sm:p-6 lg:p-8 bg-background border border-border rounded-xl text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)] hover:border-jotofa-accent"
+              className="p-5 sm:p-6 lg:p-8 bg-card rounded-2xl text-center transition-all duration-300 hover:-translate-y-1 hover:border-jotofa-accent/25"
             >
               <div className="inline-flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-jotofa-accent/10 text-jotofa-accent mb-3 sm:mb-4">
                 <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -331,7 +331,7 @@ function Ecosystem() {
             <motion.div key={item.number} {...fadeUp}>
             <PageLink
               page={item.page}
-              className="group grid grid-cols-[44px_1fr_auto] sm:grid-cols-[60px_1fr_auto] items-center gap-3 sm:gap-8 p-4 sm:p-6 lg:p-8 bg-muted/40 dark:bg-white/[0.03] rounded-xl text-left transition-all duration-300 hover:bg-background hover:translate-x-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="group grid grid-cols-[44px_1fr_auto] sm:grid-cols-[60px_1fr_auto] items-center gap-3 sm:gap-8 p-4 sm:p-6 lg:p-8 bg-card rounded-2xl text-left transition-all duration-300 hover:bg-background hover:border-jotofa-accent/25 hover:translate-x-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               <span className="text-xl sm:text-2xl font-bold text-foreground tabular-nums">
                 {item.number}

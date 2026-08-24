@@ -119,10 +119,10 @@ export function Contact() {
                 animate={{ opacity: 1, scale: 1 }}
                 className="flex flex-col items-center justify-center py-16 text-center"
               >
-                <div className="w-16 h-16 rounded-full bg-jotofa-navy/10 flex items-center justify-center mb-4">
-                  <CheckCircle2 className="w-8 h-8 text-jotofa-navy" />
+                <div className="w-16 h-16 rounded-full bg-jotofa-navy/10 dark:bg-jotofa-accent/20 flex items-center justify-center mb-4">
+                  <CheckCircle2 className="w-8 h-8 text-jotofa-navy dark:text-jotofa-accent" />
                 </div>
-                <h3 className="text-xl font-bold text-jotofa-navy mb-2">Message Sent!</h3>
+                <h3 className="text-xl font-bold text-jotofa-navy dark:text-white mb-2">Message Sent!</h3>
                 <p className="text-muted-foreground">Thank you for reaching out. We&apos;ll get back to you shortly.</p>
               </motion.div>
             ) : (

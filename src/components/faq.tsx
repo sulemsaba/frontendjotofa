@@ -58,7 +58,7 @@ export function FAQ() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: index * 0.05 }}
-              className="rounded-xl border border-jotofa-navy/10 dark:border-white/10 bg-white dark:bg-jotofa-navy-card overflow-hidden"
+              className="rounded-2xl border border-border bg-card overflow-hidden"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}

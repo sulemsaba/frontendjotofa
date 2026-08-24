@@ -118,7 +118,7 @@ export function UTECPage() {
           <ScrollReveal delay={0.3}>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 max-w-3xl">
               {stats.map((stat) => (
-                <div key={stat.label} className="text-center p-4 rounded-xl bg-muted border border-border">
+                 <div key={stat.label} className="text-center p-4 rounded-2xl bg-card border border-border">
                   <div className="text-2xl sm:text-3xl font-bold text-foreground">{stat.value}</div>
                   <div className="text-xs text-muted-foreground mt-1">{stat.label}</div>
                 </div>

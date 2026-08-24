@@ -182,7 +182,7 @@ export function UtecProductSpotlight() {
         </ScrollReveal>
 
         {/* The box - product images pierce above its top edge on desktop */}
-        <div className="relative rounded-[2rem] border border-border bg-card px-5 sm:px-6 md:px-8 pt-6 md:pt-12 pb-6 md:pb-8">
+        <div className="relative rounded-2xl border border-border bg-card px-5 sm:px-6 md:px-8 pt-6 md:pt-12 pb-6 md:pb-8">
           <StaggerContainer
             className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-6 lg:gap-8"
             staggerDelay={0.1}

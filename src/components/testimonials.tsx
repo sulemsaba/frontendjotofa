@@ -15,7 +15,7 @@ interface TestimonialsProps {
   accent?: string;
   /** Tailwind bg tint class for icon/avatars, e.g. "bg-jotofa-accent/10" */
   accentBg?: string;
-  /** Tailwind border tint class for cards, e.g. "border-jotofa-accent/20" */
+  /** Tailwind border tint class for cards (kept for API compat; default is now neutral) */
   accentBorder?: string;
   /** Array of testimonials to render */
   testimonials: Testimonial[];
@@ -33,7 +33,7 @@ export function Testimonials({
   subtitle,
   accent = "text-jotofa-accent",
   accentBg = "bg-jotofa-accent/10",
-  accentBorder = "border-jotofa-accent/20",
+  accentBorder = "border-border",
   testimonials,
 }: TestimonialsProps) {
   return (
@@ -62,7 +62,7 @@ export function Testimonials({
           {testimonials.map((t) => (
             <StaggerItem key={`${t.name}-${t.company}`}>
               <figure
-                className={`group relative h-full flex flex-col p-6 sm:p-7 rounded-2xl bg-card border ${accentBorder} hover:border-opacity-50 hover:bg-secondary transition-all duration-300`}
+                className={`group relative h-full flex flex-col p-6 sm:p-7 rounded-2xl bg-card border border-border hover:border-jotofa-accent/25 hover:bg-secondary transition-all duration-300`}
               >
                 {/* Decorative quote mark in the corner */}
                 <Quote

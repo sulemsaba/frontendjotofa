@@ -97,10 +97,10 @@ function ServiceCell({ service, index }: { service: Service; index: number }) {
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.08 * index, duration: 0.5, ease: "easeOut" }}
-        className={`group relative w-full h-full text-left overflow-hidden rounded-3xl border transition-all duration-300 ${
+        className={`group relative w-full h-full text-left overflow-hidden rounded-2xl border transition-all duration-300 ${
           featured
-            ? "min-h-[340px] sm:min-h-[420px] lg:min-h-[520px] border-jotofa-accent/40 hover:border-jotofa-accent/70 hover:shadow-[0_28px_70px_-22px_rgba(214,11,11,0.45)]"
-            : "min-h-[260px] sm:min-h-[300px] border-white/10 hover:border-jotofa-accent/40 hover:-translate-y-0.5 hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)]"
+            ? "min-h-[340px] sm:min-h-[420px] lg:min-h-[520px] border-jotofa-accent/40 hover:border-jotofa-accent/60"
+            : "min-h-[260px] sm:min-h-[300px] border-border hover:border-jotofa-accent/25 hover:-translate-y-0.5"
         }`}
       >
         {/* ── Background image (fills the card, zooms on hover) ── */}

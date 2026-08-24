@@ -45,7 +45,7 @@ function ProductCard({ product, index }: { product: FeaturedProduct; index: numb
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.05 * index, duration: 0.4 }}
         whileHover={{ y: -4 }}
-        className="group flex flex-col h-full rounded-2xl border border-border bg-card overflow-hidden hover:border-jotofa-accent/40 hover:shadow-lg transition-all duration-300"
+        className="group flex flex-col h-full rounded-2xl border border-border bg-card overflow-hidden hover:border-jotofa-accent/40 transition-all duration-300"
       >
         {/* Image */}
         <div className="relative aspect-square bg-secondary/40 overflow-hidden">
@@ -67,7 +67,7 @@ function ProductCard({ product, index }: { product: FeaturedProduct; index: numb
 
           {/* Discount badge */}
           {product.hasDiscount && product.originPrice && product.discountPrice && (
-            <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-jotofa-accent text-white shadow">
+              <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-jotofa-accent text-white">
               -
               {Math.round(
                 (1 - product.discountPrice / product.originPrice) * 100

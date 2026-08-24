@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export function UnifyingExcellence() {
   return (
-    <section className="relative w-full bg-jotofa-navy text-white overflow-hidden">
+    <section className="relative w-full bg-jotofa-navy dark:bg-jotofa-navy-card text-white overflow-hidden">
       {/* Inward corner: the page background curves down into the navy section */}
       <div aria-hidden className="h-8 w-full bg-background rounded-b-3xl" />
 

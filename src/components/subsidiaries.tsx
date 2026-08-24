@@ -405,7 +405,7 @@ export function SubsidiaryShowcase({
             <button
               type="button"
               onClick={() => { stopAuto(); activate(current - 1); }}
-              className="absolute top-1/2 left-4 z-[4] -translate-y-1/2 w-11 h-11 rounded-full bg-black/30 hover:bg-black/50 border border-white/15 text-white flex items-center justify-center transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent"
+              className="absolute top-1/2 left-4 z-[4] -translate-y-1/2 w-11 h-11 rounded-full bg-black/30 hover:bg-black/50 dark:bg-white/15 dark:hover:bg-white/25 border border-white/15 dark:border-white/25 text-white flex items-center justify-center transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent"
               aria-label="Previous slide"
             >
               <ChevronLeft className="w-5 h-5" />
@@ -413,7 +413,7 @@ export function SubsidiaryShowcase({
             <button
               type="button"
               onClick={() => { stopAuto(); activate(current + 1); }}
-              className="absolute top-1/2 right-4 z-[4] -translate-y-1/2 w-11 h-11 rounded-full bg-black/30 hover:bg-black/50 border border-white/15 text-white flex items-center justify-center transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent"
+              className="absolute top-1/2 right-4 z-[4] -translate-y-1/2 w-11 h-11 rounded-full bg-black/30 hover:bg-black/50 dark:bg-white/15 dark:hover:bg-white/25 border border-white/15 dark:border-white/25 text-white flex items-center justify-center transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent"
               aria-label="Next slide"
             >
               <ChevronRight className="w-5 h-5" />
@@ -575,7 +575,7 @@ function SplitSection({
 
         {/* Logo tile - top-left */}
         <div className="absolute top-6 left-6 sm:top-8 sm:left-8 z-10">
-          <div className="flex items-center justify-center h-24 w-24 rounded-xl bg-transparent border border-white/20 shadow-lg overflow-hidden">
+          <div className="flex items-center justify-center h-24 w-24 rounded-2xl bg-transparent border border-white/20 overflow-hidden">
             {subsidiary.logoSrc ? (
               <Image
                 src={subsidiary.logoSrc}
@@ -625,7 +625,7 @@ function SplitSection({
               return (
                 <span
                   key={sector}
-                  className={`inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-semibold uppercase tracking-wide ${a.bg} ${a.text} ${a.border} border`}
+                   className={`inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wide ${a.bg} ${a.text} ${a.border} border`}
                 >
                   {sector}
                 </span>
@@ -650,7 +650,7 @@ function SplitSection({
               return (
                 <div
                   key={service}
-                  className={`flex items-center gap-2.5 px-4 py-2.5 rounded-lg bg-jotofa-navy/[0.03] dark:bg-white/[0.04] border border-border ${a.hoverBorder} ${a.hoverBg} transition-all duration-200`}
+                   className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-jotofa-navy/[0.03] dark:bg-white/[0.04] border border-border ${a.hoverBorder} ${a.hoverBg} transition-all duration-200`}
                 >
                   <Check className="w-3.5 h-3.5 flex-shrink-0 text-jotofa-accent" />
                   <span className="text-sm font-medium text-foreground/80">
