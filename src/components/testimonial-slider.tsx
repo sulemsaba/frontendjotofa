@@ -25,6 +25,23 @@ export function TestimonialSlider({
   const containerRef = useRef<HTMLDivElement>(null);
   const startXRef = useRef(0);
   const currentXRef = useRef(0);
+  const [cardSize, setCardSize] = useState({ width: 368, height: 207 });
+
+  useEffect(() => {
+    const updateSize = () => {
+      const width = window.innerWidth;
+      if (width >= 1024) {
+        setCardSize({ width: 480, height: 280 });
+      } else if (width >= 768) {
+        setCardSize({ width: 420, height: 235 });
+      } else {
+        setCardSize({ width: 368, height: 207 });
+      }
+    };
+    updateSize();
+    window.addEventListener("resize", updateSize);
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
 
   const goTo = useCallback((index: number) => {
     setCurrent((index + testimonials.length) % testimonials.length);
@@ -125,7 +142,7 @@ export function TestimonialSlider({
         <div
           ref={containerRef}
           className="relative mx-auto flex justify-center items-center select-none"
-          style={{ maxWidth: 420, touchAction: "pan-y" }}
+          style={{ maxWidth: cardSize.width + 100, touchAction: "pan-y" }}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
@@ -135,7 +152,7 @@ export function TestimonialSlider({
           onTouchEnd={handleTouchEnd}
         >
           {/* Slides */}
-          <div className="relative flex justify-center items-center" style={{ height: 240 }}>
+          <div className="relative flex justify-center items-center" style={{ height: cardSize.height + 32 }}>
             {testimonials.map((t, i) => {
               const offset = i - current;
               const isCenter = offset === 0;
@@ -143,15 +160,19 @@ export function TestimonialSlider({
 
               // During drag, shift all cards by the drag amount
               const dragOffset = isDragging ? dragX : 0;
+              const cardOffset = `${cardSize.width}px`;
               const baseTransform = isCenter
                 ? "translate(-50%, -50%)"
                 : offset < 0
-                  ? "translate(-50%, -50%) translateX(-100%) scale(0.92)"
-                  : "translate(-50%, -50%) translateX(100%) scale(0.92)";
+                  ? `translate(-50%, -50%) translateX(calc(-100% - ${cardOffset})) scale(0.92)`
+                  : `translate(-50%, -50%) translateX(calc(100% + ${cardOffset})) scale(0.92)`;
 
               // Append drag offset to the transform
               const transform = isDragging
-                ? baseTransform.replace("translateX(-100%)", `translateX(calc(-100% + ${dragOffset}px))`).replace("translateX(100%)", `translateX(calc(100% + ${dragOffset}px))`).replace("translate(-50%, -50%)", `translate(calc(-50% + ${dragOffset}px), -50%)`)
+                ? baseTransform
+                    .replace(`calc(-100% - ${cardSize.width}px)`, `calc(-100% - ${cardSize.width}px + ${dragOffset}px)`)
+                    .replace(`calc(100% + ${cardSize.width}px)`, `calc(100% + ${cardSize.width}px + ${dragOffset}px)`)
+                    .replace("translate(-50%, -50%)", `translate(calc(-50% + ${dragOffset}px), -50%)`)
                 : baseTransform;
 
               const zIndex = isCenter ? 100 : 90;
@@ -163,8 +184,8 @@ export function TestimonialSlider({
                   key={`${t.name}-${t.company}-${i}`}
                   className="absolute left-1/2 top-1/2 rounded-[20px] overflow-hidden"
                   style={{
-                    width: 368,
-                    height: 207,
+                    width: cardSize.width,
+                    height: cardSize.height,
                     transform,
                     zIndex,
                     opacity,
@@ -187,7 +208,7 @@ export function TestimonialSlider({
                       src={`/images/showcase/${t.company.toLowerCase().replace(/[^a-z0-9]+/g, "-").slice(0, 30)}.jpg`}
                       alt=""
                       fill
-                      sizes="368px"
+                      sizes={`${cardSize.width}px`}
                       className="object-cover opacity-80"
                     />
                   </div>
