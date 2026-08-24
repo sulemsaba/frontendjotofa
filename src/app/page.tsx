@@ -25,9 +25,9 @@ export default function Home() {
       <UnifyingExcellence />
       <EcosystemShowcase />
       <TestimonialSlider
-        eyebrow="Client Voices"
-        title={<>Trusted by <span className="text-jotofa-accent">Businesses Across Tanzania</span></>}
-        subtitle="Organizations from Dar es Salaam to Kigali rely on JOTOFA Group for diversified, dependable, professional services."
+        eyebrow=""
+        title="Hear from the teams that grow with JOTOFA Group"
+        subtitle=""
         testimonials={homeTestimonials}
       />
       <NewsSection />
