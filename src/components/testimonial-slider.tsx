@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { ScrollReveal } from "./scroll-reveal";
@@ -22,25 +22,47 @@ export function TestimonialSlider({
   const [current, setCurrent] = useState(0);
   const [dragX, setDragX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
   const startXRef = useRef(0);
   const currentXRef = useRef(0);
-  const [cardSize, setCardSize] = useState({ width: 368, height: 207 });
+  const suppressClickRef = useRef(false);
+  const autoplayRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  // Sizing is derived from the viewport so the centre card always fits and the
+  // neighbours peek by a fixed amount that is CLIPPED (never overflows the page).
+  const [dims, setDims] = useState({ cardW: 300, cardH: 168, gap: 16, viewport: 360 });
 
   useEffect(() => {
-    const updateSize = () => {
-      const width = window.innerWidth;
-      if (width >= 1024) {
-        setCardSize({ width: 480, height: 280 });
-      } else if (width >= 768) {
-        setCardSize({ width: 420, height: 235 });
+    const update = () => {
+      const vw = window.innerWidth;
+      let cardW: number, gap: number, viewport: number;
+      if (vw >= 1024) {
+        // Desktop: three cards across the full width - neighbours fully visible.
+        gap = 28;
+        const available = Math.min(vw - 64, 1320);
+        cardW = Math.max(320, Math.min(440, (available - 2 * gap) / 3));
+        viewport = Math.round(cardW * 3 + gap * 2);
+      } else if (vw >= 768) {
+        // Tablet: centre card with partial neighbours peeking.
+        gap = 22;
+        const peek = 72;
+        const available = Math.min(vw - 48, 920);
+        cardW = Math.max(300, Math.min(440, available - 2 * gap - 2 * peek));
+        viewport = Math.min(available, cardW + 2 * gap + 2 * peek);
       } else {
-        setCardSize({ width: 368, height: 207 });
+        // Mobile: larger centre card with small peek slivers on both sides.
+        gap = 12;
+        const peek = 16;
+        const available = vw - 32;
+        cardW = Math.max(250, Math.min(348, available - 2 * gap - 2 * peek));
+        viewport = Math.min(available, cardW + 2 * gap + 2 * peek);
       }
+      const cardH = Math.round(cardW * 0.56);
+      setDims({ cardW, cardH, gap, viewport });
     };
-    updateSize();
-    window.addEventListener("resize", updateSize);
-    return () => window.removeEventListener("resize", updateSize);
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
   }, []);
 
   const goTo = useCallback((index: number) => {
@@ -53,9 +75,11 @@ export function TestimonialSlider({
 
   const handleStart = useCallback((x: number) => {
     setIsDragging(true);
+    setIsAutoPlaying(false);
     startXRef.current = x;
     currentXRef.current = x;
     setDragX(0);
+    suppressClickRef.current = false;
   }, []);
 
   const handleMove = useCallback((x: number) => {
@@ -68,7 +92,10 @@ export function TestimonialSlider({
   const handleEnd = useCallback(() => {
     if (!isDragging) return;
     setIsDragging(false);
-    const threshold = 50;
+    suppressClickRef.current = true;
+    setTimeout(() => { suppressClickRef.current = false; }, 0);
+
+    const threshold = dims.cardW * 0.15;
     if (dragX > threshold) {
       goPrev();
     } else if (dragX < -threshold) {
@@ -76,9 +103,8 @@ export function TestimonialSlider({
     } else {
       setDragX(0);
     }
-  }, [isDragging, dragX, goNext, goPrev]);
+  }, [isDragging, dragX, goNext, goPrev, dims.cardW]);
 
-  // Mouse events
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
     handleStart(e.clientX);
@@ -92,7 +118,6 @@ export function TestimonialSlider({
     handleEnd();
   }, [handleEnd]);
 
-  // Touch events
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     handleStart(e.touches[0].clientX);
   }, [handleStart]);
@@ -114,10 +139,92 @@ export function TestimonialSlider({
     return () => window.removeEventListener("keydown", handleKey);
   }, [goNext, goPrev]);
 
+  // Mouse-wheel / touchpad: horizontal-intent scrolling navigates the carousel
+  // (vertical scroll is left to the page). One gesture = one step.
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    let lock = false;
+    const onWheel = (e: WheelEvent) => {
+      if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+      e.preventDefault();
+      if (lock) return;
+      lock = true;
+      setIsAutoPlaying(false);
+      if (e.deltaX > 0) goNext();
+      else goPrev();
+      window.setTimeout(() => { lock = false; }, 450);
+    };
+    el.addEventListener("wheel", onWheel, { passive: false });
+    return () => el.removeEventListener("wheel", onWheel);
+  }, [goNext, goPrev]);
+
+  useEffect(() => {
+    if (!isAutoPlaying || testimonials.length <= 1) return;
+    autoplayRef.current = setInterval(() => {
+      goNext();
+    }, 7000);
+    return () => {
+      if (autoplayRef.current) clearInterval(autoplayRef.current);
+    };
+  }, [isAutoPlaying, testimonials.length, goNext]);
+
+  const handleMouseEnter = useCallback(() => setIsAutoPlaying(false), []);
+  const handleMouseLeave = useCallback(() => setIsAutoPlaying(true), []);
+
+  const cardWidthWithGap = dims.cardW + dims.gap;
+
+  const cardStyles = useMemo(() => {
+    const styles: Record<number, React.CSSProperties> = {};
+    const n = testimonials.length;
+    testimonials.forEach((_, i) => {
+      // Circular offset so the previous and next cards always peek on BOTH
+      // sides, even on the first / last slide (looping carousel).
+      let offset = i - current;
+      if (n > 1) {
+        if (offset > n / 2) offset -= n;
+        else if (offset < -n / 2) offset += n;
+      }
+      const absOffset = Math.abs(offset);
+      const isCenter = offset === 0;
+      const baseX = offset * cardWidthWithGap;
+      const dragAdjustment = isDragging ? dragX : 0;
+      const scale = isCenter ? 1 : 0.92;
+      const translateX = baseX + dragAdjustment;
+      const zIndex = isCenter ? 100 : 90 - absOffset;
+      const opacity = isDragging
+        ? absOffset === 0 ? 1 : absOffset === 1 ? 0.7 : 0
+        : isCenter ? 1 : absOffset === 1 ? 0.65 : 0;
+      const pointerEvents = isDragging ? "none" : isCenter ? "auto" : "none";
+      const willChange = absOffset <= 1 ? "transform, opacity" : "auto";
+
+      styles[i] = {
+        width: dims.cardW,
+        height: dims.cardH,
+        transform: `translate(calc(-50% + ${translateX}px), -50%) scale(${scale})`,
+        zIndex,
+        opacity,
+        pointerEvents,
+        transition: isDragging
+          ? "none"
+          : "transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), z-index 0s",
+        willChange,
+        cursor: isDragging ? "grabbing" : "pointer",
+      };
+    });
+    return styles;
+  }, [current, dragX, isDragging, dims.cardW, dims.cardH, dims.gap, cardWidthWithGap, testimonials.length]);
+
+  const containerMaxWidth = dims.viewport;
+
+  const imageSizes = useMemo(() => {
+    return `(max-width: 768px) 368px, (max-width: 1024px) 420px, 480px`;
+  }, []);
+
   if (!testimonials.length) return null;
 
   return (
-    <section className="relative py-12 sm:py-16">
+    <section className="relative py-12 sm:py-16" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <div className="absolute inset-0 bg-background" />
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-jotofa-accent/15 to-transparent" />
 
@@ -138,11 +245,11 @@ export function TestimonialSlider({
           )}
         </ScrollReveal>
 
-        {/* Slider viewport */}
         <div
           ref={containerRef}
-          className="relative mx-auto flex justify-center items-center select-none"
-          style={{ maxWidth: cardSize.width + 100, touchAction: "pan-y" }}
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Client testimonials"
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
@@ -150,73 +257,55 @@ export function TestimonialSlider({
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
+          style={{ maxWidth: containerMaxWidth, margin: "0 auto", touchAction: "pan-y pinch-zoom" }}
         >
-          {/* Slides */}
-          <div className="relative flex justify-center items-center" style={{ height: cardSize.height + 32 }}>
+          <div className="relative flex justify-center items-center overflow-hidden" style={{ height: dims.cardH + 32 }}>
+            <div
+              aria-live="polite"
+              aria-atomic="true"
+              className="sr-only"
+            >
+              {testimonials[current]?.company && `Testimonial ${current + 1} of ${testimonials.length}: ${testimonials[current].company}`}
+            </div>
+
             {testimonials.map((t, i) => {
-              const offset = i - current;
+              const n = testimonials.length;
+              let offset = i - current;
+              if (n > 1) {
+                if (offset > n / 2) offset -= n;
+                else if (offset < -n / 2) offset += n;
+              }
               const isCenter = offset === 0;
               const absOffset = Math.abs(offset);
-
-              // During drag, shift all cards by the drag amount
-              const dragOffset = isDragging ? dragX : 0;
-              const cardOffset = `${cardSize.width}px`;
-              const baseTransform = isCenter
-                ? "translate(-50%, -50%)"
-                : offset < 0
-                  ? `translate(-50%, -50%) translateX(calc(-100% - ${cardOffset})) scale(0.92)`
-                  : `translate(-50%, -50%) translateX(calc(100% + ${cardOffset})) scale(0.92)`;
-
-              // Append drag offset to the transform
-              const transform = isDragging
-                ? baseTransform
-                    .replace(`calc(-100% - ${cardSize.width}px)`, `calc(-100% - ${cardSize.width}px + ${dragOffset}px)`)
-                    .replace(`calc(100% + ${cardSize.width}px)`, `calc(100% + ${cardSize.width}px + ${dragOffset}px)`)
-                    .replace("translate(-50%, -50%)", `translate(calc(-50% + ${dragOffset}px), -50%)`)
-                : baseTransform;
-
-              const zIndex = isCenter ? 100 : 90;
-              const opacity = isDragging ? (absOffset === 0 ? 1 : absOffset === 1 ? 0.6 : 0) : (isCenter ? 1 : absOffset === 1 ? 0.5 : 0);
-              const pointerEvents = isDragging ? "none" : (isCenter ? "auto" : "none");
+              const style = cardStyles[i];
 
               return (
                 <div
                   key={`${t.name}-${t.company}-${i}`}
                   className="absolute left-1/2 top-1/2 rounded-[20px] overflow-hidden"
-                  style={{
-                    width: cardSize.width,
-                    height: cardSize.height,
-                    transform,
-                    zIndex,
-                    opacity,
-                    pointerEvents,
-                    transition: isDragging ? "none" : "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease, z-index 0s",
-                    willChange: "transform, opacity",
-                    cursor: isDragging ? "grabbing" : "pointer",
-                  }}
-                  onClick={() => !isDragging && goTo(i)}
-                  role="button"
-                  tabIndex={0}
+                  style={style}
+                  onClick={() => !suppressClickRef.current && goTo(i)}
+                  role="tab"
+                  aria-selected={isCenter}
+                  aria-label={`${t.name}, ${t.company}`}
+                  tabIndex={isCenter ? 0 : -1}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" || e.key === " ") goTo(i);
                   }}
-                  aria-label={`${t.name}, ${t.company}`}
                 >
-                  {/* Background image */}
                   <div className="absolute inset-0 bg-jotofa-navy-deep">
                     <Image
                       src={`/images/showcase/${t.company.toLowerCase().replace(/[^a-z0-9]+/g, "-").slice(0, 30)}.jpg`}
                       alt=""
                       fill
-                      sizes={`${cardSize.width}px`}
+                      sizes={imageSizes}
                       className="object-cover opacity-80"
+                      priority={isCenter}
                     />
                   </div>
 
-                  {/* Fallback gradient when image is missing */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-jotofa-navy via-jotofa-navy-deep to-jotofa-navy opacity-100 md:hidden" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-jotofa-navy via-jotofa-navy-deep to-jotofa-navy opacity-100" />
 
-                  {/* Gradient overlay - exact from reference */}
                   <div
                     className="absolute inset-0"
                     style={{
@@ -225,14 +314,11 @@ export function TestimonialSlider({
                     }}
                   />
 
-                  {/* Text content - bottom aligned, max-width 22rem */}
                   <div className="absolute inset-0 flex flex-col justify-between p-5">
-                    {/* Title at top */}
-                    <div className="text-white text-base sm:text-lg font-medium leading-snug line-clamp-2">
-                      &ldquo;{t.quote.slice(0, 120)}{t.quote.length > 120 ? "..." : ""}&rdquo;
+                    <div className="text-white text-base sm:text-lg font-medium leading-snug line-clamp-3">
+                      &ldquo;{t.quote}&rdquo;
                     </div>
 
-                    {/* Bottom: company + read case study link */}
                     <div>
                       <div className="text-white font-semibold text-sm mb-1.5">
                         {t.company}
@@ -251,21 +337,22 @@ export function TestimonialSlider({
           </div>
         </div>
 
-        {/* Dots */}
-        <div className="flex items-center justify-center gap-2 mt-6">
+        <div className="flex items-center justify-center gap-2 mt-6" role="tablist" aria-label="Testimonial navigation">
           {testimonials.map((t, i) => (
             <button
               key={`${t.name}-${t.company}-dot-${i}`}
               type="button"
               onClick={() => goTo(i)}
               aria-label={`Go to testimonial ${i + 1}: ${t.name}`}
+              aria-selected={i === current}
+              role="tab"
               className="group/dot"
             >
               <span
                 className={`block rounded-full transition-all duration-300 ${
                   i === current
-                    ? "w-6 h-2 bg-jotofa-navy dark:bg-white"
-                    : "w-2 h-2 bg-jotofa-navy/25 dark:bg-white/25 group-hover/dot:bg-jotofa-navy/50 dark:group-hover/dot:bg-white/50"
+                    ? "w-8 h-3 bg-jotofa-navy dark:bg-white"
+                    : "w-3 h-3 bg-jotofa-navy/25 dark:bg-white/25 group-hover/dot:bg-jotofa-navy/50 dark:group-hover/dot:bg-white/50"
                 }`}
               />
             </button>
