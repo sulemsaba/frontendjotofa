@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { ScrollReveal } from "./scroll-reveal";
 import type { Testimonial } from "@/lib/testimonials-data";
 
@@ -20,13 +20,73 @@ export function TestimonialSlider({
   testimonials,
 }: TestimonialSliderProps) {
   const [current, setCurrent] = useState(0);
+  const [dragX, setDragX] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const startXRef = useRef(0);
+  const currentXRef = useRef(0);
 
   const goTo = useCallback((index: number) => {
     setCurrent((index + testimonials.length) % testimonials.length);
+    setDragX(0);
   }, [testimonials.length]);
 
   const goNext = useCallback(() => goTo(current + 1), [current, goTo]);
   const goPrev = useCallback(() => goTo(current - 1), [current, goTo]);
+
+  const handleStart = useCallback((x: number) => {
+    setIsDragging(true);
+    startXRef.current = x;
+    currentXRef.current = x;
+    setDragX(0);
+  }, []);
+
+  const handleMove = useCallback((x: number) => {
+    if (!isDragging) return;
+    currentXRef.current = x;
+    const delta = x - startXRef.current;
+    setDragX(delta);
+  }, [isDragging]);
+
+  const handleEnd = useCallback(() => {
+    if (!isDragging) return;
+    setIsDragging(false);
+    const threshold = 50;
+    if (dragX > threshold) {
+      goPrev();
+    } else if (dragX < -threshold) {
+      goNext();
+    } else {
+      setDragX(0);
+    }
+  }, [isDragging, dragX, goNext, goPrev]);
+
+  // Mouse events
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    handleStart(e.clientX);
+  }, [handleStart]);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    handleMove(e.clientX);
+  }, [handleMove]);
+
+  const handleMouseUp = useCallback(() => {
+    handleEnd();
+  }, [handleEnd]);
+
+  // Touch events
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    handleStart(e.touches[0].clientX);
+  }, [handleStart]);
+
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    handleMove(e.touches[0].clientX);
+  }, [handleMove]);
+
+  const handleTouchEnd = useCallback(() => {
+    handleEnd();
+  }, [handleEnd]);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -62,7 +122,18 @@ export function TestimonialSlider({
         </ScrollReveal>
 
         {/* Slider viewport */}
-        <div className="relative mx-auto flex justify-center items-center" style={{ maxWidth: 420 }}>
+        <div
+          ref={containerRef}
+          className="relative mx-auto flex justify-center items-center select-none"
+          style={{ maxWidth: 420, touchAction: "pan-y" }}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
           {/* Slides */}
           <div className="relative flex justify-center items-center" style={{ height: 240 }}>
             {testimonials.map((t, i) => {
@@ -70,40 +141,46 @@ export function TestimonialSlider({
               const isCenter = offset === 0;
               const absOffset = Math.abs(offset);
 
-              // Center slide: centered, full opacity, z-index 100
-              // Side slides: shifted left/right, reduced opacity/scale, z-index 90
-              const transform = isCenter
+              // During drag, shift all cards by the drag amount
+              const dragOffset = isDragging ? dragX : 0;
+              const baseTransform = isCenter
                 ? "translate(-50%, -50%)"
                 : offset < 0
                   ? "translate(-50%, -50%) translateX(-100%) scale(0.92)"
                   : "translate(-50%, -50%) translateX(100%) scale(0.92)";
 
+              // Append drag offset to the transform
+              const transform = isDragging
+                ? baseTransform.replace("translateX(-100%)", `translateX(calc(-100% + ${dragOffset}px))`).replace("translateX(100%)", `translateX(calc(100% + ${dragOffset}px))`).replace("translate(-50%, -50%)", `translate(calc(-50% + ${dragOffset}px), -50%)`)
+                : baseTransform;
+
               const zIndex = isCenter ? 100 : 90;
-              const opacity = isCenter ? 1 : absOffset === 1 ? 0.5 : 0;
-              const pointerEvents = isCenter ? "auto" : "none";
+              const opacity = isDragging ? (absOffset === 0 ? 1 : absOffset === 1 ? 0.6 : 0) : (isCenter ? 1 : absOffset === 1 ? 0.5 : 0);
+              const pointerEvents = isDragging ? "none" : (isCenter ? "auto" : "none");
 
               return (
-                  <div
-                    key={`${t.name}-${t.company}-${i}`}
-                    className="absolute left-1/2 top-1/2 rounded-[20px] overflow-hidden cursor-pointer"
-                    style={{
-                      width: 368,
-                      height: 207,
-                      transform,
-                      zIndex,
-                      opacity,
-                      pointerEvents,
-                      transition: "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease, z-index 0s",
-                      willChange: "transform, opacity",
-                    }}
-                    onClick={() => goTo(i)}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") goTo(i);
-                    }}
-                    aria-label={`${t.name}, ${t.company}`}
-                  >
+                <div
+                  key={`${t.name}-${t.company}-${i}`}
+                  className="absolute left-1/2 top-1/2 rounded-[20px] overflow-hidden"
+                  style={{
+                    width: 368,
+                    height: 207,
+                    transform,
+                    zIndex,
+                    opacity,
+                    pointerEvents,
+                    transition: isDragging ? "none" : "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease, z-index 0s",
+                    willChange: "transform, opacity",
+                    cursor: isDragging ? "grabbing" : "pointer",
+                  }}
+                  onClick={() => !isDragging && goTo(i)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") goTo(i);
+                  }}
+                  aria-label={`${t.name}, ${t.company}`}
+                >
                   {/* Background image */}
                   <div className="absolute inset-0 bg-jotofa-navy-deep">
                     <Image
@@ -151,24 +228,6 @@ export function TestimonialSlider({
               );
             })}
           </div>
-
-          {/* Navigation arrows */}
-          <button
-            type="button"
-            onClick={goPrev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 sm:-translate-x-4 w-10 h-10 rounded-full border border-jotofa-navy/15 dark:border-white/15 flex items-center justify-center text-jotofa-navy/60 dark:text-white/60 hover:text-jotofa-navy dark:hover:text-white hover:border-jotofa-navy/40 dark:hover:border-white/40 transition-all cursor-pointer z-[110] bg-white/80 dark:bg-jotofa-navy/80 backdrop-blur-sm"
-            aria-label="Previous testimonial"
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </button>
-          <button
-            type="button"
-            onClick={goNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 sm:translate-x-4 w-10 h-10 rounded-full border border-jotofa-navy/15 dark:border-white/15 flex items-center justify-center text-jotofa-navy/60 dark:text-white/60 hover:text-jotofa-navy dark:hover:text-white hover:border-jotofa-navy/40 dark:hover:border-white/40 transition-all cursor-pointer z-[110] bg-white/80 dark:bg-jotofa-navy/80 backdrop-blur-sm"
-            aria-label="Next testimonial"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
         </div>
 
         {/* Dots */}
