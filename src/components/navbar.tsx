@@ -14,14 +14,15 @@ import {
   Sun,
   Moon,
   Building2,
-  Briefcase,
-  Leaf,
+  RadioTower,
+  Sparkles,
+  Users,
 } from "lucide-react";
 
 const businessItems = [
-  { id: "utec", label: "UTEC Solutions", description: "ICT & Telecommunications", page: "utec" as PageId, image: "/images/utec.png", logo: "/images/utec-logo.png" },
-  { id: "cleaning", label: "Cleaning & Maids", description: "Professional Cleaning Services", page: "cleaning" as PageId, image: "/images/cleaning.png" },
-  { id: "staffing", label: "Staffing & Labour", description: "Workforce Solutions Partner", page: "staffing" as PageId, image: "/images/staffing.png" },
+  { id: "utec", label: "UTEC Solutions", description: "ICT & Telecommunications", page: "utec" as PageId, image: "/images/utec.png", logo: "/images/utec-logo.png", icon: RadioTower },
+  { id: "cleaning", label: "Cleaning & Maids", description: "Professional Cleaning Services", page: "cleaning" as PageId, image: "/images/cleaning.png", icon: Sparkles },
+  { id: "staffing", label: "Staffing & Labour", description: "Workforce Solutions Partner", page: "staffing" as PageId, image: "/images/staffing.png", icon: Users },
 ];
 
 const PHONE_NUMBER = "0794 974 996";
@@ -43,7 +44,7 @@ const subsidiariesPages: PageId[] = ["businesses", "utec", "cleaning", "staffing
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<"subsidiaries" | "about" | null>(null);
+  const [openDropdown, setOpenDropdown] = useState<"subsidiaries" | "about" | null>("subsidiaries");
   const [hoveredBizIndex, setHoveredBizIndex] = useState(0);
   const [mobileExpanded, setMobileExpanded] = useState<"subsidiaries" | "about" | null>(null);
   const { setTheme, resolvedTheme } = useTheme();
@@ -239,58 +240,56 @@ export function Navbar() {
                          className="absolute top-full left-2 lg:left-4 pt-2"
                          onMouseEnter={() => openMenu("subsidiaries")}
                          onMouseLeave={scheduleCloseMenu}>
-                          <div className="w-[640px] max-w-[calc(100vw-2rem)] bg-white dark:bg-jotofa-navy-card backdrop-blur-[20px] border border-jotofa-navy/8 dark:border-white/10 rounded-2xl overflow-hidden">
-                            <div className="grid grid-cols-[45%_55%] min-h-[300px]">
-                              <div className="border-r border-jotofa-navy/6 dark:border-white/6 p-2">
-                                 <div className="px-3 py-1.5 mb-1"><span className="text-[10px] font-semibold uppercase tracking-widest text-jotofa-navy/70 dark:text-white/70">Subsidiaries</span></div>
-                                {businessItems.map((biz, idx) => (
+                          <div className="w-[560px] max-w-[calc(100vw-2rem)] bg-white dark:bg-jotofa-navy-card backdrop-blur-[20px] border border-jotofa-navy/8 dark:border-white/10 rounded-2xl shadow-[0_16px_50px_rgba(0,20,40,0.16)] dark:shadow-[0_24px_60px_rgba(0,0,0,0.5)] p-2.5">
+                            <div className="grid grid-cols-[47%_53%] gap-2.5">
+                              {/* LEFT: compact list on the shared background */}
+                              <div className="flex flex-col">
+                                 <div className="px-2.5 pt-1 pb-1.5"><span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-jotofa-navy/50 dark:text-white/45">Subsidiaries</span></div>
+                                {businessItems.map((biz, idx) => {
+                                  const active = hoveredBizIndex === idx;
+                                  const Icon = biz.icon;
+                                  return (
                                   <PageLink key={biz.id} page={biz.page} onMouseEnter={() => { setHoveredBizIndex(idx); prefetchPage(biz.page); }} onClick={closeMenus}
-                                    className={`flex items-center gap-3 w-full text-left px-3 py-2 rounded-lg transition-all duration-200 group/biz cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent ${hoveredBizIndex === idx ? "bg-jotofa-navy/[0.04] dark:bg-white/[0.06]" : "hover:bg-jotofa-navy/[0.02] dark:hover:bg-white/[0.03]"}`}>
-                                     {biz.logo && (
-                                       <div className="flex-shrink-0 w-9 h-9 rounded-lg overflow-hidden flex items-center justify-center bg-gray-50 border border-black/5 dark:bg-white/10 dark:border-white/20 shadow-sm">
-                                         <Image
-                                           src={biz.logo}
-                                           alt={`${biz.label} logo`}
-                                           width={28}
-                                           height={28}
-                                           className="w-7 h-7 object-contain"
-                                         />
-                                       </div>
-                                     )}
-                                    <div className="min-w-0 flex-1">
-                                      <div className={`text-xs font-medium ${hoveredBizIndex === idx ? "text-jotofa-navy dark:text-white font-semibold" : "text-jotofa-navy/70 dark:text-white/70 group-hover/biz:text-jotofa-navy dark:group-hover/biz:text-white/90"}`}>{biz.label}</div>
-                                       <div className="text-[10px] text-jotofa-navy/70 dark:text-white/70 truncate mt-0.5">{biz.description}</div>
-                                    </div>
-                                    <ArrowRight className={`w-3 h-3 flex-shrink-0 ml-2 transition-all duration-200 text-jotofa-accent ${hoveredBizIndex === idx ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-1"}`} />
+                                    className={`group/biz flex items-center gap-2.5 rounded-xl px-2.5 py-2 transition-colors duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent ${active ? "bg-jotofa-navy/[0.05] dark:bg-white/[0.07]" : "hover:bg-jotofa-navy/[0.03] dark:hover:bg-white/[0.04]"}`}>
+                                     <span className={`flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center transition-colors duration-150 ${active ? "bg-jotofa-accent/15 text-jotofa-accent" : "bg-jotofa-navy/[0.05] dark:bg-white/[0.06] text-jotofa-navy/55 dark:text-white/55"}`}>
+                                       {biz.logo ? (
+                                         <Image src={biz.logo} alt="" width={20} height={20} className="w-5 h-5 object-contain" />
+                                       ) : Icon ? (
+                                         <Icon className="w-4 h-4" strokeWidth={2} />
+                                       ) : null}
+                                     </span>
+                                    <span className="min-w-0 flex-1">
+                                      <span className={`block text-[13px] leading-tight font-semibold ${active ? "text-jotofa-navy dark:text-white" : "text-jotofa-navy/80 dark:text-white/80"}`}>{biz.label}</span>
+                                      <span className="block text-[11px] leading-tight text-jotofa-navy/50 dark:text-white/50 truncate mt-0.5">{biz.description}</span>
+                                    </span>
+                                    <ArrowRight className={`w-3.5 h-3.5 flex-shrink-0 text-jotofa-accent transition-all duration-150 ${active ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-1"}`} />
                                   </PageLink>
-                                ))}
+                                  );
+                                })}
+                                <PageLink page="businesses" onClick={closeMenus} className="group/viewall mt-auto flex items-center gap-1.5 rounded-xl px-2.5 py-2 text-[12px] font-medium text-jotofa-navy/70 dark:text-white/60 hover:text-jotofa-navy dark:hover:text-white hover:bg-jotofa-navy/[0.03] dark:hover:bg-white/[0.04] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent">
+                                  View All Subsidiaries <ArrowRight className="w-3 h-3 group-hover/viewall:translate-x-0.5 transition-transform" />
+                                </PageLink>
                               </div>
-                              {/* Right panel   Next.js Image (not CSS background) */}
-                              <div className="relative min-h-[300px] overflow-hidden">
+                              {/* RIGHT: image inset in the shared background (rounded, no bleed) */}
+                              <div className="relative rounded-xl overflow-hidden min-h-[236px]">
                                 <AnimatePresence>
                                   <motion.div key={currentBiz.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="absolute inset-0">
                                     <Image
                                       src={currentBiz.image}
                                       alt=""
                                       fill
-                                      sizes="352px"
+                                      sizes="300px"
                                       className="object-cover"
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-jotofa-navy/90 via-jotofa-navy/40 to-transparent" />
-                                    <div className="absolute bottom-0 left-0 right-0 p-5">
-                                      <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/10 border border-white/10 mb-2"><span className="text-[11px] font-medium text-white">{currentBiz.description}</span></div>
-                                      <div className="text-white text-base font-semibold">{currentBiz.label}</div>
+                                    <div className="absolute inset-0 bg-gradient-to-t from-jotofa-navy/90 via-jotofa-navy/35 to-transparent" />
+                                    <div className="absolute bottom-0 left-0 right-0 p-4">
+                                      <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/12 border border-white/15 backdrop-blur-sm mb-1.5"><span className="text-[10px] font-medium text-white">{currentBiz.description}</span></div>
+                                      <div className="text-white text-[15px] font-semibold leading-tight">{currentBiz.label}</div>
                                     </div>
                                   </motion.div>
                                 </AnimatePresence>
                               </div>
                             </div>
-                           <div className="border-t border-jotofa-navy/6 dark:border-white/6 px-5 py-2.5 flex items-center justify-between">
-                             <PageLink page="businesses" onClick={closeMenus} className="text-[12px] text-jotofa-navy dark:text-white/70 hover:text-jotofa-navy/70 dark:hover:text-white transition-colors flex items-center gap-1.5 group/viewall font-medium cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm">
-                               View All Subsidiaries <ArrowRight className="w-3 h-3 group-hover/viewall:translate-x-0.5 transition-transform" />
-                             </PageLink>
-                              <div className="text-[11px] text-jotofa-navy/70 dark:text-white/70">4 subsidiaries across Tanzania</div>
-                           </div>
                          </div>
                        </motion.div>
                      </AnimatePresence>
@@ -339,10 +338,14 @@ export function Navbar() {
           <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.25 }} className="fixed inset-0 z-40 lg:hidden" role="dialog" aria-modal="true" aria-label="Site navigation menu">
              <div className="absolute inset-0 bg-black/20 dark:bg-black/50 backdrop-blur-sm" onClick={() => setMobileOpen(false)} onKeyDown={(e) => { if (e.key === "Escape") setMobileOpen(false); }} aria-label="Close navigation menu" />
             <motion.div ref={mobileDrawerRef} initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }} transition={{ duration: 0.3, ease: "easeOut" }}
-              className="absolute right-0 top-14 sm:top-16 bottom-0 w-[300px] max-w-[85vw] flex flex-col bg-white dark:bg-jotofa-navy-card backdrop-blur-xl border-l border-t border-jotofa-navy/8 dark:border-white/8 shadow-[0_16px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_24px_60px_rgba(0,0,0,0.5)] overscroll-contain">
-              <div className="flex-1 py-3 px-2 space-y-0.5 overflow-y-auto overscroll-contain">
+              className="absolute right-0 top-14 sm:top-16 bottom-0 w-[300px] max-w-[85vw] flex flex-col bg-white dark:bg-jotofa-navy-card backdrop-blur-xl border-l border-jotofa-navy/8 dark:border-white/8 shadow-[0_16px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_24px_60px_rgba(0,0,0,0.5)] overscroll-contain">
+              <div className="flex-1 p-3 space-y-1 overflow-y-auto overscroll-contain">
                 {navItems.map((item) => {
-                  const itemClasses = `flex items-center justify-between w-full text-left px-4 py-3 text-base tracking-wide transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent min-h-[44px] ${activePage === item.id || (item.hasDropdown && isDropdownActive(item.hasDropdown)) ? "text-jotofa-navy dark:text-white font-semibold" : "text-jotofa-navy/70 dark:text-white/70 hover:text-jotofa-navy dark:hover:text-white"}`;
+                  const isActive = activePage === item.id || (item.hasDropdown && isDropdownActive(item.hasDropdown));
+                  const itemClasses = `relative flex items-center justify-between w-full text-left pl-5 pr-4 py-3.5 rounded-xl text-base tracking-wide transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent min-h-[48px] ${isActive ? "bg-jotofa-accent/10 dark:bg-jotofa-accent/15 text-jotofa-navy dark:text-white font-semibold" : "text-jotofa-navy/70 dark:text-white/75 hover:bg-jotofa-navy/[0.04] dark:hover:bg-white/[0.06] hover:text-jotofa-navy dark:hover:text-white"}`;
+                  const indicator = (
+                    <span aria-hidden className={`absolute left-1.5 top-1/2 -translate-y-1/2 h-5 w-[3px] rounded-full bg-jotofa-accent transition-opacity duration-200 ${isActive ? "opacity-100" : "opacity-0"}`} />
+                  );
                   return (
                   <div key={item.id}>
                     {item.hasDropdown ? (
@@ -351,27 +354,29 @@ export function Navbar() {
                         aria-expanded={mobileExpanded === item.hasDropdown}
                         className={itemClasses}
                       >
-                        <span className="text-base">{item.label}</span>
-                        <ChevronDown className={`w-5 h-5 transition-transform ${mobileExpanded === item.hasDropdown ? "rotate-180" : ""}`} />
+                        {indicator}
+                        <span>{item.label}</span>
+                        <ChevronDown className={`w-5 h-5 opacity-70 transition-transform ${mobileExpanded === item.hasDropdown ? "rotate-180" : ""}`} />
                       </button>
                     ) : (
                       <PageLink page={item.id} onClick={closeMenus} className={itemClasses}>
-                        <span className="text-base">{item.label}</span>
+                        {indicator}
+                        <span>{item.label}</span>
                       </PageLink>
                     )}
                        {item.hasDropdown === "subsidiaries" && mobileExpanded === "subsidiaries" && (
-                      <div className="pl-4 space-y-1 pb-2">
-                        <PageLink page="businesses" onClick={closeMenus} className="flex items-center gap-3 w-full text-left px-4 py-3 text-jotofa-navy dark:text-white font-medium hover:bg-jotofa-navy/[0.03] dark:hover:bg-white/[0.04] rounded-lg min-h-[44px]">
-                          <Building2 className="w-5 h-5" /><span className="text-base">View All Subsidiaries</span>
+                      <div className="mt-1 ml-3 pl-3 border-l border-jotofa-navy/8 dark:border-white/10 space-y-1 pb-1">
+                        <PageLink page="businesses" onClick={closeMenus} className="flex items-center gap-3 w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium text-jotofa-navy dark:text-white hover:bg-jotofa-navy/[0.04] dark:hover:bg-white/[0.05] min-h-[44px]">
+                          <Building2 className="w-4 h-4 text-jotofa-accent" /><span>View All Subsidiaries</span>
                         </PageLink>
                         {businessItems.map(biz => (
-                          <PageLink key={biz.id} page={biz.page} onClick={closeMenus} className="flex items-center gap-3 w-full text-left px-4 py-3 text-jotofa-navy/70 dark:text-white/70 hover:text-jotofa-navy dark:hover:text-white hover:bg-jotofa-navy/[0.03] dark:hover:bg-white/[0.04] rounded-lg min-h-[44px]">
+                          <PageLink key={biz.id} page={biz.page} onClick={closeMenus} className="flex items-center gap-3 w-full text-left px-3 py-2.5 rounded-lg text-sm text-jotofa-navy/70 dark:text-white/70 hover:text-jotofa-navy dark:hover:text-white hover:bg-jotofa-navy/[0.04] dark:hover:bg-white/[0.05] min-h-[44px]">
                             {biz.logo && (
                               <div className="w-7 h-7 rounded-md overflow-hidden flex items-center justify-center bg-white border border-black/5 dark:border-white/10 flex-shrink-0">
                                 <Image src={biz.logo} alt={`${biz.label} logo`} width={24} height={24} className="w-6 h-6 object-contain" />
                               </div>
                             )}
-                            <span className="text-base">{biz.label}</span>
+                            <span>{biz.label}</span>
                           </PageLink>
                         ))}
                       </div>
@@ -380,8 +385,8 @@ export function Navbar() {
                   </div>
                 );
                 })}
-                <div className="pt-4 mt-3 border-t border-jotofa-navy/6 dark:border-white/6 space-y-1">
-                  <a href={`tel:${PHONE_TEL}`} className="flex items-center gap-3 px-4 py-3 rounded-xl text-jotofa-navy/70 dark:text-white/70 text-base hover:bg-jotofa-navy/[0.03] dark:hover:bg-white/[0.04] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent min-h-[44px]"><Phone className="w-5 h-5" /><span>{PHONE_NUMBER}</span></a>
+                <div className="pt-3 mt-2 border-t border-jotofa-navy/8 dark:border-white/8">
+                  <a href={`tel:${PHONE_TEL}`} className="flex items-center gap-3 pl-5 pr-4 py-3.5 rounded-xl text-jotofa-navy dark:text-white text-base font-medium hover:bg-jotofa-navy/[0.04] dark:hover:bg-white/[0.06] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent min-h-[48px]"><Phone className="w-5 h-5 text-jotofa-accent" /><span>{PHONE_NUMBER}</span></a>
                 </div>
               </div>
             </motion.div>

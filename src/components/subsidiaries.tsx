@@ -369,7 +369,7 @@ export function SubsidiaryShowcase({
           onMouseLeave={startAuto}
         >
           {/* LEFT: Image Slider */}
-          <div className="relative w-full lg:w-[52%] min-h-[300px] sm:min-h-[400px] lg:min-h-[560px] bg-jotofa-navy-deep overflow-hidden">
+          <div className="relative w-full lg:w-[52%] min-h-[300px] sm:min-h-[400px] lg:min-h-[560px] bg-jotofa-navy-deep overflow-hidden dark:border-r dark:border-white/10">
             {slides.map((item, i) => (
               <div
                 key={i}

@@ -6,8 +6,17 @@ import { motion } from "framer-motion";
 export function UnifyingExcellence() {
   return (
     <section className="relative w-full bg-jotofa-navy dark:bg-jotofa-navy-card text-white overflow-hidden">
-      {/* Inward corner: the page background curves down into the navy section */}
-      <div aria-hidden className="h-8 w-full bg-background rounded-b-3xl" />
+      {/* Smooth curved top: the page background dips into the navy section as a
+          single full-width arc (no hard horizontal seam). */}
+      <svg
+        aria-hidden
+        className="absolute top-0 left-0 w-full h-8 sm:h-12 z-0"
+        viewBox="0 0 1440 48"
+        preserveAspectRatio="none"
+        style={{ fill: "var(--background)" }}
+      >
+        <path d="M0,0 H1440 V4 Q720,56 0,4 Z" />
+      </svg>
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 sm:pt-24 pb-16 sm:pb-24">
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start">
