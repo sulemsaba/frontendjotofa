@@ -26,7 +26,7 @@ export default function Home() {
       <EcosystemShowcase />
       <TestimonialSlider
         eyebrow=""
-        title="Hear from the teams that grow with JOTOFA Group"
+        title="Hear from the teams that grows with JOTOFA Group"
         subtitle=""
         testimonials={homeTestimonials}
       />
