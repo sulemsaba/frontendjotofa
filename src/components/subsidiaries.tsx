@@ -690,7 +690,6 @@ function SplitSection({
 }
 
 export function Subsidiaries() {
-  const [activeSubsidiary, setActiveSubsidiary] = useState(visibleSubsidiaries[0]?.id ?? "utec");
 
   const cleaningHeaderTitle = "Premium Cleaning & Housekeeping Solutions";
   const cleaningHeaderSubtitle = "From commercial offices to residential homes - we deliver hygiene, consistency, and peace of mind across Tanzania.";
@@ -699,6 +698,7 @@ export function Subsidiaries() {
   const staffingHeaderSubtitle = "Recruitment, labour outsourcing, and HR consulting - connecting the right talent with the right opportunity.";
 
   const visibleSubsidiaries = subsidiaries.filter((s) => s.id !== "staffing");
+  const [activeSubsidiary, setActiveSubsidiary] = useState(visibleSubsidiaries[0]?.id ?? "utec");
 
   return (
     <section className="relative">
