@@ -2,7 +2,7 @@
 
 import { Hero } from "@/components/hero";
 import { UnifyingExcellence } from "@/components/unifying-excellence";
-import { Subsidiaries } from "@/components/subsidiaries";
+import { EcosystemShowcase } from "@/components/ecosystem-showcase";
 import { NewsSection } from "@/components/news-section";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { BackToTopButton } from "@/components/back-to-top-button";
@@ -23,7 +23,7 @@ export default function Home() {
     <main className="flex-1">
       <Hero />
       <UnifyingExcellence />
-      <Subsidiaries />
+      <EcosystemShowcase />
       <Testimonials
         eyebrow="Client Voices"
         title={<>Trusted by <span className="text-jotofa-accent">Businesses Across Tanzania</span></>}

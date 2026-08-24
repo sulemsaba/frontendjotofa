@@ -44,7 +44,7 @@ const subsidiariesPages: PageId[] = ["businesses", "utec", "cleaning", "staffing
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<"subsidiaries" | "about" | null>("subsidiaries");
+  const [openDropdown, setOpenDropdown] = useState<"subsidiaries" | "about" | null>(null);
   const [hoveredBizIndex, setHoveredBizIndex] = useState(0);
   const [mobileExpanded, setMobileExpanded] = useState<"subsidiaries" | "about" | null>(null);
   const { setTheme, resolvedTheme } = useTheme();

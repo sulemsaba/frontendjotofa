@@ -19,6 +19,7 @@ import {
 import { PageId, PageLink } from "@/lib/page-context";
 import { storeProductsPageUrl } from "@/lib/store-config";
 import { SubsidiaryShowcase, Slide } from "../subsidiaries";
+import { EcosystemShowcase } from "@/components/ecosystem-showcase";
 
 /* ──────────────────────────────────────────────────────────────────────────
    Accent color tokens - each subsidiary has its own brand accent used for
@@ -430,7 +431,7 @@ export function BusinessesPage() {
   return (
     <>
       <BusinessesHero />
-      <SplitSections />
+      <EcosystemShowcase />
       <GroupImpact />
       <ContactCTA />
     </>
