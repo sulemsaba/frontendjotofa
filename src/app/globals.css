@@ -534,7 +534,7 @@
 .map-wrapper {
   position: relative;
   width: 100%;
-  height: 480px;
+  height: clamp(240px, 40vh, 480px);
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 8px 32px rgba(0, 59, 100, 0.08);
@@ -617,10 +617,10 @@
 .contact-info-section .info-row:last-child { margin-bottom: 0; }
 
 /* ── Responsive ── */
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .contact-grid {
     grid-template-columns: 1fr;
-    gap: 48px;
+    gap: 40px;
   }
 
   .contact-left h2 { font-size: 28px; }
@@ -630,7 +630,7 @@
     gap: 0;
   }
 
-  .map-wrapper { height: 350px; }
+  .map-wrapper { height: 320px; }
 
   .map-overlay {
     display: none;
@@ -651,6 +651,7 @@
   .contact-left h2 { font-size: 24px; }
   .map-section h2 { font-size: 26px; }
   .submit-btn { width: 100%; justify-content: center; }
+  .map-wrapper { height: 240px; }
 }
 
 /* ═══════════════════════════════════════════

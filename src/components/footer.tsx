@@ -185,8 +185,8 @@ function CareersColumn() {
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-background border-t border-border pt-20 pb-14">
-      <div className="relative z-10 max-w-7xl mx-auto px-10">
+    <footer className="relative overflow-hidden bg-background border-t border-border pt-12 sm:pt-20 pb-8 sm:pb-14">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
         {/* Brand */}
         <div className="flex flex-col items-center mb-16">
             <div className="relative w-[160px] h-16">
@@ -211,7 +211,7 @@ export function Footer() {
         </div>
 
         {/* Columns */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 lg:gap-8 mb-14">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-10 sm:mb-14">
           <LinkColumn title="Quick Links" links={quickLinks} />
 
           <LinkColumn title="Our Businesses" links={businessLinks} />
@@ -227,7 +227,7 @@ export function Footer() {
             <div className="space-y-3 text-[15px] text-foreground mb-6">
               <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 mt-0.5 text-jotofa-accent flex-shrink-0" />
-                <span>{CORPORATE_ADDRESS}</span>
+                <span className="break-all">{CORPORATE_ADDRESS}</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-jotofa-accent flex-shrink-0" />
@@ -264,9 +264,9 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="w-9 h-9 rounded-lg bg-foreground text-background flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95"
+                   className="w-11 h-11 rounded-lg bg-foreground text-background flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95"
                 >
-                  <social.icon className="w-4 h-4" />
+                  <social.icon className="w-5 h-5" />
                 </a>
               ))}
              </div>

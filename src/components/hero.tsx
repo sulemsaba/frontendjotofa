@@ -153,16 +153,16 @@ export function Hero() {
 
       <div className="flex flex-col lg:flex-row w-full min-h-full lg:h-full">
 
-        {/* ════════════ MOBILE: Animated Ticker (TOP) ════════════ */}
-        <div aria-hidden className="lg:hidden relative">
-          <div className="flex w-full" style={{ height: "55vh", gap: "8px", padding: "8px", paddingTop: "72px" }}>
-            <TickerColumn images={tickerImagesCol1} paused={tickerPaused} reducedMotion={!!prefersReducedMotion} />
-            <TickerColumn images={tickerImagesCol2} reverse paused={tickerPaused} reducedMotion={!!prefersReducedMotion} />
-          </div>
-          <div className="absolute top-[80px] right-[16px] z-10">
-            <TickerPauseButton paused={tickerPaused} onToggle={() => setTickerPaused(!tickerPaused)} />
-          </div>
-        </div>
+         {/* ════════════ MOBILE: Animated Ticker (TOP) ════════════ */}
+         <div aria-hidden className="lg:hidden relative">
+           <div className="flex w-full" style={{ height: "38vh", gap: "8px", padding: "8px", paddingTop: "72px" }}>
+             <TickerColumn images={tickerImagesCol1} paused={tickerPaused} reducedMotion={!!prefersReducedMotion} />
+             <TickerColumn images={tickerImagesCol2} reverse paused={tickerPaused} reducedMotion={!!prefersReducedMotion} />
+           </div>
+           <div className="absolute top-[80px] right-[16px] z-10">
+             <TickerPauseButton paused={tickerPaused} onToggle={() => setTickerPaused(!tickerPaused)} />
+           </div>
+         </div>
 
         {/* ════════════ LEFT COLUMN   Text + News Slider ════════════ */}
         <div className="w-full lg:w-[45%] flex flex-col justify-between relative z-[2]">
@@ -243,20 +243,20 @@ export function Hero() {
                 </PageLink>
               </div>
               <div className="flex items-center gap-2">
-                <button
-                  onClick={prevSlide}
-                  className="w-9 h-9 rounded-full border border-jotofa-navy/15 dark:border-white/15 flex items-center justify-center text-jotofa-navy/60 dark:text-white/60 hover:text-jotofa-navy dark:hover:text-white hover:border-jotofa-navy/40 dark:hover:border-white/40 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                  aria-label="Previous slide"
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                </button>
-                <button
-                  onClick={nextSlide}
-                  className="w-9 h-9 rounded-full border border-jotofa-navy/15 dark:border-white/15 flex items-center justify-center text-jotofa-navy/60 dark:text-white/60 hover:text-jotofa-navy dark:hover:text-white hover:border-jotofa-navy/40 dark:hover:border-white/40 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                  aria-label="Next slide"
-                >
-                  <ChevronRight className="w-4 h-4" />
-                </button>
+                 <button
+                   onClick={prevSlide}
+                   className="w-11 h-11 rounded-full border border-jotofa-navy/15 dark:border-white/15 flex items-center justify-center text-jotofa-navy/60 dark:text-white/60 hover:text-jotofa-navy dark:hover:text-white hover:border-jotofa-navy/40 dark:hover:border-white/40 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                   aria-label="Previous slide"
+                 >
+                   <ChevronLeft className="w-5 h-5" />
+                 </button>
+                 <button
+                   onClick={nextSlide}
+                   className="w-11 h-11 rounded-full border border-jotofa-navy/15 dark:border-white/15 flex items-center justify-center text-jotofa-navy/60 dark:text-white/60 hover:text-jotofa-navy dark:hover:text-white hover:border-jotofa-navy/40 dark:hover:border-white/40 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                   aria-label="Next slide"
+                 >
+                   <ChevronRight className="w-5 h-5" />
+                 </button>
               </div>
             </div>
           </div>

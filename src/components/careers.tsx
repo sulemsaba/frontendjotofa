@@ -656,7 +656,7 @@ export function Careers() {
                 setShowCompanyDropdown(false);
                 setShowSearchCategory(false);
               }}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-input bg-background text-sm text-foreground hover:border-jotofa-navy/30 transition-colors"
+               className="flex items-center gap-2 px-4 py-2.5 rounded-full border border-input bg-background text-sm text-foreground hover:border-jotofa-navy/30 transition-colors min-h-[44px]"
             >
               <Briefcase className="w-3.5 h-3.5 text-muted-foreground" />
               <span className="truncate max-w-[140px]">
@@ -697,7 +697,7 @@ export function Careers() {
                 setShowCategoryDropdown(false);
                 setShowSearchCategory(false);
               }}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-input bg-background text-sm text-foreground hover:border-jotofa-navy/30 transition-colors"
+               className="flex items-center gap-2 px-4 py-2.5 rounded-full border border-input bg-background text-sm text-foreground hover:border-jotofa-navy/30 transition-colors min-h-[44px]"
             >
               <Globe className="w-3.5 h-3.5 text-muted-foreground" />
               <span className="truncate max-w-[140px]">
@@ -1252,18 +1252,18 @@ export function Careers() {
                   onClick={() =>
                     setCurrentPage((p) => Math.max(1, p - 1))
                   }
-                  disabled={currentPage === 1}
-                  className="p-2 rounded-lg hover:bg-secondary dark:hover:bg-jotofa-navy/50 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-                  aria-label="Previous page"
-                >
-                  <ChevronLeft className="w-4 h-4 text-foreground" />
-                </button>
+                   disabled={currentPage === 1}
+                   className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg hover:bg-secondary dark:hover:bg-jotofa-navy/50 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                   aria-label="Previous page"
+                 >
+                   <ChevronLeft className="w-4 h-4 text-foreground" />
+                 </button>
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map(
                   (page) => (
                     <button
                       key={page}
                       onClick={() => setCurrentPage(page)}
-                      className={`w-8 h-8 text-sm font-medium rounded-lg transition-colors ${
+                       className={`w-11 h-11 text-sm font-medium rounded-lg transition-colors ${
                         currentPage === page
                           ? "bg-jotofa-navy text-white"
                           : "text-foreground hover:bg-secondary dark:hover:bg-jotofa-navy/50"
@@ -1277,12 +1277,12 @@ export function Careers() {
                   onClick={() =>
                     setCurrentPage((p) => Math.min(totalPages, p + 1))
                   }
-                  disabled={currentPage === totalPages}
-                  className="p-2 rounded-lg hover:bg-secondary dark:hover:bg-jotofa-navy/50 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-                  aria-label="Next page"
-                >
-                  <ChevronRight className="w-4 h-4 text-foreground" />
-                </button>
+                   disabled={currentPage === totalPages}
+                   className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg hover:bg-secondary dark:hover:bg-jotofa-navy/50 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                   aria-label="Next page"
+                 >
+                   <ChevronRight className="w-4 h-4 text-foreground" />
+                 </button>
               </div>
             </div>
           </div>

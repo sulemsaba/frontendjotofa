@@ -546,7 +546,7 @@ function SplitSection({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      className="relative flex flex-col lg:flex-row min-h-[52vh] lg:min-h-[68vh] border-b border-border"
+      className="relative flex flex-col lg:flex-row min-h-[40vh] lg:min-h-[60vh] border-b border-border"
     >
       {/* ─── Image / Visual Side ─── */}
       <div
