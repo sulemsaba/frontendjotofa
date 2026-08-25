@@ -81,8 +81,9 @@
 :root {
   --radius: 0.625rem;
 
-  /* Backgrounds */
-  --background: #e8e6e1;
+  /* Backgrounds - brand palette is White (not the old warm beige). Page uses a
+     whisper-cool near-white so pure-white cards still read as elevated. */
+  --background: #F7F9FB;
   --foreground: #003B64;
   --card: #FFFFFF;
   --card-foreground: #003B64;
