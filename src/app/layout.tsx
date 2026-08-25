@@ -8,6 +8,7 @@ import { RouteProgress } from "@/components/route-progress";
 import { JsonLd } from "@/components/json-ld";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { FloatingActions } from "@/components/floating-actions";
 
 // Inter carries body, subheadings, labels, and navigation.
 const inter = localFont({
@@ -94,7 +95,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${inter.variable} ${interTight.variable} antialiased bg-background text-foreground`}
       >
@@ -122,6 +123,7 @@ export default function RootLayout({
             </main>
             <Footer />
             <Toaster />
+            <FloatingActions />
           </PageProvider>
         </ThemeProvider>
 

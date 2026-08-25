@@ -201,9 +201,10 @@
   body {
     @apply bg-background text-foreground;
   }
-  html {
-    scroll-behavior: smooth;
-  }
+  /* NOTE: no global `scroll-behavior: smooth` on <html>. It makes Next.js'
+     scroll-to-top on every route change ANIMATE (the weird "fast scroll" on
+     nav clicks). Intentional smooth scrolls use JS scrollTo({behavior:"smooth"})
+     where needed (back-to-top button, in-section steppers). */
   /* Display voice: headlines run Inter Tight with tight tracking.
      Body, labels, and navigation stay on Inter (the default sans). */
   h1, h2, h3 {
