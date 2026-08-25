@@ -110,7 +110,7 @@ export default function RootLayout({
         {/* Skip-to-content link - first focusable element for keyboard users (WCAG 2.4.1) */}
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-jotofa-accent focus:text-white focus:shadow-lg focus:outline-none"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-jotofa-accent focus:text-jotofa-navy focus:shadow-lg focus:outline-none"
         >
           Skip to content
         </a>

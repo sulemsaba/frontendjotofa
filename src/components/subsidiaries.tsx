@@ -509,7 +509,7 @@ export function SubsidiaryShowcase({
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
               <PageLink
                 page={explorePage}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-jotofa-navy hover:bg-jotofa-navy-deep dark:bg-jotofa-accent dark:hover:bg-jotofa-accent-dark text-white rounded-full font-semibold text-sm transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-card"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-jotofa-navy hover:bg-jotofa-navy-deep dark:bg-jotofa-accent dark:hover:bg-jotofa-accent-dark text-white dark:text-jotofa-navy rounded-full font-semibold text-sm transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-card"
               >
                 Get a Quote
                 <ArrowRight className="w-4 h-4" />
@@ -665,7 +665,7 @@ function SplitSection({
           <div className="flex flex-wrap items-center gap-3">
             <PageLink
               page={subsidiary.id}
-              className="group/btn inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-jotofa-navy dark:bg-jotofa-accent text-white text-sm font-semibold transition-all hover:bg-jotofa-navy-deep dark:hover:bg-jotofa-accent-dark cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="group/btn inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-jotofa-navy dark:bg-jotofa-accent text-white dark:text-jotofa-navy text-sm font-semibold transition-all hover:bg-jotofa-navy-deep dark:hover:bg-jotofa-accent-dark cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               Explore Entity
               <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5" />

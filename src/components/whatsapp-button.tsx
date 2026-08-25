@@ -15,36 +15,18 @@ export function WhatsAppButton() {
   const [showTooltip, setShowTooltip] = useState(false);
 
   return (
-    <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-2">
-      {/* Tooltip */}
-      <AnimatePresence>
-        {showTooltip && (
-          <motion.div
-            initial={{ opacity: 0, y: 8, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 8, scale: 0.9 }}
-            transition={{ duration: 0.2 }}
-            className="px-4 py-2 rounded-lg bg-white dark:bg-jotofa-navy-card shadow-lg border border-border text-sm text-foreground font-medium"
-          >
-            Chat with us on WhatsApp
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Button */}
-      <motion.a
-        href="https://wa.me/255794974996"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Chat on WhatsApp"
-        onMouseEnter={() => setShowTooltip(true)}
-        onMouseLeave={() => setShowTooltip(false)}
-        className="flex items-center justify-center w-12 h-12 rounded-full bg-jotofa-accent hover:bg-jotofa-accent-dark shadow-lg hover:shadow-xl transition-all duration-200"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        <WhatsAppIcon className="w-6 h-6 text-white" />
-      </motion.a>
-    </div>
+    <motion.a
+      href="https://wa.me/255794974996"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Chat on WhatsApp"
+      onMouseEnter={() => setShowTooltip(true)}
+      onMouseLeave={() => setShowTooltip(false)}
+      className="flex items-center justify-center w-12 h-12 rounded-full bg-jotofa-accent hover:bg-jotofa-accent-dark shadow-lg hover:shadow-xl transition-all duration-200"
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+    >
+      <WhatsAppIcon className="w-6 h-6 text-white" />
+    </motion.a>
   );
 }

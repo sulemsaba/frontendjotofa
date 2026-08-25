@@ -413,7 +413,7 @@ function ContactCTA() {
         </p>
         <PageLink
           page="contact"
-          className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-jotofa-accent text-white font-semibold text-sm hover:bg-jotofa-accent-dark transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2"
+          className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-jotofa-accent text-jotofa-navy font-semibold text-sm hover:bg-jotofa-accent-dark transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2"
         >
           Contact JOTOFA Group
           <ArrowRight className="w-4 h-4" />

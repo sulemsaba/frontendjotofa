@@ -28,7 +28,7 @@ export default function GlobalError({
           </p>
           <button
             onClick={reset}
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-jotofa-accent text-white rounded-full font-semibold text-sm transition-all hover:shadow-lg"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-jotofa-accent text-jotofa-navy rounded-full font-semibold text-sm transition-all hover:shadow-lg"
           >
             Try again
           </button>

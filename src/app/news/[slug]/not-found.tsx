@@ -11,7 +11,7 @@ export default function NewsArticleNotFound() {
         </p>
         <Link
           href="/news"
-          className="inline-block px-6 py-2.5 bg-jotofa-accent text-white font-semibold rounded-full hover:bg-jotofa-accent-dark transition-all"
+          className="inline-block px-6 py-2.5 bg-jotofa-accent text-jotofa-navy font-semibold rounded-full hover:bg-jotofa-accent-dark transition-all"
         >
           Back to News
         </Link>

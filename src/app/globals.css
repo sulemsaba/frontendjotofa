@@ -46,33 +46,29 @@
 
   /* ════════════════════════════════════════════════════════════
      JOTOFA BRAND TOKENS  -  per JOTOFA Visual Identity Guidelines
-     Main colours (guide p.23):
-       • JOTOFA Blue  #003B64  (RGB 0, 59, 100)
-       • Jet Black    #000000
-     Complementary colours (guide p.23):
-       • Teal         #00A9B7  (RGB 0, 169, 183)
-       • Lavender     #D9B3CE  (RGB 217, 179, 206)
-       • Lime Green   #8ED644  (RGB 142, 214, 68)
-       • Red          #E73323  (RGB 231, 51, 35)
-       • Burgundy     #8B1B5E  (RGB 139, 27, 94)
-       • Light Blue   #6ED2EC  (RGB 110, 210, 236)
-       • Gray         #CCD1D1  (RGB 204, 209, 209)
-       • Pink         #FF4D7D  (RGB 255, 77, 125)
+     The official brand set is: BLUE, YELLOW and WHITE (+ black).
+       • JOTOFA Blue   #003B64  (RGB 0, 59, 100)   - primary
+       • JOTOFA Yellow #FDC502  (RGB 253, 197, 2)  - accent / highlight
+       • Jet Black     #000000                     - logo / body text
+       • White         #FFFFFF                      - backgrounds
+     NOTE: the earlier "teal" accent was NOT a brand colour - it came from the
+     publication-category codes (guide p.26, report side-bands), not the brand
+     palette. The brand accent is yellow. Yellow always carries DARK (navy/
+     black) text on it, never white.
      ════════════════════════════════════════════════════════════ */
 
-   /* Primary - JOTOFA Blue (text, brand, strong elements) */
+   /* Primary - JOTOFA Blue (text, brand, strong elements, links, buttons) */
    --color-jotofa-navy: #003B64;
    --color-jotofa-navy-deep: #002A4A;
    --color-jotofa-navy-mid: #00355A;
    --color-jotofa-navy-card: #0A4A75;
    --color-jotofa-navy-sidebar: #00253F;
 
-   /* Accent - Teal (design accent, CTAs, links, highlights).
-      Three-color rule: navy (primary) + teal (accent) + neutrals.
-      -light/-dark are shades of the same teal, not extra colors. */
-   --color-jotofa-accent: #00A9B7;
-   --color-jotofa-accent-light: #33BAC6;
-   --color-jotofa-accent-dark: #008799;
+   /* Accent - JOTOFA Yellow (highlights, badges, active bars, fills).
+      -light/-dark are shades of the same yellow, not extra colors. */
+   --color-jotofa-accent: #FDC502;
+   --color-jotofa-accent-light: #FFD84D;
+   --color-jotofa-accent-dark: #D9A800;
 
    /* Text hierarchy (neutrals) */
    --color-jotofa-text-secondary: #5E6A75;
@@ -106,9 +102,9 @@
   --muted: #F2F7FA;
   --muted-foreground: #5E6A75;
 
-  /* Accent = Teal (highlights, CTAs, links) */
-  --accent: #00A9B7;
-  --accent-foreground: #FFFFFF;
+  /* Accent = JOTOFA Yellow (highlights, badges) - dark text on it */
+  --accent: #FDC502;
+  --accent-foreground: #003B64;
 
   /* Destructive */
   --destructive: oklch(0.577 0.245 27.325);
@@ -116,24 +112,24 @@
   /* UI */
   --border: rgba(0, 59, 100, 0.08);
   --input: rgba(0, 59, 100, 0.12);
-  --ring: #00A9B7;
+  --ring: #FDC502;
 
-  /* Charts */
-  --chart-1: #00A9B7;
-  --chart-2: #00A9B7;
-  --chart-3: #00A9B7;
-  --chart-4: #00A9B7;
-  --chart-5: #00A9B7;
+  /* Charts - brand blue + yellow set */
+  --chart-1: #003B64;
+  --chart-2: #FDC502;
+  --chart-3: #0A4A75;
+  --chart-4: #D9A800;
+  --chart-5: #6E8493;
 
   /* Sidebar */
   --sidebar: #003B64;
   --sidebar-foreground: #FFFFFF;
-  --sidebar-primary: #00A9B7;
+  --sidebar-primary: #FDC502;
   --sidebar-primary-foreground: #003B64;
   --sidebar-accent: #0A4A75;
   --sidebar-accent-foreground: #FFFFFF;
   --sidebar-border: rgba(255, 255, 255, 0.08);
-  --sidebar-ring: #00A9B7;
+  --sidebar-ring: #FDC502;
 }
 
 /* ═══════════════════════════════════════════
@@ -162,7 +158,7 @@
   --muted-foreground: #C7D1DA;
 
   /* Accent = Teal */
-  --accent: #00A9B7;
+  --accent: #FDC502;
   --accent-foreground: #00253F;
 
   /* Destructive */
@@ -171,24 +167,24 @@
   /* UI */
   --border: rgba(255, 255, 255, 0.08);
   --input: rgba(255, 255, 255, 0.12);
-  --ring: #00A9B7;
+  --ring: #FDC502;
 
   /* Charts */
-  --chart-1: #00A9B7;
-  --chart-2: #00A9B7;
-  --chart-3: #00A9B7;
-  --chart-4: #00A9B7;
-  --chart-5: #00A9B7;
+  --chart-1: #FDC502;
+  --chart-2: #FDC502;
+  --chart-3: #FDC502;
+  --chart-4: #FDC502;
+  --chart-5: #FDC502;
 
   /* Sidebar */
   --sidebar: #00253F;
   --sidebar-foreground: #FFFFFF;
-  --sidebar-primary: #00A9B7;
+  --sidebar-primary: #FDC502;
   --sidebar-primary-foreground: #00253F;
   --sidebar-accent: #0A4A75;
   --sidebar-accent-foreground: #FFFFFF;
   --sidebar-border: rgba(255, 255, 255, 0.08);
-  --sidebar-ring: #00A9B7;
+  --sidebar-ring: #FDC502;
 }
 
 /* ═══════════════════════════════════════════
@@ -861,7 +857,7 @@
 }
 
 .dark .contact-card-icon {
-  background: #00A9B7;
+  background: #FDC502;
   color: #00253F;
 }
 
@@ -874,7 +870,7 @@
 }
 
 .dark .contact-card-value:hover {
-  color: #00A9B7;
+  color: #FDC502;
 }
 
 .dark .contact-card-divider {
@@ -897,7 +893,7 @@
 .dark .contact-form input:focus,
 .dark .contact-form select:focus,
 .dark .contact-form textarea:focus {
-  border-bottom-color: #00A9B7;
+  border-bottom-color: #FDC502;
 }
 
 .dark .contact-form select {
@@ -905,12 +901,12 @@
 }
 
 .dark .submit-btn {
-  background-color: #00A9B7;
+  background-color: #FDC502;
   color: #00253F;
 }
 
 .dark .submit-btn:hover {
-  background-color: #008799;
+  background-color: #D9A800;
 }
 
 .dark .section-label,
@@ -926,9 +922,9 @@
 }
 
 .dark .checkbox-group a {
-  color: #00A9B7;
+  color: #FDC502;
 }
 
 .dark .checkbox-group input[type="checkbox"] {
-  accent-color: #00A9B7;
+  accent-color: #FDC502;
 }

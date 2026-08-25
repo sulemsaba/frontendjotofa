@@ -67,7 +67,7 @@ function ProductCard({ product, index }: { product: FeaturedProduct; index: numb
 
           {/* Discount badge */}
           {product.hasDiscount && product.originPrice && product.discountPrice && (
-              <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-jotofa-accent text-white">
+              <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-jotofa-accent text-jotofa-navy">
               -
               {Math.round(
                 (1 - product.discountPrice / product.originPrice) * 100
@@ -224,7 +224,7 @@ export function UtecFeaturedProducts() {
               href={storeProductsPageUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-7 py-3 bg-jotofa-accent hover:bg-jotofa-accent/90 text-white font-semibold rounded-full transition-all"
+              className="inline-flex items-center gap-2 px-7 py-3 bg-jotofa-accent hover:bg-jotofa-accent/90 text-jotofa-navy font-semibold rounded-full transition-all"
             >
               Browse All Products <ArrowRight className="w-4 h-4" />
             </a>

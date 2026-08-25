@@ -6,10 +6,6 @@ import {
   ArrowRight,
   ShoppingBag,
   ExternalLink,
-  Briefcase,
-  Wrench,
-  FileText,
-  Settings2,
   CheckCircle2,
 } from "lucide-react";
 import { ScrollReveal } from "../scroll-reveal";
@@ -19,6 +15,7 @@ import { PageLink } from "@/lib/page-context";
 import { UtecProductSpotlight } from "../utec-product-spotlight";
 import { UtecProductRepeater } from "../utec-product-repeater";
 import { UtecServices } from "../utec-services";
+import { MediaMultiCol } from "../media-multi-col";
 import { storeProductsPageUrl } from "@/lib/store-config";
 
 const stats = [
@@ -132,7 +129,7 @@ export function UTECPage() {
                 href={storeProductsPageUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-7 py-3.5 bg-jotofa-accent hover:bg-jotofa-accent-dark text-white font-semibold rounded-full transition-all"
+                className="inline-flex items-center gap-2 px-7 py-3.5 bg-jotofa-accent hover:bg-jotofa-accent-dark text-jotofa-navy font-semibold rounded-full transition-all"
               >
                 <ShoppingBag className="w-4 h-4" />
                 Shop Our Products
@@ -149,63 +146,28 @@ export function UTECPage() {
         </div>
       </section>
 
-      {/* Why Choose Us */}
-      <section className="py-16 sm:py-20 bg-background">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start">
-            {/* Left */}
-            <div className="w-full lg:w-[28%] flex-shrink-0">
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground uppercase tracking-wide">
-                Why Choose Us
-              </h2>
-              <span className="block w-10 h-0.5 bg-jotofa-accent mt-3 mb-6" />
-              <p className="text-base text-muted-foreground leading-relaxed max-w-sm">
-                At UTEC Solutions, we are more than just a service provider. We are your strategic partner, working hand in hand to drive your success through innovation.
-              </p>
-            </div>
-
-            {/* Right */}
-            <div className="flex-1 border-l-2 border-jotofa-accent/80 pl-8 sm:pl-10">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 sm:gap-12">
-                {[
-                  {
-                    icon: Briefcase,
-                    title: "Expertise",
-                    description:
-                      "Our seasoned professionals bring deep industry knowledge and technical prowess to every project.",
-                  },
-                  {
-                    icon: Wrench,
-                    title: "Customization",
-                    description:
-                      "We understand that every business has unique needs. Our solutions are tailored to your requirements, ensuring optimal outcomes.",
-                  },
-                  {
-                    icon: FileText,
-                    title: "Reliability",
-                    description:
-                      "We are dedicated to delivering products and services that you can rely on, day in and day out.",
-                  },
-                  {
-                    icon: Settings2,
-                    title: "Innovation",
-                    description:
-                      "Staying ahead of the curve is vital. We constantly explore emerging technologies to offer you the latest advancements in communication, security, IT, and energy solutions.",
-                  },
-                ].map((item) => (
-                  <div key={item.title} className="flex flex-col gap-2">
-                    <item.icon className="w-7 h-7 text-jotofa-accent" />
-                    <h3 className="text-lg font-bold text-jotofa-accent">{item.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {item.description}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Why UTEC — media + multi-column content */}
+      <MediaMultiCol
+        image="/images/subsidiaries/utec.jpg"
+        imageAlt="UTEC Solutions team at work"
+        heading="Connectivity that keeps your operations running."
+        col1={
+          <>
+            We deploy two-way radio networks, integrated security systems, and IT
+            infrastructure built for the Tanzanian operating environment. Designed,
+            installed, and maintained by a team that shows up.
+          </>
+        }
+        col2={
+          <>
+            Commercial, industrial, and institutional clients across every region
+            rely on us for communication, safety, and power. Reliable today,
+            connected tomorrow.
+          </>
+        }
+        ctaLabel="Learn more about us"
+        ctaHref="/about"
+      />
 
       {/* Mission / Vision / Core Values */}
       <section className="py-16 sm:py-20 bg-background">
@@ -315,7 +277,7 @@ export function UTECPage() {
               <label htmlFor="utec-message" className="block mb-1.5 text-sm font-semibold text-gray-700">Message</label>
               <textarea id="utec-message" placeholder="Tell us about your telecom needs..." rows={4} className="w-full mb-5 px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-jotofa-accent/40 focus:border-jotofa-accent resize-vertical"></textarea>
 
-              <button type="submit" className="w-full py-3 bg-jotofa-accent hover:bg-jotofa-accent-dark text-white font-semibold rounded transition-colors">
+              <button type="submit" className="w-full py-3 bg-jotofa-accent hover:bg-jotofa-accent-dark text-jotofa-navy font-semibold rounded transition-colors">
                 Send Request
               </button>
               </form>

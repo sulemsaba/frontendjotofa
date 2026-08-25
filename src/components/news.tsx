@@ -389,7 +389,7 @@ export function News() {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <PageLink
                   page="contact"
-                  className="px-8 py-3.5 bg-jotofa-accent hover:bg-jotofa-accent-dark text-white font-semibold rounded-full transition-all"
+                  className="px-8 py-3.5 bg-jotofa-accent hover:bg-jotofa-accent-dark text-jotofa-navy font-semibold rounded-full transition-all"
                 >
                   Subscribe to Updates
                 </PageLink>

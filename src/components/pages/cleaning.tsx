@@ -115,7 +115,7 @@ export function CleaningPage() {
               </p>
               <PageLink
                 page="contact"
-                className="inline-flex items-center gap-2 px-8 py-3.5 bg-jotofa-accent hover:bg-jotofa-accent/90 text-white font-semibold rounded-full transition-all"
+                className="inline-flex items-center gap-2 px-8 py-3.5 bg-jotofa-accent hover:bg-jotofa-accent/90 text-jotofa-navy font-semibold rounded-full transition-all"
               >
                 Contact Us <ArrowRight className="w-4 h-4" />
               </PageLink>

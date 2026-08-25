@@ -245,7 +245,7 @@ function ExploreLink({ page, name }: { page: PageId; name: string }) {
       page={page}
       className="inline-flex items-center gap-2 text-sm font-semibold text-jotofa-navy dark:text-white group/exp cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent rounded-sm"
     >
-      <span className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-jotofa-navy/25 dark:border-white/30 transition-colors group-hover/exp:bg-jotofa-accent group-hover/exp:border-jotofa-accent group-hover/exp:text-white">
+      <span className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-jotofa-navy/25 dark:border-white/30 transition-colors group-hover/exp:bg-jotofa-accent group-hover/exp:border-jotofa-accent group-hover/exp:text-jotofa-navy">
         <ArrowRight className="w-4 h-4" />
       </span>
       Explore {name}
@@ -364,7 +364,7 @@ function MobileOfferings({
               aria-current={active === i ? "true" : undefined}
               className={`shrink-0 rounded-full px-3 py-1.5 text-[12px] font-medium whitespace-nowrap transition-colors ${
                 active === i
-                  ? "bg-jotofa-accent text-white"
+                  ? "bg-jotofa-accent text-jotofa-navy"
                   : "bg-jotofa-navy/[0.05] dark:bg-white/[0.06] text-jotofa-navy/70 dark:text-white/70"
               }`}
             >
