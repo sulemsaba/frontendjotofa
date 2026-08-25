@@ -6,7 +6,7 @@ import { BackToTopButton } from "@/components/back-to-top-button";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Learn about JOTOFA GROUP - our mission, vision, leadership, and the story behind Tanzania's premier diversified holding company with five industry-leading subsidiaries.",
+    "Learn about JOTOFA GROUP - our mission, vision, leadership, and the story behind Tanzania's premier diversified holding company with three industry-leading subsidiaries.",
   openGraph: {
     title: "About JOTOFA GROUP",
     description:

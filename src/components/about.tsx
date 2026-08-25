@@ -65,13 +65,13 @@ const timeline: Milestone[] = [
     year: "2019",
     title: "The Ecosystem Grows",
     description:
-      "Introduced Courier & Logistics and Cleaning & Maids, creating a comprehensive network under one trusted group.",
+      "Introduced Cleaning & Maids, adding professional facility services to the group's trusted network.",
   },
   {
     year: "2021",
     title: "Staffing & Labour",
     description:
-      "Completed our four-pillar ecosystem by connecting skilled talent with opportunity across Tanzania.",
+      "Completed our three-pillar ecosystem by connecting skilled talent with opportunity across Tanzania.",
   },
   {
     year: "2024",
@@ -91,7 +91,7 @@ const values: Value[] = [
   { icon: Handshake, title: "Integrity", description: "Honesty and transparency in every interaction" },
   { icon: Lightbulb, title: "Innovation", description: "Cutting-edge technology solving real problems" },
   { icon: Star, title: "Excellence", description: "Highest standards in everything we do" },
-  { icon: Link2, title: "Unity", description: "Four arms, one unified vision" },
+  { icon: Link2, title: "Unity", description: "Three arms, one unified vision" },
   { icon: Globe, title: "Impact", description: "Empowering communities across East Africa" },
 ];
 
@@ -125,13 +125,20 @@ const ecosystem: EcoSubsidiary[] = [
   },
 ];
 
+/* Compact hero strip - the three arms with a short sector tag. */
+const arms: { number: string; name: string; sector: string }[] = [
+  { number: "01", name: "UTEC Solutions", sector: "ICT & Telecommunications" },
+  { number: "02", name: "Cleaning & Maids", sector: "Facility & Cleaning" },
+  { number: "03", name: "Staffing & Labour", sector: "Workforce Solutions" },
+];
+
 interface Stat {
   number: string;
   label: string;
 }
 
 const stats: Stat[] = [
-  { number: "4", label: "Specialized Sectors" },
+  { number: "3", label: "Specialized Sectors" },
   { number: "500+", label: "Dedicated Employees" },
   { number: "10k+", label: "Clients Served" },
   { number: "24/7", label: "Operational Support" },
@@ -142,48 +149,57 @@ const stats: Stat[] = [
 
 function AboutHero() {
   return (
-    <section className="border-b border-border section-py">
-      <div className="container-wide">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-10 lg:gap-20 items-center">
-          <ScrollReveal>
-            <SectionEyebrow label="About JOTOFA Group" />
-            <h1 className="h1 text-foreground mb-6 sm:mb-8">
-              Four Arms.
-              <br />
-              One Unified Vision.
-            </h1>
-            <p className="lead max-w-[540px] mb-9 sm:mb-10">
-              A diversified Tanzanian holding company driving excellence through
-              ICT, logistics, professional services, and staffing -
-              empowering communities and industries across East Africa.
-            </p>
-            <div className="flex flex-wrap items-center gap-3">
-              <PageLink
-                page="contact"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-jotofa-navy dark:bg-jotofa-accent text-white dark:text-jotofa-navy font-semibold transition-all hover:-translate-y-0.5 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/30 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-              >
-                Work with us <ArrowRight className="w-4 h-4" />
-              </PageLink>
-              <PageLink
-                page="strategy"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-foreground/20 text-foreground hover:bg-foreground/5 font-semibold transition-all cursor-pointer"
-              >
-                Our strategy
-              </PageLink>
-            </div>
-          </ScrollReveal>
+    <section className="relative border-b border-border">
+      <div className="container-wide pt-8 sm:pt-12 lg:pt-16 pb-14 sm:pb-20 lg:pb-24">
+        <ScrollReveal className="max-w-4xl">
+          <SectionEyebrow label="About JOTOFA Group" />
+          <h1 className="h-display text-foreground mb-6 sm:mb-8">
+            Three specialized arms.
+            <br className="hidden sm:block" />{" "}
+            <span className="text-muted-foreground">One unified standard.</span>
+          </h1>
+          <p className="lead max-w-2xl mb-9 sm:mb-10">
+            JOTOFA Group is a diversified Tanzanian holding company delivering
+            excellence through ICT &amp; telecommunications, professional
+            cleaning, and staffing - serving businesses and communities under
+            one trusted standard of quality.
+          </p>
+          <div className="flex flex-wrap items-center gap-3">
+            <PageLink
+              page="contact"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-jotofa-navy dark:bg-jotofa-accent text-white dark:text-jotofa-navy font-semibold transition-all hover:-translate-y-0.5 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/30 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              Work with us <ArrowRight className="w-4 h-4" />
+            </PageLink>
+            <PageLink
+              page="strategy"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-foreground/20 text-foreground hover:bg-foreground/5 font-semibold transition-all cursor-pointer"
+            >
+              Our strategy
+            </PageLink>
+          </div>
+        </ScrollReveal>
 
-          <ScrollReveal delay={0.1} className={`${imageCard} aspect-[4/5]`}>
-            <Image
-              src="/images/jotofa-hero-1.jpeg"
-              alt="JOTOFA Group headquarters"
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 45vw"
-              className="object-cover"
-            />
-          </ScrollReveal>
-        </div>
+        {/* The three arms as a minimal typographic strip - replaces the old
+            hero photo, keeps the top clean and confident. */}
+        <ScrollReveal
+          delay={0.1}
+          className="mt-14 sm:mt-16 lg:mt-20 pt-8 sm:pt-10 border-t border-border grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-6"
+        >
+          {arms.map((arm) => (
+            <div key={arm.number} className="flex items-baseline gap-3">
+              <span className="text-sm font-semibold text-muted-foreground/60 tabular-nums pt-0.5">
+                {arm.number}
+              </span>
+              <div>
+                <div className="text-lg font-semibold text-foreground leading-tight">
+                  {arm.name}
+                </div>
+                <div className="body-sm mt-0.5">{arm.sector}</div>
+              </div>
+            </div>
+          ))}
+        </ScrollReveal>
       </div>
     </section>
   );
@@ -200,7 +216,7 @@ function Story() {
           </h2>
           <p className="lead">
             What began as a vision to deliver integrated business solutions in
-            Tanzania has evolved into a regional powerhouse through four
+            Tanzania has evolved into a regional powerhouse through three
             specialized subsidiaries.
           </p>
         </ScrollReveal>
@@ -242,7 +258,7 @@ function Purpose() {
               <p className="body-sm">
                 To empower businesses and communities across East Africa by
                 delivering specialized, high-quality solutions in technology,
-                logistics, facility management, and human capital.
+                facility management, and human capital.
               </p>
             </div>
 
@@ -250,7 +266,7 @@ function Purpose() {
               <h3 className="h4 text-foreground mb-2">Our Vision</h3>
               <p className="body-sm">
                 To be East Africa&apos;s most trusted and integrated holding
-                company, recognized for uniting four specialized arms under one
+                company, recognized for uniting three specialized arms under one
                 commitment to quality, innovation, and impact.
               </p>
             </div>
@@ -296,7 +312,7 @@ function Ecosystem() {
         <ScrollReveal className="max-w-[640px] mb-10 sm:mb-12 lg:mb-16">
           <SectionEyebrow label="Our Companies" />
           <h2 className="h2 text-foreground mb-5 sm:mb-6">
-            Four Arms, One Vision
+            Three Arms, One Vision
           </h2>
           <p className="lead">
             Each subsidiary is a pillar of our group - specialized, yet united
@@ -373,9 +389,9 @@ function CTA() {
             Ready to Partner with East Africa&apos;s Unified Powerhouse?
           </h2>
           <p className="lead mb-8 sm:mb-10 max-w-[600px] mx-auto">
-            Whether you need ICT solutions, logistics support, facility
-            management, or workforce solutions - JOTOFA Group delivers
-            excellence under one trusted roof.
+            Whether you need ICT &amp; telecommunications, professional cleaning,
+            or staffing solutions - JOTOFA Group delivers excellence under one
+            trusted roof.
           </p>
           <PageLink
             page="contact"

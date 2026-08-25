@@ -756,17 +756,17 @@ export function Careers() {
           ═══════════════════════════════════════ */}
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 mt-6 mb-20 sm:mb-12">
         {isLoading ? (
-           <div className="bg-card rounded-2xl border border-border p-10 sm:p-16 text-center">
-             <div className="mx-auto mb-5 h-10 w-10 rounded-full border-4 border-jotofa-navy/20 border-t-jotofa-navy animate-spin" />
-            <h3 className="text-xl font-bold text-foreground mb-2">
-              Loading open positions
-            </h3>
+           <div className="bg-card rounded-2xl border border-border p-8 sm:p-16 text-center">
+            <div className="mx-auto mb-5 h-10 w-10 rounded-full border-4 border-jotofa-navy/20 border-t-jotofa-navy animate-spin" />
+             <h3 className="text-xl font-bold text-foreground mb-2">
+               Loading open positions
+             </h3>
             <p className="text-sm text-muted-foreground">
               Fetching the latest career opportunities from the backend.
             </p>
           </div>
         ) : loadError ? (
-           <div className="bg-card rounded-2xl border border-red-200 dark:border-red-900/50 p-10 sm:p-16 text-center">
+           <div className="bg-card rounded-2xl border border-red-200 dark:border-red-900/50 p-8 sm:p-16 text-center">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-50 dark:bg-red-900/20 mb-5">
               <AlertTriangle className="w-8 h-8 text-red-600 dark:text-red-400" />
             </div>
@@ -946,14 +946,14 @@ export function Careers() {
                     {/* ─── Preview Mode (first click) ─── */}
                     {isPreview && !isFullExpanded && (
                       <div className="border-t border-border">
-                        <div className="px-5 sm:px-6 py-4">
+                        <div className="px-4 sm:px-6 py-4">
                           {/* Description - truncated to 2 lines */}
                           <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2 mb-4">
                             {job.description}
                           </p>
 
                           {/* Key metadata */}
-                          <div className="flex flex-wrap items-center gap-3 mb-4 text-sm">
+                          <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 mb-4 text-sm">
                             <span className="inline-flex items-center gap-1.5 text-muted-foreground">
                               <MapPin className="w-3.5 h-3.5" />
                               {job.location}
@@ -1023,7 +1023,7 @@ export function Careers() {
                     {/* ─── Full Details Mode (click "See More") ─── */}
                     {isFullExpanded && (
                       <div className="border-t border-border">
-                        <div className="px-5 sm:px-6 py-5">
+                        <div className="px-4 sm:px-6 py-5">
                           {/* Remote/Hybrid info banner */}
                           {job.remote && (
                             <div className="flex items-start gap-3 mb-5 px-4 py-3 rounded-lg bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800/50">
@@ -1309,15 +1309,15 @@ export function Careers() {
           /* ═══════════════════════════════════════
              EMPTY STATE
              ═══════════════════════════════════════ */
-          <div className="bg-card rounded-2xl border border-border p-10 sm:p-16 text-center">
-             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-secondary dark:bg-jotofa-navy mb-5">
-               <Briefcase className="w-8 h-8 text-muted-foreground" />
+           <div className="bg-card rounded-2xl border border-border p-8 sm:p-16 text-center">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-secondary dark:bg-jotofa-navy mb-5">
+              <Briefcase className="w-8 h-8 text-muted-foreground" />
             </div>
             <h3 className="text-xl font-bold text-foreground mb-2">
               No positions found
             </h3>
             <p className="text-sm text-muted-foreground max-w-md mx-auto mb-6 leading-relaxed">
-              We couldn&apos;t find any positions matching your criteria. Try
+              We couldn't find any positions matching your criteria. Try
               adjusting your filters or search terms.
             </p>
             <button
@@ -1327,7 +1327,7 @@ export function Careers() {
                 setKeyword("");
                 handleTabChange("all");
               }}
-              className="px-6 py-2.5 text-sm font-semibold rounded-full bg-jotofa-navy text-white hover:bg-jotofa-navy-mid transition-colors"
+              className="px-6 py-3 text-sm font-semibold rounded-xl bg-jotofa-navy text-white hover:bg-jotofa-navy-mid transition-colors"
             >
               View All Positions
             </button>
@@ -1339,28 +1339,28 @@ export function Careers() {
           6. TALENT COMMUNITY SECTION
           ═══════════════════════════════════════ */}
       <div id="talent-community" className="scroll-mt-20 bg-jotofa-navy">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
-          <div className="grid md:grid-cols-2 gap-10 items-center">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
+          <div className="grid md:grid-cols-2 gap-8 sm:gap-10 items-center">
             <div>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight mb-4">
+              <h2 className="text-xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight mb-4">
                 Join Our Talent Community
               </h2>
               <p className="text-white/70 leading-relaxed mb-8 text-sm sm:text-base">
                 Stay connected with JOTOFA GROUP and be the first to know about
                 new opportunities across our five subsidiaries. Whether
-                you&apos;re an experienced professional or just starting your
+                you're an experienced professional or just starting your
                 career, we want to hear from you.
               </p>
               <PageLink
                 page="contact"
-                className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold rounded-full bg-white text-jotofa-navy hover:bg-white/90 transition-colors"
+                className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold rounded-xl bg-white text-jotofa-navy hover:bg-white/90 transition-colors"
               >
                 Join Now
                 <ArrowRight className="w-4 h-4" />
               </PageLink>
             </div>
 
-            <div className="relative rounded-2xl overflow-hidden aspect-[4/3]">
+            <div className="relative rounded-2xl overflow-hidden aspect-[16/10] sm:aspect-[4/3]">
               <Image
                 src="/images/jotofa-hero-3.jpeg"
                 alt="JOTOFA GROUP team"
