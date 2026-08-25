@@ -110,7 +110,7 @@ function ServiceBand({
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-8 max-w-lg">
               {service.highlights.map((h) => (
                 <li key={h} className="flex items-center gap-2.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-jotofa-accent shrink-0" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-foreground/30 shrink-0" />
                   <span className="text-sm text-foreground/80">{h}</span>
                 </li>
               ))}
@@ -119,7 +119,7 @@ function ServiceBand({
             <button
               type="button"
               onClick={() => setActivePage("contact")}
-              className="inline-flex items-center px-6 py-3 rounded-xl bg-jotofa-accent hover:bg-jotofa-accent-dark text-jotofa-navy text-sm font-semibold transition-all duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="inline-flex items-center px-6 py-3 rounded-xl border border-foreground/15 text-foreground hover:bg-foreground/5 hover:border-foreground/30 text-sm font-semibold transition-all duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/30 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               Talk to our team
             </button>
@@ -155,13 +155,13 @@ function ServiceBand({
 export function UtecServices() {
   return (
     <section className="relative w-full bg-background" aria-label="Our services">
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-jotofa-accent/30 to-transparent" />
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
 
       {/* Section header */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 lg:pt-24 pb-4">
         <ScrollReveal>
           <div className="flex items-center gap-3 mb-4">
-            <span className="inline-block w-8 h-px bg-jotofa-accent" />
+            <span className="inline-block w-8 h-px bg-foreground/30" />
             <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-muted-foreground">
               Our Services
             </span>

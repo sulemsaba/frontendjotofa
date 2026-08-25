@@ -135,14 +135,14 @@ export function MediaMultiCol({
                 <button
                   type="button"
                   onClick={ctaOnClick}
-                  className="inline-flex items-center px-6 py-3 rounded-xl bg-jotofa-accent hover:bg-jotofa-accent-dark text-jotofa-navy text-sm font-semibold transition-all duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  className="inline-flex items-center px-6 py-3 rounded-xl border border-foreground/15 text-foreground hover:bg-foreground/5 hover:border-foreground/30 text-sm font-semibold transition-all duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/30 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   {ctaLabel}
                 </button>
               ) : (
                 <a
                   href={ctaHref ?? "#"}
-                  className="inline-flex items-center px-6 py-3 rounded-xl bg-jotofa-accent hover:bg-jotofa-accent-dark text-jotofa-navy text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  className="inline-flex items-center px-6 py-3 rounded-xl border border-foreground/15 text-foreground hover:bg-foreground/5 hover:border-foreground/30 text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/30 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   {ctaLabel}
                 </a>

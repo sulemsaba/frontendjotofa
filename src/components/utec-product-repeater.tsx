@@ -39,18 +39,18 @@ const rowMeta: Record<
 > = {
   repeaters: {
     icon: RadioTower,
-    accent: "text-jotofa-accent",
-    soft: "bg-jotofa-accent/10",
+    accent: "text-foreground",
+    soft: "bg-foreground/[0.06]",
   },
   mobile: {
     icon: Truck,
-    accent: "text-jotofa-accent",
-    soft: "bg-jotofa-accent/10",
+    accent: "text-foreground",
+    soft: "bg-foreground/[0.06]",
   },
   portables: {
     icon: Radio,
-    accent: "text-jotofa-accent",
-    soft: "bg-jotofa-accent/10",
+    accent: "text-foreground",
+    soft: "bg-foreground/[0.06]",
   },
 };
 
@@ -88,7 +88,7 @@ function CatalogCard({
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.05 * index, duration: 0.4 }}
         whileHover={{ y: -4 }}
-        className="group flex flex-col h-full rounded-2xl border border-border bg-card overflow-hidden hover:border-jotofa-accent/40 transition-all duration-300"
+        className="group flex flex-col h-full rounded-2xl border border-border bg-card overflow-hidden hover:border-foreground/25 transition-all duration-300"
       >
         {/* Image */}
         <div className="relative aspect-square bg-gradient-to-b from-secondary/40 to-secondary/10 overflow-hidden">
@@ -115,7 +115,7 @@ function CatalogCard({
 
           {/* External link affordance */}
           <span className="absolute top-3 right-3 w-8 h-8 rounded-full bg-background/80 backdrop-blur flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-            <ExternalLink className="w-4 h-4 text-jotofa-accent" />
+            <ExternalLink className="w-4 h-4 text-foreground" />
           </span>
         </div>
 
@@ -196,7 +196,7 @@ export function UtecProductRepeater() {
   return (
     <section className="relative py-20 sm:py-24">
       <div className="absolute inset-0 bg-background" />
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-jotofa-accent/15 to-transparent" />
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -273,8 +273,8 @@ export function UtecProductRepeater() {
 
         {status === "error" && (
           <div className="max-w-xl mx-auto p-8 rounded-2xl border border-border bg-card text-center">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-jotofa-accent/10 mb-4">
-              <AlertCircle className="w-6 h-6 text-jotofa-accent" />
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-foreground/[0.06] mb-4">
+              <AlertCircle className="w-6 h-6 text-muted-foreground" />
             </div>
             <h3 className="text-lg font-semibold text-foreground mb-2">
               Catalog preview unavailable

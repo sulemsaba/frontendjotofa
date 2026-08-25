@@ -84,7 +84,6 @@ export function UTECPage() {
       {/* Hero */}
       <section className="relative min-h-[70vh] flex items-center py-28 sm:py-36 overflow-hidden">
         <div aria-hidden className="absolute inset-0 bg-background" />
-        <div aria-hidden className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-jotofa-accent/5 rounded-full blur-[140px]" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
@@ -137,7 +136,7 @@ export function UTECPage() {
               </a>
               <PageLink
                 page="contact"
-                className="inline-flex items-center gap-2 px-7 py-3.5 border border-jotofa-accent/40 text-foreground hover:bg-jotofa-accent/10 rounded-full font-semibold transition-all"
+                className="inline-flex items-center gap-2 px-7 py-3.5 border border-foreground/20 text-foreground hover:bg-foreground/5 rounded-full font-semibold transition-all"
               >
                 Talk to Sales <ArrowRight className="w-4 h-4" />
               </PageLink>
@@ -174,19 +173,19 @@ export function UTECPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10">
             <div className="rounded-2xl border border-border bg-muted/40 dark:bg-white/[0.03] p-6 sm:p-8">
-              <h3 className="text-xs font-semibold uppercase tracking-widest text-jotofa-accent mb-3">Mission</h3>
+              <h3 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">Mission</h3>
               <p className="text-sm sm:text-base text-foreground leading-relaxed">
                 To continually improve services by setting and achieving objectives in line with customers&apos; requirements
               </p>
             </div>
             <div className="rounded-2xl border border-border bg-muted/40 dark:bg-white/[0.03] p-6 sm:p-8">
-              <h3 className="text-xs font-semibold uppercase tracking-widest text-jotofa-accent mb-3">Vision</h3>
+              <h3 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">Vision</h3>
               <p className="text-sm sm:text-base text-foreground leading-relaxed">
                 To lead in customers valuing in the field of wireless communications (RADIO CALL COMMUNICATION), Security and safety systems, Solar system, Generator and General IT &amp; ICT solution
               </p>
             </div>
             <div className="rounded-2xl border border-border bg-muted/40 dark:bg-white/[0.03] p-6 sm:p-8">
-              <h3 className="text-xs font-semibold uppercase tracking-widest text-jotofa-accent mb-3">Core Values</h3>
+              <h3 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">Core Values</h3>
               <p className="text-sm sm:text-base text-foreground leading-relaxed">
                 To provide a multi-cultural environment that motivates team work, continuous learning and development and reward of an individual achievement.
               </p>
@@ -252,14 +251,14 @@ export function UTECPage() {
             <button
               ref={closeBtnRef}
               onClick={() => setIsModalOpen(false)}
-              className="absolute top-4 right-5 min-w-[44px] min-h-[44px] flex items-center justify-center text-2xl text-gray-400 hover:text-jotofa-accent transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent"
+              className="absolute top-4 right-5 min-w-[44px] min-h-[44px] flex items-center justify-center text-2xl text-gray-400 hover:text-gray-600 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-navy/30"
               aria-label="Close modal"
             >
               &times;
             </button>
             <h3 className="text-xl font-bold text-gray-900 mb-6">Free Quote</h3>
             {isSubmitted ? (
-              <div className="flex items-center gap-2 rounded-lg border border-jotofa-accent/25 bg-jotofa-accent/10 px-4 py-3 text-sm text-jotofa-accent-dark">
+              <div className="flex items-center gap-2 rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-700">
                 <CheckCircle2 className="h-4 w-4" />
                 Quote request sent. We'll reply within 1 hour.
               </div>
