@@ -164,8 +164,8 @@ export function Navbar() {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className={`fixed top-0 left-0 right-0 z-50 border-b border-jotofa-navy/10 dark:border-white/10 transition-all duration-200 ${
           scrolled
-            ? "bg-background dark:bg-jotofa-navy-mid"
-            : "bg-background/80 dark:bg-jotofa-navy-mid/80 backdrop-blur-md"
+            ? "bg-background"
+            : "bg-background/80 backdrop-blur-md"
         }`}
       >
         <div className="mx-auto max-w-[1440px] h-14 sm:h-16 px-4 sm:px-6 flex items-center gap-3 lg:gap-8">
