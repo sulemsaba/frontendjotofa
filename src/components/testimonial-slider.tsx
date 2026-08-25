@@ -175,19 +175,36 @@ export function TestimonialSlider({
 
   const cardWidthWithGap = dims.cardW + dims.gap;
 
+  // Circular offset per card so both neighbours always peek (looping carousel).
+  const offsets = useMemo(() => {
+    const n = testimonials.length;
+    return testimonials.map((_, i) => {
+      let o = i - current;
+      if (n > 1) {
+        if (o > n / 2) o -= n;
+        else if (o < -n / 2) o += n;
+      }
+      return o;
+    });
+  }, [current, testimonials]);
+
+  // Remember each card's previous offset. On a loop, exactly one card jumps to
+  // the opposite side (offset change > 1); that card should TELEPORT there, not
+  // slide across the whole width - which was the weird auto-scroll animation.
+  const prevOffsetsRef = useRef<number[]>([]);
+  useEffect(() => {
+    prevOffsetsRef.current = offsets;
+  }, [offsets]);
+
   const cardStyles = useMemo(() => {
     const styles: Record<number, React.CSSProperties> = {};
-    const n = testimonials.length;
+    const prev = prevOffsetsRef.current;
     testimonials.forEach((_, i) => {
-      // Circular offset so the previous and next cards always peek on BOTH
-      // sides, even on the first / last slide (looping carousel).
-      let offset = i - current;
-      if (n > 1) {
-        if (offset > n / 2) offset -= n;
-        else if (offset < -n / 2) offset += n;
-      }
+      const offset = offsets[i];
       const absOffset = Math.abs(offset);
       const isCenter = offset === 0;
+      const prevOffset = prev[i] ?? offset;
+      const isWrapping = Math.abs(offset - prevOffset) > 1;
       const baseX = offset * cardWidthWithGap;
       const dragAdjustment = isDragging ? dragX : 0;
       const scale = isCenter ? 1 : 0.92;
@@ -206,15 +223,16 @@ export function TestimonialSlider({
         zIndex,
         opacity,
         pointerEvents,
-        transition: isDragging
-          ? "none"
-          : "transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), z-index 0s",
+        transition:
+          isDragging || isWrapping
+            ? "none"
+            : "transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease, z-index 0s",
         willChange,
         cursor: isDragging ? "grabbing" : "pointer",
       };
     });
     return styles;
-  }, [current, dragX, isDragging, dims.cardW, dims.cardH, dims.gap, cardWidthWithGap, testimonials.length]);
+  }, [offsets, dragX, isDragging, dims.cardW, dims.cardH, cardWidthWithGap, testimonials]);
 
   const containerMaxWidth = dims.viewport;
 
@@ -270,14 +288,8 @@ export function TestimonialSlider({
             </div>
 
             {testimonials.map((t, i) => {
-              const n = testimonials.length;
-              let offset = i - current;
-              if (n > 1) {
-                if (offset > n / 2) offset -= n;
-                else if (offset < -n / 2) offset += n;
-              }
+              const offset = offsets[i];
               const isCenter = offset === 0;
-              const absOffset = Math.abs(offset);
               const style = cardStyles[i];
 
               return (
