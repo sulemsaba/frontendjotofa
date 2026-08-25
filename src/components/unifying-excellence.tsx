@@ -1,8 +1,9 @@
-"use client";
-
 import { PageLink } from "@/lib/page-context";
-import { motion } from "framer-motion";
+import { ScrollReveal } from "./scroll-reveal";
 
+/* Server component. The only interactive/animated leaves are PageLink and
+   ScrollReveal (both framer-free client components), so this section itself
+   ships no JavaScript. */
 export function UnifyingExcellence() {
   return (
     <section className="relative w-full bg-jotofa-navy dark:bg-jotofa-navy-card text-white overflow-hidden">
@@ -12,13 +13,7 @@ export function UnifyingExcellence() {
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 sm:pt-24 pb-16 sm:pb-24">
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start">
           {/* Left column */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full lg:w-[38%] flex-shrink-0"
-          >
+          <ScrollReveal duration={0.7} className="w-full lg:w-[38%] flex-shrink-0">
             <div className="flex items-center gap-4 text-xs font-semibold tracking-[0.25em] uppercase text-white/80 mb-8">
               <span className="inline-block w-10 h-px bg-jotofa-accent" />
               JOTOFA Group
@@ -46,16 +41,10 @@ export function UnifyingExcellence() {
               </span>
               Explore the Group
             </PageLink>
-          </motion.div>
+          </ScrollReveal>
 
           {/* Right column - starts lower on desktop */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="flex-1 lg:mt-24"
-          >
+          <ScrollReveal duration={0.7} delay={0.2} className="flex-1 lg:mt-24">
             <div className="flex items-center gap-3 mb-8">
               <span className="inline-block w-8 h-px bg-jotofa-accent" />
               <span className="text-xs font-semibold tracking-[0.2em] uppercase text-white/70">
@@ -78,7 +67,7 @@ export function UnifyingExcellence() {
                 The JOTOFA Group is committed to integrity, innovation, and excellence - building a stronger East Africa through collaboration and forward-thinking solutions.
               </p>
             </div>
-          </motion.div>
+          </ScrollReveal>
         </div>
       </div>
     </section>
