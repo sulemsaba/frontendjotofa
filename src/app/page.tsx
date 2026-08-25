@@ -1,22 +1,27 @@
-"use client";
-
+import dynamic from "next/dynamic";
 import { Hero } from "@/components/hero";
 import { UnifyingExcellence } from "@/components/unifying-excellence";
-import { EcosystemShowcase } from "@/components/ecosystem-showcase";
-import { NewsSection } from "@/components/news-section";
-import { WhatsAppButton } from "@/components/whatsapp-button";
-import { BackToTopButton } from "@/components/back-to-top-button";
-import { TestimonialSlider } from "@/components/testimonial-slider";
 import { homeTestimonials } from "@/lib/testimonials-data";
 
 /* ──────────────────────────────────────────────────────────────────────────
-   Home route (`/`) - focused landing page.
+   Home route (`/`) - SERVER component shell.
 
-   Navigation between pages is now URL-based (router.push in page-context),
-   so every other page has its own route file (e.g. /about, /businesses).
-   This component only renders the home landing composition. The slim top
-   RouteProgress bar + template.tsx fade-in handle transition UX globally.
+   Above-the-fold (Hero, Unifying Excellence) ships in the main chunk. The
+   below-the-fold sections are code-split via next/dynamic so their JavaScript
+   loads AFTER the critical content instead of blocking first paint. They still
+   server-render (content stays in the HTML for SEO); only their client hydration
+   chunk is deferred.
    ────────────────────────────────────────────────────────────────────────── */
+
+const EcosystemShowcase = dynamic(() =>
+  import("@/components/ecosystem-showcase").then((m) => m.EcosystemShowcase)
+);
+const TestimonialSlider = dynamic(() =>
+  import("@/components/testimonial-slider").then((m) => m.TestimonialSlider)
+);
+const NewsSection = dynamic(() =>
+  import("@/components/news-section").then((m) => m.NewsSection)
+);
 
 export default function Home() {
   return (
