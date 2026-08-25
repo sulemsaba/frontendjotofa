@@ -120,7 +120,12 @@ export default function RootLayout({
             {/* JSON-LD structured data   Organization, WebSite, BreadcrumbList */}
             <JsonLd />
             <Navbar />
-            <main id="main-content" className="flex-1">
+            {/* overflow-x-clip: contains stray horizontal overflow (e.g. the
+                off-screen start position of scroll-reveal slide-ins) so pages
+                never gain an accidental horizontal scroll / zoomed-out feel on
+                mobile. `clip` (not `hidden`) does NOT create a scroll container,
+                so position:sticky pinning and nested carousels still work. */}
+            <main id="main-content" className="flex-1 overflow-x-clip">
               {children}
             </main>
             <Footer />
