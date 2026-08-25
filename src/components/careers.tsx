@@ -908,6 +908,8 @@ export function Careers() {
                         handleCategorySelect(cat);
                       }}
                       className={`w-full text-left px-4 py-2.5 text-sm hover:bg-secondary dark:hover:bg-jotofa-navy transition-colors ${
+                        cat === "All Categories" ? "hidden sm:block" : ""
+                      } ${
                         selectedCategory === cat
                           ? "text-jotofa-navy dark:text-white font-medium"
                           : "text-foreground"
@@ -948,6 +950,8 @@ export function Careers() {
                         handleCompanySelect(comp);
                       }}
                       className={`w-full text-left px-4 py-2.5 text-sm hover:bg-secondary dark:hover:bg-jotofa-navy transition-colors ${
+                        comp === "All Companies" ? "hidden sm:block" : ""
+                      } ${
                         selectedCompany === comp
                           ? "text-jotofa-navy dark:text-white font-medium"
                           : "text-foreground"
