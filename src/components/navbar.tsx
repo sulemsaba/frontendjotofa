@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "next-themes";
 import { usePage, PageLink, PageId } from "@/lib/page-context";
 import {
@@ -158,11 +157,8 @@ export function Navbar() {
 
   return (
     <>
-      <motion.header
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className={`fixed top-0 left-0 right-0 z-50 border-b border-jotofa-navy/10 dark:border-white/10 transition-all duration-200 ${
+      <header
+        className={`animate-nav-in fixed top-0 left-0 right-0 z-50 border-b border-jotofa-navy/10 dark:border-white/10 transition-colors duration-200 ${
           scrolled
             ? "bg-background"
             : "bg-background/80 backdrop-blur-md"
@@ -235,9 +231,8 @@ export function Navbar() {
 
                    {/* Subsidiaries Mega Dropdown - left-aligned to the "Subsidiaries" label */}
                    {item.hasDropdown === "subsidiaries" && openDropdown === "subsidiaries" && (
-                     <AnimatePresence>
-                       <motion.div initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} transition={{ duration: 0.2, ease: "easeOut" }}
-                         className="absolute top-full left-2 lg:left-4 pt-2"
+                       <div
+                         className="animate-drop-in absolute top-full left-2 lg:left-4 pt-2"
                          onMouseEnter={() => openMenu("subsidiaries")}
                          onMouseLeave={scheduleCloseMenu}>
                           <div className="w-[560px] max-w-[calc(100vw-2rem)] bg-white dark:bg-jotofa-navy-card backdrop-blur-[20px] border border-jotofa-navy/8 dark:border-white/10 rounded-2xl shadow-[0_16px_50px_rgba(0,20,40,0.16)] dark:shadow-[0_24px_60px_rgba(0,0,0,0.5)] p-2.5">
@@ -274,8 +269,7 @@ export function Navbar() {
                               </div>
                               {/* RIGHT: image inset in the shared background (rounded, no bleed) */}
                               <div className="relative rounded-2xl overflow-hidden min-h-[180px]">
-                                <AnimatePresence>
-                                  <motion.div key={currentBiz.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="absolute inset-0">
+                                  <div key={currentBiz.id} className="animate-fade-in-fast absolute inset-0">
                                     <Image
                                       src={currentBiz.image}
                                       alt=""
@@ -287,13 +281,11 @@ export function Navbar() {
                                     <div className="absolute bottom-0 left-0 right-0 p-4">
                                       <div className="text-white text-[15px] font-semibold leading-tight">{currentBiz.label}</div>
                                     </div>
-                                  </motion.div>
-                                </AnimatePresence>
+                                  </div>
                               </div>
                             </div>
                          </div>
-                       </motion.div>
-                     </AnimatePresence>
+                       </div>
                    )}
 
                  </div>
@@ -331,15 +323,14 @@ export function Navbar() {
              </button>
            </div>
         </div>
-      </motion.header>
+      </header>
 
       {/* MOBILE MENU - focus-trapped dialog (WCAG 2.1.2) */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.25 }} className="fixed inset-0 z-40 lg:hidden" role="dialog" aria-modal="true" aria-label="Site navigation menu">
+      {mobileOpen && (
+          <div className="animate-fade-in-fast fixed inset-0 z-40 lg:hidden" role="dialog" aria-modal="true" aria-label="Site navigation menu">
              <div className="absolute inset-0 bg-black/20 dark:bg-black/50 backdrop-blur-sm" onClick={() => setMobileOpen(false)} onKeyDown={(e) => { if (e.key === "Escape") setMobileOpen(false); }} aria-label="Close navigation menu" />
-            <motion.div ref={mobileDrawerRef} initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }} transition={{ duration: 0.3, ease: "easeOut" }}
-              className="absolute right-0 top-14 sm:top-16 bottom-0 w-[300px] max-w-[85vw] flex flex-col bg-white dark:bg-jotofa-navy-card backdrop-blur-xl border-l border-jotofa-navy/8 dark:border-white/8 shadow-[0_16px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_24px_60px_rgba(0,0,0,0.5)] overscroll-contain">
+            <div ref={mobileDrawerRef}
+              className="animate-slide-in-right absolute right-0 top-14 sm:top-16 bottom-0 w-[300px] max-w-[85vw] flex flex-col bg-white dark:bg-jotofa-navy-card backdrop-blur-xl border-l border-jotofa-navy/8 dark:border-white/8 shadow-[0_16px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_24px_60px_rgba(0,0,0,0.5)] overscroll-contain">
               <div className="flex-1 p-3 space-y-1 overflow-y-auto overscroll-contain">
                 {navItems.map((item) => {
                   const isActive = activePage === item.id || (item.hasDropdown && isDropdownActive(item.hasDropdown));
@@ -390,10 +381,9 @@ export function Navbar() {
                   <a href={`tel:${PHONE_TEL}`} className="flex items-center gap-3 pl-5 pr-4 py-3.5 rounded-xl text-jotofa-navy dark:text-white text-base font-medium hover:bg-jotofa-navy/[0.04] dark:hover:bg-white/[0.06] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent min-h-[48px]"><Phone className="w-5 h-5 text-jotofa-accent" /><span>{PHONE_NUMBER}</span></a>
                 </div>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         )}
-      </AnimatePresence>
     </>
   );
 }
