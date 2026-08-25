@@ -5,8 +5,19 @@ frontend already expects. Read this before building the API/admin so the backend
 is a drop-in and we do not over-build.
 
 **Recommended stack:** FastAPI + PostgreSQL. The admin lives in a **separate
-repository** (its own app that calls the API's `/admin/*` endpoints with auth).
-This frontend stays a static/marketing site that talks to the API over HTTP.
+repository** (its own app). This frontend stays a static/marketing site that
+talks to the API over HTTP.
+
+> **Built (not yet wired).** Two sibling repos now implement this spec, verified
+> to run end to end:
+> - `../jotofa-backend` - FastAPI public API (jobs, subsidiaries, applications,
+>   contacts, news) matching the exact contract in `src/lib/api.ts`. Seeds the 3
+>   real subsidiaries + job categories only (no fake jobs/blogs).
+> - `../jotofa-admin` - FastAPI + SQLAdmin, a login-protected admin UI covering
+>   every content type, sharing the same PostgreSQL database.
+>
+> Nothing is wired to the site yet. To turn it on later, set
+> `NEXT_PUBLIC_API_BASE_URL` to the API host - no frontend code changes.
 
 **Guiding principle:** only three kinds of things deserve a backend -
 1. content non-technical staff must edit often (jobs, news),
