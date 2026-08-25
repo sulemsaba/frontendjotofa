@@ -18,20 +18,14 @@ const Toaster = dynamic(() =>
   import("@/components/ui/sonner").then((m) => m.Toaster)
 );
 
-// Inter carries body, subheadings, labels, and navigation.
-const inter = localFont({
-  src: "../../public/fonts/Inter-Variable.woff2",
-  variable: "--font-inter",
+// Open Sans is the JOTOFA brand web font (guide p.18: "Open Sans should be
+// used for web and digital applications"). Self-hosted variable font, used for
+// both body and headings.
+const openSans = localFont({
+  src: "../../public/fonts/OpenSans-Variable.woff2",
+  variable: "--font-open-sans",
   display: "swap",
   weight: "300 800",
-});
-
-// Inter Tight is the display voice: headlines only, tight tracking.
-const interTight = localFont({
-  src: "../../public/fonts/InterTight-Variable.woff2",
-  variable: "--font-inter-tight",
-  display: "swap",
-  weight: "500 800",
 });
 
 export const metadata: Metadata = {
@@ -105,7 +99,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${interTight.variable} antialiased bg-background text-foreground`}
+        className={`${openSans.variable} antialiased bg-background text-foreground`}
       >
         {/* Skip-to-content link - first focusable element for keyboard users (WCAG 2.4.1) */}
         <a
