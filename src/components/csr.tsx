@@ -2,7 +2,7 @@
 
 import { GraduationCap, Heart, TreePine, ArrowUpRight } from "lucide-react";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "./scroll-reveal";
-import { Testimonials } from "./testimonials";
+import { TestimonialSlider } from "./testimonial-slider";
 import { csrTestimonials } from "@/lib/testimonials-data";
 
 const csrPillars = [
@@ -170,13 +170,10 @@ export function CSR() {
     </section>
 
     {/* Testimonials */}
-    <Testimonials
+    <TestimonialSlider
       eyebrow="Community Voices"
       title={<>What Our Community Partners Say</>}
       subtitle="Real impact, told by the schools, health partners, and communities we serve."
-      accent="text-jotofa-accent"
-      accentBg="bg-jotofa-accent/10"
-      accentBorder="border-jotofa-accent/20"
       testimonials={csrTestimonials}
     />
     </>

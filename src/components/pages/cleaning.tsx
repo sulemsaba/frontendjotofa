@@ -10,7 +10,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "../scroll-reveal";
-import { Testimonials } from "../testimonials";
+import { TestimonialSlider } from "../testimonial-slider";
 import { cleaningTestimonials } from "@/lib/testimonials-data";
 import { PageLink } from "@/lib/page-context";
 
@@ -95,13 +95,10 @@ export function CleaningPage() {
       </section>
 
       {/* Testimonials */}
-      <Testimonials
+      <TestimonialSlider
         eyebrow="Cleaning Client Stories"
         title={<>What Our Cleaning Clients Say</>}
         subtitle="From office towers to lodges - why organizations across Tanzania choose JOTOFA Cleaning & Maids."
-        accent="text-jotofa-accent"
-        accentBg="bg-jotofa-accent/10"
-        accentBorder="border-jotofa-accent/20"
         testimonials={cleaningTestimonials}
       />
 

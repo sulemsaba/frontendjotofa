@@ -10,7 +10,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "../scroll-reveal";
-import { Testimonials } from "../testimonials";
+import { TestimonialSlider } from "../testimonial-slider";
 import { staffingTestimonials } from "@/lib/testimonials-data";
 import { PageLink } from "@/lib/page-context";
 
@@ -95,13 +95,10 @@ export function StaffingPage() {
       </section>
 
       {/* Testimonials */}
-      <Testimonials
+      <TestimonialSlider
         eyebrow="Staffing Client Stories"
         title={<>What Our HR Clients Say</>}
         subtitle="Why Tanzanian employers rely on Staffing & Labour Supply for talent, payroll, and workforce management."
-        accent="text-jotofa-accent"
-        accentBg="bg-jotofa-accent/10"
-        accentBorder="border-jotofa-accent/20"
         testimonials={staffingTestimonials}
       />
 

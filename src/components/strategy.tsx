@@ -9,7 +9,7 @@ import {
   Globe,
 } from "lucide-react";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "./scroll-reveal";
-import { Testimonials } from "./testimonials";
+import { TestimonialSlider } from "./testimonial-slider";
 import { strategyTestimonials } from "@/lib/testimonials-data";
 
 const objectives = [
@@ -167,13 +167,10 @@ export function Strategy() {
     </section>
 
     {/* Testimonials */}
-    <Testimonials
+    <TestimonialSlider
       eyebrow="Investor & Partner Voices"
       title={<>What Investors & Partners Say</>}
       subtitle="Why strategic partners and investors back JOTOFA Group's regional growth strategy."
-      accent="text-jotofa-accent"
-      accentBg="bg-jotofa-accent/10"
-      accentBorder="border-jotofa-accent/20"
       testimonials={strategyTestimonials}
     />
     </>

@@ -13,7 +13,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { ScrollReveal } from "../scroll-reveal";
-import { Testimonials } from "../testimonials";
+import { TestimonialSlider } from "../testimonial-slider";
 import { utecTestimonials } from "@/lib/testimonials-data";
 import { PageLink } from "@/lib/page-context";
 import { UtecProductSpotlight } from "../utec-product-spotlight";
@@ -243,13 +243,10 @@ export function UTECPage() {
       <UtecProductRepeater />
 
       {/* Testimonials */}
-      <Testimonials
+      <TestimonialSlider
         eyebrow="UTEC Client Stories"
         title={<>What UTEC Clients Say</>}
         subtitle="Real outcomes from organizations that transformed their operations with UTEC Solutions."
-        accent="text-jotofa-accent"
-        accentBg="bg-jotofa-accent/10"
-        accentBorder="border-jotofa-accent/20"
         testimonials={utecTestimonials}
       />
 
