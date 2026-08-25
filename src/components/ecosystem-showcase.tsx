@@ -201,10 +201,12 @@ const subs: Sub[] = [
   },
 ];
 
-// Static height classes so Tailwind JIT can see the literals.
+// Static height classes so Tailwind JIT can see the literals. Both mobile and
+// desktop are tall/pinned so vertical scroll drives the animation (horizontal
+// pan on mobile, vertical stepper on desktop).
 const HEIGHT_BY_STEPS: Record<number, string> = {
-  3: "lg:h-[270vh]",
-  4: "lg:h-[360vh]",
+  3: "h-[230vh] lg:h-[270vh]",
+  4: "h-[300vh] lg:h-[360vh]",
 };
 
 // ─── Framed image ───────────────────────────────────────────────────────────
@@ -304,59 +306,47 @@ function OfferingRail({
   );
 }
 
-// ─── Mobile: horizontal scroll-snap carousel of a subsidiary's offerings.
-//     Echoes the desktop stepper's scroll-driven feel (tab rail + a progress
-//     bar that fills with scroll, and the centred card brightens/scales) but
-//     as a horizontal swipe instead of a pinned vertical scroll. ─────────────
-function MobileOfferings({ sub }: { sub: Sub }) {
+// ─── Mobile: pinned, scroll-driven HORIZONTAL pan of a subsidiary's offerings.
+//     Same mechanic as the desktop stepper (the section is tall, the content
+//     pins, and vertical page scroll drives the animation) but instead of the
+//     copy crossfading, the offering cards pan sideways so you see all of them
+//     smoothly as you scroll. `progress` is the section's scrollYProgress. ────
+function MobileOfferings({
+  sub,
+  progress,
+  scrollToProgress,
+}: {
+  sub: Sub;
+  progress: MotionValue<number>;
+  scrollToProgress: (p: number) => void;
+}) {
   const offerings = sub.offerings!;
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const n = offerings.length;
   const [active, setActive] = useState(0);
-  const { scrollXProgress } = useScroll({ container: scrollRef });
 
-  const onScroll = () => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const center = el.scrollLeft + el.clientWidth / 2;
-    let best = 0;
-    let bestDist = Infinity;
-    Array.from(el.children).forEach((c, i) => {
-      const card = c as HTMLElement;
-      const cc = card.offsetLeft + card.clientWidth / 2;
-      const d = Math.abs(cc - center);
-      if (d < bestDist) {
-        bestDist = d;
-        best = i;
-      }
-    });
-    setActive(best);
-  };
+  useMotionValueEvent(progress, "change", (v) => {
+    setActive(Math.min(n - 1, Math.max(0, Math.round(v * (n - 1)))));
+  });
 
-  const scrollToCard = (i: number) => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const card = el.children[i] as HTMLElement | undefined;
-    if (card) el.scrollTo({ left: card.offsetLeft - el.offsetLeft, behavior: "smooth" });
-  };
+  // Card 0 centred at progress 0, card n-1 centred at progress 1.
+  // Card = 78vw, gap = 4vw (step 82vw); centring offset = (100-78)/2 = 11vw.
+  const x = useTransform(progress, [0, 1], ["11vw", `${11 - (n - 1) * 82}vw`]);
 
   return (
-    <div className="lg:hidden py-14">
-      <div className="px-6 sm:px-8">
+    <div className="lg:hidden sticky top-0 h-screen overflow-hidden flex flex-col">
+      <div className="px-6 sm:px-8 pt-20 pb-1 flex-shrink-0">
         <SubEyebrow index={sub.index} tagline={sub.tagline} />
-        <h3 className="font-light leading-[1.08] tracking-tight text-jotofa-navy dark:text-white mb-3 text-3xl">
+        <h3 className="font-light leading-[1.08] tracking-tight text-jotofa-navy dark:text-white mb-4 text-2xl">
           {sub.name}
         </h3>
-        <p className="text-jotofa-text-secondary dark:text-white/70 text-base leading-relaxed mb-6 max-w-lg">
-          {sub.description}
-        </p>
 
-        {/* Offering tabs (like the desktop rail) */}
+        {/* Offering tabs (mirror the desktop rail) */}
         <div className="flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {offerings.map((o, i) => (
             <button
               key={o.title}
               type="button"
-              onClick={() => scrollToCard(i)}
+              onClick={() => scrollToProgress(n > 1 ? i / (n - 1) : 0)}
               aria-current={active === i ? "true" : undefined}
               className={`shrink-0 rounded-full px-3 py-1.5 text-[12px] font-medium whitespace-nowrap transition-colors ${
                 active === i
@@ -370,36 +360,35 @@ function MobileOfferings({ sub }: { sub: Sub }) {
         </div>
         {/* Scroll-linked progress bar */}
         <div className="mt-3 h-[3px] rounded-full bg-jotofa-navy/10 dark:bg-white/10 overflow-hidden">
-          <motion.div style={{ scaleX: scrollXProgress }} className="h-full origin-left rounded-full bg-jotofa-accent" />
+          <motion.div style={{ scaleX: progress }} className="h-full origin-left rounded-full bg-jotofa-accent" />
         </div>
       </div>
 
-      {/* Horizontal snap cards */}
-      <div
-        ref={scrollRef}
-        onScroll={onScroll}
-        className="mt-5 flex gap-4 overflow-x-auto snap-x snap-mandatory px-6 sm:px-8 scroll-px-6 sm:scroll-px-8 pb-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-      >
-        {offerings.map((o, i) => (
-          <motion.div
-            key={o.title}
-            animate={{ opacity: active === i ? 1 : 0.45, scale: active === i ? 1 : 0.95 }}
-            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="snap-center shrink-0 w-[82vw] max-w-[400px]"
-          >
-            <div className="mb-4">
-              <Frame src={o.image} alt={o.title} />
-            </div>
-            <h4 className="text-lg font-semibold text-jotofa-navy dark:text-white mb-2">{o.title}</h4>
-            <p className="text-jotofa-text-secondary dark:text-white/70 text-[15px] leading-relaxed mb-4">
-              {o.description}
-            </p>
-            <BenefitList items={o.benefits} />
-          </motion.div>
-        ))}
+      {/* Horizontal track panned by the vertical page scroll */}
+      <div className="flex-1 min-h-0 flex items-center overflow-hidden">
+        <motion.div style={{ x }} className="flex gap-[4vw] items-start will-change-transform">
+          {offerings.map((o, i) => (
+            <motion.div
+              key={o.title}
+              animate={{ opacity: active === i ? 1 : 0.4 }}
+              transition={{ duration: 0.3 }}
+              className="w-[78vw] shrink-0"
+            >
+              <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden border border-jotofa-navy/10 dark:border-white/10">
+                <Image src={o.image} alt={o.title} fill sizes="80vw" className="object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-jotofa-navy/55 via-transparent to-transparent" />
+              </div>
+              <h4 className="text-base font-semibold text-jotofa-navy dark:text-white mt-3 mb-1.5">{o.title}</h4>
+              <p className="text-jotofa-text-secondary dark:text-white/70 text-sm leading-relaxed mb-3 line-clamp-2">
+                {o.description}
+              </p>
+              <BenefitList items={o.benefits} />
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
 
-      <div className="px-6 sm:px-8 mt-6">
+      <div className="px-6 sm:px-8 py-5 flex-shrink-0">
         <ExploreLink page={sub.page} name={sub.name} />
       </div>
     </div>
@@ -418,19 +407,19 @@ function SubsidiaryStepper({ sub, reversed }: { sub: Sub; reversed: boolean }) {
     setActive(Math.min(n - 1, Math.max(0, Math.floor(v * n))));
   });
 
-  // Click a step to jump straight to that offering: scroll the page to the
-  // position within this pinned section where step `i` sits at its centre.
-  const goTo = (i: number) => {
+  // Scroll the page so this pinned section's progress lands on `p` (0..1).
+  const scrollToProgress = (p: number) => {
     const el = ref.current;
     if (!el) return;
     const top = el.getBoundingClientRect().top + window.scrollY;
     const scrollable = Math.max(0, el.offsetHeight - window.innerHeight);
-    const p = n <= 1 ? 0 : (i + 0.5) / n;
     window.scrollTo({ top: Math.round(top + scrollable * p), behavior: "smooth" });
   };
+  // Desktop: a step is active for v in [i/n, (i+1)/n), so jump to its centre.
+  const goTo = (i: number) => scrollToProgress(n <= 1 ? 0 : (i + 0.5) / n);
 
   const cur = offerings[active];
-  const heightClass = HEIGHT_BY_STEPS[n] ?? "lg:h-[300vh]";
+  const heightClass = HEIGHT_BY_STEPS[n] ?? "h-[240vh] lg:h-[300vh]";
 
   return (
     <section ref={ref} className={`relative w-full ${heightClass}`}>
@@ -506,8 +495,8 @@ function SubsidiaryStepper({ sub, reversed }: { sub: Sub; reversed: boolean }) {
         </div>
       </div>
 
-      {/* MOBILE: horizontal scroll-snap carousel of offerings */}
-      <MobileOfferings sub={sub} />
+      {/* MOBILE: pinned, scroll-driven horizontal pan of offerings */}
+      <MobileOfferings sub={sub} progress={scrollYProgress} scrollToProgress={scrollToProgress} />
     </section>
   );
 }
