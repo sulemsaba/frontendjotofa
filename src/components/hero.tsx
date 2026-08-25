@@ -156,7 +156,7 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative w-full lg:h-screen lg:overflow-hidden bg-background dark:bg-jotofa-navy-mid">
+    <section className="relative w-full lg:h-screen lg:overflow-hidden bg-background dark:bg-gradient-to-br dark:from-[#00243D] dark:via-[#001B30] dark:to-[#001220]">
       {/* Decorative top accent bar */}
       <div aria-hidden className="absolute top-0 left-0 right-0 z-[1] h-[3px] bg-gradient-to-r from-transparent via-jotofa-accent/70 to-transparent" />
 
@@ -264,7 +264,7 @@ export function Hero() {
         </div>
 
         {/* ════════════ RIGHT COLUMN   Vertical Image Ticker (Desktop) ════════════ */}
-        <div className="hidden lg:flex flex-1 relative h-full dark:bg-jotofa-navy-mid animate-fade-up-delay-2" aria-hidden>
+        <div className="hidden lg:flex flex-1 relative h-full dark:bg-transparent animate-fade-up-delay-2" aria-hidden>
           <div className="flex w-full h-full" style={{ gap: "12px", padding: "12px", paddingTop: "80px" }}>
             <TickerColumn images={tickerImagesCol1} paused={tickerPaused} reducedMotion={!!prefersReducedMotion} />
             <TickerColumn images={tickerImagesCol2} reverse paused={tickerPaused} reducedMotion={!!prefersReducedMotion} />
