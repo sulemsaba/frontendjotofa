@@ -1,7 +1,41 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef, type ReactNode } from "react";
+import { useRef, useState, useEffect, type ReactNode } from "react";
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Scroll-reveal helpers - framer-motion-free (IntersectionObserver + CSS), so
+   they add ~zero JS to the bundle. Same API as before: ScrollReveal (fade-up
+   on enter), StaggerContainer + StaggerItem (staggered children reveal).
+   Honors prefers-reduced-motion (shows content immediately, no animation).
+   ────────────────────────────────────────────────────────────────────────── */
+
+function useInViewOnce(margin = "-80px") {
+  const ref = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const reduce =
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    if (reduce || typeof IntersectionObserver === "undefined") {
+      setInView(true);
+      return;
+    }
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          obs.disconnect();
+        }
+      },
+      { rootMargin: margin }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [margin]);
+  return { ref, inView };
+}
 
 interface ScrollRevealProps {
   children: ReactNode;
@@ -11,6 +45,13 @@ interface ScrollRevealProps {
   duration?: number;
 }
 
+const OFFSET: Record<string, string> = {
+  up: "translateY(40px)",
+  down: "translateY(-40px)",
+  left: "translateX(40px)",
+  right: "translateX(-40px)",
+};
+
 export function ScrollReveal({
   children,
   className = "",
@@ -18,70 +59,36 @@ export function ScrollReveal({
   direction = "up",
   duration = 0.6,
 }: ScrollRevealProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-
-  const directionMap = {
-    up: { y: 40, x: 0 },
-    down: { y: -40, x: 0 },
-    left: { x: 40, y: 0 },
-    right: { x: -40, y: 0 },
-  };
-
-  const offset = directionMap[direction];
-
+  const { ref, inView } = useInViewOnce("-80px");
   return (
-    <motion.div
+    <div
       ref={ref}
       className={className}
-      initial={{ opacity: 0, ...offset }}
-      animate={
-        isInView
-          ? { opacity: 1, x: 0, y: 0 }
-          : { opacity: 0, ...offset }
-      }
-      transition={{
-        duration,
-        delay,
-        ease: [0.25, 0.4, 0.25, 1],
+      style={{
+        opacity: inView ? 1 : 0,
+        transform: inView ? "none" : OFFSET[direction],
+        transition: `opacity ${duration}s cubic-bezier(0.25,0.4,0.25,1) ${delay}s, transform ${duration}s cubic-bezier(0.25,0.4,0.25,1) ${delay}s`,
+        willChange: "opacity, transform",
       }}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
 
 interface StaggerContainerProps {
   children: ReactNode;
   className?: string;
+  /** Kept for API compatibility; CSS uses fixed 70ms steps. */
   staggerDelay?: number;
 }
 
-export function StaggerContainer({
-  children,
-  className = "",
-  staggerDelay = 0.1,
-}: StaggerContainerProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-60px" });
-
+export function StaggerContainer({ children, className = "" }: StaggerContainerProps) {
+  const { ref, inView } = useInViewOnce("-60px");
   return (
-    <motion.div
-      ref={ref}
-      className={className}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-      variants={{
-        hidden: {},
-        visible: {
-          transition: {
-            staggerChildren: staggerDelay,
-          },
-        },
-      }}
-    >
+    <div ref={ref} className={`reveal-stagger ${inView ? "is-in" : ""} ${className}`}>
       {children}
-    </motion.div>
+    </div>
   );
 }
 
@@ -92,22 +99,6 @@ export function StaggerItem({
   children: ReactNode;
   className?: string;
 }) {
-  return (
-    <motion.div
-      className={className}
-      variants={{
-        hidden: { opacity: 0, y: 30 },
-        visible: {
-          opacity: 1,
-          y: 0,
-          transition: {
-            duration: 0.5,
-            ease: [0.25, 0.4, 0.25, 1],
-          },
-        },
-      }}
-    >
-      {children}
-    </motion.div>
-  );
+  // The parent `.reveal-stagger` drives the staggered reveal via CSS.
+  return <div className={className}>{children}</div>;
 }
