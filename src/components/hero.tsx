@@ -28,14 +28,11 @@ function usePrefersReducedMotion() {
    Hero - home page landing section.
 
    PERFORMANCE NOTES:
-   • Entry animations use CSS (.animate-fade-up) instead of framer-motion
-     initial/animate. CSS animations run on first paint - no JS hydration
-     wait - so the hero text is visible almost instantly.
-   • framer-motion is kept ONLY for the slideshow crossfade (AnimatePresence),
-     which is below the fold and non-critical for first paint.
+   • No framer-motion. Entry animations, the news-slider crossfade, and the
+     vertical image ticker are all pure CSS keyframes, so nothing here weighs on
+     the first-load JS bundle. Reduced-motion is honored via matchMedia.
    • All colors use design tokens (no raw hex). Typography uses the .h-display
      / .lead / .eyebrow utility classes from globals.css.
-   • The vertical image ticker is pure CSS (scrollVertical keyframe).
    ────────────────────────────────────────────────────────────────────────── */
 
 // First entry of each column has descriptive alt text; subsequent duplicates
