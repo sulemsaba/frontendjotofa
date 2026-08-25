@@ -328,9 +328,23 @@ function MobileOfferings({
     setActive(Math.min(n - 1, Math.max(0, Math.round(v * (n - 1)))));
   });
 
-  // Card 0 centred at progress 0, card n-1 centred at progress 1.
-  // Card = 78vw, gap = 4vw (step 82vw); centring offset = (100-78)/2 = 11vw.
-  const x = useTransform(progress, [0, 1], ["11vw", `${11 - (n - 1) * 82}vw`]);
+  // Each card DWELLS centred for a stretch of scroll, then pans quickly to the
+  // next - so every card (1st, 2nd, 3rd...) settles properly centred instead of
+  // being caught half-way. Card = 78vw, gap = 4vw (step 82vw); centre offset =
+  // (100-78)/2 = 11vw, so card i is centred at x = 11 - i*82 (vw).
+  const step = n > 1 ? 1 / (n - 1) : 1;
+  const hold = step * 0.35; // how long each card stays centred (each side)
+  const inputRange: number[] = [];
+  const outputRange: string[] = [];
+  for (let i = 0; i < n; i++) {
+    const p = i * step;
+    const xi = `${11 - i * 82}vw`;
+    inputRange.push(i === 0 ? 0 : Math.max(0, p - hold));
+    outputRange.push(xi);
+    inputRange.push(i === n - 1 ? 1 : Math.min(1, p + hold));
+    outputRange.push(xi);
+  }
+  const x = useTransform(progress, inputRange, outputRange);
 
   return (
     <div className="lg:hidden sticky top-0 h-screen overflow-hidden flex flex-col">
