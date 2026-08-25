@@ -189,16 +189,6 @@ const subs: Sub[] = [
       },
     ],
   },
-  {
-    index: "04",
-    name: "Logistics & Courier",
-    tagline: "Reliable Delivery",
-    page: "businesses",
-    image: "/images/subsidiaries/courier.jpg",
-    description:
-      "Dependable courier and supply-chain services that move goods and documents safely and on time, right across the region.",
-    highlights: ["Courier Delivery", "Supply Chain", "Last-Mile Logistics", "Document Dispatch"],
-  },
 ];
 
 // Static height classes so Tailwind JIT can see the literals. Both mobile and
@@ -567,7 +557,7 @@ export function EcosystemShowcase() {
           <span className="inline-block w-8 h-px bg-jotofa-accent" />
         </div>
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-jotofa-navy dark:text-white mb-4">
-          Four Arms, One Group
+          Three Arms, One Group
         </h2>
         <p className="mx-auto max-w-2xl text-jotofa-text-secondary dark:text-white/70 text-lg">
           Each subsidiary is a pillar of JOTOFA Group - specialized, yet united by a shared

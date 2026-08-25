@@ -21,7 +21,6 @@ const categories = [
   { id: "utec", label: "UTEC Solutions" },
   { id: "csr", label: "CSR" },
   { id: "innovation", label: "Innovation" },
-  { id: "logistics", label: "Logistics" },
 ];
 
 const featuredArticle = {
@@ -32,7 +31,7 @@ const featuredArticle = {
   categoryBorder: "border-jotofa-accent/20",
   title: "JOTOFA GROUP Expands into East African Markets",
   excerpt:
-    "Our regional growth strategy takes a major step forward with new operations in Kenya and Uganda, strengthening cross-border logistics and ICT services. This milestone marks a new chapter in our mission to power progress across East Africa.",
+    "Our regional growth strategy takes a major step forward with new operations in Kenya and Uganda, strengthening cross-border ICT and professional services. This milestone marks a new chapter in our mission to power progress across East Africa.",
   date: "March 2025",
   readTime: "4 min read",
   image: "/images/jotofa-hero-1.jpeg",
@@ -73,23 +72,10 @@ const newsItems = [
     categoryBorder: "border-jotofa-accent/20",
     title: "Digital Transformation Across All Subsidiaries",
     excerpt:
-      "JOTOFA GROUP invests in end-to-end digital platforms, integrating operations from logistics tracking to HR management under one technology umbrella.",
+      "JOTOFA GROUP invests in end-to-end digital platforms, integrating operations from network monitoring to HR management under one technology umbrella.",
     date: "December 2024",
     readTime: "5 min read",
     image: "/images/jotofa-hero-2.jpeg",
-  },
-  {
-    category: "Logistics",
-    categoryKey: "logistics",
-    categoryColor: "text-foreground",
-    categoryBg: "bg-jotofa-accent/10",
-    categoryBorder: "border-jotofa-accent/20",
-    title: "JOTOFA Courier Launches Same-Day Delivery in Dar es Salaam",
-    excerpt:
-      "Our logistics subsidiary introduces express delivery services, reducing turnaround times for businesses and individuals across the metropolitan area.",
-    date: "November 2024",
-    readTime: "3 min read",
-    image: "/images/courier.png",
   },
   {
     category: "Group Update",

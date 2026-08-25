@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Careers",
   description:
-    "Join JOTOFA GROUP - explore career opportunities across ICT, logistics, cleaning, and staffing. Build your future with Tanzania's leading diversified holding company.",
+    "Join JOTOFA GROUP - explore career opportunities across ICT, cleaning, and staffing. Build your future with Tanzania's leading diversified holding company.",
   openGraph: {
     title: "JOTOFA GROUP - Careers & Job Opportunities",
     description:

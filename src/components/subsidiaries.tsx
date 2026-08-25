@@ -35,7 +35,7 @@ const accentClasses: Record<string, { bg: string; text: string; border: string; 
 };
 
 /* ──────────────────────────────────────────────────────────────────────────
-   "Five Arms, One Vision" - Home page subsidiaries section.
+   "Three Arms, One Vision" - Home page subsidiaries section.
 
    Redesigned as SPLIT-SCREEN STACKED CARDS to match the businesses page:
    • Full-width alternating split sections - one image LEFT, next image RIGHT
@@ -705,7 +705,7 @@ export function Subsidiaries() {
       {/* Section header */}
       <ScrollReveal className="text-center py-20 sm:py-24">
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4">
-          Four Arms, One Vision
+          Three Arms, One Vision
         </h2>
         <p className="mx-auto max-w-2xl text-muted-foreground text-lg">
           Each subsidiary is a pillar of our group - specialized, yet united

@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "JOTOFA GROUP - Contact Us",
     description:
-      "Contact JOTOFA GROUP for inquiries about our ICT, logistics, cleaning, security services, and staffing solutions across Tanzania and East Africa.",
+      "Contact JOTOFA GROUP for inquiries about our ICT, cleaning, security services, and staffing solutions across Tanzania and East Africa.",
   },
   alternates: {
     canonical: "/contact",

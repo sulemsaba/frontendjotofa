@@ -29,7 +29,7 @@ export function UnifyingExcellence() {
             </h1>
 
             <p className="text-white/80 text-base sm:text-lg leading-relaxed max-w-md mb-10">
-              Four specialized sectors. One shared commitment to quality, integrity, and lasting impact across Tanzania and East Africa.
+              Three specialized sectors. One shared commitment to quality, integrity, and lasting impact across Tanzania and East Africa.
             </p>
 
             <PageLink
@@ -56,12 +56,12 @@ export function UnifyingExcellence() {
               className="font-light leading-snug text-white mb-10"
               style={{ fontSize: "clamp(1.4rem, 2.6vw, 2.25rem)" }}
             >
-              ICT, logistics, cleaning, and staffing - four subsidiaries united under one group.
+              ICT, cleaning, and staffing - three subsidiaries united under one group.
             </h2>
 
             <div className="space-y-6 text-white/80 leading-[1.8] max-w-2xl">
               <p className="text-base sm:text-lg">
-                We empower businesses and communities by uniting four specialized subsidiaries under one trusted roof. From telecommunications infrastructure to reliable courier services and professional cleaning, to skilled staffing - every service is built to drive real impact.
+                We empower businesses and communities by uniting three specialized subsidiaries under one trusted roof. From telecommunications infrastructure to professional cleaning and skilled staffing - every service is built to drive real impact.
               </p>
               <p className="text-base sm:text-lg text-white/70">
                 The JOTOFA Group is committed to integrity, innovation, and excellence - building a stronger East Africa through collaboration and forward-thinking solutions.

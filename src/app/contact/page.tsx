@@ -4,7 +4,7 @@ import { Contact } from "@/components/contact";
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Get in touch with JOTOFA GROUP - reach our team for inquiries about ICT solutions, logistics, cleaning services, security services, staffing, or general business partnerships in Tanzania and East Africa.",
+    "Get in touch with JOTOFA GROUP - reach our team for inquiries about ICT solutions, cleaning services, security services, staffing, or general business partnerships in Tanzania and East Africa.",
   openGraph: {
     title: "Contact Us - JOTOFA GROUP",
     description:

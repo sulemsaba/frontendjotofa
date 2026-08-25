@@ -50,7 +50,6 @@ const categoryTags: Record<string, string[]> = {
   utec: ["ICT", "Smart City", "5G", "Telecommunications", "Digital Infrastructure"],
   csr: ["Sustainability", "Reforestation", "Community Impact", "Environmental", "Green Initiative"],
   innovation: ["Digital Transformation", "Technology", "AI & ML", "Cloud", "Innovation"],
-  logistics: ["Same-Day Delivery", "Logistics", "E-Commerce", "Fleet Management", "Supply Chain"],
 };
 
 /* ── Social Share Icons ── */
@@ -124,9 +123,9 @@ function generateArticleContent(article: NewsArticle): {
     "JOTOFA GROUP Expands into East African Markets": {
       lead: "In a landmark strategic move, JOTOFA GROUP has officially launched operations in Kenya and Uganda, marking the group's first expansion beyond Tanzania's borders and signaling a new era of cross-border growth across East Africa.",
       paragraphs: [
-        "The expansion, which has been in development for over 18 months, encompasses the full spectrum of JOTOFA's subsidiary operations - from ICT infrastructure deployment through UTEC Solutions to logistics and courier services via JOTOFA Courier. Initial investment exceeds $12 million, with plans to scale operations significantly over the next three years.",
+        "The expansion, which has been in development for over 18 months, encompasses the full spectrum of JOTOFA's subsidiary operations - from ICT infrastructure deployment through UTEC Solutions to professional cleaning and skilled staffing across the group. Initial investment exceeds $12 million, with plans to scale operations significantly over the next three years.",
         "The Kenyan operations will be headquartered in Nairobi's Kilimani district, with satellite offices planned for Mombasa and Kisumu. In Uganda, the primary base of operations will be in Kampala, with secondary hubs in Jinja and Entebbe. Both operations are expected to create over 200 direct employment opportunities in their first year, with additional indirect jobs through partner networks and supply chains.",
-        "Industry analysts have praised the move as well-timed, noting that both Kenya and Uganda are experiencing rapid digital transformation coupled with growing demand for reliable logistics infrastructure. The East African Community's push for greater economic integration, including streamlined customs procedures and harmonized trade regulations, further supports the viability of cross-border service delivery models like JOTOFA's.",
+        "Industry analysts have praised the move as well-timed, noting that both Kenya and Uganda are experiencing rapid digital transformation coupled with growing demand for reliable ICT and business services. The East African Community's push for greater economic integration, including streamlined customs procedures and harmonized trade regulations, further supports the viability of cross-border service delivery models like JOTOFA's.",
       ],
       pullQuote: "Our entry into Kenya and Uganda is not merely geographic expansion - it is a commitment to building integrated, technology-driven solutions that serve businesses and communities across borders.",
       pullQuoteAuthor: "JOTOFA GROUP CEO",
@@ -137,7 +136,7 @@ function generateArticleContent(article: NewsArticle): {
         "Launch satellite offices in Mombasa and Kisumu",
         "Deploy ICT infrastructure across key urban centers",
         "Create 200+ direct employment opportunities in year one",
-        "Build cross-border logistics and courier networks",
+        "Extend professional cleaning and staffing services regionally",
       ],
       bulletList2: [
         "Set realistic, data-driven regional growth targets",
@@ -200,9 +199,9 @@ function generateArticleContent(article: NewsArticle): {
       ],
     },
     "Digital Transformation Across All Subsidiaries": {
-      lead: "JOTOFA GROUP has embarked on a comprehensive digital transformation journey, investing in end-to-end platforms that integrate operations across all four subsidiaries under a unified technology architecture.",
+      lead: "JOTOFA GROUP has embarked on a comprehensive digital transformation journey, investing in end-to-end platforms that integrate operations across all three subsidiaries under a unified technology architecture.",
       paragraphs: [
-        "The multi-year initiative, budgeted at approximately $15 million, encompasses cloud migration, enterprise resource planning, real-time analytics, and customer-facing digital platforms. The transformation touches every aspect of the group's operations - from GPS-enabled fleet tracking at JOTOFA Courier to automated scheduling systems at JOTOFA Cleaning, and from advanced security systems to digital recruitment pipelines at JOTOFA Staffing.",
+        "The multi-year initiative, budgeted at approximately $15 million, encompasses cloud migration, enterprise resource planning, real-time analytics, and customer-facing digital platforms. The transformation touches every aspect of the group's operations - from automated scheduling systems at JOTOFA Cleaning to advanced security systems at UTEC Solutions and digital recruitment pipelines at JOTOFA Staffing.",
         "Central to the transformation is the JOTOFA Digital Core - a shared services platform built on modern cloud infrastructure that provides common capabilities including identity management, financial reporting, HR administration, and data analytics. By consolidating these functions, the group expects to reduce operational costs by 18% while improving data-driven decision-making across all business units.",
         "The transformation also includes a significant upskilling component, with over 300 employees enrolled in digital literacy and specialized technology training programs. Partnerships with global technology providers ensure access to cutting-edge tools, while local tech talent is being cultivated through internship programs and university collaborations, creating a sustainable pipeline of digital skills within the organization.",
       ],
@@ -225,36 +224,10 @@ function generateArticleContent(article: NewsArticle): {
         "Review technology strategy quarterly",
       ],
     },
-    "JOTOFA Courier Launches Same-Day Delivery in Dar es Salaam": {
-      lead: "JOTOFA Courier has introduced same-day delivery services across the Dar es Salaam metropolitan area, promising pickup-to-delivery completion within six hours for businesses and individuals - a first for Tanzania's logistics sector.",
-      paragraphs: [
-        "The express service leverages JOTOFA Courier's existing fleet of 85 vehicles, augmented by a newly acquired fleet of 30 electric motorcycles for rapid urban delivery. Orders placed before 10:00 AM are guaranteed delivery by 4:00 PM the same day, with real-time tracking available through the JOTOFA Courier mobile application and web portal.",
-        "Pricing for the same-day service starts at TZS 8,000 for packages up to 5kg within Zone 1 (central business district), with tiered pricing for heavier items and outlying zones. Early adopters include e-commerce platforms, pharmaceutical distributors, and legal firms requiring time-sensitive document delivery - segments that have historically relied on informal courier networks with unpredictable service levels.",
-        "The service launch is supported by three newly established micro-hub facilities in Kariakoo, Mikocheni, and Kigamboni, serving as sorting and redistribution points that reduce last-mile delivery times. JOTOFA Courier plans to extend the same-day service to Arusha and Mwanza by Q3 2025, with eventual rollout to all major urban centers in Tanzania.",
-      ],
-      pullQuote: "Dar es Salaam is a city of over six million people where businesses lose billions annually to unreliable logistics. Our same-day service is designed to eliminate that uncertainty.",
-      pullQuoteAuthor: "Operations Director, JOTOFA Courier",
-      subheading1: "Technology-Powered Logistics",
-      subheading2: "Service Expansion Plans",
-      bulletList1: [
-        "Deploy 30 electric motorcycles for urban delivery",
-        "Guarantee 6-hour delivery for orders before 10 AM",
-        "Establish 3 micro-hub facilities in key zones",
-        "Launch real-time tracking via mobile app and web",
-        "Introduce barcode scanning at every checkpoint",
-      ],
-      bulletList2: [
-        "Expand same-day service to Arusha by Q3 2025",
-        "Roll out to Mwanza and other major cities",
-        "Build API integrations for e-commerce platforms",
-        "Scale fleet with demand-driven procurement",
-        "Maintain 99.5%+ on-time delivery rate",
-      ],
-    },
     "JOTOFA GROUP Achieves ISO 9001 Certification": {
       lead: "JOTOFA GROUP has been awarded ISO 9001:2015 certification, the internationally recognized standard for quality management systems, validating the group's commitment to operational excellence and continuous improvement across all subsidiaries.",
       paragraphs: [
-        "The certification, issued by Bureau Veritas following an extensive eight-month audit process, covers the group's headquarters and all five subsidiary operations. The audit evaluated processes ranging from service delivery and customer satisfaction measurement to internal communication, document control, and corrective action procedures - with JOTOFA meeting or exceeding all requirements on the first assessment.",
+        "The certification, issued by Bureau Veritas following an extensive eight-month audit process, covers the group's headquarters and all three subsidiary operations. The audit evaluated processes ranging from service delivery and customer satisfaction measurement to internal communication, document control, and corrective action procedures - with JOTOFA meeting or exceeding all requirements on the first assessment.",
         "The certification process involved training over 150 staff members as internal quality auditors, establishing standardized quality management procedures across all subsidiaries, and implementing a digital document management system that ensures real-time compliance tracking. Monthly management reviews and quarterly internal audits create a self-reinforcing cycle of quality improvement.",
         "For JOTOFA's clients, particularly those in regulated industries such as financial services and healthcare, the ISO 9001 certification provides an additional layer of assurance when selecting service providers. The certification is expected to open doors to new corporate and institutional clients who mandate ISO compliance in their vendor qualification processes.",
       ],
@@ -312,7 +285,7 @@ function generateArticleContent(article: NewsArticle): {
   return {
     lead: `JOTOFA GROUP continues to strengthen its position as a leading diversified conglomerate in East Africa, with the latest development marking another significant milestone in the group's growth trajectory and strategic vision for the region.`,
       paragraphs: [
-        "The announcement reflects JOTOFA GROUP's unwavering commitment to operational excellence and sustainable growth across all its business verticals. With four subsidiaries spanning ICT, logistics, facility management, and staffing, the group's integrated approach continues to set industry benchmarks in Tanzania and beyond.",
+        "The announcement reflects JOTOFA GROUP's unwavering commitment to operational excellence and sustainable growth across all its business verticals. With three subsidiaries spanning ICT, facility management, and staffing, the group's integrated approach continues to set industry benchmarks in Tanzania and beyond.",
       "The development is expected to create new employment opportunities and strengthen JOTOFA's market position across multiple sectors. Industry observers note that the group's diversified portfolio provides natural resilience against sector-specific economic fluctuations, while its continued investment in technology and human capital positions it for sustained long-term growth.",
       "Looking ahead, JOTOFA GROUP remains focused on its strategic priorities of geographic expansion, digital transformation, and community impact. The group's five-year strategic plan, unveiled last year, targets significant revenue growth driven by new market entry, service innovation, and operational efficiency improvements across all subsidiaries.",
     ],
@@ -344,7 +317,6 @@ function getArticleImage(article: NewsArticle): string {
     utec: "/images/utec.png",
     csr: "/images/cleaning.png",
     innovation: "/images/jotofa-hero-2.jpeg",
-    logistics: "/images/courier.png",
     group: "/images/jotofa-hero-1.jpeg",
   };
   return imageMap[article.categoryKey] || "/images/jotofa-hero-3.jpeg";
@@ -355,7 +327,6 @@ function getRelatedImage(categoryKey: string): string {
     utec: "/images/utec.png",
     csr: "/images/cleaning.png",
     innovation: "/images/jotofa-hero-2.jpeg",
-    logistics: "/images/courier.png",
     group: "/images/jotofa-hero-1.jpeg",
   };
   return imageMap[categoryKey] || "/images/jotofa-hero-3.jpeg";

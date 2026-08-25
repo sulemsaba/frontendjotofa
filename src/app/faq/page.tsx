@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "FAQ - JOTOFA GROUP",
     description:
-      "Find answers to frequently asked questions about JOTOFA GROUP and our five subsidiaries.",
+      "Find answers to frequently asked questions about JOTOFA GROUP and our three subsidiaries.",
     images: [{ url: "/images/jotofa-hero-1.webp", width: 1200, height: 630, alt: "JOTOFA GROUP FAQ" }],
   },
 };

@@ -65,7 +65,6 @@ interface SubsidiaryTab {
 const defaultSubsidiaryTabs: SubsidiaryTab[] = [
   { key: "jotofa", label: "JOTOFA Group" },
   { key: "utec", label: "UTEC Solutions" },
-  { key: "courier", label: "Courier & Logistics" },
   { key: "cleaning", label: "Cleaning & Maids" },
   { key: "staffing", label: "Staffing & Labour" },
   { key: "all", label: "All Jobs" },
@@ -85,12 +84,12 @@ const subsidiaryHeroData: Record<
   jotofa: {
     name: "JOTOFA Group",
     tagline:
-      "Delivering excellence across industries through ICT, logistics, professional services, and staffing",
+      "Delivering excellence across industries through ICT, professional cleaning, and staffing",
     logo: "/images/jotofa-logo-dark.png",
     heroImage: "/images/jotofa-hero-1.jpeg",
       stats: [
         { label: "Employees", value: "1,200+" },
-        { label: "Subsidiaries", value: "4" },
+        { label: "Subsidiaries", value: "3" },
         { label: "Country", value: "Tanzania" },
       ],
     },
@@ -103,18 +102,6 @@ const subsidiaryHeroData: Record<
     stats: [
       { label: "Employees", value: "200+" },
       { label: "Focus", value: "IT & Tech" },
-      { label: "Country", value: "Tanzania" },
-    ],
-  },
-  courier: {
-    name: "Courier & Logistics",
-    tagline:
-      "Delivering reliability - connecting businesses across Tanzania every day",
-    logo: "/images/courier.png",
-    heroImage: "/images/jotofa-hero-3.jpeg",
-    stats: [
-      { label: "Employees", value: "300+" },
-      { label: "Focus", value: "Logistics" },
       { label: "Country", value: "Tanzania" },
     ],
   },
@@ -149,7 +136,7 @@ const subsidiaryHeroData: Record<
     heroImage: "/images/jotofa-hero-1.jpeg",
     stats: [
       { label: "Employees", value: "1,200+" },
-      { label: "Subsidiaries", value: "4" },
+      { label: "Subsidiaries", value: "3" },
       { label: "Country", value: "Tanzania" },
     ],
   },
@@ -158,7 +145,6 @@ const subsidiaryHeroData: Record<
 const categories = [
   "All Categories",
   "Information Technology",
-  "Supply Chain & Logistics",
   "Operations",
   "Security & Safety",
   "Human Resources",
@@ -168,7 +154,6 @@ const categories = [
 const companies = [
   "All Companies",
   "UTEC Solutions",
-  "Courier & Logistics",
   "Cleaning & Maids",
   "Staffing & Labour",
 ];
@@ -176,7 +161,6 @@ const companies = [
 /* Company → subsidiary key mapping for filtering */
 const fallbackCompanyToSubKey: Record<string, string> = {
   "UTEC Solutions": "utec",
-  "Courier & Logistics": "courier",
   "Cleaning & Maids": "cleaning",
   "Staffing & Labour": "staffing",
 };
@@ -1347,7 +1331,7 @@ export function Careers() {
               </h2>
               <p className="text-white/70 leading-relaxed mb-8 text-sm sm:text-base">
                 Stay connected with JOTOFA GROUP and be the first to know about
-                new opportunities across our five subsidiaries. Whether
+                new opportunities across our three subsidiaries. Whether
                 you're an experienced professional or just starting your
                 career, we want to hear from you.
               </p>

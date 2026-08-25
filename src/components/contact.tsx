@@ -165,7 +165,6 @@ export function Contact() {
                     <option value="" disabled>What services are you interested in?</option>
                     <option value="consulting">Business Consulting</option>
                     <option value="investment">Investment Services</option>
-                    <option value="logistics">Logistics &amp; Supply Chain</option>
                     <option value="real-estate">Real Estate</option>
                     <option value="other">Other</option>
                   </select>

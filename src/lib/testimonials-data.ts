@@ -22,7 +22,7 @@ export const homeTestimonials: Testimonial[] = [
   },
   {
     quote:
-      "What sets JOTOFA apart is their consistency. Whether it is a courier pickup in Mwanza or a network installation in Dodoma, the quality and professionalism is identical. They behave like a true national partner.",
+      "What sets JOTOFA apart is their consistency. Whether it is a cleaning contract in Mwanza or a network installation in Dodoma, the quality and professionalism is identical. They behave like a true national partner.",
     name: "Fatma Mcharo",
     role: "Procurement Director",
     company: "Kilimanjaro Logistics Co.",
@@ -90,7 +90,7 @@ export const strategyTestimonials: Testimonial[] = [
   },
   {
     quote:
-      "Their decision to verticalize across ICT, logistics, and staffing creates real moats. Each subsidiary feeds the others - and that integrated model is hard to replicate.",
+      "Their decision to verticalize across ICT, cleaning, and staffing creates real moats. Each subsidiary feeds the others - and that integrated model is hard to replicate.",
     name: "Asha Mwakyusa",
     role: "Senior Analyst",
     company: "Twiga Equity Research",
@@ -175,40 +175,6 @@ export const utecTestimonials: Testimonial[] = [
     location: "Dar es Salaam",
     rating: 5,
     initials: "HM",
-  },
-];
-
-/* Courier & Logistics - clients */
-export const courierTestimonials: Testimonial[] = [
-  {
-    quote:
-      "We ship 300+ parcels a week across all 31 regions of Tanzania. JOTOFA Courier has held a 98% on-time rate for two years. Their GPS-tracked fleet gives our customers real visibility.",
-    name: "Charles Mrosso",
-    role: "Logistics Manager",
-    company: "Online Mart Tanzania",
-    location: "Dar es Salaam",
-    rating: 5,
-    initials: "CM",
-  },
-  {
-    quote:
-      "Cross-border freight to Rwanda used to take 9 days with two other providers. JOTOFA does it in 5 - including customs. They handle the paperwork so we can focus on sales.",
-    name: "Immaculate Uwase",
-    role: "Supply Chain Lead",
-    company: "Great Lakes Imports",
-    location: "Kigali, Rwanda",
-    rating: 5,
-    initials: "IU",
-  },
-  {
-    quote:
-      "Their warehousing team runs our 2,400 m² facility like clockwork. Real-time inventory, weekly cycle counts, and zero stock discrepancies in 14 months. Outstanding operational discipline.",
-    name: "Baraka Mosha",
-    role: "Warehouse Operations Manager",
-    company: "Highland Distributors Ltd",
-    location: "Mwanza",
-    rating: 5,
-    initials: "BM",
   },
 ];
 

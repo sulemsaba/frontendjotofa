@@ -190,7 +190,7 @@ export function Hero() {
 
             <p className="mb-8 lead text-jotofa-text-secondary dark:text-white/80 max-w-[450px] animate-fade-up-delay-2">
               A diversified Tanzanian holding company driving excellence through
-              ICT, logistics, professional services, and staffing -
+              ICT, professional cleaning, and staffing -
               empowering communities and industries alike.
             </p>
 

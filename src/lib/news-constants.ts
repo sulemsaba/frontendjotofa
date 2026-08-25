@@ -17,7 +17,6 @@ export const CATEGORY_MAP: Record<string, {
   "Technology":         { key: "utec",        color: "text-foreground",      bg: "bg-jotofa-accent/10",       border: "border-jotofa-accent/20",       label: "UTEC Solutions" },
   "CSR":                { key: "csr",         color: "text-foreground", bg: "bg-jotofa-accent/10",  border: "border-jotofa-accent/20",  label: "CSR" },
   "Innovation":         { key: "innovation",  color: "text-foreground", bg: "bg-jotofa-accent/10", border: "border-jotofa-accent/20",  label: "Innovation" },
-  "Logistics":          { key: "logistics",   color: "text-foreground", bg: "bg-jotofa-accent/10",  border: "border-jotofa-accent/20",  label: "Logistics" },
   "Partnerships":       { key: "group",       color: "text-foreground",     bg: "bg-jotofa-accent/10",   border: "border-jotofa-accent/20",   label: "Partnerships" },
 };
 
@@ -84,7 +83,7 @@ export const FALLBACK_ARTICLES: RawArticle[] = [
     category: "Group Update", categoryKey: "group",
     categoryColor: "text-foreground", categoryBg: "bg-jotofa-accent/10", categoryBorder: "border-jotofa-accent/20",
     title: "JOTOFA GROUP Expands into East African Markets with Kenya and Uganda Operations",
-    excerpt: "Our regional growth strategy takes a major step forward with new offices in Nairobi and Kampala, strengthening cross-border logistics and ICT services across the EAC.",
+    excerpt: "Our regional growth strategy takes a major step forward with new offices in Nairobi and Kampala, strengthening cross-border ICT and professional services across the EAC.",
     content: "", author: "JOTOFA Group", date: "MAR 15, 2026", readTime: "4 MIN READ", image: "/images/jotofa-hero-1.webp",
   },
   {
@@ -102,14 +101,6 @@ export const FALLBACK_ARTICLES: RawArticle[] = [
     title: "5,000 Trees Planted: JOTOFA's Green Tanzania Initiative Doubles Impact",
     excerpt: "Our environmental stewardship program reaches a new milestone with reforestation projects across Morogoro, Iringa, and Mbeya regions - doubling last year's target.",
     content: "", author: "JOTOFA Group", date: "JAN 20, 2026", readTime: "2 MIN READ", image: "/images/jotofa-hero-2.webp",
-  },
-  {
-    id: "f-4", slug: "courier-fleet-electrification",
-    category: "Logistics", categoryKey: "logistics",
-    categoryColor: "text-foreground", categoryBg: "bg-jotofa-accent/10", categoryBorder: "border-jotofa-accent/20",
-    title: "Courier & Logistics Launches Electric Vehicle Fleet for Last-Mile Delivery",
-    excerpt: "Ten new electric delivery vans hit the streets of Dar es Salaam, reducing carbon emissions by an estimated 40% while improving delivery speed in urban zones.",
-    content: "", author: "Courier & Logistics", date: "DEC 12, 2025", readTime: "3 MIN READ", image: "/images/courier.webp",
   },
   {
     id: "f-5", slug: "staffing-youth-program",
@@ -136,14 +127,6 @@ export const FALLBACK_ARTICLES: RawArticle[] = [
     content: "", author: "JOTOFA Group", date: "AUG 3, 2025", readTime: "3 MIN READ", image: "/images/cleaning.webp",
   },
   {
-    id: "f-8", slug: "logistics-cross-border",
-    category: "Logistics", categoryKey: "logistics",
-    categoryColor: "text-foreground", categoryBg: "bg-jotofa-accent/10", categoryBorder: "border-jotofa-accent/20",
-    title: "Cross-Border Logistics Corridor Opens Between Dar es Salaam and Lusaka",
-    excerpt: "A new streamlined customs clearance process reduces transit time from 5 days to 48 hours for goods moving between Tanzania and Zambia along the TAZARA corridor.",
-    content: "", author: "Courier & Logistics", date: "JUL 19, 2025", readTime: "3 MIN READ", image: "/images/courier.webp",
-  },
-  {
     id: "f-9", slug: "csr-digital-literacy",
     category: "CSR", categoryKey: "csr",
     categoryColor: "text-foreground", categoryBg: "bg-jotofa-accent/10", categoryBorder: "border-jotofa-accent/20",
@@ -164,23 +147,15 @@ export const FALLBACK_ARTICLES: RawArticle[] = [
     category: "Group Update", categoryKey: "group",
     categoryColor: "text-foreground", categoryBg: "bg-jotofa-accent/10", categoryBorder: "border-jotofa-accent/20",
     title: "JOTOFA GROUP Reports 35% Revenue Growth in 2025 Annual Results",
-    excerpt: "The group's diversified portfolio drives record performance with ICT and logistics divisions leading growth, while cleaning expands market share across Tanzania.",
+    excerpt: "The group's diversified portfolio drives record performance with ICT and staffing divisions leading growth, while cleaning expands market share across Tanzania.",
     content: "", author: "JOTOFA Group", date: "MAR 1, 2025", readTime: "5 MIN READ", image: "/images/jotofa-hero-1.webp",
-  },
-  {
-    id: "f-12", slug: "courier-same-day-delivery",
-    category: "Logistics", categoryKey: "logistics",
-    categoryColor: "text-foreground", categoryBg: "bg-jotofa-accent/10", categoryBorder: "border-jotofa-accent/20",
-    title: "Same-Day Delivery Service Expands to All Major Tanzanian Cities",
-    excerpt: "Courier & Logistics now offers guaranteed same-day parcel delivery in Dar es Salaam, Arusha, Mwanza, Dodoma, and Mbeya - powered by a new automated sorting hub.",
-    content: "", author: "Courier & Logistics", date: "FEB 14, 2025", readTime: "2 MIN READ", image: "/images/courier.webp",
   },
   {
     id: "f-13", slug: "group-annual-report-2024",
     category: "Group Update", categoryKey: "group",
     categoryColor: "text-foreground", categoryBg: "bg-jotofa-accent/10", categoryBorder: "border-jotofa-accent/20",
     title: "JOTOFA GROUP Reports Strong Performance in 2024 Annual Results",
-    excerpt: "The group's diversified portfolio continues to deliver strong results across all four subsidiaries, with significant growth in ICT and logistics segments.",
+    excerpt: "The group's diversified portfolio continues to deliver strong results across all three subsidiaries, with significant growth in ICT and staffing segments.",
     content: "", author: "JOTOFA Group", date: "JAN 15, 2025", readTime: "5 MIN READ", image: "/images/jotofa-hero-1.webp",
   },
 ];
@@ -191,7 +166,6 @@ export const FILTER_CATEGORIES = [
   { id: "utec", label: "UTEC Solutions" },
   { id: "csr", label: "CSR" },
   { id: "innovation", label: "Innovation" },
-  { id: "logistics", label: "Logistics" },
 ];
 
 // ─── Tags per category (for detail page sidebar) ───
@@ -200,5 +174,4 @@ export const categoryTags: Record<string, string[]> = {
   utec: ["ICT", "Smart City", "5G", "Telecommunications", "Digital Infrastructure"],
   csr: ["Sustainability", "Reforestation", "Community Impact", "Environmental", "Green Initiative"],
   innovation: ["Digital Transformation", "Technology", "AI & ML", "Cloud", "Innovation"],
-  logistics: ["Same-Day Delivery", "Logistics", "E-Commerce", "Fleet Management", "Supply Chain"],
 };

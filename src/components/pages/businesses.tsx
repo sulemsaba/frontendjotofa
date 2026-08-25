@@ -209,7 +209,7 @@ function BusinessesHero() {
 
           {/* Mission subtitle */}
           <p className="mx-auto max-w-2xl text-base sm:text-lg text-jotofa-text-secondary dark:text-white/75 leading-relaxed mb-10">
-            JOTOFA Group unites four specialized subsidiaries under one
+            JOTOFA Group unites three specialized subsidiaries under one
             corporate umbrella - each an independent leader in its sector, all
             bound by the same commitment to quality, integrity, and lasting
             impact across Tanzania and East Africa.
@@ -218,11 +218,11 @@ function BusinessesHero() {
           {/* Mini stats bar */}
           <div className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-muted/80 dark:bg-white/5 backdrop-blur border border-border text-sm">
             <span className="font-semibold text-foreground dark:text-white">
-              4 Subsidiaries
+              3 Subsidiaries
             </span>
             <span className="text-muted-foreground" aria-hidden>·</span>
             <span className="font-semibold text-foreground dark:text-white">
-              4 Sectors
+              3 Sectors
             </span>
             <span className="text-muted-foreground" aria-hidden>·</span>
             <span className="font-semibold text-foreground dark:text-white">
@@ -255,7 +255,7 @@ function SplitSections() {
           Our Subsidiaries
         </h2>
         <p className="mx-auto max-w-2xl text-muted-foreground text-lg">
-          Four independent entities. Four areas of expertise. One shared
+          Three independent entities. Three areas of expertise. One shared
           standard of excellence.
         </p>
       </ScrollReveal>
@@ -303,10 +303,10 @@ interface ImpactStat {
 const impactStats: ImpactStat[] = [
   {
     icon: Building2,
-    value: 4,
-    suffix: "+",
+    value: 3,
+    suffix: "",
     label: "Subsidiaries",
-    descriptor: "Across four specialized sectors",
+    descriptor: "Across three specialized sectors",
   },
   {
     icon: Users,
@@ -353,7 +353,7 @@ function GroupImpact() {
             JOTOFA Group
           </h2>
           <p className="mx-auto max-w-2xl text-white/70 text-lg">
-            Four subsidiaries working as one - the aggregate reach of our
+            Three subsidiaries working as one - the aggregate reach of our
             combined operations across Tanzania and East Africa.
           </p>
         </ScrollReveal>

@@ -20,11 +20,11 @@ function CareersSkeleton() {
 export const metadata: Metadata = {
   title: "Careers",
   description:
-    "Join JOTOFA GROUP - explore career opportunities across our four subsidiaries in ICT, logistics, cleaning, and staffing. Build your future with Tanzania's premier diversified holding company.",
+    "Join JOTOFA GROUP - explore career opportunities across our three subsidiaries in ICT, cleaning, and staffing. Build your future with Tanzania's premier diversified holding company.",
   openGraph: {
     title: "Careers - JOTOFA GROUP",
     description:
-      "Explore career opportunities across our five subsidiaries. Build your future with Tanzania's premier diversified holding company.",
+      "Explore career opportunities across our three subsidiaries. Build your future with Tanzania's premier diversified holding company.",
     images: [{ url: "/images/jotofa-hero-1.jpeg", width: 1200, height: 630, alt: "Careers at JOTOFA GROUP" }],
   },
 };
