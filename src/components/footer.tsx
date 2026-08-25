@@ -108,13 +108,18 @@ function LinkColumn({
               className="text-[15px] font-semibold text-foreground hover:text-jotofa-accent transition-colors cursor-pointer rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-1 focus-visible:ring-offset-background text-left"
             >
               {link.iconSrc && link.iconType === "wordmark" && (
-                <Image
-                  src={link.iconSrc}
-                  alt={link.iconAlt ?? ""}
-                  width={80}
-                  height={32}
-                  className="h-6 w-auto object-contain inline-block align-middle mr-2 dark:brightness-0 dark:invert"
-                />
+                /* Show the subsidiary's own logo in its true brand colours.
+                   A small white chip gives it a consistent, controlled
+                   backdrop in both themes instead of recolouring the mark. */
+                <span className="inline-flex items-center align-middle mr-2 px-1.5 py-0.5 rounded-sm bg-white border border-black/5">
+                  <Image
+                    src={link.iconSrc}
+                    alt={link.iconAlt ?? ""}
+                    width={80}
+                    height={32}
+                    className="h-5 w-auto object-contain"
+                  />
+                </span>
               )}
               {link.iconSrc && link.iconType === "icon" && (
                 <span className="inline-flex items-center justify-center w-4 h-4 rounded-sm bg-white border border-black/5 dark:bg-white/90 dark:border-white/20 flex-shrink-0 overflow-hidden align-middle mr-1.5">
