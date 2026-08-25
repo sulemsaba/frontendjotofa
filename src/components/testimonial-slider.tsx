@@ -50,11 +50,12 @@ export function TestimonialSlider({
         cardW = Math.max(300, Math.min(440, available - 2 * gap - 2 * peek));
         viewport = Math.min(available, cardW + 2 * gap + 2 * peek);
       } else {
-        // Mobile: larger centre card with small peek slivers on both sides.
+        // Mobile: centre card with clearly visible peek of the neighbours on
+        // both sides (like the subsidiary offering carousel).
         gap = 12;
-        const peek = 16;
+        const peek = 46;
         const available = vw - 32;
-        cardW = Math.max(250, Math.min(348, available - 2 * gap - 2 * peek));
+        cardW = Math.max(224, Math.min(348, available - 2 * gap - 2 * peek));
         viewport = Math.min(available, cardW + 2 * gap + 2 * peek);
       }
       const cardH = Math.round(cardW * 0.56);
