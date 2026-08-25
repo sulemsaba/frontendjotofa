@@ -304,6 +304,108 @@ function OfferingRail({
   );
 }
 
+// ─── Mobile: horizontal scroll-snap carousel of a subsidiary's offerings.
+//     Echoes the desktop stepper's scroll-driven feel (tab rail + a progress
+//     bar that fills with scroll, and the centred card brightens/scales) but
+//     as a horizontal swipe instead of a pinned vertical scroll. ─────────────
+function MobileOfferings({ sub }: { sub: Sub }) {
+  const offerings = sub.offerings!;
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
+  const { scrollXProgress } = useScroll({ container: scrollRef });
+
+  const onScroll = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const center = el.scrollLeft + el.clientWidth / 2;
+    let best = 0;
+    let bestDist = Infinity;
+    Array.from(el.children).forEach((c, i) => {
+      const card = c as HTMLElement;
+      const cc = card.offsetLeft + card.clientWidth / 2;
+      const d = Math.abs(cc - center);
+      if (d < bestDist) {
+        bestDist = d;
+        best = i;
+      }
+    });
+    setActive(best);
+  };
+
+  const scrollToCard = (i: number) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const card = el.children[i] as HTMLElement | undefined;
+    if (card) el.scrollTo({ left: card.offsetLeft - el.offsetLeft, behavior: "smooth" });
+  };
+
+  return (
+    <div className="lg:hidden py-14">
+      <div className="px-6 sm:px-8">
+        <SubEyebrow index={sub.index} tagline={sub.tagline} />
+        <h3 className="font-light leading-[1.08] tracking-tight text-jotofa-navy dark:text-white mb-3 text-3xl">
+          {sub.name}
+        </h3>
+        <p className="text-jotofa-text-secondary dark:text-white/70 text-base leading-relaxed mb-6 max-w-lg">
+          {sub.description}
+        </p>
+
+        {/* Offering tabs (like the desktop rail) */}
+        <div className="flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {offerings.map((o, i) => (
+            <button
+              key={o.title}
+              type="button"
+              onClick={() => scrollToCard(i)}
+              aria-current={active === i ? "true" : undefined}
+              className={`shrink-0 rounded-full px-3 py-1.5 text-[12px] font-medium whitespace-nowrap transition-colors ${
+                active === i
+                  ? "bg-jotofa-accent text-white"
+                  : "bg-jotofa-navy/[0.05] dark:bg-white/[0.06] text-jotofa-navy/70 dark:text-white/70"
+              }`}
+            >
+              {o.title}
+            </button>
+          ))}
+        </div>
+        {/* Scroll-linked progress bar */}
+        <div className="mt-3 h-[3px] rounded-full bg-jotofa-navy/10 dark:bg-white/10 overflow-hidden">
+          <motion.div style={{ scaleX: scrollXProgress }} className="h-full origin-left rounded-full bg-jotofa-accent" />
+        </div>
+      </div>
+
+      {/* Horizontal snap cards */}
+      <div
+        ref={scrollRef}
+        onScroll={onScroll}
+        className="mt-5 flex gap-4 overflow-x-auto snap-x snap-mandatory px-6 sm:px-8 scroll-px-6 sm:scroll-px-8 pb-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {offerings.map((o, i) => (
+          <motion.div
+            key={o.title}
+            animate={{ opacity: active === i ? 1 : 0.45, scale: active === i ? 1 : 0.95 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="snap-center shrink-0 w-[82vw] max-w-[400px]"
+          >
+            <div className="mb-4">
+              <Frame src={o.image} alt={o.title} />
+            </div>
+            <h4 className="text-lg font-semibold text-jotofa-navy dark:text-white mb-2">{o.title}</h4>
+            <p className="text-jotofa-text-secondary dark:text-white/70 text-[15px] leading-relaxed mb-4">
+              {o.description}
+            </p>
+            <BenefitList items={o.benefits} />
+          </motion.div>
+        ))}
+      </div>
+
+      <div className="px-6 sm:px-8 mt-6">
+        <ExploreLink page={sub.page} name={sub.name} />
+      </div>
+    </div>
+  );
+}
+
 // ─── Subsidiary as a pinned scroll-stepper of its offerings ─────────────────
 function SubsidiaryStepper({ sub, reversed }: { sub: Sub; reversed: boolean }) {
   const offerings = sub.offerings!;
@@ -404,33 +506,8 @@ function SubsidiaryStepper({ sub, reversed }: { sub: Sub; reversed: boolean }) {
         </div>
       </div>
 
-      {/* MOBILE: stacked offerings */}
-      <div className="lg:hidden px-6 sm:px-8 py-14">
-        <SubEyebrow index={sub.index} tagline={sub.tagline} />
-        <h3 className="font-light leading-[1.08] tracking-tight text-jotofa-navy dark:text-white mb-3 text-3xl">
-          {sub.name}
-        </h3>
-        <p className="text-jotofa-text-secondary dark:text-white/70 text-base leading-relaxed mb-8 max-w-lg">
-          {sub.description}
-        </p>
-        <div className="space-y-10">
-          {offerings.map((o) => (
-            <div key={o.title}>
-              <div className="mb-4">
-                <Frame src={o.image} alt={o.title} />
-              </div>
-              <h4 className="text-lg font-semibold text-jotofa-navy dark:text-white mb-2">{o.title}</h4>
-              <p className="text-jotofa-text-secondary dark:text-white/70 text-[15px] leading-relaxed mb-4">
-                {o.description}
-              </p>
-              <BenefitList items={o.benefits} />
-            </div>
-          ))}
-        </div>
-        <div className="mt-9">
-          <ExploreLink page={sub.page} name={sub.name} />
-        </div>
-      </div>
+      {/* MOBILE: horizontal scroll-snap carousel of offerings */}
+      <MobileOfferings sub={sub} />
     </section>
   );
 }
