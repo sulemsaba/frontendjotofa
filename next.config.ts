@@ -1,7 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "standalone",
+  // `standalone` produces a self-contained server bundle for self-hosting
+  // (e.g. Docker). On Vercel it conflicts with Vercel's own serverless
+  // packaging - the finalize step fails looking for next-server.js.nft.json -
+  // so only enable it when NOT building on Vercel (Vercel sets VERCEL=1).
+  output: process.env.VERCEL ? undefined : "standalone",
   reactStrictMode: true,
   compress: true,
   experimental: {
