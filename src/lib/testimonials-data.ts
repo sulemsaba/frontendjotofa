@@ -25,7 +25,7 @@ export const homeTestimonials: Testimonial[] = [
       "What sets JOTOFA apart is their consistency. Whether it is a cleaning contract in Mwanza or a network installation in Dodoma, the quality and professionalism is identical. They behave like a true national partner.",
     name: "Fatma Mcharo",
     role: "Procurement Director",
-    company: "Kilimanjaro Logistics Co.",
+    company: "Kilimanjaro Trading Co.",
     location: "Arusha",
     rating: 5,
     initials: "FM",
