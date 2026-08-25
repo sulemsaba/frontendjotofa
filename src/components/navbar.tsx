@@ -241,7 +241,7 @@ export function Navbar() {
                          onMouseEnter={() => openMenu("subsidiaries")}
                          onMouseLeave={scheduleCloseMenu}>
                           <div className="w-[560px] max-w-[calc(100vw-2rem)] bg-white dark:bg-jotofa-navy-card backdrop-blur-[20px] border border-jotofa-navy/8 dark:border-white/10 rounded-2xl shadow-[0_16px_50px_rgba(0,20,40,0.16)] dark:shadow-[0_24px_60px_rgba(0,0,0,0.5)] p-2.5">
-                            <div className="grid grid-cols-[47%_53%] gap-2.5">
+                            <div className="grid grid-cols-[47fr_53fr] gap-2.5">
                               {/* LEFT: compact list on the shared background */}
                               <div className="flex flex-col">
                                  <div className="px-2.5 pt-1 pb-1.5"><span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-jotofa-navy/50 dark:text-white/45">Subsidiaries</span></div>
@@ -250,28 +250,30 @@ export function Navbar() {
                                   const Icon = biz.icon;
                                   return (
                                   <PageLink key={biz.id} page={biz.page} onMouseEnter={() => { setHoveredBizIndex(idx); prefetchPage(biz.page); }} onClick={closeMenus}
-                                    className={`group/biz flex items-center gap-2.5 rounded-xl px-2.5 py-2 transition-colors duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent ${active ? "bg-jotofa-navy/[0.05] dark:bg-white/[0.07]" : "hover:bg-jotofa-navy/[0.03] dark:hover:bg-white/[0.04]"}`}>
-                                     <span className={`flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center transition-colors duration-150 ${active ? "bg-jotofa-accent/15 text-jotofa-accent" : "bg-jotofa-navy/[0.05] dark:bg-white/[0.06] text-jotofa-navy/55 dark:text-white/55"}`}>
-                                       {biz.logo ? (
-                                         <Image src={biz.logo} alt="" width={20} height={20} className="w-5 h-5 object-contain" />
-                                       ) : Icon ? (
-                                         <Icon className="w-4 h-4" strokeWidth={2} />
-                                       ) : null}
-                                     </span>
+                                    className={`group/biz flex items-center gap-2.5 rounded-md px-2.5 py-2 transition-colors duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent ${active ? "bg-jotofa-navy/[0.05] dark:bg-white/[0.07]" : "hover:bg-jotofa-navy/[0.03] dark:hover:bg-white/[0.04]"}`}>
+                                     {biz.logo ? (
+                                       <span className="flex-shrink-0 w-9 h-9 flex items-center justify-center">
+                                         <Image src={biz.logo} alt="" width={36} height={36} className="w-9 h-9 object-contain" />
+                                       </span>
+                                     ) : (
+                                       <span className={`flex-shrink-0 w-9 h-9 flex items-center justify-center transition-colors duration-150 ${active ? "text-jotofa-accent" : "text-jotofa-navy/60 dark:text-white/60"}`}>
+                                         {Icon ? <Icon className="w-6 h-6" strokeWidth={1.75} /> : null}
+                                       </span>
+                                     )}
                                     <span className="min-w-0 flex-1">
                                       <span className={`block text-[13px] leading-tight font-semibold ${active ? "text-jotofa-navy dark:text-white" : "text-jotofa-navy/80 dark:text-white/80"}`}>{biz.label}</span>
                                       <span className="block text-[11px] leading-tight text-jotofa-navy/50 dark:text-white/50 truncate mt-0.5">{biz.description}</span>
                                     </span>
-                                    <ArrowRight className={`w-3.5 h-3.5 flex-shrink-0 text-jotofa-accent transition-all duration-150 ${active ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-1"}`} />
+                                    <ArrowRight className={`w-3.5 h-3.5 flex-shrink-0 mr-1 text-jotofa-accent transition-all duration-150 ${active ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-1"}`} />
                                   </PageLink>
                                   );
                                 })}
-                                <PageLink page="businesses" onClick={closeMenus} className="group/viewall mt-auto flex items-center gap-1.5 rounded-xl px-2.5 py-2 text-[12px] font-medium text-jotofa-navy/70 dark:text-white/60 hover:text-jotofa-navy dark:hover:text-white hover:bg-jotofa-navy/[0.03] dark:hover:bg-white/[0.04] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent">
+                                <PageLink page="businesses" onClick={closeMenus} className="group/viewall mt-1 flex items-center gap-1.5 rounded-md px-2.5 py-2 text-[12px] font-medium text-jotofa-navy/70 dark:text-white/60 hover:text-jotofa-navy dark:hover:text-white hover:bg-jotofa-navy/[0.03] dark:hover:bg-white/[0.04] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent">
                                   View All Subsidiaries <ArrowRight className="w-3 h-3 group-hover/viewall:translate-x-0.5 transition-transform" />
                                 </PageLink>
                               </div>
                               {/* RIGHT: image inset in the shared background (rounded, no bleed) */}
-                              <div className="relative rounded-xl overflow-hidden min-h-[236px]">
+                              <div className="relative rounded-2xl overflow-hidden min-h-[180px]">
                                 <AnimatePresence>
                                   <motion.div key={currentBiz.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="absolute inset-0">
                                     <Image
@@ -283,7 +285,6 @@ export function Navbar() {
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-jotofa-navy/90 via-jotofa-navy/35 to-transparent" />
                                     <div className="absolute bottom-0 left-0 right-0 p-4">
-                                      <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/12 border border-white/15 backdrop-blur-sm mb-1.5"><span className="text-[10px] font-medium text-white">{currentBiz.description}</span></div>
                                       <div className="text-white text-[15px] font-semibold leading-tight">{currentBiz.label}</div>
                                     </div>
                                   </motion.div>

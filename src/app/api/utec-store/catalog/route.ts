@@ -68,8 +68,10 @@ export interface CatalogRow {
 function normalizeImageUrl(url: string | null | undefined): string | null {
   if (!url) return null;
   try {
-    // encodeURI keeps http:// and / intact but encodes spaces and parens.
-    return encodeURI(url);
+    // The store returns URLs with a literal "/../" (e.g.
+    // https://core.utecsolutions.co.tz/../shared_utils/...) - collapse it.
+    // encodeURI then keeps http:// and / intact but encodes spaces and parens.
+    return encodeURI(url.replace(/\/\.\.\//g, "/"));
   } catch {
     return url;
   }
