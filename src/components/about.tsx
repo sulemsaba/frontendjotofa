@@ -1,7 +1,4 @@
-"use client";
-
 import Image from "next/image";
-import { motion } from "framer-motion";
 import {
   ArrowRight,
   Handshake,
@@ -12,38 +9,36 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { PageLink, PageId } from "@/lib/page-context";
+import { ScrollReveal, StaggerContainer, StaggerItem } from "./scroll-reveal";
 
 /* ──────────────────────────────────────────────────────────────────────────
-   About JOTOFA Group - clean, editorial, minimal.
+   About JOTOFA Group - editorial and minimal, rebuilt to share the same
+   design language as the home and UTEC pages:
+     - framer-free scroll reveals (IntersectionObserver + CSS)
+     - brand yellow reserved for the single primary CTA; every decorative
+       accent (eyebrows, value icons, rules, hover states) is neutral
+     - thin-dash section eyebrows, image cards with a soft shadow, and a
+       consistent card/stat vocabulary
 
-   Layout (top → bottom):
-     1. Hero         split grid (text 1.2fr / image 1fr). "Five Arms. One
-                     Unified Vision." + portrait photograph.
-     2. Story        "Our Journey" header + 2-column milestone timeline
-                     (2015 → 2024) with year / title / description rows.
-     3. Purpose      split grid: Mission & Vision (accent left-border) +
-                     square image; below, a 5-column values grid.
-     4. Ecosystem    "Five Arms, One Vision" subsidiary list. Each row is a
-                     clickable card that routes to the subsidiary page.
-     5. Stats        5-column minimal counters band.
-     6. CTA          centered "Ready to Partner..." + Contact button.
-
-   Brand palette ONLY (JOTOFA navy + teal). Theme-aware (light + dark).
-   Scroll fade-up animations via framer-motion whileInView - NO stagger
-   delays so content appears together rather than trickling in.
-   Fully responsive: mobile-first grids, appropriate type scale, compact
-   spacing on small screens.
+   Sections: Hero, Our Journey (timeline), Our Purpose (mission/vision +
+   values), Our Companies (ecosystem), Stats band, CTA.
    ────────────────────────────────────────────────────────────────────────── */
 
-/* Shared framer-motion variant   opacity 0 → 1, y 16 → 0. Short duration
-   (0.4s) so sections arrive quickly. NO stagger delays - every element in
-   a section animates together so content "shows up all at once" on load. */
-const fadeUp = {
-  initial: { opacity: 0, y: 16 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-40px" },
-  transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] as const },
-};
+/* ─── Small shared bits ─── */
+
+function SectionEyebrow({ label }: { label: string }) {
+  return (
+    <div className="flex items-center gap-3 mb-4">
+      <span aria-hidden className="inline-block w-8 h-px bg-foreground/30" />
+      <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-muted-foreground">
+        {label}
+      </span>
+    </div>
+  );
+}
+
+const imageCard =
+  "relative rounded-2xl overflow-hidden border border-border shadow-[0_20px_60px_rgba(0,20,40,0.12)]";
 
 /* ─── Data ─── */
 
@@ -150,27 +145,35 @@ function AboutHero() {
     <section className="border-b border-border section-py">
       <div className="container-wide">
         <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-10 lg:gap-20 items-center">
-          <motion.div {...fadeUp}>
-            <div className="eyebrow mb-5 sm:mb-6">
-              About JOTOFA Group
-            </div>
+          <ScrollReveal>
+            <SectionEyebrow label="About JOTOFA Group" />
             <h1 className="h1 text-foreground mb-6 sm:mb-8">
               Four Arms.
               <br />
-              One Unified{" "}
-              Vision.
+              One Unified Vision.
             </h1>
-            <p className="lead max-w-[540px]">
+            <p className="lead max-w-[540px] mb-9 sm:mb-10">
               A diversified Tanzanian holding company driving excellence through
               ICT, logistics, professional services, and staffing -
               empowering communities and industries across East Africa.
             </p>
-          </motion.div>
+            <div className="flex flex-wrap items-center gap-3">
+              <PageLink
+                page="contact"
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-jotofa-navy dark:bg-jotofa-accent text-white dark:text-jotofa-navy font-semibold transition-all hover:-translate-y-0.5 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/30 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              >
+                Work with us <ArrowRight className="w-4 h-4" />
+              </PageLink>
+              <PageLink
+                page="strategy"
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-foreground/20 text-foreground hover:bg-foreground/5 font-semibold transition-all cursor-pointer"
+              >
+                Our strategy
+              </PageLink>
+            </div>
+          </ScrollReveal>
 
-          <motion.div
-            {...fadeUp}
-            className="relative rounded-2xl overflow-hidden aspect-[4/5]"
-          >
+          <ScrollReveal delay={0.1} className={`${imageCard} aspect-[4/5]`}>
             <Image
               src="/images/jotofa-hero-1.jpeg"
               alt="JOTOFA Group headquarters"
@@ -179,7 +182,7 @@ function AboutHero() {
               sizes="(max-width: 1024px) 100vw, 45vw"
               className="object-cover"
             />
-          </motion.div>
+          </ScrollReveal>
         </div>
       </div>
     </section>
@@ -190,10 +193,8 @@ function Story() {
   return (
     <section className="border-b border-border section-py">
       <div className="container-wide">
-        <motion.div {...fadeUp} className="max-w-[640px] mb-12 sm:mb-16 lg:mb-20">
-          <div className="eyebrow mb-4">
-            Our Journey
-          </div>
+        <ScrollReveal className="max-w-[640px] mb-12 sm:mb-16 lg:mb-20">
+          <SectionEyebrow label="Our Journey" />
           <h2 className="h2 text-foreground mb-5 sm:mb-6">
             Expanding into East African Markets
           </h2>
@@ -202,29 +203,24 @@ function Story() {
             Tanzania has evolved into a regional powerhouse through four
             specialized subsidiaries.
           </p>
-        </motion.div>
+        </ScrollReveal>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-16 lg:gap-x-20 gap-y-0">
+        <StaggerContainer className="grid grid-cols-1 lg:grid-cols-2 gap-x-16 lg:gap-x-20 gap-y-0">
           {timeline.map((item) => (
-            <motion.div
+            <StaggerItem
               key={item.year}
-              {...fadeUp}
               className="grid grid-cols-[56px_1fr] sm:grid-cols-[80px_1fr] gap-4 sm:gap-8 py-6 sm:py-8 border-t border-border last:border-b"
             >
               <div className="text-sm font-bold text-foreground pt-1 tabular-nums">
                 {item.year}
               </div>
               <div>
-                <h3 className="h3 text-foreground mb-2">
-                  {item.title}
-                </h3>
-                <p className="body-sm">
-                  {item.description}
-                </p>
+                <h3 className="h3 text-foreground mb-2">{item.title}</h3>
+                <p className="body-sm">{item.description}</p>
               </div>
-            </motion.div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );
@@ -234,42 +230,33 @@ function Purpose() {
   return (
     <section className="section-py bg-muted/40 dark:bg-white/[0.02]">
       <div className="container-wide">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 mb-16 sm:mb-20 lg:mb-24">
-          <motion.div {...fadeUp}>
-            <div className="eyebrow mb-4">
-              Our Purpose
-            </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 mb-16 sm:mb-20 lg:mb-24 items-center">
+          <ScrollReveal>
+            <SectionEyebrow label="Our Purpose" />
             <h2 className="h2 text-foreground mb-8 sm:mb-12">
               Driven by Excellence, Guided by Impact
             </h2>
 
-            <div className="mb-8 sm:mb-10 pl-5 sm:pl-6 border-l-2 border-jotofa-accent">
-              <h3 className="h4 text-foreground mb-2">
-                Our Mission
-              </h3>
+            <div className="mb-8 sm:mb-10 pl-5 sm:pl-6 border-l-2 border-foreground/15">
+              <h3 className="h4 text-foreground mb-2">Our Mission</h3>
               <p className="body-sm">
-                 To empower businesses and communities across East Africa by
-                 delivering specialized, high-quality solutions in technology,
-                 logistics, facility management, and human capital.
+                To empower businesses and communities across East Africa by
+                delivering specialized, high-quality solutions in technology,
+                logistics, facility management, and human capital.
               </p>
             </div>
 
-            <div className="pl-5 sm:pl-6 border-l-2 border-jotofa-accent">
-              <h3 className="h4 text-foreground mb-2">
-                Our Vision
-              </h3>
+            <div className="pl-5 sm:pl-6 border-l-2 border-foreground/15">
+              <h3 className="h4 text-foreground mb-2">Our Vision</h3>
               <p className="body-sm">
                 To be East Africa&apos;s most trusted and integrated holding
                 company, recognized for uniting four specialized arms under one
                 commitment to quality, innovation, and impact.
               </p>
             </div>
-          </motion.div>
+          </ScrollReveal>
 
-          <motion.div
-            {...fadeUp}
-            className="relative rounded-2xl overflow-hidden aspect-[4/3] sm:aspect-square"
-          >
+          <ScrollReveal delay={0.1} className={`${imageCard} aspect-[4/3] sm:aspect-square`}>
             <Image
               src="/images/jotofa-hero-3.jpeg"
               alt="Professional team collaboration"
@@ -277,33 +264,26 @@ function Purpose() {
               sizes="(max-width: 1024px) 100vw, 45vw"
               className="object-cover"
             />
-          </motion.div>
+          </ScrollReveal>
         </div>
 
-        <motion.div
-          {...fadeUp}
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6"
-        >
+        <StaggerContainer className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
           {values.map((value) => {
             const Icon = value.icon;
             return (
-            <div
-              key={value.title}
-              className="p-5 sm:p-6 lg:p-8 bg-card rounded-2xl text-center transition-all duration-300 hover:-translate-y-1 hover:border-jotofa-accent/25"
-            >
-              <div className="inline-flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-jotofa-accent/10 text-jotofa-accent mb-3 sm:mb-4">
-                <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
-              </div>
-              <h4 className="h4 text-foreground mb-1.5 sm:mb-2">
-                {value.title}
-              </h4>
-              <p className="body-sm">
-                {value.description}
-              </p>
-            </div>
+              <StaggerItem
+                key={value.title}
+                className="p-5 sm:p-6 lg:p-8 bg-card border border-border rounded-2xl text-center transition-all duration-300 hover:-translate-y-1 hover:border-foreground/20"
+              >
+                <div className="inline-flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-foreground/[0.06] text-foreground mb-3 sm:mb-4">
+                  <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
+                </div>
+                <h4 className="h4 text-foreground mb-1.5 sm:mb-2">{value.title}</h4>
+                <p className="body-sm">{value.description}</p>
+              </StaggerItem>
             );
           })}
-        </motion.div>
+        </StaggerContainer>
       </div>
     </section>
   );
@@ -313,10 +293,8 @@ function Ecosystem() {
   return (
     <section className="border-b border-border section-py">
       <div className="container-wide">
-        <motion.div {...fadeUp} className="max-w-[640px] mb-10 sm:mb-12 lg:mb-16">
-          <div className="eyebrow mb-4">
-            Our Companies
-          </div>
+        <ScrollReveal className="max-w-[640px] mb-10 sm:mb-12 lg:mb-16">
+          <SectionEyebrow label="Our Companies" />
           <h2 className="h2 text-foreground mb-5 sm:mb-6">
             Four Arms, One Vision
           </h2>
@@ -324,44 +302,42 @@ function Ecosystem() {
             Each subsidiary is a pillar of our group - specialized, yet united
             by a commitment to quality, innovation, and impact.
           </p>
-        </motion.div>
+        </ScrollReveal>
 
-        <div className="grid gap-3 sm:gap-4">
+        <StaggerContainer className="grid gap-3 sm:gap-4">
           {ecosystem.map((item) => (
-            <motion.div key={item.number} {...fadeUp}>
-            <PageLink
-              page={item.page}
-              className="group grid grid-cols-[44px_1fr_auto] sm:grid-cols-[60px_1fr_auto] items-center gap-3 sm:gap-8 p-4 sm:p-6 lg:p-8 bg-card rounded-2xl text-left transition-all duration-300 hover:bg-background hover:border-jotofa-accent/25 hover:translate-x-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-            >
-              <span className="text-xl sm:text-2xl font-bold text-foreground tabular-nums">
-                {item.number}
-              </span>
-              <div className="flex items-center gap-3 sm:gap-4 min-w-0">
-                <div className="hidden sm:flex flex-shrink-0 w-11 h-11 rounded-lg overflow-hidden items-center justify-center bg-white border border-black/5 dark:border-white/10 shadow-sm">
-                  {item.logo && (
-                    <Image
-                      src={item.logo}
-                      alt={`${item.name} logo`}
-                      width={32}
-                      height={32}
-                      className="w-8 h-8 object-contain"
-                    />
-                  )}
+            <StaggerItem key={item.number}>
+              <PageLink
+                page={item.page}
+                className="group grid grid-cols-[44px_1fr_auto] sm:grid-cols-[60px_1fr_auto] items-center gap-3 sm:gap-8 p-4 sm:p-6 lg:p-8 bg-card border border-border rounded-2xl text-left transition-all duration-300 hover:border-foreground/25 hover:translate-x-1.5 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/30 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              >
+                <span className="text-xl sm:text-2xl font-bold text-foreground tabular-nums">
+                  {item.number}
+                </span>
+                <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+                  <div className="hidden sm:flex flex-shrink-0 w-11 h-11 rounded-lg overflow-hidden items-center justify-center bg-white border border-black/5 dark:border-white/10 shadow-sm">
+                    {item.logo && (
+                      <Image
+                        src={item.logo}
+                        alt={`${item.name} logo`}
+                        width={32}
+                        height={32}
+                        className="w-8 h-8 object-contain"
+                      />
+                    )}
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="h3 text-foreground mb-0.5 sm:mb-1">{item.name}</h3>
+                    <p className="body-sm line-clamp-2 sm:line-clamp-none">
+                      {item.description}
+                    </p>
+                  </div>
                 </div>
-                <div className="min-w-0">
-                  <h3 className="h3 text-foreground mb-0.5 sm:mb-1">
-                    {item.name}
-                  </h3>
-                  <p className="body-sm line-clamp-2 sm:line-clamp-none">
-                    {item.description}
-                  </p>
-                </div>
-              </div>
-              <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-muted-foreground/60 transition-all duration-300 group-hover:text-jotofa-accent group-hover:translate-x-1 flex-shrink-0" />
-            </PageLink>
-            </motion.div>
+                <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-muted-foreground/60 transition-all duration-300 group-hover:text-foreground group-hover:translate-x-1 flex-shrink-0" />
+              </PageLink>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );
@@ -371,49 +347,44 @@ function Stats() {
   return (
     <section className="border-b border-border section-py">
       <div className="container-wide">
-        <motion.div
-          {...fadeUp}
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8 sm:gap-10 lg:gap-12"
-        >
+        <StaggerContainer className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8 sm:gap-10 lg:gap-12">
           {stats.map((stat) => (
-            <div key={stat.label} className="text-center">
+            <StaggerItem key={stat.label} className="text-center">
               <div className="text-3xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-none mb-2 tracking-tight tabular-nums">
                 {stat.number}
               </div>
               <div className="body-sm text-xs sm:text-base font-medium">
                 {stat.label}
               </div>
-            </div>
+            </StaggerItem>
           ))}
-        </motion.div>
+        </StaggerContainer>
       </div>
     </section>
   );
 }
 
 function CTA() {
-
   return (
     <section className="section-py text-center">
       <div className="container-wide">
-        <motion.div {...fadeUp}>
+        <ScrollReveal>
           <h2 className="h2 text-foreground mb-5 sm:mb-6 max-w-[800px] mx-auto">
-            Ready to Partner with East Africa&apos;s{" "}
-            Unified Powerhouse?
+            Ready to Partner with East Africa&apos;s Unified Powerhouse?
           </h2>
           <p className="lead mb-8 sm:mb-10 max-w-[600px] mx-auto">
             Whether you need ICT solutions, logistics support, facility
-            management, or workforce solutions - JOTOFA Group
-            delivers excellence under one trusted roof.
+            management, or workforce solutions - JOTOFA Group delivers
+            excellence under one trusted roof.
           </p>
           <PageLink
             page="contact"
-            className="inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-3.5 sm:py-4 rounded-lg bg-jotofa-navy dark:bg-jotofa-accent text-white dark:text-jotofa-navy text-sm sm:text-base font-semibold transition-all duration-300 hover:-translate-y-0.5 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jotofa-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            className="inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-3.5 sm:py-4 rounded-full bg-jotofa-navy dark:bg-jotofa-accent text-white dark:text-jotofa-navy text-sm sm:text-base font-semibold transition-all duration-300 hover:-translate-y-0.5 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/30 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             Contact JOTOFA Group
             <ArrowRight className="w-4 h-4" />
           </PageLink>
-        </motion.div>
+        </ScrollReveal>
       </div>
     </section>
   );

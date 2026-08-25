@@ -1203,9 +1203,9 @@ export function Careers() {
                                   );
                                 }
                               }}
-                              className="px-5 py-2.5 text-sm font-medium rounded-full border border-input text-foreground hover:border-jotofa-navy/30 transition-colors"
+                              className="px-5 py-3 text-sm font-medium rounded-xl border border-input text-foreground hover:border-jotofa-navy/30 transition-colors w-full sm:w-auto"
                             >
-                              <span className="flex items-center gap-1.5">
+                              <span className="flex items-center justify-center gap-1.5">
                                 <Share2 className="w-3.5 h-3.5" />
                                 Share
                               </span>
@@ -1223,68 +1223,85 @@ export function Careers() {
                 PAGINATION - Reyes Holdings style
                 ═══════════════════════════════════════ */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-3 mt-6 pt-4 border-t border-border">
-              {/* Items per page */}
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <span>Items per page:</span>
-                <select
-                  value={pageSize}
-                  onChange={(e) =>
-                    handlePageSizeChange(Number(e.target.value))
-                  }
-                  className="px-2 py-1 text-sm rounded border border-input bg-background text-foreground focus:outline-none focus:ring-1 focus:ring-jotofa-navy/20"
-                >
-                  {PAGE_SIZE_OPTIONS.map((size) => (
-                    <option key={size} value={size}>
-                      {size}
-                    </option>
-                  ))}
-                </select>
+              {/* Items per page + Range text */}
+              <div className="flex items-center justify-between sm:gap-4 w-full sm:w-auto">
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <span className="hidden sm:inline">Items per page:</span>
+                  <span className="sm:hidden">Per page:</span>
+                  <select
+                    value={pageSize}
+                    onChange={(e) =>
+                      handlePageSizeChange(Number(e.target.value))
+                    }
+                    className="px-2 py-1.5 text-sm rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-1 focus:ring-jotofa-navy/20"
+                  >
+                    {PAGE_SIZE_OPTIONS.map((size) => (
+                      <option key={size} value={size}>
+                        {size}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <span className="text-sm text-muted-foreground">
+                  {(currentPage - 1) * pageSize + 1}-
+                  {Math.min(currentPage * pageSize, filteredJobs.length)} of{" "}
+                  {filteredJobs.length}
+                </span>
               </div>
 
-              {/* Range text */}
-              <span className="text-sm text-muted-foreground">
-                {(currentPage - 1) * pageSize + 1}-
-                {Math.min(currentPage * pageSize, filteredJobs.length)} of{" "}
-                {filteredJobs.length}
-              </span>
-
-              {/* Navigation arrows */}
+              {/* Navigation arrows - compact on mobile */}
               <div className="flex items-center gap-1">
                 <button
                   onClick={() =>
                     setCurrentPage((p) => Math.max(1, p - 1))
                   }
-                   disabled={currentPage === 1}
-                   className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg hover:bg-secondary dark:hover:bg-jotofa-navy/50 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-                   aria-label="Previous page"
-                 >
-                   <ChevronLeft className="w-4 h-4 text-foreground" />
-                 </button>
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                  (page) => (
-                    <button
-                      key={page}
-                      onClick={() => setCurrentPage(page)}
-                       className={`w-11 h-11 text-sm font-medium rounded-lg transition-colors ${
-                        currentPage === page
-                          ? "bg-jotofa-navy text-white"
-                          : "text-foreground hover:bg-secondary dark:hover:bg-jotofa-navy/50"
-                      }`}
-                    >
-                      {page}
-                    </button>
-                  )
-                )}
+                  disabled={currentPage === 1}
+                  className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg hover:bg-secondary dark:hover:bg-jotofa-navy/50 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                  aria-label="Previous page"
+                >
+                  <ChevronLeft className="w-4 h-4 text-foreground" />
+                </button>
+                {Array.from({ length: totalPages }, (_, i) => i + 1)
+                  .filter((page) => {
+                    // Show first, last, current, and neighbors on mobile
+                    if (totalPages <= 5) return true;
+                    if (page === 1 || page === totalPages) return true;
+                    if (Math.abs(page - currentPage) <= 1) return true;
+                    return false;
+                  })
+                  .map((page, idx, arr) => {
+                    // Insert ellipsis where there are gaps
+                    const prevPage = arr[idx - 1];
+                    const hasGap = prevPage && page - prevPage > 1;
+                    return (
+                      <span key={page} className="flex items-center">
+                        {hasGap && (
+                          <span className="px-1 text-muted-foreground text-sm">...</span>
+                        )}
+                        <button
+                          onClick={() => setCurrentPage(page)}
+                          className={`w-10 h-10 sm:w-11 sm:h-11 text-sm font-medium rounded-lg transition-colors ${
+                            currentPage === page
+                              ? "bg-jotofa-navy text-white"
+                              : "text-foreground hover:bg-secondary dark:hover:bg-jotofa-navy/50"
+                          }`}
+                        >
+                          {page}
+                        </button>
+                      </span>
+                    );
+                  })}
                 <button
                   onClick={() =>
                     setCurrentPage((p) => Math.min(totalPages, p + 1))
                   }
-                   disabled={currentPage === totalPages}
-                   className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg hover:bg-secondary dark:hover:bg-jotofa-navy/50 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-                   aria-label="Next page"
-                 >
-                   <ChevronRight className="w-4 h-4 text-foreground" />
-                 </button>
+                  disabled={currentPage === totalPages}
+                  className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg hover:bg-secondary dark:hover:bg-jotofa-navy/50 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                  aria-label="Next page"
+                >
+                  <ChevronRight className="w-4 h-4 text-foreground" />
+                </button>
               </div>
             </div>
           </div>
