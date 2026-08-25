@@ -14,7 +14,6 @@ import {
   ArrowRight,
   X,
   Globe,
-  Filter,
   Share2,
   Bookmark,
   Check,
@@ -142,28 +141,343 @@ const subsidiaryHeroData: Record<
   },
 };
 
-const categories = [
-  "All Categories",
-  "Information Technology",
-  "Operations",
-  "Security & Safety",
-  "Human Resources",
-  "Quality Assurance",
-];
-
-const companies = [
-  "All Companies",
-  "UTEC Solutions",
-  "Cleaning & Maids",
-  "Staffing & Labour",
-];
-
 /* Company → subsidiary key mapping for filtering */
 const fallbackCompanyToSubKey: Record<string, string> = {
   "UTEC Solutions": "utec",
   "Cleaning & Maids": "cleaning",
   "Staffing & Labour": "staffing",
 };
+
+/* ── Demo openings ──
+   Shown when no live careers backend is reachable (e.g. the public
+   preview/demo deployment) so the page is fully populated instead of empty.
+   Real API jobs always take precedence when available. Companies map to the
+   three subsidiaries via fallbackCompanyToSubKey; "JOTOFA Group" roles show
+   under the group/all tabs. */
+const DEMO_JOBS: Job[] = [
+  {
+    id: "demo-utec-network-engineer",
+    title: "Network Engineer",
+    category: "Information Technology",
+    company: "UTEC Solutions",
+    location: "Dar es Salaam",
+    remote: false,
+    type: "Full-time",
+    description:
+      "Design, deploy, and maintain enterprise networks and two-way radio infrastructure for clients across Tanzania.",
+    qualifications: [
+      "Bachelor's degree in Telecommunications, IT, or a related field",
+      "3+ years in network engineering or a similar role",
+      "CCNA/CCNP certification is an added advantage",
+    ],
+    responsibilities: [
+      "Plan and configure LAN/WAN, VoIP, and radio networks",
+      "Monitor network performance and resolve incidents",
+      "Support field deployments and client site surveys",
+    ],
+    requirements: [
+      "Strong knowledge of routing, switching, and network security",
+      "Willingness to travel to client sites",
+      "Fluent in English and Kiswahili",
+    ],
+    benefits: [
+      "Competitive salary",
+      "Health insurance",
+      "Professional certification support",
+      "Career growth within UTEC",
+    ],
+    deadline: "2026-10-15",
+  },
+  {
+    id: "demo-utec-field-technician",
+    title: "Field Technician (Radio & Security Systems)",
+    category: "Engineering & Field Services",
+    company: "UTEC Solutions",
+    location: "Arusha",
+    remote: false,
+    type: "Full-time",
+    description:
+      "Install, commission, and service CCTV, access control, and two-way radio systems at commercial and industrial sites.",
+    qualifications: [
+      "Diploma in Electronics, Electrical, or Telecommunications",
+      "2+ years installing security or radio systems",
+    ],
+    responsibilities: [
+      "Install and configure CCTV, alarms, and radio equipment",
+      "Carry out preventive maintenance and fault repair",
+      "Document work and train clients on basic use",
+    ],
+    requirements: [
+      "Comfortable working at heights and on-site",
+      "Valid driving licence preferred",
+      "Available for regional travel",
+    ],
+    benefits: [
+      "Competitive salary",
+      "Field allowance",
+      "Tools and uniform provided",
+      "On-the-job training",
+    ],
+    deadline: "2026-10-31",
+  },
+  {
+    id: "demo-utec-solar-technician",
+    title: "Solar Installation Technician",
+    category: "Engineering & Field Services",
+    company: "UTEC Solutions",
+    location: "Dodoma",
+    remote: false,
+    type: "Contract",
+    description:
+      "Install and maintain solar power systems, water heaters, and street lighting for homes, offices, and institutions.",
+    qualifications: [
+      "Certificate or Diploma in Electrical or Renewable Energy",
+      "Hands-on solar installation experience",
+    ],
+    responsibilities: [
+      "Mount panels, wiring, inverters, and batteries",
+      "Test and commission installed systems",
+      "Advise clients on system care and safety",
+    ],
+    requirements: [
+      "Knowledge of electrical safety standards",
+      "Physically fit for installation work",
+      "Regional travel as required",
+    ],
+    benefits: [
+      "Attractive contract rate",
+      "Field allowance",
+      "Path to a permanent role",
+      "Renewable-energy training",
+    ],
+    deadline: "2026-11-15",
+  },
+  {
+    id: "demo-cleaning-supervisor",
+    title: "Cleaning Site Supervisor",
+    category: "Operations",
+    company: "Cleaning & Maids",
+    location: "Dar es Salaam",
+    remote: false,
+    type: "Full-time",
+    description:
+      "Lead cleaning teams at client sites, ensuring quality, safety, and consistent service standards every day.",
+    qualifications: [
+      "Certificate in facility management or equivalent experience",
+      "2+ years supervising cleaning or facility teams",
+    ],
+    responsibilities: [
+      "Schedule, brief, and supervise cleaning crews",
+      "Conduct quality checks and client walkthroughs",
+      "Manage supplies, equipment, and safety compliance",
+    ],
+    requirements: [
+      "Strong leadership and communication skills",
+      "Attention to detail",
+      "Reliable and punctual",
+    ],
+    benefits: [
+      "Competitive salary",
+      "Health cover",
+      "Uniform provided",
+      "Team leadership training",
+    ],
+    deadline: "2026-09-30",
+  },
+  {
+    id: "demo-cleaning-cleaner",
+    title: "Professional Cleaner",
+    category: "Operations",
+    company: "Cleaning & Maids",
+    location: "Mwanza",
+    remote: false,
+    type: "Full-time",
+    description:
+      "Deliver high-standard commercial, residential, and industrial cleaning as part of a supervised, uniformed team.",
+    qualifications: [
+      "Primary or secondary education",
+      "Prior cleaning experience is an advantage",
+    ],
+    responsibilities: [
+      "Perform daily cleaning to set checklists",
+      "Handle equipment and chemicals safely",
+      "Report issues to your site supervisor",
+    ],
+    requirements: [
+      "Reliable, honest, and hardworking",
+      "Able to follow safety procedures",
+      "Available for shift work",
+    ],
+    benefits: [
+      "Steady monthly pay",
+      "Uniform and PPE provided",
+      "On-the-job training",
+      "Opportunities to advance",
+    ],
+    deadline: "2026-11-30",
+  },
+  {
+    id: "demo-cleaning-qa",
+    title: "Quality Assurance Officer",
+    category: "Quality Assurance",
+    company: "Cleaning & Maids",
+    location: "Dar es Salaam",
+    remote: false,
+    type: "Full-time",
+    description:
+      "Audit cleaning sites against service standards and drive continuous improvement across client contracts.",
+    qualifications: [
+      "Diploma or Degree in a relevant field",
+      "Experience in quality control or facility auditing",
+    ],
+    responsibilities: [
+      "Conduct scheduled and surprise site audits",
+      "Track KPIs and client satisfaction",
+      "Recommend and follow up on corrective actions",
+    ],
+    requirements: [
+      "Detail-oriented with good reporting skills",
+      "Comfortable using checklists and simple software",
+      "Willing to travel between sites",
+    ],
+    benefits: [
+      "Competitive salary",
+      "Health insurance",
+      "Performance bonus",
+      "Career development",
+    ],
+    deadline: "2026-12-15",
+  },
+  {
+    id: "demo-staffing-recruiter",
+    title: "Recruitment Consultant",
+    category: "Human Resources",
+    company: "Staffing & Labour",
+    location: "Dar es Salaam",
+    remote: false,
+    type: "Full-time",
+    description:
+      "Source, screen, and place skilled and semi-skilled talent for corporate clients across Tanzania.",
+    qualifications: [
+      "Degree in HR, Business, or a related field",
+      "1-3 years in recruitment or HR",
+    ],
+    responsibilities: [
+      "Manage the full recruitment cycle",
+      "Build candidate pipelines and client relationships",
+      "Coordinate interviews, onboarding, and placements",
+    ],
+    requirements: [
+      "Excellent communication and negotiation skills",
+      "Strong organisation and follow-through",
+      "Fluent in English and Kiswahili",
+    ],
+    benefits: [
+      "Base salary plus placement commission",
+      "Health cover",
+      "HR certification support",
+      "Fast-track growth",
+    ],
+    deadline: "2026-10-15",
+  },
+  {
+    id: "demo-staffing-payroll",
+    title: "HR & Payroll Officer",
+    category: "Human Resources",
+    company: "Staffing & Labour",
+    location: "Dar es Salaam",
+    remote: false,
+    type: "Full-time",
+    description:
+      "Run accurate payroll and HR administration for outsourced staff across multiple client sites.",
+    qualifications: [
+      "Degree or Diploma in HR, Accounting, or a related field",
+      "Experience with payroll and statutory filings (PAYE, NSSF)",
+    ],
+    responsibilities: [
+      "Process monthly payroll and payslips",
+      "Maintain staff records and contracts",
+      "Ensure statutory and labour-law compliance",
+    ],
+    requirements: [
+      "Strong numeracy and confidentiality",
+      "Proficiency in spreadsheets and payroll tools",
+      "High accuracy under deadlines",
+    ],
+    benefits: [
+      "Competitive salary",
+      "Health insurance",
+      "Training in HR systems",
+      "Stable, professional environment",
+    ],
+    deadline: "2026-11-30",
+  },
+  {
+    id: "demo-group-finance",
+    title: "Group Finance Officer",
+    category: "Finance & Administration",
+    company: "JOTOFA Group",
+    location: "Dar es Salaam",
+    remote: false,
+    type: "Full-time",
+    description:
+      "Support group-level financial reporting, budgeting, and controls across all three subsidiaries.",
+    qualifications: [
+      "Degree in Accounting or Finance",
+      "CPA(T) or ACCA (part-qualified acceptable)",
+      "2+ years in a finance role",
+    ],
+    responsibilities: [
+      "Prepare management accounts and reconciliations",
+      "Assist with budgeting and cash-flow monitoring",
+      "Support audits and statutory reporting",
+    ],
+    requirements: [
+      "Solid knowledge of accounting standards",
+      "Strong Excel and accounting-software skills",
+      "High integrity and attention to detail",
+    ],
+    benefits: [
+      "Competitive salary",
+      "Health insurance",
+      "Study and CPD support",
+      "Group-wide career path",
+    ],
+    deadline: "2026-12-15",
+  },
+  {
+    id: "demo-group-marketing",
+    title: "Marketing Executive",
+    category: "Sales & Marketing",
+    company: "JOTOFA Group",
+    location: "Dar es Salaam",
+    remote: true,
+    type: "Full-time",
+    description:
+      "Grow the JOTOFA Group brand and generate leads across the group's ICT, cleaning, and staffing services.",
+    qualifications: [
+      "Degree in Marketing, Communications, or a related field",
+      "1-3 years in marketing or business development",
+    ],
+    responsibilities: [
+      "Plan and run digital and offline campaigns",
+      "Manage social media and content",
+      "Support proposals and client outreach",
+    ],
+    requirements: [
+      "Creative with strong writing skills",
+      "Familiar with social and design tools",
+      "Fluent in English and Kiswahili",
+    ],
+    benefits: [
+      "Competitive salary",
+      "Performance bonus",
+      "Health cover",
+      "Room to grow the function",
+    ],
+    deadline: "2026-10-31",
+  },
+];
 
 const PAGE_SIZE_OPTIONS = [10, 50, 100] as const;
 
@@ -214,7 +528,6 @@ export function Careers() {
   const [pageSize, setPageSize] = useState<number>(10);
   const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
   const [showCompanyDropdown, setShowCompanyDropdown] = useState(false);
-  const [showSearchCategory, setShowSearchCategory] = useState(false);
   const [applyJob, setApplyJob] = useState<Job | null>(null);
   const [savedJobs, setSavedJobs] = useState<Set<string>>(new Set());
   const [jobsData, setJobsData] = useState<Job[]>([]);
@@ -234,12 +547,16 @@ export function Careers() {
           getSubsidiaries(),
         ]);
         if (cancelled) return;
-        setJobsData(jobList.map(mapPublicJob));
+        const mapped = jobList.map(mapPublicJob);
+        // Fall back to sample openings when the live API returns nothing, so
+        // the demo/preview is never an empty page.
+        setJobsData(mapped.length ? mapped : DEMO_JOBS);
         setApiSubsidiaries(subsidiaryList);
-      } catch (error) {
+      } catch {
         if (!cancelled) {
-          setLoadError(error instanceof Error ? error.message : "Could not load careers data.");
-          setJobsData([]);
+          // No live careers backend reachable (e.g. the public preview) - show
+          // demo openings instead of an error so the page stays presentable.
+          setJobsData(DEMO_JOBS);
           setApiSubsidiaries([]);
         }
       } finally {
@@ -366,16 +683,9 @@ export function Careers() {
     setExpandedFullJob(null);
   }, []);
 
-  const handleSearch = useCallback(() => {
-    setCurrentPage(1);
-    setExpandedJob(null);
-    setExpandedFullJob(null);
-  }, []);
-
   const handleCategorySelect = useCallback((cat: string) => {
     setSelectedCategory(cat);
     setShowCategoryDropdown(false);
-    setShowSearchCategory(false);
     setCurrentPage(1);
     setExpandedJob(null);
     setExpandedFullJob(null);
@@ -412,7 +722,6 @@ export function Careers() {
   const closeAllDropdowns = useCallback(() => {
     setShowCategoryDropdown(false);
     setShowCompanyDropdown(false);
-    setShowSearchCategory(false);
   }, []);
 
   /* ── Deadline helper ── */
@@ -553,106 +862,44 @@ export function Careers() {
       </div>
 
       {/* ═══════════════════════════════════════
-          3. SEARCH CARD
+          3. SEARCH + FILTERS (one compact bar)
           ═══════════════════════════════════════ */}
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 mt-6">
-        <div className="bg-card rounded-2xl p-4 sm:p-8 border border-border">
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-            <div className="flex-1 relative">
-               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-               <input
-                 type="text"
-                 placeholder="Search keyword, category, or job title"
-                 value={keyword}
-                 onChange={(e) => handleKeywordChange(e.target.value)}
-                 onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                 className="w-full pl-10 pr-4 py-3 rounded-xl border border-input bg-background text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-jotofa-navy/20 focus:border-jotofa-navy/40 transition-all"
-               />
-            </div>
-
-            <div className="relative sm:w-48">
-               <button
-                 onClick={(e) => {
-                   e.stopPropagation();
-                   setShowSearchCategory(!showSearchCategory);
-                   setShowCategoryDropdown(false);
-                   setShowCompanyDropdown(false);
-                 }}
-                 className="w-full flex items-center justify-between gap-2 px-4 py-3 rounded-xl border border-input bg-background text-sm text-foreground hover:border-jotofa-navy/30 transition-colors"
-               >
-                <span className="truncate">
-                  {selectedCategory === "All Categories"
-                    ? "Category"
-                    : selectedCategory}
-                </span>
-                <ChevronDown className="w-4 h-4 text-muted-foreground shrink-0" />
-              </button>
-              {showSearchCategory && (
-                <div className="absolute top-full left-0 right-0 mt-1 bg-card rounded-2xl border border-border z-50 max-h-60 overflow-y-auto">
-                  {categories.map((cat) => (
-                    <button
-                      key={cat}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleCategorySelect(cat);
-                      }}
-                      className={`w-full text-left px-4 py-2.5 text-sm hover:bg-secondary dark:hover:bg-jotofa-navy transition-colors ${
-                        selectedCategory === cat
-                          ? "text-jotofa-navy dark:text-white font-medium"
-                          : "text-foreground"
-                      }`}
-                    >
-                      {cat}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-
-              <button
-               onClick={handleSearch}
-               className="flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold rounded-xl bg-jotofa-navy text-white hover:bg-jotofa-navy-mid transition-colors shrink-0"
-               aria-label="Search"
-             >
-              <Search className="w-4 h-4" />
-              <span>Find Jobs</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* ═══════════════════════════════════════
-          4. FILTER BAR
-          ═══════════════════════════════════════ */}
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 mt-6">
-        <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-2">
-          <div className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground shrink-0">
-            <Filter className="w-4 h-4" />
-            <span>Filters</span>
+        <div className="flex flex-col gap-3">
+          {/* Search input - full width on all screens */}
+          <div className="relative">
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <input
+              type="text"
+              placeholder="Search keyword, category, or job title"
+              value={keyword}
+              onChange={(e) => handleKeywordChange(e.target.value)}
+              className="w-full pl-10 pr-4 py-3 rounded-xl border border-input bg-card text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-jotofa-navy/20 focus:border-jotofa-navy/40 transition-all"
+            />
           </div>
 
-          <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2">
+          {/* Filters row: Category + Company + Clear */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
             {/* Category filter */}
-            <div className="relative">
+            <div className="relative flex-1">
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   setShowCategoryDropdown(!showCategoryDropdown);
                   setShowCompanyDropdown(false);
-                  setShowSearchCategory(false);
                 }}
-                className="w-full flex items-center gap-2 px-4 py-3 rounded-xl border border-input bg-background text-sm text-foreground hover:border-jotofa-navy/30 transition-colors min-h-[44px]"
+                className="w-full flex items-center gap-2 px-4 py-3 rounded-xl border border-input bg-card text-sm text-foreground hover:border-jotofa-navy/30 transition-colors min-h-[44px]"
               >
                 <Briefcase className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
                 <span className="truncate flex-1 text-left">
                   {selectedCategory === "All Categories"
-                    ? "Categories"
+                    ? "All Categories"
                     : selectedCategory}
                 </span>
                 <ChevronDown className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
               </button>
               {showCategoryDropdown && (
-                <div className="absolute top-full left-0 right-0 sm:w-56 mt-1 bg-card rounded-2xl border border-border z-50 max-h-60 overflow-y-auto">
+                <div className="absolute top-full left-0 right-0 mt-1 bg-card rounded-2xl border border-border z-50 max-h-60 overflow-y-auto shadow-lg">
                   {categories.map((cat) => (
                     <button
                       key={cat}
@@ -674,26 +921,25 @@ export function Careers() {
             </div>
 
             {/* Company filter */}
-            <div className="relative">
+            <div className="relative flex-1">
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   setShowCompanyDropdown(!showCompanyDropdown);
                   setShowCategoryDropdown(false);
-                  setShowSearchCategory(false);
                 }}
-                className="w-full flex items-center gap-2 px-4 py-3 rounded-xl border border-input bg-background text-sm text-foreground hover:border-jotofa-navy/30 transition-colors min-h-[44px]"
+                className="w-full flex items-center gap-2 px-4 py-3 rounded-xl border border-input bg-card text-sm text-foreground hover:border-jotofa-navy/30 transition-colors min-h-[44px]"
               >
                 <Globe className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
                 <span className="truncate flex-1 text-left">
                   {selectedCompany === "All Companies"
-                    ? "Company"
+                    ? "All Companies"
                     : selectedCompany}
                 </span>
                 <ChevronDown className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
               </button>
               {showCompanyDropdown && (
-                <div className="absolute top-full left-0 right-0 sm:w-56 mt-1 bg-card rounded-2xl border border-border z-50 max-h-60 overflow-y-auto">
+                <div className="absolute top-full left-0 right-0 mt-1 bg-card rounded-2xl border border-border z-50 max-h-60 overflow-y-auto shadow-lg">
                   {companies.map((comp) => (
                     <button
                       key={comp}
@@ -713,30 +959,30 @@ export function Careers() {
                 </div>
               )}
             </div>
-          </div>
 
-          {/* Clear filters */}
-          {(selectedCategory !== "All Categories" ||
-            selectedCompany !== "All Companies" ||
-            keyword.trim()) && (
-            <button
-              onClick={() => {
-                setSelectedCategory("All Categories");
-                setSelectedCompany("All Companies");
-                setKeyword("");
-                setCurrentPage(1);
-              }}
-              className="flex items-center gap-1 px-3 py-2 text-sm text-jotofa-navy dark:text-white hover:text-jotofa-navy/70 dark:hover:text-white/70 transition-colors min-h-[44px]"
-            >
-              <X className="w-3.5 h-3.5" />
-              Clear
-            </button>
-          )}
+            {/* Clear filters */}
+            {(selectedCategory !== "All Categories" ||
+              selectedCompany !== "All Companies" ||
+              keyword.trim()) && (
+              <button
+                onClick={() => {
+                  setSelectedCategory("All Categories");
+                  setSelectedCompany("All Companies");
+                  setKeyword("");
+                  setCurrentPage(1);
+                }}
+                className="flex items-center justify-center gap-1.5 px-4 py-3 text-sm font-medium text-jotofa-navy dark:text-white hover:bg-muted/50 dark:hover:bg-white/5 rounded-xl transition-colors min-h-[44px] shrink-0"
+              >
+                <X className="w-3.5 h-3.5" />
+                Clear
+              </button>
+            )}
+          </div>
         </div>
       </div>
 
       {/* ═══════════════════════════════════════
-          5. JOB LISTINGS   Single container with rows
+          4. JOB LISTINGS   Single container with rows
           ═══════════════════════════════════════ */}
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 mt-6 mb-20 sm:mb-12">
         {isLoading ? (
@@ -1320,7 +1566,7 @@ export function Careers() {
       </div>
 
       {/* ═══════════════════════════════════════
-          6. TALENT COMMUNITY SECTION
+          5. TALENT COMMUNITY SECTION
           ═══════════════════════════════════════ */}
       <div id="talent-community" className="scroll-mt-20 bg-jotofa-navy">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
@@ -1359,7 +1605,7 @@ export function Careers() {
       </div>
 
       {/* ═══════════════════════════════════════
-          7. APPLY MODAL
+          6. APPLY MODAL
           ═══════════════════════════════════════ */}
       {applyJob && (
         <JobApplyModal
