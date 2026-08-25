@@ -1,14 +1,22 @@
 import type { Metadata, Viewport } from "next";
+import dynamic from "next/dynamic";
 import localFont from "next/font/local";
 import "@/app/globals.css";
 import { ThemeProvider } from "next-themes";
-import { Toaster } from "@/components/ui/sonner";
 import { PageProvider } from "@/lib/page-context";
 import { RouteProgress } from "@/components/route-progress";
 import { JsonLd } from "@/components/json-ld";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import { FloatingActions } from "@/components/floating-actions";
+
+// Non-critical chrome: only matters after a scroll (floating actions) or when a
+// toast fires. Code-split so their JS is deferred off the critical path.
+const FloatingActions = dynamic(() =>
+  import("@/components/floating-actions").then((m) => m.FloatingActions)
+);
+const Toaster = dynamic(() =>
+  import("@/components/ui/sonner").then((m) => m.Toaster)
+);
 
 // Inter carries body, subheadings, labels, and navigation.
 const inter = localFont({
