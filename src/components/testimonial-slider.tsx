@@ -140,26 +140,6 @@ export function TestimonialSlider({
     return () => window.removeEventListener("keydown", handleKey);
   }, [goNext, goPrev]);
 
-  // Mouse-wheel / touchpad: horizontal-intent scrolling navigates the carousel
-  // (vertical scroll is left to the page). One gesture = one step.
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    let lock = false;
-    const onWheel = (e: WheelEvent) => {
-      if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
-      e.preventDefault();
-      if (lock) return;
-      lock = true;
-      setIsAutoPlaying(false);
-      if (e.deltaX > 0) goNext();
-      else goPrev();
-      window.setTimeout(() => { lock = false; }, 450);
-    };
-    el.addEventListener("wheel", onWheel, { passive: false });
-    return () => el.removeEventListener("wheel", onWheel);
-  }, [goNext, goPrev]);
-
   useEffect(() => {
     if (!isAutoPlaying || testimonials.length <= 1) return;
     autoplayRef.current = setInterval(() => {
@@ -207,7 +187,7 @@ export function TestimonialSlider({
       const isWrapping = Math.abs(offset - prevOffset) > 1;
       const baseX = offset * cardWidthWithGap;
       const dragAdjustment = isDragging ? dragX : 0;
-      const scale = isCenter ? 1 : 0.92;
+      const scale = 1; // no shrink: keep the motion a simple, flat slide
       const translateX = baseX + dragAdjustment;
       const zIndex = isCenter ? 100 : 90 - absOffset;
       const opacity = isDragging
