@@ -258,16 +258,22 @@
   from { transform: translateX(100%); }
   to { transform: translateX(0); }
 }
+@keyframes slideFade {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
 .animate-nav-in { animation: navIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
 .animate-drop-in { animation: dropIn 0.2s ease-out both; }
 .animate-fade-in-fast { animation: fadeInFast 0.3s ease-out both; }
 .animate-slide-in-right { animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.animate-slide-fade { animation: slideFade 0.35s ease-in-out both; }
 
 @media (prefers-reduced-motion: reduce) {
   .animate-nav-in,
   .animate-drop-in,
   .animate-fade-in-fast,
-  .animate-slide-in-right {
+  .animate-slide-in-right,
+  .animate-slide-fade {
     animation: none !important;
   }
 }

@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
   ChevronLeft,
@@ -11,6 +10,19 @@ import {
   Pause,
 } from "lucide-react";
 import { PageLink } from "@/lib/page-context";
+
+// Tiny framer-free replacement for framer's useReducedMotion.
+function usePrefersReducedMotion() {
+  const [reduced, setReduced] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReduced(mq.matches);
+    update();
+    mq.addEventListener?.("change", update);
+    return () => mq.removeEventListener?.("change", update);
+  }, []);
+  return reduced;
+}
 
 /* ──────────────────────────────────────────────────────────────────────────
    Hero - home page landing section.
@@ -126,7 +138,7 @@ function TickerPauseButton({ paused, onToggle }: { paused: boolean; onToggle: ()
 
 // ─── Main Hero ──────────────────────────────────────────────────────────
 export function Hero() {
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = usePrefersReducedMotion();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPlaying, setIsPlaying] = useState(!prefersReducedMotion);
   const [tickerPaused, setTickerPaused] = useState(false);
@@ -203,14 +215,7 @@ export function Hero() {
             onMouseLeave={() => setIsPlaying(true)}
           >
             <div className="overflow-hidden">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentSlide}
-                  initial={{ opacity: 0, x: 30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -30 }}
-                  transition={{ duration: 0.35, ease: "easeInOut" }}
-                ><PageLink page="news" className="flex gap-4 items-start cursor-pointer group">
+                <div key={currentSlide} className="animate-slide-fade"><PageLink page="news" className="flex gap-4 items-start cursor-pointer group">
                   <div className="flex-shrink-0 w-[130px] sm:w-[160px] h-[85px] sm:h-[100px] rounded-lg overflow-hidden relative">
                     <Image
                       src={newsSlides[currentSlide].image}
@@ -226,8 +231,7 @@ export function Hero() {
                       {newsSlides[currentSlide].title}
                     </h3>
                   </div>
-                </PageLink></motion.div>
-              </AnimatePresence>
+                </PageLink></div>
             </div>
 
             <div className="flex items-center justify-between mt-4">
